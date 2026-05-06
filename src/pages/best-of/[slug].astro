@@ -1,0 +1,48 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { bestOfLists } from "@/data/content";
+import { ChevronRight, Trophy } from "lucide-react";
+
+export async function getStaticPaths() {
+  return bestOfLists.map((list) => ({
+    params: { slug: list.slug },
+    props: { list },
+  }));
+}
+
+const { list } = Astro.props;
+---
+<SiteLayout title={`${list.title} — Best Of`} description={list.intro}>
+  <section class="bg-gradient-warm text-white pt-32 pb-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <nav class="flex items-center gap-2 text-white/70 text-sm mb-6">
+        <a href="/" class="hover:text-white">Home</a>
+        <ChevronRight className="w-4 h-4" />
+        <a href="/best-of" class="hover:text-white">Best Of</a>
+        <ChevronRight className="w-4 h-4" />
+        <span class="text-white">{list.category}</span>
+      </nav>
+      <p class="inline-flex items-center gap-2 text-gold text-xs uppercase tracking-widest mb-3">
+        <Trophy className="w-4 h-4" /> {list.category} · {list.city} · {list.year}
+      </p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-4">{list.title}</h1>
+      <p class="text-white/85 text-lg max-w-3xl">{list.intro}</p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16 max-w-4xl">
+    <ol class="space-y-5">
+      {list.picks.map((p) => (
+        <li class="bg-card border border-border rounded-xl p-7 flex items-start gap-6 hover:shadow-soft transition-all">
+          <div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary text-primary-foreground font-serif font-bold text-2xl flex items-center justify-center">
+            {p.rank}
+          </div>
+          <div class="flex-1">
+            <h3 class="font-serif text-2xl font-bold mb-2">{p.name}</h3>
+            <p class="text-muted-foreground leading-relaxed">{p.reason}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+</SiteLayout>

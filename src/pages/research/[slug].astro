@@ -1,0 +1,68 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import ReportReader from "@/components/ReportReader";
+import { researchReports } from "@/data/content";
+import { ChevronRight, Download } from "lucide-react";
+
+export async function getStaticPaths() {
+  return researchReports.map((report) => ({
+    params: { slug: report.slug },
+    props: { report },
+  }));
+}
+
+const { report } = Astro.props;
+const totalSections = report.sections?.length ?? (report.body ? 1 : 0);
+---
+<SiteLayout title={`${report.title} — Oregon SMB Directory Research`} description={report.summary}>
+  <header class="bg-primary text-primary-foreground pt-32 pb-14 px-4">
+    <div class="container mx-auto max-w-5xl">
+      <nav class="flex items-center gap-2 text-primary-foreground/70 text-sm mb-6">
+        <a href="/" class="hover:text-primary-foreground">Home</a>
+        <ChevronRight className="w-4 h-4" />
+        <a href="/research" class="hover:text-primary-foreground">Research</a>
+        <ChevronRight className="w-4 h-4" />
+        <span class="text-primary-foreground line-clamp-1">{report.title}</span>
+      </nav>
+
+      <div class="grid md:grid-cols-[1fr_auto] gap-6 items-start">
+        <div>
+          <p class="text-gold text-xs font-medium uppercase tracking-widest mb-3">
+            {report.category} · {report.published} · {totalSections} section{totalSections === 1 ? "" : "s"}
+          </p>
+          <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-5">
+            {report.title}
+          </h1>
+          <p class="text-lg md:text-xl text-primary-foreground/85 leading-relaxed max-w-3xl">
+            {report.summary}
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 bg-gold text-gold-foreground px-5 py-3 rounded font-medium hover:bg-gold/90 transition-colors flex-shrink-0"
+        >
+          <Download className="w-4 h-4" /> Request PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="px-4 -mt-8 mb-12">
+    <div class="container mx-auto max-w-5xl">
+      <div class="grid grid-cols-3 gap-4 md:gap-6 bg-card border border-border rounded-xl p-6 md:p-8 shadow-elegant">
+        {report.metrics.map((m) => (
+          <div class="text-center">
+            <div class="font-serif text-2xl md:text-4xl font-bold text-primary mb-1">
+              {m.value}
+            </div>
+            <div class="text-[10px] md:text-[11px] uppercase tracking-widest text-muted-foreground">
+              {m.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ReportReader report={report} client:load />
+</SiteLayout>

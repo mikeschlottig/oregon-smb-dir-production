@@ -1,0 +1,129 @@
+[
+  {
+    "title": "Streamline Plumbing LLC",
+    "address": "910 W Hickory St",
+    "phone": "(541) 580-2860",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Streamline%20Plumbing%20LLC&query_place_id=ChIJI8uvcBk9xFQRBScZcLSfco8",
+    "rating": 5.0,
+    "reviews": 20,
+    "website": "https://streamline-plumbing.net"
+  },
+  {
+    "title": "Michael Rokus Building & Plumbing",
+    "address": "1621 NW Keasey St",
+    "phone": "(541) 580-0960",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Michael%20Rokus%20Building%20%26%20Plumbing&query_place_id=ChIJ_QXCFQQjxFQR-XzX5-BcJy4",
+    "rating": 5.0,
+    "reviews": 18
+  },
+  {
+    "title": "The Dirty Bandits Drain Cleaning",
+    "address": "838 SE Parrott St",
+    "phone": "(541) 670-3156",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=The%20Dirty%20Bandits%20Drain%20Cleaning&query_place_id=ChIJK6lRkuAjxFQRopnqZpFWby4",
+    "rating": 5.0,
+    "reviews": 17
+  },
+  {
+    "title": "North Umpqua Plumbing",
+    "address": "235 NE Bogard St",
+    "phone": "(541) 672-0212",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Umpqua%20Plumbing&query_place_id=ChIJ30qpXiIjxFQRPkyLKJ9GUPs",
+    "rating": 5.0,
+    "reviews": 3
+  },
+  {
+    "title": "Precision Plumbing & Rooter",
+    "address": "2141 NE Airport Rd",
+    "phone": "(541) 817-9353",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Precision%20Plumbing%20%26%20Rooter&query_place_id=ChIJi6Ouw48jxFQRUJQeNou8lEY",
+    "rating": 4.9,
+    "reviews": 83
+  },
+  {
+    "title": "Above and Beyond Plumbing",
+    "address": "1634 NW Evans Ave",
+    "phone": "(541) 530-5038",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Above%20and%20Beyond%20Plumbing&query_place_id=ChIJjyAKBmatxlQR3Fy-xXBpRVY",
+    "rating": 4.9,
+    "reviews": 78
+  },
+  {
+    "title": "541-Plumber LLC",
+    "address": "210 NE Channon Ave",
+    "phone": "(541) 758-6237",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=541-Plumber%20LLC&query_place_id=ChIJrbYSASM9xFQRVxi4R0QistY",
+    "rating": 4.4,
+    "reviews": 16,
+    "website": "https://541plumber.com"
+  },
+  {
+    "title": "Yaeger Plumbing",
+    "address": "1022 NE Stephens St",
+    "phone": "(541) 672-8460",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Yaeger%20Plumbing&query_place_id=ChIJ64JYQtwixFQRFRpDnMLcfpA",
+    "rating": 4.3,
+    "reviews": 121,
+    "website": "https://yaegerplumbing.com"
+  },
+  {
+    "title": "GFD Plumbing LLC",
+    "address": "466 SE Ramp St",
+    "phone": "(541) 430-6466",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=GFD%20Plumbing%20LLC&query_place_id=ChIJYwpHbD0jxFQRI3jgv_Ig_vw",
+    "rating": 4.2,
+    "reviews": 18
+  },
+  {
+    "title": "Carson Plumbing",
+    "address": "509 NE Rifle Range St",
+    "phone": "(541) 637-7575",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Carson%20Plumbing&query_place_id=ChIJY3p_lRsjxFQRamAh6ezKANE",
+    "rating": 4.0,
+    "reviews": 5
+  },
+  {
+    "title": "Patriot Plumbing",
+    "phone": "(541) 672-4770",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Patriot%20Plumbing&query_place_id=ChIJsUP3Td8ixFQRKz3trinkLOE",
+    "rating": 3.9,
+    "reviews": 11
+  },
+  {
+    "title": "North Valley Plumbing",
+    "address": "1453 NE Airport Rd",
+    "phone": "(541) 440-5325",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Valley%20Plumbing&query_place_id=ChIJsUP3Td8ixFQRWMMZNoT90OY",
+    "rating": 3.8,
+    "reviews": 10
+  },
+  {
+    "title": "Home Services at The Home Depot",
+    "address": "3000 Aviation Dr",
+    "phone": "(844) 476-2140",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Home%20Services%20at%20The%20Home%20Depot&query_place_id=ChIJc02_hpwixFQRL469yy0uOQI",
+    "rating": 3.6,
+    "reviews": 14,
+    "website": "https://homedepot.com/l/Roseburg/OR/Roseburg/97470/4020/services"
+  },
+  {
+    "title": "Crooch & Harris Plumbing & Heating",
+    "address": "1980 NE Stephens St",
+    "phone": "(541) 672-9755",
+    "category": "Plumber",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Crooch%20%26%20Harris%20Plumbing%20%26%20Heating&query_place_id=ChIJV2IvL5UixFQRPqT7Krwozd4"
+  }
+]

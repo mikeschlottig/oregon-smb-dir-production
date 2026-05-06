@@ -1,0 +1,116 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import BusinessFilterGrid from "@/components/BusinessFilterGrid";
+import Pagination from "@/components/Pagination.astro";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { getBusinesses } from "@/data/businesses";
+import { ChevronRight } from "lucide-react";
+
+export const PER_PAGE = 15;
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  for (const city of cities) {
+    for (const industry of industries) {
+      paths.push({
+        params: { citySlug: city.slug, industrySlug: industry.slug },
+        props: { city, industry },
+      });
+    }
+  }
+  return paths;
+}
+
+const { city, industry } = Astro.props;
+const businesses = getBusinesses(city.slug, industry.slug);
+const totalPages = Math.max(1, Math.ceil(businesses.length / PER_PAGE));
+const pageSlice = businesses.slice(0, PER_PAGE);
+const baseUrl = `/city/${city.slug}/${industry.slug}/`;
+
+const title = `${industry.name} in ${city.name}, Oregon`;
+const description = `${industry.description}. Browse ${
+  businesses.length || "local"
+} verified providers serving ${city.name}.`;
+
+const siteOrigin = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+
+const jsonLd = businesses.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: title,
+      numberOfItems: pageSlice.length,
+      itemListElement: pageSlice.map((b, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "LocalBusiness",
+          name: b.title,
+          address: b.address,
+          telephone: b.phone || undefined,
+          url: `${siteOrigin}/city/${city.slug}/${industry.slug}/${b.slug}`,
+          ...(b.rating
+            ? {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: b.rating,
+                  reviewCount: b.reviews ?? 0,
+                },
+              }
+            : {}),
+          ...(b.category ? { description: b.category } : {}),
+        },
+      })),
+    }
+  : undefined;
+---
+<SiteLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="bg-muted pt-32 pb-12 px-4 border-b border-border">
+    <div class="container mx-auto">
+      <nav class="flex items-center flex-wrap gap-2 text-muted-foreground text-sm mb-4">
+        <a href="/" class="hover:text-foreground">Home</a>
+        <ChevronRight className="w-4 h-4" />
+        <a href={`/city/${city.slug}`} class="hover:text-foreground">{city.name}</a>
+        <ChevronRight className="w-4 h-4" />
+        <span class="text-foreground">{industry.name}</span>
+      </nav>
+      <p class="text-accent text-sm uppercase tracking-widest mb-2">{city.name}</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-3">
+        {industry.name} in {city.name}
+      </h1>
+      <p class="text-muted-foreground text-lg max-w-2xl">
+        {industry.description}. Browse {businesses.length > 0 ? businesses.length : "local"} verified provider{businesses.length === 1 ? "" : "s"} serving {city.name}.
+      </p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    {businesses.length === 0 ? (
+      <div class="max-w-xl mx-auto text-center py-20">
+        <h2 class="font-serif text-2xl font-bold mb-3">Listings coming soon</h2>
+        <p class="text-muted-foreground mb-6">
+          We're actively curating verified {industry.name.toLowerCase()} in {city.name}. Want your business featured first?
+        </p>
+        <a
+          href={`/contact?city=${city.slug}&industry=${industry.slug}`}
+          class="inline-block bg-primary text-primary-foreground px-6 py-3 rounded font-medium hover:bg-primary/90 transition-colors"
+        >
+          List Your Business
+        </a>
+      </div>
+    ) : (
+      <>
+        <BusinessFilterGrid
+          client:load
+          businesses={businesses}
+          pageSlice={pageSlice}
+          citySlug={city.slug}
+          industrySlug={industry.slug}
+          industryName={industry.name}
+        />
+        <Pagination baseUrl={baseUrl} currentPage={1} totalPages={totalPages} />
+      </>
+    )}
+  </section>
+</SiteLayout>

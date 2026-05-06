@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "comfort-suites-salem",
+    "title": "Comfort Suites Salem",
+    "address": "630 Hawthorne Ave SE, Salem, OR 97301",
+    "phone": "(971) 3455276",
+    "rating": 4.3,
+    "reviews": 660,
+    "category": "Hotels",
+    "website": "https://www.choicehotels.com/oregon/salem/comfort-suites-hotels/or055?mc=llgoxxpx",
+    "googleUrl": "https://www.google.com/maps/place/Comfort+Suites+Salem/@44.9505151,-123.0149237,12z/data=!4m14!1m3!2m2!1sHotels+Salem+Oregon!6e3!3m9!1s0x54bff8d32521c895:0x9398136d676c84dd!5m2!4m1!1i2!8m2!3d44.92314!4d-122.991732!15sChNIb3RlbHMgU2FsZW0gT3JlZ29ukgEFaG90ZWyqAUcQASoKIgZob3RlbHMoADIeEAEiGocwxjJF-urCc4FBQXtRh7x53O4u_7tS3sZvMhcQAiITaG90ZWxzIHNhbGVtIG9yZWdvbuABAA!16s%2Fg%2F1v8k_b71?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "holiday-inn-express-suites-salem-north-keizer-by-ihg",
+    "title": "Holiday Inn Express & Suites Salem North Keizer by IHG",
+    "address": "6150 Keizer Station Blvd, Keizer, OR 97303",
+    "phone": "(971) 7185335",
+    "rating": 4.3,
+    "reviews": 362,
+    "category": "Hotels",
+    "website": "https://www.ihg.com/holidayinnexpress/hotels/us/en/keizer/slekz/hoteldetail?cm_mmc=GoogleMaps-_-EX-_-US-_-SLEKZ",
+    "googleUrl": "https://www.google.com/maps/place/Holiday+Inn+Express+%26+Suites+Salem+North+-+Keizer+by+IHG/@44.9397158,-123.1936284,12z/data=!4m14!1m3!2m2!1sHotels+Salem+Oregon!6e3!3m9!1s0x5495579d00b241bd:0xe6713e43ef6c5b1c!5m2!4m1!1i2!8m2!3d45.009589!4d-122.9957789!15sChNIb3RlbHMgU2FsZW0gT3JlZ29ukgEFaG90ZWyqAUcQASoKIgZob3RlbHMoADIeEAEiGocwxjJF-urCc4FBQXtRh7x53O4u_7tS3sZvMhcQAiITaG90ZWxzIHNhbGVtIG9yZWdvbuABAA!16s%2Fg%2F11g0ztxvpj?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "shilo-inns-salem",
+    "title": "Shilo Inns Salem",
+    "address": "3304 Market St NE, Salem, OR 97301",
+    "phone": "(503) 5814001",
+    "rating": 3.6,
+    "reviews": 921,
+    "category": "Hotels",
+    "website": "https://www.shiloinns.com/shilo-inns-salem",
+    "googleUrl": "https://www.google.com/maps/place/Shilo+Inns+Salem/@44.9397158,-123.1936284,12z/data=!4m14!1m3!2m2!1sHotels+Salem+Oregon!6e3!3m9!1s0x54bffeef22e6e295:0x163859f81d338448!5m2!4m1!1i2!8m2!3d44.9492237!4d-122.9941895!15sChNIb3RlbHMgU2FsZW0gT3JlZ29ukgEFaG90ZWyqAUcQASoKIgZob3RlbHMoADIeEAEiGocwxjJF-urCc4FBQXtRh7x53O4u_7tS3sZvMhcQAiITaG90ZWxzIHNhbGVtIG9yZWdvbuABAA!16s%2Fg%2F1td4t_n0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  }
+]

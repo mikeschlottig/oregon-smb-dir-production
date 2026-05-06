@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "fresh-start-furniture",
+    "title": "Fresh Start Furniture",
+    "address": "4107 Industrial Ave Ste 9, Springfield, OR 97478",
+    "phone": "(541) 3218151",
+    "rating": 5.0,
+    "reviews": 25,
+    "category": "Furniture store",
+    "website": "http://freshstartfurniture.com/",
+    "googleUrl": "https://www.google.com/maps/place/Fresh+Start+Furniture/@43.2673903,-123.1756752,8z/data=!4m11!1m3!2m2!1sFurniture+and+Mattress+Stores+Springfield+Oregon!6e6!3m6!1s0x54c0e1003ace2dc3:0x5b6f7f7c5e5c931f!8m2!3d44.0546979!4d-122.9678716!15sCjBGdXJuaXR1cmUgYW5kIE1hdHRyZXNzIFN0b3JlcyBTcHJpbmdmaWVsZCBPcmVnb25aMiIwZnVybml0dXJlIGFuZCBtYXR0cmVzcyBzdG9yZXMgc3ByaW5nZmllbGQgb3JlZ29ukgEPZnVybml0dXJlX3N0b3JlmgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxdk1HVlVSVE5hTW05NVVtMWFNVlpzWjNoWU1HZ3paR3hPYTJKR1JSQULgAQD6AQQIABBE!16s%2Fg%2F11xl_wkdz0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "aaron-s-rent-to-own",
+    "title": "Aaron's Rent To Own",
+    "address": "1991 Olympic St, Springfield, OR 97477",
+    "phone": "(541) 7261812",
+    "rating": 3.7,
+    "reviews": 99,
+    "category": "Furniture store",
+    "website": "https://www.aarons.com/locations/us/or/springfield/1991-olympic-st?y_source=1_MTUzNTM0NjAtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D",
+    "googleUrl": "https://www.google.com/maps/place/Aaron's+Rent+To+Own/@43.2673903,-123.1756752,8z/data=!4m11!1m3!2m2!1sFurniture+and+Mattress+Stores+Springfield+Oregon!6e6!3m6!1s0x54c0e100f65b1635:0x8ad8216eaea52538!8m2!3d44.0592334!4d-122.9964557!15sCjBGdXJuaXR1cmUgYW5kIE1hdHRyZXNzIFN0b3JlcyBTcHJpbmdmaWVsZCBPcmVnb25aMiIwZnVybml0dXJlIGFuZCBtYXR0cmVzcyBzdG9yZXMgc3ByaW5nZmllbGQgb3JlZ29ukgEPZnVybml0dXJlX3N0b3JlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5DYVdOUGJqVjNSUkFC4AEA-gEECAAQJA!16s%2Fg%2F1vc6d3rj?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  }
+]

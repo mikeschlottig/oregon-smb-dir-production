@@ -1,0 +1,300 @@
+[
+  {
+    "title": "Physical Freedom Massage",
+    "address": "6422 SE Ramona St, Portland, OR 97206",
+    "phone": "(503) 756-2836",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Physical%20Freedom%20Massage&query_place_id=ChIJJa5W2MaglVQRp5EtNbgDavg",
+    "rating": 5.0,
+    "reviews": 33,
+    "website": "https://physicalfreedom.net"
+  },
+  {
+    "title": "David Jacob, LMT",
+    "address": "5406 SE 45th Ave, Portland, OR 97206",
+    "phone": "(503) 522-5550",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=David%20Jacob%2C%20LMT&query_place_id=ChIJmbLBzgqglVQRoT8eh20ZLwI",
+    "rating": 5.0,
+    "reviews": 26,
+    "website": "https://pdxmassage.net"
+  },
+  {
+    "title": "Woodstock Massage",
+    "address": "5835 SE Liebe St, Portland, OR 97206",
+    "phone": "(503) 593-0448",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Woodstock%20Massage&query_place_id=ChIJn1FLhf7BSQQR3saQtLr-MXA",
+    "rating": 5.0,
+    "reviews": 23
+  },
+  {
+    "title": "Triple Integration Massage Therapy",
+    "address": "9204 SE Mitchell St, Portland, OR 97266",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Triple%20Integration%20Massage%20Therapy&query_place_id=ChIJO3FvbaGhlVQRn_ugNs6r2oA",
+    "rating": 5.0,
+    "reviews": 22,
+    "website": "https://massagetherapypdx.com"
+  },
+  {
+    "title": "Tina Smith Massage, LLC",
+    "address": "4632 SE Boise St, Portland, OR 97206",
+    "phone": "(503) 577-7890",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Tina%20Smith%20Massage%2C%20LLC&query_place_id=ChIJhfub7bChlVQRKTE7Z4OR71U",
+    "rating": 5.0,
+    "reviews": 22,
+    "website": "https://tinasmithmassage.com"
+  },
+  {
+    "title": "Light Journey Healing- Amanda Light JurNe",
+    "address": "9204 SE Mitchell St, Portland, OR 97266",
+    "phone": "(971) 801-2737",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Light%20Journey%20Healing-%20Amanda%20Light%20JurNe&query_place_id=ChIJN7GuX6bjW4gRirgdlBbUDuE",
+    "rating": 5.0,
+    "reviews": 22,
+    "website": "https://amandalightjurne.com"
+  },
+  {
+    "title": "Starling Somatics",
+    "address": "7902 SE Mitchell St, Portland, OR 97206",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Starling%20Somatics&query_place_id=ChIJRXkI2I-hlVQRffwyypl8ZKo",
+    "rating": 5.0,
+    "reviews": 18,
+    "website": "https://starlingsomaticsbodywork.com"
+  },
+  {
+    "title": "MaryJane Remer-Veatch, LMT",
+    "address": "5105 SE 44th Ave, Portland, OR 97206",
+    "phone": "(541) 999-8043",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=MaryJane%20Remer-Veatch%2C%20LMT&query_place_id=ChIJWSoVVdoKlVQRevSbjzHoTFc",
+    "rating": 5.0,
+    "reviews": 17,
+    "website": "https://remer-veatchlmt.com"
+  },
+  {
+    "title": "Rose Massage",
+    "address": "6126 SE Duke St, Portland, OR 97206",
+    "phone": "(503) 519-3138",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Rose%20Massage&query_place_id=ChIJv-gfcGahlVQRXNfRUH-Wc8I",
+    "rating": 5.0,
+    "reviews": 11,
+    "website": "https://rosemassageinc.com"
+  },
+  {
+    "title": "Island Style Massage",
+    "address": "4121 SE 73rd Ave, Portland, OR 97206",
+    "phone": "(503) 730-6232",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Island%20Style%20Massage&query_place_id=ChIJ5YUTYT-glVQR9S2mOI0vj98",
+    "rating": 5.0,
+    "reviews": 8,
+    "website": "https://islandstylemassage.weebly.com"
+  },
+  {
+    "title": "Lucky Spa",
+    "address": "6919 SE 82nd Ave UNIT 102, Portland, OR 97266",
+    "phone": "(503) 901-7364",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Lucky%20Spa&query_place_id=ChIJ_4Sf-beflVQRovqlUz_Enno",
+    "rating": 5.0,
+    "reviews": 8
+  },
+  {
+    "title": "Xinyue massage",
+    "address": "5959 SE 92nd Ave Suite 106, Portland, OR 97266",
+    "phone": "(503) 969-5513",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Xinyue%20massage&query_place_id=ChIJEU2hxlChlVQRi7zQgRrHsLM",
+    "rating": 5.0,
+    "reviews": 8,
+    "website": "https://orxinyuemassage.com"
+  },
+  {
+    "title": "Mandarin Therapeutic Massage",
+    "address": "9204 SE Mitchell St Room 2, Portland, OR 97266",
+    "phone": "(971) 825-2278",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Mandarin%20Therapeutic%20Massage&query_place_id=ChIJS8Zr2AWhlVQRPDTqac92XTM",
+    "rating": 5.0,
+    "reviews": 7,
+    "website": "https://mandarintherapeuticmassage.com"
+  },
+  {
+    "title": "Shea Michelle, LMT , Licenced Massage Therapist",
+    "address": "Portland, OR 97202",
+    "phone": "(503) 757-7309",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Shea%20Michelle%2C%20LMT%20%2C%20Licenced%20Massage%20Therapist&query_place_id=ChIJTemFPMMKlVQREnQ82fGF9uk",
+    "rating": 5.0,
+    "reviews": 6,
+    "website": "https://sheamichellemassagetherapy.com"
+  },
+  {
+    "title": "Garland Massage Therapy",
+    "address": "9204 SE Mitchell St, Portland, OR 97266",
+    "phone": "(503) 764-5174",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Garland%20Massage%20Therapy&query_place_id=ChIJg-WhjyWglVQRwbZSC-ZIFE8",
+    "rating": 5.0,
+    "reviews": 5,
+    "website": "https://garlandmassagetherapy.net"
+  },
+  {
+    "title": "Nini Foot Spa Massage",
+    "address": "5621 SE Woodstock Blvd, Portland, OR 97206",
+    "phone": "(503) 453-2085",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Nini%20Foot%20Spa%20Massage&query_place_id=ChIJe6fINQChlVQRl2GIh1sYmA4",
+    "rating": 5.0,
+    "reviews": 5
+  },
+  {
+    "title": "MARTA LANGE, Licensed Massage Therapist",
+    "address": "4645 SE 67th Ave, Portland, OR 97206",
+    "phone": "(503) 729-1460",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=MARTA%20LANGE%2C%20Licensed%20Massage%20Therapist&query_place_id=ChIJw0amsrmglVQR3nKU05d6J9I",
+    "rating": 5.0,
+    "reviews": 4,
+    "website": "https://martalange.com"
+  },
+  {
+    "title": "True Bodywork",
+    "address": "6004 SE Foster Rd, Portland, OR 97206",
+    "phone": "(503) 383-9545",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=True%20Bodywork&query_place_id=ChIJT9EiCf6hlVQR-MNKoNLwlSY",
+    "rating": 5.0,
+    "reviews": 4,
+    "website": "https://true-bodywork.com"
+  },
+  {
+    "title": "WOODSTOCK BODYWORK",
+    "address": "4127 SE Ramona St, Portland, OR 97202",
+    "phone": "(503) 752-6838",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=WOODSTOCK%20BODYWORK&query_place_id=ChIJAQBsUqAKlVQRUhHRiwFwC7A",
+    "rating": 5.0,
+    "reviews": 4
+  },
+  {
+    "title": "Massage for Medically Complex People",
+    "address": "6901 SE 65th Ave, Portland, OR 97206",
+    "phone": "(503) 232-7282",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Massage%20for%20Medically%20Complex%20People&query_place_id=ChIJAZsfzuyglVQREjZTFzhvKck",
+    "rating": 5.0,
+    "reviews": 3,
+    "website": "https://marianwolfedixon.com"
+  },
+  {
+    "title": "zenway bodywork and energy medicine-Certified Lymphedema Therapist",
+    "address": "7417 SE 85th Ave, Portland, OR 97266",
+    "phone": "(503) 929-3115",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=zenway%20bodywork%20and%20energy%20medicine-Certified%20Lymphedema%20Therapist&query_place_id=ChIJhW8VBu2flVQRPPZv7LNF_NY",
+    "rating": 5.0,
+    "reviews": 1,
+    "website": "https://massagebook.com/search/OR/Portland/massage-therapy/zenway-bodywork-and-energy-medicine"
+  },
+  {
+    "title": "Aaby's Massage Intentions",
+    "address": "3144 SE 131st Ave, Portland, OR 97266",
+    "phone": "(971) 254-4640",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Aaby's%20Massage%20Intentions&query_place_id=ChIJZ_TAoeehlVQRniL_3NcYDfs",
+    "rating": 4.9,
+    "reviews": 18,
+    "website": "https://aabysmassageintentions.com"
+  },
+  {
+    "title": "Mudra Massage",
+    "address": "2906 NE Glisan St, Portland, OR 97232",
+    "phone": "(503) 706-2225",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Mudra%20Massage&query_place_id=ChIJCwwbfs6glVQR-NJz47RSZF0",
+    "rating": 4.8,
+    "reviews": 264,
+    "website": "https://mudramassage.net"
+  },
+  {
+    "title": "OREGON CS Chiropractic",
+    "address": "5424 SE 82nd Ave, Portland, OR 97266",
+    "phone": "(503) 477-8720",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=OREGON%20CS%20Chiropractic&query_place_id=ChIJnZ5YrCOglVQRymCEai8BZZ4",
+    "rating": 4.8,
+    "reviews": 32,
+    "website": "https://oregoncschiropractic.com"
+  },
+  {
+    "title": "Health Bay Massage",
+    "address": "10143 SE Foster Rd, Portland, OR 97266",
+    "phone": "(503) 572-7647",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Health%20Bay%20Massage&query_place_id=ChIJcbSi6zuflVQR-KIU1MQrUFQ",
+    "rating": 4.8,
+    "reviews": 17
+  },
+  {
+    "title": "Zama Massage Therapeutic Spa",
+    "address": "2149 NE Broadway, Portland, OR 97232",
+    "phone": "(503) 281-0278",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Zama%20Massage%20Therapeutic%20Spa&query_place_id=ChIJ84D1rsuglVQRlDoBnDprWIg",
+    "rating": 4.7,
+    "reviews": 473,
+    "website": "https://zamamassage.com"
+  },
+  {
+    "title": "PDX Best Spa Portland",
+    "address": "8450 SE 82nd Ave, Portland, OR 97266",
+    "phone": "(503) 793-1114",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Best%20Spa%20Portland&query_place_id=ChIJS9wvQ72flVQRi9MN1cgubkM",
+    "rating": 4.5,
+    "reviews": 10,
+    "website": "https://pdxmassage.org"
+  },
+  {
+    "title": "Candy Massage",
+    "address": "12050 SE Holgate Blvd, Portland, OR 97266",
+    "phone": "(971) 340-6807",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Candy%20Massage&query_place_id=ChIJx0kzL2KhlVQRksgbUiVNzAo",
+    "rating": 4.4,
+    "reviews": 18
+  },
+  {
+    "title": "Fuyuan Foot Spa",
+    "address": "5253 SE 82nd Ave #35, Portland, OR 97266",
+    "phone": "(503) 964-0139",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Fuyuan%20Foot%20Spa&query_place_id=ChIJL1Ox7UiglVQR_t9YoAUHuOQ",
+    "rating": 4.3,
+    "reviews": 106
+  },
+  {
+    "title": "Magic Spa & Asian Massage",
+    "address": "8136 SE Foster Rd #160, Portland, OR 97206",
+    "phone": "(971) 279-5115",
+    "category": "Massage spa",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Magic%20Spa%20%26%20Asian%20Massage&query_place_id=ChIJ2fSwiiKglVQR1Umum1JFVXk",
+    "rating": 3.8,
+    "reviews": 72
+  },
+  {
+    "title": "Jennifer Mueller, LMT",
+    "address": "4437 SE Cesar Estrada Chavez Blvd, Portland, OR 97202",
+    "phone": "(503) 774-3585",
+    "category": "Massage therapist",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Jennifer%20Mueller%2C%20LMT&query_place_id=ChIJkbklBneglVQRqnS3zn7Q-Ns",
+    "website": "https://therapeuticassociates.com/team/jennifer-mueller"
+  }
+]

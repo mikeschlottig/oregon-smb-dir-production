@@ -1,0 +1,55 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import ContactForm from "@/components/ContactForm";
+import { Mail, MapPin } from "lucide-react";
+---
+<SiteLayout
+  title="Contact — Oregon SMB Directory"
+  description="Get in touch with the Oregon SMB Directory team. List your business, request press coverage, or send us feedback."
+>
+  <section class="bg-muted pt-32 pb-12 px-4 border-b border-border">
+    <div class="container mx-auto max-w-4xl">
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Get in touch</p>
+      <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Contact us</h1>
+      <p class="text-muted-foreground text-lg max-w-2xl">
+        Want your business listed, have a press inquiry, or just want to share what we missed about your town? We read every message.
+      </p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16 max-w-4xl">
+    <div class="grid gap-10 lg:grid-cols-[2fr_1fr]">
+      <div class="bg-card border border-border rounded-xl p-7 md:p-9 shadow-sm">
+        <h2 class="font-serif text-2xl font-bold mb-2">Send a message</h2>
+        <p class="text-muted-foreground text-sm mb-6">
+          We typically respond within one business day.
+        </p>
+        <ContactForm client:load />
+      </div>
+
+      <aside class="space-y-5 text-sm">
+        <div class="bg-card border border-border rounded-xl p-6">
+          <h3 class="font-serif text-lg font-semibold mb-3">Direct</h3>
+          <ul class="space-y-3 text-muted-foreground">
+            <li class="flex items-start gap-2.5">
+              <Mail className="w-4 h-4 text-accent mt-0.5" />
+              <a href="mailto:ceo@leverageai.network" class="hover:text-foreground">
+                ceo@leverageai.network
+              </a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <MapPin className="w-4 h-4 text-accent mt-0.5" />
+              <span>Grants Pass, Oregon · I-5 Corridor</span>
+            </li>
+          </ul>
+        </div>
+        <div class="bg-primary/5 border border-primary/20 rounded-xl p-6">
+          <h3 class="font-serif text-lg font-semibold mb-2">Get listed</h3>
+          <p class="text-muted-foreground leading-relaxed">
+            Verified Oregon businesses are added free. Mention your business name and city in your message and we'll take it from there.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</SiteLayout>

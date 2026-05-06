@@ -1,0 +1,437 @@
+[
+  {
+    "title": "MJ Roofing & Exteriors",
+    "address": "4131 Carlton Ave, Central Point, OR 97502",
+    "phone": "(541) 778-6804",
+    "rating": 5,
+    "reviews": 131,
+    "category": "Roofing contractor",
+    "website": "https://mjroofingandexteriors.com/?utm_campaign=gmb&utm_content=website_button&utm_medium=organic&utm_source=GMB_Listing",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3761776,-122.93238849999999"
+  },
+  {
+    "title": "All American Foundation Solutions",
+    "address": "4706 Table Rock Rd Suite F, Central Point, OR 97502",
+    "phone": "(541) 973-9171",
+    "category": "Contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=All%20American%20Foundation%20Solutions&query_place_id=ChIJa7thz1Imn2AR8sMlnF8ZKvk",
+    "rating": 5.0,
+    "reviews": 40,
+    "website": "https://all-americanfs.com"
+  },
+  {
+    "title": "Fontana Roofing",
+    "address": "6465 Crater Lake Hwy, Central Point, OR 97502",
+    "phone": "(541) 826-5595",
+    "rating": 5,
+    "reviews": 27,
+    "category": "Roofing contractor",
+    "website": "https://www.fontanaroofingservices.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4108628,-122.8587019"
+  },
+  {
+    "title": "Rispoli Design & Build, LLC",
+    "address": "Medford, OR",
+    "phone": "(541) 690-1313",
+    "rating": 5,
+    "reviews": 24,
+    "category": "Design-build firm",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Lallo Concrete Designs, LLC",
+    "address": "2435 E Main St, Medford, OR 97504",
+    "phone": "(541) 890-3182",
+    "category": "Concrete contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Lallo%20Concrete%20Designs%2C%20LLC&query_place_id=ChIJRYIbVEgEwYwRu-LLdYA5IeM",
+    "rating": 5.0,
+    "reviews": 21,
+    "website": "https://lalloconcretedesigns.com"
+  },
+  {
+    "title": "Sage Construction",
+    "address": "1021 W 2nd St, Medford, OR 97501",
+    "phone": "(541) 261-8207",
+    "rating": 5,
+    "reviews": 20,
+    "category": "Roofing contractor",
+    "website": "http://sageconstruction-roofingcontractor.com/?utm_source=gmb&utm_medium=referral",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3280325,-122.89247739999999"
+  },
+  {
+    "title": "HOMEMASTERS Southern Oregon",
+    "address": "3500 S Stage Rd Unit B, Medford, OR 97501",
+    "phone": "(541) 240-8977",
+    "rating": 5,
+    "reviews": 14,
+    "category": "Roofing contractor",
+    "website": "https://homemasterssouthernoregon.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3018928,-122.9235976"
+  },
+  {
+    "title": "Shield Pro",
+    "address": "837 N Riverside Ave, Medford, OR 97501",
+    "phone": "(541) 203-0140",
+    "rating": 5,
+    "reviews": 11,
+    "category": "Roofing contractor",
+    "website": "https://www.shieldpro.co/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3354577,-122.8745974"
+  },
+  {
+    "title": "Preferred Property Maintenance",
+    "address": "922 La Loma Dr, Medford, OR 97504",
+    "phone": "(541) 613-2466",
+    "category": "Handyman/Handywoman/Handyperson",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Preferred%20Property%20Maintenance&query_place_id=ChIJA6_fUP5xz1QRP4ovQAHiciY",
+    "rating": 5.0,
+    "reviews": 8,
+    "website": "https://prefpropertymaintenance.com"
+  },
+  {
+    "title": "Southern Oregon Roofing and Construction LLC",
+    "address": "3539 Heathrow Way # 200, Medford, OR 97504",
+    "phone": "(541) 538-8846",
+    "rating": 5,
+    "reviews": 6,
+    "category": "Roofing contractor",
+    "website": "http://www.soroofingandconstruction.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3675715,-122.8794669"
+  },
+  {
+    "title": "May Rock & Excavating",
+    "address": "1345 Center Dr, Medford, OR 97501",
+    "phone": "(458) 529-8461",
+    "category": "Excavating contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=May%20Rock%20%26%20Excavating&query_place_id=ChIJn58M7ZF7z1QRWqn7EiEYNbc",
+    "rating": 5.0,
+    "reviews": 1,
+    "website": "https://mayrockexc.com"
+  },
+  {
+    "title": "On The Top Roofing Services LLC",
+    "address": "6517 Pioneer Rd, Medford, OR 97501",
+    "phone": "(541) 613-5314",
+    "rating": 5,
+    "reviews": 1,
+    "category": "Roofing contractor",
+    "website": "http://www.onthetoproofing.net/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.2808504,-122.8976651"
+  },
+  {
+    "title": "FRS Roofing",
+    "address": "40 Canal St # 3, Medford, MA 02155",
+    "phone": "(781) 322-6252",
+    "rating": 4.9,
+    "reviews": 670,
+    "category": "Roofing contractor",
+    "website": "https://frsroof.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4194673,-71.1300734"
+  },
+  {
+    "title": "JAM Roofing",
+    "address": "920 Chevy Way, Medford, OR 97504",
+    "phone": "(541) 773-7663",
+    "rating": 4.9,
+    "reviews": 160,
+    "category": "Roofing contractor",
+    "website": "https://www.jamroofing.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3603782,-122.87982889999999"
+  },
+  {
+    "title": "Outlier Construction",
+    "address": "Medford, OR",
+    "phone": "(541) 690-0772",
+    "rating": 4.9,
+    "reviews": 51,
+    "category": "General contractor",
+    "website": "https://www.outlierconstruction.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "S+B James Construction",
+    "address": "Medford, OR",
+    "phone": "(541) 779-1031",
+    "rating": 4.9,
+    "reviews": 42,
+    "category": "General contractor",
+    "website": "https://sbjames.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Z Development LLC",
+    "address": "Jacksonville, OR",
+    "phone": "(541) 899-2828",
+    "rating": 4.9,
+    "reviews": 16,
+    "category": "Remodeler",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3134,-122.9678"
+  },
+  {
+    "title": "Van Wey Homes, LLC",
+    "address": "Medford, OR",
+    "phone": "(541) 858-8118",
+    "rating": 4.9,
+    "reviews": 12,
+    "category": "Home builder",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Pressure Point Roofing, LLC",
+    "address": "5235 Rainbow Dr, Central Point, OR 97502",
+    "phone": "(541) 772-1945",
+    "rating": 4.8,
+    "reviews": 204,
+    "category": "Roofing contractor",
+    "website": "https://pressurepointroofing.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.392739999999996,-122.8790873"
+  },
+  {
+    "title": "The Shed Guys",
+    "address": "4888 Airway Dr, Central Point, OR 97502",
+    "phone": "(541) 779-7433",
+    "category": "Shed builder",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=The%20Shed%20Guys&query_place_id=ChIJK4axiJd8z1QRBzyDVHEsiDI",
+    "rating": 4.8,
+    "reviews": 76,
+    "website": "https://theshedguys.com"
+  },
+  {
+    "title": "Dreamworx Roofing",
+    "address": "1067 Court St, Medford, OR 97501",
+    "phone": "(541) 788-5849",
+    "rating": 4.8,
+    "reviews": 34,
+    "category": "Roofing contractor",
+    "website": "http://dreamworxtx.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3377206,-122.88067749999999"
+  },
+  {
+    "title": "Buntin Construction",
+    "address": "Medford, OR",
+    "phone": "(541) 245-1101",
+    "rating": 4.8,
+    "reviews": 31,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Southridge Builders LLC",
+    "address": "Medford, OR",
+    "phone": "(541) 326-2233",
+    "rating": 4.8,
+    "reviews": 19,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Rock Solid Remodeling",
+    "address": "Wilderville, OR",
+    "phone": "(541) 471-1010",
+    "rating": 4.8,
+    "reviews": 17,
+    "category": "Remodeler",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4169,-123.4625"
+  },
+  {
+    "title": "Tom Tobey Design & Build, Inc.",
+    "address": "Murphy, OR",
+    "phone": "(541) 862-2222",
+    "rating": 4.8,
+    "reviews": 13,
+    "category": "Design-build firm",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3686,-123.3356"
+  },
+  {
+    "title": "Applegate Rogue Building Company",
+    "address": "Jacksonville, OR",
+    "phone": "(541) 899-7373",
+    "rating": 4.8,
+    "reviews": 9,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3134,-122.9678"
+  },
+  {
+    "title": "Mahar Homes, Inc.",
+    "address": "Medford, OR",
+    "phone": "(541) 779-2811",
+    "rating": 4.7,
+    "reviews": 96,
+    "category": "Home builder",
+    "website": "https://www.maharhomes.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Andersen Construction",
+    "address": "Medford, OR (Regional Office)",
+    "phone": "(503) 283-6712",
+    "rating": 4.7,
+    "reviews": 88,
+    "category": "General contractor",
+    "website": "https://www.andersen-const.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Purelight Roofing of Medford",
+    "address": "860 O'Hare Pkwy # 200, Medford, OR 97504",
+    "phone": "(541) 813-8145",
+    "rating": 4.7,
+    "reviews": 62,
+    "category": "Roofing contractor",
+    "website": "https://roofing.purelight.com/locations/medford-oregon/?utm_source=google&utm_medium=gbp",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3656321,-122.87911199999999"
+  },
+  {
+    "title": "Hoag Roofing",
+    "address": "842 Enterprise Dr, Central Point, OR 97502",
+    "phone": "(541) 779-7743",
+    "rating": 4.7,
+    "reviews": 38,
+    "category": "Roofing contractor",
+    "website": "https://www.hoagroofing.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3860453,-122.8690331"
+  },
+  {
+    "title": "Riverline Construction LLC",
+    "address": "Central Point, OR",
+    "phone": "(541) 664-5588",
+    "rating": 4.7,
+    "reviews": 14,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3754,-122.9162"
+  },
+  {
+    "title": "Skye Roofing",
+    "address": "561 Midway Rd, Medford, OR 97501",
+    "phone": "(541) 941-4630",
+    "rating": 4.7,
+    "reviews": 14,
+    "category": "Roofing contractor",
+    "website": "http://www.skyeroofing.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.356967,-122.8840498"
+  },
+  {
+    "title": "Platinum Roofing & Gutters, LLC",
+    "phone": "(541) 326-5015",
+    "rating": 4.7,
+    "reviews": 12,
+    "category": "Roofing contractor",
+    "website": "http://www.platinumroofingllc.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4959444,-123.1623324"
+  },
+  {
+    "title": "Brian Magel Construction, Inc.",
+    "address": "Eagle Point, OR",
+    "phone": "(541) 826-4400",
+    "rating": 4.7,
+    "reviews": 10,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4734,-122.8025"
+  },
+  {
+    "title": "Galpin Homes LLC",
+    "address": "Medford, OR",
+    "phone": "(541) 535-2299",
+    "rating": 4.7,
+    "reviews": 8,
+    "category": "Home builder",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Hoffman Construction",
+    "address": "Medford, OR (Statewide Reach)",
+    "phone": "(503) 221-8811",
+    "rating": 4.6,
+    "reviews": 67,
+    "category": "General contractor",
+    "website": "https://www.hoffmancorp.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Scott Wells Construction Company",
+    "address": "Medford, OR",
+    "phone": "(541) 779-1133",
+    "rating": 4.6,
+    "reviews": 23,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Stephen Westfall Roofing Inc",
+    "address": "6473 Crater Lake Hwy, Central Point, OR 97502",
+    "phone": "(541) 941-3736",
+    "rating": 4.6,
+    "reviews": 18,
+    "category": "Roofing contractor",
+    "website": "http://www.stephenwestfallroofinginc.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4101447,-122.8588082"
+  },
+  {
+    "title": "Riverdell Construction, Inc.",
+    "address": "Central Point, OR",
+    "phone": "(541) 664-2200",
+    "rating": 4.6,
+    "reviews": 11,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3754,-122.9162"
+  },
+  {
+    "title": "Renaissance Roofing Southern Oregon",
+    "address": "5104 Crater Lake Ave, Central Point, OR 97502",
+    "phone": "(541) 772-1096",
+    "rating": 4.5,
+    "reviews": 37,
+    "category": "Roofing contractor",
+    "website": "https://www.renaissanceroofingso.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.390800399999996,-122.85487359999999"
+  },
+  {
+    "title": "Knouff, Inc.",
+    "address": "Central Point, OR",
+    "phone": "(541) 664-7711",
+    "rating": 4.5,
+    "reviews": 7,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3754,-122.9162"
+  },
+  {
+    "title": "Holt Homes",
+    "address": "Medford, OR (Regional Office)",
+    "phone": "(541) 622-8332",
+    "rating": 4.4,
+    "reviews": 134,
+    "category": "Home builder",
+    "website": "https://holthomes.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3265,-122.8756"
+  },
+  {
+    "title": "Willamette Graystone",
+    "address": "727 W McAndrews Rd, Medford, OR 97501",
+    "phone": "(541) 773-4575",
+    "category": "Building materials store",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Willamette%20Graystone&query_place_id=ChIJsdCgNNN7z1QRFL_thrbaF5A",
+    "rating": 4.3,
+    "reviews": 52,
+    "website": "https://willamettegraystone.com"
+  },
+  {
+    "title": "Rogue Valley Roofing LLC",
+    "address": "720 S Grape St, Medford, OR 97501",
+    "phone": "(541) 776-6620",
+    "rating": 4.3,
+    "reviews": 20,
+    "category": "Roofing contractor",
+    "website": "https://www.roguevalleyroofingco.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3172061,-122.8678257"
+  },
+  {
+    "title": "Rivas Construction & Roofing",
+    "address": "3860 Calhoun Rd, Medford, OR 97501",
+    "phone": "(541) 301-5212",
+    "rating": 4.3,
+    "reviews": 16,
+    "category": "Roofing contractor",
+    "website": "http://www.rivasconstructionandroofing.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.2677228,-122.8314736"
+  }
+]

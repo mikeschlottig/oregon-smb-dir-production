@@ -1,0 +1,334 @@
+[
+  {
+    "title": "Walsh Construction Co",
+    "address": "2905 SW 1st Ave, Portland, OR 97201",
+    "phone": "(503) 222-4375",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Walsh%20Construction%20Co&query_place_id=ChIJ64v4IUIKlVQRYrMMeodS6Dw",
+    "rating": 5.0,
+    "reviews": 19,
+    "website": "https://walshconstruction.com"
+  },
+  {
+    "title": "Gryphon Construction",
+    "address": "7025 N Lombard St Ste 101, Portland, OR 97203",
+    "phone": "(503) 926-8351",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Gryphon%20Construction&query_place_id=ChIJi9969j6nlVQR_uJ6ufQQILU",
+    "rating": 5.0,
+    "reviews": 13,
+    "website": "https://gryphonconstruct.com"
+  },
+  {
+    "title": "Peton Construction LLC",
+    "address": "6635 N Baltimore Ave, Portland, OR 97203",
+    "phone": "(503) 389-8899",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Peton%20Construction%20LLC&query_place_id=ChIJMaDndZ7VeK8R6Zy4uflKRHo",
+    "rating": 5.0,
+    "reviews": 13,
+    "website": "https://petonconstruction.com"
+  },
+  {
+    "title": "North Pier Concrete LLC",
+    "address": "9514 N Seneca St, Portland, OR 97203",
+    "phone": "(503) 999-7882",
+    "category": "Concrete contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Pier%20Concrete%20LLC&query_place_id=ChIJh7DfDgWplVQRsRQs92ISxUE",
+    "rating": 5.0,
+    "reviews": 10,
+    "website": "https://instagram.com/np.concrete"
+  },
+  {
+    "title": "Remodel Design and Build | Kitchen Remodel Portland | Bathroom Remodel Portland",
+    "address": "2723 N Hayden Island Dr UNIT B, Portland, OR 97217",
+    "phone": "(503) 906-0651",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Remodel%20Design%20and%20Build%20%7C%20Kitchen%20Remodel%20Portland%20%7C%20Bathroom%20Remodel%20Portland&query_place_id=ChIJIxnHEjCplVQRPKtT26kFeY8",
+    "rating": 5.0,
+    "reviews": 8,
+    "website": "https://jdiconstruction.co"
+  },
+  {
+    "title": "GDSI (formerly Green Deconstruction)",
+    "address": "8823 N Harborgate St, Portland, OR 97203",
+    "phone": "(503) 236-4299",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=GDSI%20(formerly%20Green%20Deconstruction)&query_place_id=ChIJYfHG_k-ilVQRu3XsumcKeMc",
+    "rating": 5.0,
+    "reviews": 3,
+    "website": "https://gdsidemo.com"
+  },
+  {
+    "title": "Green Bell Concrete",
+    "address": "8940 N Columbia Blvd #1, Portland, OR 97203",
+    "phone": "(503) 496-9710",
+    "category": "Concrete contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Green%20Bell%20Concrete&query_place_id=ChIJl7S-GxeolVQRXEx4zMOLiTc",
+    "rating": 5.0,
+    "reviews": 2
+  },
+  {
+    "title": "Willamette Construction Services, Inc.",
+    "address": "8823 N Harborgate St, Portland, OR 97203",
+    "phone": "(971) 420-8150",
+    "category": "Demolition contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Willamette%20Construction%20Services%2C%20Inc.&query_place_id=ChIJv8u72XiplVQRj9hyo6H-7Rk",
+    "rating": 5.0,
+    "reviews": 1,
+    "website": "https://willamettecsi.com"
+  },
+  {
+    "title": "Alpha Strong Construction, Inc.",
+    "address": "6110 N Lombard St, Portland, OR 97203",
+    "phone": "(503) 265-8164",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Alpha%20Strong%20Construction%2C%20Inc.&query_place_id=ChIJY0i3wBmnlVQR3H6R_EBn_6I",
+    "rating": 5.0,
+    "reviews": 1
+  },
+  {
+    "title": "SFW Construction",
+    "address": "2552 NW Vaughn St, Portland, OR 97210",
+    "phone": "(503) 783-8677",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=SFW%20Construction&query_place_id=ChIJXfrvWNJylVQR7TcBW_cAh2M",
+    "rating": 4.9,
+    "reviews": 150,
+    "website": "https://sfwconstruction.com"
+  },
+  {
+    "title": "Noble Fir Construction",
+    "address": "10125 N Leonard St, Portland, OR 97203",
+    "phone": "(503) 457-3729",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Noble%20Fir%20Construction&query_place_id=ChIJfdw74ymplVQRq8YW6HHY_ow",
+    "rating": 4.9,
+    "reviews": 16,
+    "website": "https://noblefirconstruction.com"
+  },
+  {
+    "title": "Western Oregon Builders",
+    "address": "3909 NE Martin Luther King Jr Blvd Suite 204, Portland, OR 97212",
+    "phone": "(503) 380-2714",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Western%20Oregon%20Builders&query_place_id=ChIJISmgvE2nlVQR_DM2UsrccR8",
+    "rating": 4.8,
+    "reviews": 36,
+    "website": "https://westernoregonbuilders.com"
+  },
+  {
+    "title": "Colas Construction",
+    "address": "1419 NW 14th Ave, Portland, OR 97209",
+    "phone": "(503) 292-4025",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Colas%20Construction&query_place_id=ChIJqamyJQEKlVQRh61l9Y1yvEo",
+    "rating": 4.6,
+    "reviews": 17,
+    "website": "https://colasconstruction.com"
+  },
+  {
+    "title": "StruXure PNW",
+    "address": "2630 N Marine Dr, Portland, OR 97217",
+    "phone": "(206) 687-3033",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=StruXure%20PNW&query_place_id=ChIJc4d8TBuplVQRoG_R61cqSE0",
+    "rating": 4.5,
+    "reviews": 86,
+    "website": "https://struxurepnw.com"
+  },
+  {
+    "title": "JDL General Contracting",
+    "address": "8823 N Harborgate St, Portland, OR 97203",
+    "phone": "(503) 239-6858",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=JDL%20General%20Contracting&query_place_id=ChIJX-xpb7uilVQRjX5g1TZZJG8",
+    "rating": 4.5,
+    "reviews": 2,
+    "website": "https://jdlgeneral.com"
+  },
+  {
+    "title": "PROBuild Contractors, LLC",
+    "address": "6710 N Catlin Ave Suite B, Portland, OR 97203",
+    "phone": "(503) 206-7939",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=PROBuild%20Contractors%2C%20LLC&query_place_id=ChIJ62E14vOmlVQRwXqpjAWD4gE",
+    "rating": 4.4,
+    "reviews": 73,
+    "website": "https://probuildor.com"
+  },
+  {
+    "title": "Stanley Tiny Homes",
+    "address": "9040 N Burgard Way, Portland, OR 97203",
+    "phone": "(503) 482-2183",
+    "category": "Home builder",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Stanley%20Tiny%20Homes&query_place_id=ChIJ24-GG4mogywRIaQy2GJOONs",
+    "rating": 4.4,
+    "reviews": 7,
+    "website": "https://stanleytinyhomes.com"
+  },
+  {
+    "title": "Bremik Construction, Inc.",
+    "address": "1026 SE Stark St, Portland, OR 97214",
+    "phone": "(503) 688-1000",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Bremik%20Construction%2C%20Inc.&query_place_id=ChIJf7C7BaSglVQR4H39Gjjb6rs",
+    "rating": 4.3,
+    "reviews": 19,
+    "website": "https://bremik.com"
+  },
+  {
+    "title": "Andersen Construction Co",
+    "address": "6712 N Cutter Cir, Portland, OR 97217",
+    "phone": "(503) 283-6712",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Andersen%20Construction%20Co&query_place_id=ChIJl6LO8ZmnlVQRGc2XVV9H0bQ",
+    "rating": 4.2,
+    "reviews": 27,
+    "website": "https://andersen-const.com"
+  },
+  {
+    "title": "Medallion Industries, Inc.",
+    "address": "13636 N Columbia Blvd Suite 100, Portland, OR 97203",
+    "phone": "(503) 221-0170",
+    "category": "Building materials supplier",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Medallion%20Industries%2C%20Inc.&query_place_id=ChIJ37g2AdwJlVQRqFVevqJ3JXg",
+    "rating": 4.1,
+    "reviews": 46,
+    "website": "https://medallionwd.com"
+  },
+  {
+    "title": "Laneco",
+    "address": "8823 N Harborgate St, Portland, OR 97203",
+    "phone": "(503) 239-6858",
+    "category": "Demolition contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Laneco&query_place_id=ChIJ8dPP4IQKlVQR1CnhsxAYC1Y",
+    "rating": 4.1,
+    "reviews": 27,
+    "website": "https://lanecoinc.com"
+  },
+  {
+    "title": "R&H Construction",
+    "address": "2019 NW Wilson St, Portland, OR 97209",
+    "phone": "(503) 228-7177",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=R%26H%20Construction&query_place_id=ChIJE0CX9RwKlVQRHVfi8mi13ZQ",
+    "rating": 4.0,
+    "reviews": 26,
+    "website": "https://rhconst.com"
+  },
+  {
+    "title": "Ash Grove Cement Co",
+    "address": "13939 N Rivergate Blvd, Portland, OR 97203",
+    "phone": "(503) 286-1677",
+    "category": "Ready mix concrete supplier",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Ash%20Grove%20Cement%20Co&query_place_id=ChIJdesSU9KplVQRQczIsBO6V2k",
+    "rating": 4.0,
+    "reviews": 7,
+    "website": "https://ashgrove.com"
+  },
+  {
+    "title": "Revive Construction",
+    "address": "9755 N Syracuse St, Portland, OR 97203",
+    "phone": "(503) 544-3994",
+    "category": "Contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Revive%20Construction&query_place_id=ChIJ6a__ZR2olVQRiQaBbcoKiok",
+    "rating": 4.0,
+    "reviews": 3,
+    "website": "https://reviveconstruction.net"
+  },
+  {
+    "title": "The Home Depot",
+    "address": "1728 N Tomahawk Island Dr, Portland, OR 97217",
+    "phone": "(503) 289-9200",
+    "category": "Home improvement store",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=The%20Home%20Depot&query_place_id=ChIJI8kuEJyolVQRZ2gGRe7SP6M",
+    "rating": 3.9,
+    "reviews": 2022,
+    "website": "https://homedepot.com/l/Jantzen-Beach/OR/Portland/97217/4007"
+  },
+  {
+    "title": "Lowe's Home Improvement",
+    "address": "1160 N Hayden Meadows Dr, Portland, OR 97217",
+    "phone": "(503) 737-3000",
+    "category": "Home improvement store",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Lowe's%20Home%20Improvement&query_place_id=ChIJBdR6FTSmlVQR4v2KYgKew6c",
+    "rating": 3.7,
+    "reviews": 2305,
+    "website": "https://lowes.com/store/OR-Portland/2579"
+  },
+  {
+    "title": "The Conco Companies",
+    "address": "7025 N Leadbetter Rd, Portland, OR 97203",
+    "phone": "(971) 808-5954",
+    "category": "Concrete contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=The%20Conco%20Companies&query_place_id=ChIJV8hr1o-plVQRhubBduaXue0",
+    "rating": 3.7,
+    "reviews": 3,
+    "website": "https://conconow.com/about/locations"
+  },
+  {
+    "title": "Installed Building Products Portland",
+    "address": "2738 N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(503) 641-8166",
+    "category": "Insulation contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Installed%20Building%20Products%20Portland&query_place_id=ChIJ51rmpqCjlVQRhWbuxXolLEY",
+    "rating": 3.5,
+    "reviews": 23,
+    "website": "https://ibpportland.com"
+  },
+  {
+    "title": "Dynamic Drywall Of Oregon Inc",
+    "address": "2541 N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(503) 254-1111",
+    "category": "Dry wall contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Dynamic%20Drywall%20Of%20Oregon%20Inc&query_place_id=ChIJWXj9AZqolVQRqGdSR2t3u5U",
+    "rating": 3.4,
+    "reviews": 11,
+    "website": "https://dynamicdrywalloforegon.com"
+  },
+  {
+    "title": "portland commercial construction",
+    "address": "2519 N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(971) 279-5258",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=portland%20commercial%20construction&query_place_id=ChIJ08t9oJColVQRjt1aGa26JTA",
+    "rating": 3.0,
+    "reviews": 11
+  },
+  {
+    "title": "E & M Concrete",
+    "address": "9514 N Seneca St, Portland, OR 97203",
+    "phone": "(503) 975-5753",
+    "category": "Concrete contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=E%20%26%20M%20Concrete&query_place_id=ChIJN8uwzQSolVQRqvlCz0cRWSE",
+    "rating": 3.0,
+    "reviews": 2
+  },
+  {
+    "title": "Corpac Construction Company",
+    "address": "8420 N Ivanhoe St #83477, Portland, OR 97203",
+    "phone": "(541) 740-7929",
+    "category": "Road construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Corpac%20Construction%20Company&query_place_id=ChIJi3vxU7BBwFQRjDYNvIMw-kE",
+    "rating": 1.7,
+    "reviews": 6,
+    "website": "https://corpacconstruction.com"
+  },
+  {
+    "title": "Porter Construction Inc",
+    "address": "2527 N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(503) 248-2455",
+    "category": "Construction company",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Porter%20Construction%20Inc&query_place_id=ChIJs6pOzuyjlVQRjfg2kOtBmnY",
+    "website": "https://porterci.com"
+  },
+  {
+    "title": "Dynamic Drywall of Oregon Inc",
+    "address": "2541 N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(503) 254-1111",
+    "category": "Dry wall contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Dynamic%20Drywall%20of%20Oregon%20Inc&query_place_id=ChIJaRaz9AMExwgRTb6hrcob6Bg",
+    "website": "https://dynamicdrywalloforegon.com"
+  }
+]

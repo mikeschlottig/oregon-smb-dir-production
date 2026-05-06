@@ -1,0 +1,52 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { blogPosts } from "@/data/content";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
+
+const formatDate = (iso: string) => {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+};
+---
+<SiteLayout title="Stories from the I-5 — Oregon SMB Directory Blog">
+  <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
+    <div class="container mx-auto max-w-4xl text-center">
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">The Blog</p>
+      <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Stories from the I-5</h1>
+      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+        Local guides, business advice, and on-the-ground reporting from every stop along Oregon's most-traveled corridor.
+      </p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      {blogPosts.map((p) => (
+        <a
+          href={`/blog/${p.slug}`}
+          class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
+        >
+          <div class="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+            <span class="bg-muted px-2.5 py-1 rounded-full text-accent font-medium uppercase tracking-wider">
+              {p.category}
+            </span>
+            {p.city && <span>· {p.city}</span>}
+          </div>
+          <h2 class="font-serif text-2xl font-bold leading-snug text-foreground group-hover:text-primary transition-colors mb-3">
+            {p.title}
+          </h2>
+          <p class="text-muted-foreground text-sm leading-relaxed flex-1">{p.excerpt}</p>
+          <div class="mt-5 pt-5 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
+            <span class="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{formatDate(p.date)}</span>
+            <span class="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{p.readTime}</span>
+          </div>
+          <span class="mt-4 inline-flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all">
+            Read article <ArrowRight className="w-4 h-4" />
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

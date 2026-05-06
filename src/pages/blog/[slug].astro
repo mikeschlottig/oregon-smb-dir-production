@@ -1,177 +1,106 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { blogPosts } from "@/data/content";
+import { getCollection, render } from "astro:content";
 import { ChevronRight, Calendar, Clock, User, MapPin } from "lucide-react";
 
 export async function getStaticPaths() {
-  return blogPosts.map((post) => ({
-    params: { slug: post.slug },
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
+const { Content, headings } = await render(post);
 
 const formatDate = (iso: string) => {
   if (!iso) return "";
   const d = new Date(iso + "T00:00:00");
   if (isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 };
 
-// Inline markdown -> HTML: **bold**, *em*, [text](href)
-const inline = (text: string): string => {
-  if (!text) return "";
-  let html = text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-  html = html.replace(
-    /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" class="text-primary underline underline-offset-2 hover:text-primary/80" target="_blank" rel="noopener">$1</a>',
-  );
-  html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-  html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
-  return html;
+const tocHeadings = headings.filter((h: any) => h.depth === 2 || h.depth === 3);
+
+const siteOrigin = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.excerpt,
+  datePublished: post.data.date,
+  dateModified: post.data.lastEdited || post.data.date,
+  author: { "@type": "Person", name: post.data.author },
+  publisher: {
+    "@type": "Organization",
+    name: "Oregon SMB Directory",
+    logo: { "@type": "ImageObject", url: `${siteOrigin}/og-default.jpg` },
+  },
+  mainEntityOfPage: `${siteOrigin}/blog/${post.id}`,
+  articleSection: post.data.category,
+  keywords: post.data.topics.join(", "),
 };
 ---
-<SiteLayout title={`${post.title} — Oregon SMB Directory Blog`} description={post.excerpt}>
+<SiteLayout
+  title={`${post.data.title} — Oregon SMB Directory Blog`}
+  description={post.data.excerpt}
+  jsonLd={jsonLd}
+>
   <article class="pt-32 pb-20 px-4">
     <div class="container mx-auto max-w-3xl">
       <nav class="flex items-center gap-2 text-muted-foreground text-sm mb-8 flex-wrap">
         <a href="/" class="hover:text-foreground">Home</a>
         <ChevronRight className="w-4 h-4" />
-        <a href="/blog" class="hover:text-foreground">Blog</a>
+        <a href="/blog/" class="hover:text-foreground">Blog</a>
         <ChevronRight className="w-4 h-4" />
-        <span class="text-foreground line-clamp-1">{post.title}</span>
+        <span class="text-foreground line-clamp-1">{post.data.title}</span>
       </nav>
 
-      <p class="text-accent text-xs font-medium uppercase tracking-widest mb-4">{post.category}</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-6">{post.title}</h1>
-      <p class="text-xl text-muted-foreground leading-relaxed mb-8">{post.excerpt}</p>
+      <p class="text-accent text-xs font-medium uppercase tracking-widest mb-4">{post.data.category}</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-6">{post.data.title}</h1>
+      <p class="text-xl text-muted-foreground leading-relaxed mb-8">{post.data.excerpt}</p>
 
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground pb-8 border-b border-border">
-        <span class="inline-flex items-center gap-2"><User className="w-4 h-4 text-accent" />{post.author}</span>
-        {post.date && <span class="inline-flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />{formatDate(post.date)}</span>}
-        <span class="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-accent" />{post.readTime}</span>
-        {post.city && (
-          <a href={`/city/${post.citySlug}`} class="inline-flex items-center gap-2 hover:text-foreground">
-            <MapPin className="w-4 h-4 text-accent" />{post.city}
+        <span class="inline-flex items-center gap-2"><User className="w-4 h-4 text-accent" />{post.data.author}</span>
+        {post.data.date && <span class="inline-flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />{formatDate(post.data.date)}</span>}
+        {post.data.readTime && <span class="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-accent" />{post.data.readTime}</span>}
+        {post.data.city && (
+          <a href={`/city/${post.data.citySlug}/`} class="inline-flex items-center gap-2 hover:text-foreground">
+            <MapPin className="w-4 h-4 text-accent" />{post.data.city}
           </a>
         )}
       </div>
 
-      {post.topics && post.topics.length > 0 && (
+      {post.data.topics.length > 0 && (
         <div class="flex flex-wrap gap-2 mt-6">
-          {post.topics.map((t) => (
+          {post.data.topics.map((t) => (
             <span class="text-xs uppercase tracking-wider bg-muted text-muted-foreground px-2.5 py-1 rounded-full">{t}</span>
           ))}
         </div>
       )}
 
-      <div class="mt-10 space-y-5">
-        {post.blocks.map((b) => {
-          if (b.type === "h2") {
-            return (
-              <h2
-                class="font-serif text-3xl font-bold mt-12 mb-3 text-foreground scroll-mt-24"
-                set:html={inline(b.text)}
-              />
-            );
-          }
-          if (b.type === "h3") {
-            return (
-              <h3
-                class="font-serif text-2xl font-semibold mt-8 mb-2 text-foreground"
-                set:html={inline(b.text)}
-              />
-            );
-          }
-          if (b.type === "p") {
-            return (
-              <p
-                class="text-foreground/90 text-lg leading-relaxed"
-                set:html={inline(b.text)}
-              />
-            );
-          }
-          if (b.type === "list") {
-            return (
-              <ul class="list-disc pl-6 space-y-2 text-foreground/90 text-lg leading-relaxed">
-                {b.items.map((it) => <li set:html={inline(it)} />)}
-              </ul>
-            );
-          }
-          if (b.type === "numbered") {
-            return (
-              <ol class="list-decimal pl-6 space-y-2 text-foreground/90 text-lg leading-relaxed">
-                {b.items.map((it) => <li set:html={inline(it)} />)}
-              </ol>
-            );
-          }
-          if (b.type === "callout") {
-            const toneClass =
-              b.tone === "primary"
-                ? "border-primary/30 bg-primary/5"
-                : "border-accent/30 bg-accent/5";
-            return (
-              <aside class={`my-6 rounded-xl border-2 p-6 ${toneClass}`}>
-                {b.title && (
-                  <p
-                    class="font-semibold text-foreground mb-3"
-                    set:html={inline(b.title)}
-                  />
-                )}
-                {b.text && (
-                  <p
-                    class="text-foreground/90 leading-relaxed"
-                    set:html={inline(b.text)}
-                  />
-                )}
-                {b.items && b.items.length > 0 && (
-                  <ul class="list-disc pl-5 space-y-1.5 text-foreground/90">
-                    {b.items.map((it) => <li set:html={inline(it)} />)}
-                  </ul>
-                )}
-              </aside>
-            );
-          }
-          if (b.type === "table") {
-            return (
-              <div class="overflow-x-auto my-6">
-                <table class="w-full border-collapse text-sm">
-                  <thead>
-                    <tr class="bg-muted">
-                      {b.headers.map((h) => (
-                        <th class="text-left p-3 border border-border font-semibold" set:html={inline(h)} />
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {b.rows.map((row) => (
-                      <tr>
-                        {row.map((cell) => (
-                          <td class="p-3 border border-border align-top" set:html={inline(cell)} />
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-          }
-          return null;
-        })}
+      {tocHeadings.length >= 3 && (
+        <nav aria-label="Table of contents" class="mt-10 p-6 rounded-xl border border-border bg-muted/40">
+          <p class="text-xs uppercase tracking-widest text-muted-foreground mb-3">Contents</p>
+          <ol class="space-y-1.5 text-sm">
+            {tocHeadings.map((h: any) => (
+              <li class={h.depth === 3 ? "pl-4" : ""}>
+                <a href={`#${h.slug}`} class="text-foreground/80 hover:text-primary">{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+
+      <div class="mt-10 prose prose-lg max-w-none prose-headings:font-serif prose-headings:scroll-mt-24 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-3 prose-h3:text-2xl prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-li:text-foreground/90 prose-p:text-foreground/90 prose-p:leading-relaxed prose-table:text-sm prose-th:bg-muted prose-th:text-left prose-th:p-3 prose-td:p-3 prose-td:border prose-td:border-border prose-th:border prose-th:border-border [&_aside.callout]:my-6 [&_aside.callout]:rounded-xl [&_aside.callout]:border-2 [&_aside.callout]:p-6 [&_aside.callout-accent]:border-accent/30 [&_aside.callout-accent]:bg-accent/5 [&_aside.callout-primary]:border-primary/30 [&_aside.callout-primary]:bg-primary/5">
+        <Content />
       </div>
 
-      {post.keySources && (
+      {post.data.keySources && (
         <div class="mt-16 pt-8 border-t border-border">
           <p class="text-xs uppercase tracking-widest text-muted-foreground mb-2">Key Sources</p>
-          <p class="text-sm text-foreground/80 leading-relaxed">{post.keySources}</p>
+          <p class="text-sm text-foreground/80 leading-relaxed">{post.data.keySources}</p>
         </div>
       )}
     </div>

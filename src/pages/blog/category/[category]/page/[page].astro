@@ -4,20 +4,37 @@ import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
-const PER_PAGE = 12;
+export async function getStaticPaths() {
+  const PER_PAGE = 12;
+  const slugifyCategory = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const posts = await getCollection("blog");
+  const byCat: Record<string, typeof posts> = {};
+  for (const p of posts) {
+    const k = p.data.category;
+    (byCat[k] ||= []).push(p);
+  }
+  const paths: any[] = [];
+  for (const [cat, list] of Object.entries(byCat)) {
+    list.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    for (let i = 2; i <= totalPages; i++) {
+      paths.push({
+        params: { category: slugifyCategory(cat), page: String(i) },
+        props: {
+          categoryName: cat,
+          currentPage: i,
+          totalPages,
+          pageSlice: list.slice((i - 1) * PER_PAGE, i * PER_PAGE),
+        },
+      });
+    }
+  }
+  return paths;
+}
 
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-);
-const totalPages = Math.max(1, Math.ceil(allPosts.length / PER_PAGE));
-const pageSlice = allPosts.slice(0, PER_PAGE);
-
-const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
-  acc[p.data.category] = (acc[p.data.category] || 0) + 1;
-  return acc;
-}, {});
-const categories = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]);
+const { categoryName, currentPage, totalPages, pageSlice } = Astro.props;
 const slugifyCategory = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const baseUrl = `/blog/category/${slugifyCategory(categoryName)}/`;
 
 const formatDate = (iso: string) => {
   if (!iso) return "";
@@ -26,32 +43,15 @@ const formatDate = (iso: string) => {
   return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 };
 ---
-<SiteLayout title="Stories from the I-5 — Oregon SMB Directory Blog">
+<SiteLayout title={`${categoryName} — Page ${currentPage}`}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
-      <p class="text-accent text-sm uppercase tracking-widest mb-3">The Blog</p>
-      <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Stories from the I-5</h1>
-      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-        Local guides, business advice, and on-the-ground reporting from every stop along Oregon's most-traveled corridor.
-      </p>
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Category · Page {currentPage}</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">{categoryName}</h1>
     </div>
   </section>
 
-  <section class="container mx-auto px-4 py-10">
-    <div class="flex flex-wrap gap-2 justify-center">
-      <a href="/blog/" class="px-3 py-1.5 rounded-full text-xs uppercase tracking-wider bg-primary text-primary-foreground">All ({allPosts.length})</a>
-      {categories.map(([cat, n]) => (
-        <a
-          href={`/blog/category/${slugifyCategory(cat)}/`}
-          class="px-3 py-1.5 rounded-full text-xs uppercase tracking-wider bg-muted text-muted-foreground hover:bg-accent/10 hover:text-accent transition-colors"
-        >
-          {cat} ({n})
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="container mx-auto px-4 pb-16">
+  <section class="container mx-auto px-4 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
       {pageSlice.map((p) => (
         <a
@@ -79,6 +79,6 @@ const formatDate = (iso: string) => {
       ))}
     </div>
 
-    <Pagination baseUrl="/blog/" currentPage={1} totalPages={totalPages} />
+    <Pagination baseUrl={baseUrl} currentPage={currentPage} totalPages={totalPages} />
   </section>
 </SiteLayout>

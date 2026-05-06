@@ -83,7 +83,7 @@ export default function ContactForm({
       setMessage("");
     } catch {
       setStatus("error");
-      setServerError("Network error. Please try again or email ceo@leverageai.network directly.");
+      setServerError("Network error. Please try again or email leverage_labs_alpha@proton.me directly.");
     }
   };
 
@@ -94,8 +94,8 @@ export default function ContactForm({
         <h3 className="font-serif text-2xl font-bold mb-2">Message sent</h3>
         <p className="text-muted-foreground">
           Thanks — we'll be in touch soon. For urgent matters, email{" "}
-          <a className="text-primary underline" href="mailto:ceo@leverageai.network">
-            ceo@leverageai.network
+          <a className="text-primary underline" href="mailto:leverage_labs_alpha@proton.me">
+            leverage_labs_alpha@proton.me
           </a>
           .
         </p>

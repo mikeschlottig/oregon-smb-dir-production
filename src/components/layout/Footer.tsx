@@ -28,8 +28,8 @@ export const Footer = () => {
               <a href="/contact" className="hover:text-accent transition-colors">
                 Contact us
               </a>
-              <a href="mailto:ceo@leverageai.network" className="hover:text-accent transition-colors">
-                ceo@leverageai.network
+              <a href="mailto:leverage_labs_alpha@proton.me" className="hover:text-accent transition-colors">
+                leverage_labs_alpha@proton.me
               </a>
             </div>
           </div>

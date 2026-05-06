@@ -1,6 +1,9 @@
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+
 const stats = [
-  { value: "10", label: "Cities" },
-  { value: "13", label: "Industries" },
+  { value: String(cities.length), label: "Cities" },
+  { value: String(industries.length), label: "Industries" },
   { value: "300mi", label: "I-5 Corridor" },
   { value: "∞", label: "Local Resources" },
 ];

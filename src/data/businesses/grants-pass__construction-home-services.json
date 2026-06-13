@@ -1236,6 +1236,18 @@
     "claimed": true
   },
   {
+    "slug": "daley-organics",
+    "title": "Daley Organics",
+    "address": "8470 Monument Dr, Grants Pass, OR 97526",
+    "phone": "(541) 4410510",
+    "rating": 4.6,
+    "reviews": null,
+    "category": "Soil & Mulch Supplier",
+    "website": "https://daleyorganics.com/",
+    "googleUrl": "https://www.google.com/maps/place/Daley+Organics/@42.5432168,-123.3884123,17z/data=!3m1!4b1!4m6!3m5!1s0x54c574367c852899:0x2759c1273f2ee03d!8m2!3d42.5432168!4d-123.3884123!16s%2Fg%2F11dfpgb9cn",
+    "claimed": false
+  },
+  {
     "slug": "grover-electric-plumbing-supply",
     "title": "Grover Electric & Plumbing Supply",
     "address": "1001 Rogue River Hwy, Grants Pass, OR 97527",

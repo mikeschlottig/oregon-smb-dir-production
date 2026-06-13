@@ -58,9 +58,11 @@ const related = getBusinesses(city.slug, industry.slug)
   .filter((b) => b.title !== business.title)
   .slice(0, 4);
 
-const reviewsLabel = business.reviews
+const reviewsLabel = typeof business.reviews === "number"
   ? `${business.reviews.toLocaleString()} review${business.reviews === 1 ? "" : "s"}`
-  : "Unrated";
+  : typeof business.rating === "number"
+    ? "Based on online ratings"
+    : "Unrated";
 
 const ratingRounded = Math.round(business.rating ?? 0);
 const title = `${business.title} — ${industry.name} in ${city.name}, OR`;
@@ -145,8 +147,10 @@ const description = `${business.title} is a ${
       <div>
         <h2 class="font-serif text-2xl font-bold mb-3">About {business.title}</h2>
         <p class="text-muted-foreground leading-relaxed">
-          {business.title} is a {business.category?.toLowerCase() ?? industry.name.toLowerCase()} serving the {city.name} area. {industry.description}. {typeof business.rating === "number" && business.reviews
-            ? `Customers have given them an average rating of ${business.rating.toFixed(1)} stars across ${business.reviews.toLocaleString()} reviews.`
+          {business.title} is a {business.category?.toLowerCase() ?? industry.name.toLowerCase()} serving the {city.name} area. {industry.description}. {typeof business.rating === "number"
+            ? typeof business.reviews === "number"
+              ? `Customers have given them an average rating of ${business.rating.toFixed(1)} stars across ${business.reviews.toLocaleString()} reviews.`
+              : `Customers have given them an average rating of ${business.rating.toFixed(1)} stars.`
             : "Contact them directly for service details, availability, and quotes."}
         </p>
       </div>

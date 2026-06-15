@@ -22,7 +22,7 @@ export const BusinessCard = ({ business, citySlug, industrySlug }: Props) => (
         <div className="flex-shrink-0 flex items-center gap-1 bg-muted px-2 py-1 rounded-full text-xs font-medium">
           <Star className="w-3 h-3 fill-gold text-gold" />
           <span>{business.rating.toFixed(1)}</span>
-          {business.reviews ? (
+          {typeof business.reviews === "number" ? (
             <span className="text-muted-foreground">({business.reviews})</span>
           ) : null}
         </div>

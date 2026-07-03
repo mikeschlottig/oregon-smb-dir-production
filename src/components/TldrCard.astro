@@ -15,9 +15,10 @@ interface Props {
   title: string;
   tagline: string;
   stats: StatItem[];
+  badge?: string;
 }
 
-const { breadcrumb, eyebrow, title, tagline, stats } = Astro.props;
+const { breadcrumb, eyebrow, title, tagline, stats, badge } = Astro.props;
 ---
 
 <section class="relative" style={`background-color: var(--c-pine);`}>
@@ -36,10 +37,17 @@ const { breadcrumb, eyebrow, title, tagline, stats } = Astro.props;
       ))}
     </nav>
 
-    <!-- Eyebrow -->
-    <p class="eyebrow text-sm uppercase tracking-widest mb-3" style={`color: var(--c-copper);`}>
-      {eyebrow}
-    </p>
+    <!-- Eyebrow with optional badge -->
+    <div class="flex items-center gap-3 mb-3">
+      <p class="eyebrow text-sm uppercase tracking-widest" style={`color: var(--c-copper);`}>
+        {eyebrow}
+      </p>
+      {badge && (
+        <span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full" style={{ backgroundColor: 'var(--c-copper-lt)', color: 'var(--c-pine)' }}>
+          {badge}
+        </span>
+      )}
+    </div>
 
     <!-- H1 Title (inside card as per spec) -->
     <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">

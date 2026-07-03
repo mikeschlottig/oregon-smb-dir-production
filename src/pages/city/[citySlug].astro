@@ -1,10 +1,12 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
+import SeoTextBlock from "@/components/SeoTextBlock.astro";
 import { IndustryCard } from "@/components/cards/IndustryCard";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
+import { generateCitySeoContent } from "@/lib/seo-content";
 import { ChevronRight } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -33,6 +35,10 @@ const tldrStats = [
   { value: totalListings.toString(), label: "Listings" },
   { value: city.population, label: "Population" }
 ];
+
+// Generate SEO content for city page
+const allCityBusinesses = cityIndustriesWithListings.flatMap(ind => getBusinesses(city.slug, ind.slug));
+const seoContent = generateCitySeoContent(city, cityIndustriesWithListings, allCityBusinesses);
 ---
 <SiteLayout title={title} description={description}>
   <TldrCard
@@ -58,4 +64,7 @@ const tldrStats = [
       {industries.map((i) => <IndustryCard industry={i} citySlug={city.slug} />)}
     </div>
   </section>
+
+  <!-- SEO Text Block -->
+  <SeoTextBlock title={`About ${city.name}, Oregon`} html={seoContent} />
 </SiteLayout>

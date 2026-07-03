@@ -1,0 +1,13 @@
+---
+interface Props {
+  title: string;
+  html: string;
+}
+const { title, html } = Astro.props;
+---
+<section class="py-12 border-t border-border">
+  <h2 class="font-playfair text-2xl md:text-3xl font-bold mb-6" style="color: var(--c-pine);">
+    {title}
+  </h2>
+  <div class="prose prose-lg max-w-none" style="color: var(--c-pine);" set:html={html} />
+</section>

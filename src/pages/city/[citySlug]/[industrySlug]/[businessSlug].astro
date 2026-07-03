@@ -2,6 +2,7 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import FaqSchema from "@/components/FaqSchema.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@/data/businesses";
 import { generateIndustryFaqs } from "@/lib/seo-content";
 import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import {
   ChevronRight,
   ExternalLink,
@@ -100,6 +102,15 @@ const schemas = [
   businessSchema(business, city, industry, siteUrl),
   breadcrumbSchema(breadcrumbItems),
 ];
+
+// Compute related links for this business page
+const relatedLinks = getBusinessRelatedLinks({
+  citySlug: city.slug,
+  industrySlug: industry.slug,
+  businessSlug: businessPath,
+  businesses: getBusinesses(city.slug, industry.slug),
+  baseUrl: siteUrl,
+});
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <!-- Dark TLDR Header with TldrCard -->
@@ -288,4 +299,7 @@ const schemas = [
 
   <!-- FAQPage JSON-LD -->
   <FaqSchema faqs={faqs} />
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
 </SiteLayout>

@@ -5,6 +5,7 @@ import SeoTextBlock from "@/components/SeoTextBlock.astro";
 import FaqSchema from "@/components/FaqSchema.astro";
 import BusinessFilterGrid from "@/components/BusinessFilterGrid";
 import Pagination from "@/components/Pagination.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
@@ -12,6 +13,7 @@ import { serviceCategories, getCategoriesByIndustry } from "@/data/serviceCatego
 import { matchBusinesses } from "@/data/matchBusinesses";
 import { generateIndustrySeoContent, generateIndustryFaqs } from "@/lib/seo-content";
 import { industryPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { getCityIndustryRelatedLinks } from "@/lib/link-graph";
 import { ChevronRight } from "lucide-react";
 
 export const PER_PAGE = 15;
@@ -70,6 +72,13 @@ const schemas = [
   ...industryPageSchema(city, industry, businesses, siteUrl),
   breadcrumbSchema(breadcrumbItems),
 ];
+
+// Compute related links for city×industry page
+const relatedLinks = getCityIndustryRelatedLinks({
+  citySlug: city.slug,
+  industrySlug: industry.slug,
+  baseUrl: siteUrl,
+});
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
@@ -166,4 +175,7 @@ const schemas = [
       </div>
     </section>
   )}
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
 </SiteLayout>

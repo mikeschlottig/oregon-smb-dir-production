@@ -2,12 +2,14 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import SeoTextBlock from "@/components/SeoTextBlock.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
 import { IndustryCard } from "@/components/cards/IndustryCard";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
 import { generateCitySeoContent } from "@/lib/seo-content";
 import { cityPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { getCityHubRelatedLinks } from "@/lib/link-graph";
 import { ChevronRight } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -52,6 +54,12 @@ const schemas = [
   ...cityPageSchema(city, cityIndustriesWithListings, siteUrl),
   breadcrumbSchema(breadcrumbItems),
 ];
+
+// Compute related links for city hub page
+const relatedLinks = getCityHubRelatedLinks({
+  citySlug: city.slug,
+  baseUrl: siteUrl,
+});
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
@@ -81,4 +89,7 @@ const schemas = [
 
   <!-- SEO Text Block -->
   <SeoTextBlock title={`About ${city.name}, Oregon`} html={seoContent} />
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
 </SiteLayout>

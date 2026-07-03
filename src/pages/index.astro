@@ -16,6 +16,9 @@ const featured = {
   report: researchReports[0],
 };
 
+export const title = "Oregon Business Directory — Statewide Local Listings";
+export const description = "Oregon's most useful statewide business directory covering I-5 hubs from Ashland to Portland plus Corvallis, Bend, and Klamath Falls.";
+
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 
 const schemas = [
@@ -23,7 +26,7 @@ const schemas = [
   breadcrumbSchema([{ name: "Home", url: siteUrl }]),
 ];
 ---
-<SiteLayout schemas={schemas}>
+<SiteLayout title={title} description={description} schemas={schemas}>
   <Hero />
   <MarqueeBanner />
   <AboutSection />
@@ -32,14 +35,13 @@ const schemas = [
     <div class="text-center mb-14">
       <p class="inline-flex items-center gap-2 text-accent text-sm font-medium mb-3 uppercase tracking-widest">
         <MapPin className="w-4 h-4" />
-        Explore the Corridor
+        Explore Oregon
       </p>
       <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4 text-foreground">
-        Cities Along the I-5
+        Cities Statewide
       </h2>
       <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-        Select a city to discover local businesses across 12 industries, from Ashland in the south
-        to Portland Metro in the north.
+        Select a city to discover local businesses across 12 industries, from Ashland in the south to Portland in the north, plus Corvallis, Bend, and Klamath Falls.
       </p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -54,7 +56,7 @@ const schemas = [
       <p class="text-accent text-sm font-medium mb-3 uppercase tracking-widest">Editorial</p>
       <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">From the Newsroom</h2>
       <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-        Local stories, regional research, and the best businesses on the I-5 — curated by our editors.
+        Local stories, regional research, and the best businesses across Oregon — curated by our editors.
       </p>
     </div>
 

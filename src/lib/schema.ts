@@ -116,7 +116,8 @@ export function websiteSchema(siteUrl: string): Record<string, unknown>[] {
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      name: "Oregon SMB Directory",
+      name: "Oregon Business Directory",
+      description: "Oregon's statewide business directory covering I-5 hubs and regional cities including Corvallis, Bend, and Klamath Falls.",
       url: base,
       potentialAction: {
         "@type": "SearchAction",
@@ -127,7 +128,7 @@ export function websiteSchema(siteUrl: string): Record<string, unknown>[] {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "Oregon SMB Directory",
+      name: "Oregon Business Directory",
       url: base,
       logo: `${base}/og-default.jpg`,
     },

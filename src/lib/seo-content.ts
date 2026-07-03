@@ -15,7 +15,7 @@ export function generateCitySeoContent(city: City, industries: Industry[], busin
   const industryNames = industries.slice(0, 3).map(i => i.name.toLowerCase());
   const topBizNames = topRated.map(b => b.title);
 
-  return `Discover verified local businesses serving ${city.name}, Oregon. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories along the Oregon I-5 corridor, including ${industryNames.slice(0, 2).join(" and ")} services.
+  return `Discover verified local businesses serving ${city.name}, Oregon. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories in ${city.region}, including ${industryNames.slice(0, 2).join(" and ")} services.
 
 ${topBizNames.length > 0 ? `Local providers like ${topBizNames.slice(0, 2).join(" and ")} hold customer ratings of 4.5 stars or higher, reflecting strong community trust. ` : ""}Every listing is checked against Google Business data for active operation, and each includes a verified address, Google Maps directions, and recent customer reviews.
 
@@ -37,7 +37,7 @@ export function generateIndustrySeoContent(city: City, industry: Industry, busin
 
   const topBizNames = topRated.map(b => b.title);
 
-  return `Find verified ${industry.name.toLowerCase()} businesses serving ${city.name}, Oregon. Our directory lists ${businesses.length} local providers with an average rating of ${avgRating} stars, serving ${city.name} and surrounding communities along the Oregon I-5 corridor.
+  return `Find verified ${industry.name.toLowerCase()} businesses serving ${city.name}, Oregon. Our directory lists ${businesses.length} local providers with an average rating of ${avgRating} stars, serving ${city.name} and surrounding communities in ${city.region}.
 
 ${topBizNames.length > 0 ? `Top-rated ${industry.name.toLowerCase()} businesses in ${city.name} include ${topBizNames.slice(0, 2).join(" and ")}, each rated ${topRated[0]?.rating?.toFixed(1) ?? "4.5"} stars or higher by local customers. ` : ""}Every listing is checked against Google Business data for active operation, and ratings shown reflect real customer reviews.
 

@@ -26,8 +26,8 @@ Build completed successfully (`./node_modules/.bin/astro build` exit 0). All cha
 | Springfield   | Oregon I-5 Corridor            |
 
 ## New Homepage Copy (Verbatim)
-- **H1**: Oregon Business Directory (rendered via Hero component, title tag matches)
-- **Tagline**: "Oregon's most useful statewide business directory covering I-5 hubs from Ashland to Portland plus Corvallis, Bend, and Klamath Falls."
+- **H1**: "Oregon Business Directory" (rendered as two lines in Hero.tsx: "Oregon" + "<br/>" + "<span class='italic text-gold'>Business Directory</span>")
+- **Tagline**: "Statewide coverage: I-5 hubs, Corvallis, Bend & Klamath Falls"
 - **Meta Description**: "Oregon's most useful statewide business directory covering I-5 hubs from Ashland to Portland plus Corvallis, Bend, and Klamath Falls."
 
 ## Build Exit

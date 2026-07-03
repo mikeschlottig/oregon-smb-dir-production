@@ -17,16 +17,16 @@ export const Hero = () => (
       </span>
 
       <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 leading-[1.05]">
-        The I-5 Corridor
+        Oregon
         <br />
         <span className="italic text-gold">Business Directory</span>
       </h1>
 
       <p className="text-xl md:text-2xl text-white/80 mb-3 font-light">
-        From Ashland to Portland Metro
+        Statewide coverage: I-5 hubs, Corvallis, Bend & Klamath Falls
       </p>
       <p className="text-base text-white/60 mb-10 max-w-2xl mx-auto">
-        The #1 resource for businesses, residents, and travelers on the Northwest I-5 Corridor.
+        Oregon's most useful statewide business directory.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">

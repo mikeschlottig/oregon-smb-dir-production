@@ -4,7 +4,8 @@ RESULT: DONE
 
 ### Files Changed
 1. `src/components/layout/Navbar.tsx` (MODIFIED) - Added "Services" nav link before "Best Of", fixed "Cities" link from `/#cities` to `/city`
-2. `src/pages/city/index.astro` (NEW) - Oregon Cities index page with CityCard grid
+2. `src/components/sections/Hero.tsx` (MODIFIED) - Fixed "Explore Cities" link from `#cities` to `/city`
+3. `src/pages/city/index.astro` (NEW) - Oregon Cities index page with CityCard grid
 3. `src/pages/city/[citySlug]/[industrySlug].astro` (MODIFIED) - Added "Popular Services" section for industries with service categories
 4. `src/components/SearchBar.astro` (NEW) - Pagefind search component with default and compact variants
 5. `src/pages/index.astro` (MODIFIED) - Added SearchBar below hero section

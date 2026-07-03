@@ -154,6 +154,7 @@ export type Business = {
   website?: string | null;
   googleUrl?: string | null;
   claimed?: boolean;
+  verified?: boolean;
 };
 
 const map: Record<string, Business[]> = {

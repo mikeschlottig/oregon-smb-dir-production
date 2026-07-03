@@ -1,0 +1,270 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+import { getBusinessRelatedLinks } from "@/lib/link-graph";
+import { getBusinesses } from "@/data/businesses";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { ChevronRight, ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2 } from "lucide-react";
+
+const city = cities.find(c => c.slug === "grants-pass")!;
+const industry = industries.find(i => i.slug === "business-professional-services")!;
+const businesses = getBusinesses("grants-pass", "business-professional-services");
+const related = businesses.filter(b => b.slug !== "leverageai").slice(0, 4);
+
+const title = "Leverage AI — AI Search & Digital Strategy in Grants Pass, OR";
+const description = "Leverage AI builds local demand systems for Oregon service businesses — AI search optimization, custom web design, and lead capture infrastructure. Based in Grants Pass, OR.";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Grants Pass", url: `${siteUrl}/city/grants-pass` },
+  { name: "Business & Professional Services", url: `${siteUrl}/city/grants-pass/business-professional-services` },
+  { name: "Leverage AI", url: `${siteUrl}/city/grants-pass/business-professional-services/leverageai` },
+];
+
+const schemas = [
+  businessSchema({
+    title: "Leverage AI",
+    address: "744 NW Bellevue Place, Grants Pass, OR 97526",
+    phone: "(541) 655-6144",
+    website: "https://leverageai.network",
+    rating: 5.0,
+    reviews: null,
+    category: "AI Search & Digital Strategy",
+    slug: "leverageai",
+    claimed: true,
+    verified: true,
+  }, city, industry, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+const relatedLinks = getBusinessRelatedLinks({
+  citySlug: "grants-pass",
+  industrySlug: "business-professional-services",
+  businessSlug: "leverageai",
+  businesses,
+  baseUrl: siteUrl,
+});
+
+const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=42.5536,-123.3884";
+const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&output=embed";
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Grants Pass", href: "/city/grants-pass" },
+      { label: "Business & Professional Services", href: "/city/grants-pass/business-professional-services" },
+      { label: "Leverage AI" }
+    ]}
+    eyebrow="AI Search & Digital Strategy in Grants Pass, OR"
+    title="Leverage AI"
+    tagline="Local demand systems for Oregon service businesses — connecting visibility, website trust, lead capture, and response speed into one measurable growth engine."
+    stats={[
+      { value: "5.0", label: "Rating" },
+      { value: "Verified", label: "Status" },
+      { value: "2024", label: "Est." }
+    ]}
+    badge="✓ Verified"
+  />
+
+  <section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-8">
+      <!-- Map -->
+      <div class="rounded-xl overflow-hidden border border-border shadow-sm bg-muted">
+        <iframe
+          title="Map of Leverage AI"
+          src={embedSrc}
+          width="100%"
+          height="360"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="block w-full"
+        />
+        <div class="p-4 flex flex-wrap items-center justify-between gap-3 bg-card">
+          <p class="text-sm text-muted-foreground flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-accent" />
+            744 NW Bellevue Place, Grants Pass, OR 97526
+          </p>
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+          >
+            Open in Google Maps <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- TL;DR Block -->
+      <div class="bg-muted/50 border-l-4 border-accent p-6 rounded-r-lg">
+        <h2 class="font-serif text-xl font-bold mb-3 text-foreground">Quick Answer</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          Leverage AI is a digital strategy agency based in Grants Pass, Oregon, specializing in AI-first search optimization, custom web design, and lead capture infrastructure for service businesses. Founded by Mike Schlottig, the agency builds "local demand systems" that connect search visibility, website credibility, and follow-up speed into a single measurable pipeline.
+        </p>
+      </div>
+
+      <!-- About Section -->
+      <div>
+        <h2 class="font-serif text-2xl font-bold mb-4">AI-First Digital Strategy, Built on the Ground in Southern Oregon</h2>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          Most agencies talk about "SEO" and "lead generation" like they're separate services. Leverage AI treats them as engineering problems. The agency builds what founder Mike Schlottig calls "local demand systems" — connected infrastructure that ties together a business's search visibility, website credibility, lead capture, and follow-up speed into a single measurable pipeline.
+        </p>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          That approach comes from direct experience. After moving to Grants Pass in 2023, Schlottig noticed that local service businesses — HVAC contractors, plumbers, landscapers — were being left behind by the shift toward AI-powered search. While national brands were optimizing for ChatGPT and Google's AI Overviews, Oregon service businesses were still relying on template websites and generic SEO advice from 2019.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          That observation turned into a practice. From a home office on Bellevue Place in Grants Pass, Schlottig builds local demand systems for service businesses across the Rogue Valley and the broader Oregon I-5 corridor, from HVAC contractors in Medford to organic suppliers right here in Grants Pass.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div>
+        <h3 class="font-serif text-xl font-bold mb-4">Services</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">AI Search Optimization</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Custom Web Design</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Lead Capture Infrastructure</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Local SEO & Schema Markup</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Response Speed Optimization</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Growth Pipeline Engineering</div>
+        </div>
+      </div>
+
+      <!-- Case Study Callout -->
+      <aside class="bg-accent/5 border border-accent/20 rounded-xl p-6">
+        <h3 class="font-serif text-lg font-bold mb-3 text-accent">Case Study: Local SEO Transformation</h3>
+        <p class="text-muted-foreground leading-relaxed mb-4 text-sm">
+          Rebuilt the content architecture and schema markup for a Grants Pass organic soil supplier with zero AI search presence. Within 90 days, the business appeared in AI-generated recommendations across multiple platforms.
+        </p>
+        <div class="flex gap-8">
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-accent font-serif">90</span>
+            <span class="text-xs text-muted-foreground uppercase tracking-wider">Days to Results</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-bold text-accent font-serif">0→AI</span>
+            <span class="text-xs text-muted-foreground uppercase tracking-wider">Search Visibility</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Detailed Content -->
+      <div>
+        <h3 class="font-serif text-xl font-bold mb-4">Why Choose Leverage AI</h3>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          For Oregon service businesses that have outgrown template websites and generic SEO advice, Leverage AI offers a different kind of partnership — one that treats local search visibility, AI discoverability, and website performance as engineering problems, not marketing ones.
+        </p>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          The agency's approach is rooted in direct testing. Schlottig maintains multiple test properties and agent systems to validate what actually drives visibility in AI-powered search results. That means clients get strategies based on current platform behavior, not outdated SEO playbooks.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          Leverage AI works directly with service business owners across the Rogue Valley — from single-truck operators to multi-crew operations. The focus is always on measurable pipeline growth: more qualified calls, faster response times, and higher conversion from search traffic.
+        </p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="space-y-6">
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4">Contact</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <MapPin className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">744 NW Bellevue Place<br>Grants Pass, OR 97526</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <Phone className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href="tel:5416556144" class="text-foreground hover:text-accent">(541) 655-6144</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href="https://leverageai.network" target="_blank" rel="noopener" class="text-foreground hover:text-accent break-all">
+              leverageai.network
+            </a>
+          </li>
+          <li class="flex items-center gap-3">
+            <Building2 className="w-4 h-4 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">AI Search & Digital Strategy</span>
+          </li>
+        </ul>
+
+        <div class="mt-5 pt-5 border-t border-border space-y-2">
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded hover:bg-primary/90 transition-colors"
+          >
+            Get Directions <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="https://leverageai.network"
+            target="_blank"
+            rel="noopener"
+            class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+          >
+            Visit Website <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="tel:5416556144"
+            class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5" /> Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Service Area Card -->
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4">Service Area</h3>
+        <p class="text-sm text-muted-foreground mb-3">
+          Serves <strong class="text-foreground">Grants Pass, Medford, Ashland</strong> & the I-5 corridor
+        </p>
+      </div>
+
+      <!-- Related Businesses -->
+      {related.length > 0 && (
+        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+          <h3 class="font-serif text-lg font-semibold mb-4">
+            More {industry.name} in {city.name}
+          </h3>
+          <ul class="space-y-3">
+            {related.map((b) => (
+              <li>
+                <a
+                  href={`/city/${city.slug}/${industry.slug}/${b.slug}`}
+                  class="flex items-center justify-between gap-2 text-sm group"
+                >
+                  <span class="text-foreground group-hover:text-accent transition-colors">
+                    {b.title}
+                  </span>
+                  {typeof b.rating === "number" && (
+                    <span class="flex items-center gap-1 text-muted-foreground text-xs flex-shrink-0">
+                      <Star className="w-3 h-3 fill-gold text-gold" />
+                      {b.rating.toFixed(1)}
+                    </span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/city/${city.slug}/${industry.slug}`}
+            class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings
+          </a>
+        </div>
+      )}
+    </aside>
+  </section>
+
+  <!-- Related Links -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
+</SiteLayout>

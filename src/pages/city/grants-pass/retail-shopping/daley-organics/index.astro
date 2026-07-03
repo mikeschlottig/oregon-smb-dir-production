@@ -1,0 +1,277 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+import { getBusinessRelatedLinks } from "@/lib/link-graph";
+import { getBusinesses } from "@/data/businesses";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { ChevronRight, ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2 } from "lucide-react";
+
+const city = cities.find(c => c.slug === "grants-pass")!;
+const industry = industries.find(i => i.slug === "retail-shopping")!;
+const businesses = getBusinesses("grants-pass", "retail-shopping");
+const related = businesses.filter(b => b.slug !== "daley-organics").slice(0, 4);
+
+const title = "Daley Organics — Organic Garden Supply in Grants Pass, OR";
+const description = "Daley Organics is a premium organic soil, compost, and fertilizer supplier in Grants Pass, Oregon. Family-owned and operated by Cameron Daley since 2013.";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Grants Pass", url: `${siteUrl}/city/grants-pass` },
+  { name: "Retail & Shopping", url: `${siteUrl}/city/grants-pass/retail-shopping` },
+  { name: "Daley Organics", url: `${siteUrl}/city/grants-pass/retail-shopping/daley-organics` },
+];
+
+const schemas = [
+  businessSchema({
+    title: "Daley Organics",
+    address: "8470 Monument Dr, Grants Pass, OR 97526",
+    phone: "(541) 441-0510",
+    website: "https://daleyorganics.com",
+    rating: 4.6,
+    reviews: null,
+    category: "Organic Garden Supply",
+    slug: "daley-organics",
+    claimed: true,
+    verified: true,
+  }, city, industry, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+const relatedLinks = getBusinessRelatedLinks({
+  citySlug: "grants-pass",
+  industrySlug: "retail-shopping",
+  businessSlug: "daley-organics",
+  businesses,
+  baseUrl: siteUrl,
+});
+
+const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=42.5432168,-123.3884123";
+const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=15&output=embed";
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Grants Pass", href: "/city/grants-pass" },
+      { label: "Retail & Shopping", href: "/city/grants-pass/retail-shopping" },
+      { label: "Daley Organics" }
+    ]}
+    eyebrow="Organic Garden Supply in Grants Pass, OR"
+    title="Daley Organics"
+    tagline="Premium organic soil, compost, and fertilizer blended on Monument Drive — fueling Rogue Valley gardens and farms for over a decade."
+    stats={[
+      { value: "4.6", label: "Rating" },
+      { value: "Verified", label: "Status" },
+      { value: "2013", label: "Est." }
+    ]}
+    badge="✓ Verified"
+  />
+
+  <section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-8">
+      <!-- Map -->
+      <div class="rounded-xl overflow-hidden border border-border shadow-sm bg-muted">
+        <iframe
+          title="Map of Daley Organics"
+          src={embedSrc}
+          width="100%"
+          height="360"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="block w-full"
+        />
+        <div class="p-4 flex flex-wrap items-center justify-between gap-3 bg-card">
+          <p class="text-sm text-muted-foreground flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-accent" />
+            8470 Monument Dr, Grants Pass, OR 97526
+          </p>
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+          >
+            Open in Google Maps <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- TL;DR Block -->
+      <div class="bg-muted/50 border-l-4 border-accent p-6 rounded-r-lg">
+        <h2 class="font-serif text-xl font-bold mb-3 text-foreground">Quick Answer</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          Daley Organics is a family-owned organic soil and garden supply business in Grants Pass, Oregon, operated by Cameron Daley since 2013. They specialize in premium bulk soil blends, compost, and organic fertilizers with over twenty amendments per yard — roughly triple the density of competing blends. Open seven days a week for pickup.
+        </p>
+      </div>
+
+      <!-- About Section -->
+      <div>
+        <h2 class="font-serif text-2xl font-bold mb-4">The Rogue Valley's Go-To Source for Living Soil</h2>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          Drive north on the Redwood Highway out of Grants Pass, hang a right past North Valley High School onto Monument Drive, and you'll find yourself in a different kind of supply yard. Daley Organics isn't a garden center with rows of packaged bags and seasonal displays. It's a working blending operation where Cameron Daley mixes premium organic soil, compost, and fertilizer in bulk — the kind of place where serious growers bring their trucks and load up by the yard.
+        </p>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          Cameron started the operation in 2013 after growing up in the Rogue Valley. The idea was straightforward: build soil mixes that actually feed the biology underground — the mycorrhiza, the nematodes, the fungi networks — instead of just dumping synthetic nutrients on top. Twelve years later, that approach has earned a following that stretches well beyond Josephine County. Growers drive from Medford, Ashland, and as far as the Illinois Valley to pick up his blends.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div>
+        <h3 class="font-serif text-xl font-bold mb-4">Products & Services</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Premium Potting Soil</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Organic Compost</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">All-Purpose Fertilizer</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Bloom Fertilizer</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Cedar Bark Mulch</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Bulk Soil Pickup</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Pumice & Perlite</div>
+          <div class="bg-accent/10 text-accent font-medium px-4 py-2 rounded-lg text-sm">Worm Castings</div>
+        </div>
+      </div>
+
+      <!-- Detailed Content -->
+      <div>
+        <h3 class="font-serif text-xl font-bold mb-4">Why Choose Daley Organics</h3>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          The flagship premium potting soil isn't a simple peat-and-perlite mix. It packs over twenty organic amendments into each yard: worm castings, sea bird guano, bat guano, kelp meal, fish bone meal, feather meal, greensand, alfalfa meal, crab meal, shrimp meal, glacial rock dust, humic acids, and mycorrhizal inoculant, among others. That's roughly thirty pounds of organic fertilizer per cubic yard — roughly triple the amendment density of competing premium blends available at regional farm supply stores.
+        </p>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          Beyond the premium mix, Daley Organics sells their Merlin blend (a lighter compost-based soil), cedar bark mulch, raw compost, pumice, perlite, peat moss, coconut coir, fill dirt, and standalone all-purpose and bloom fertilizers. Bulk pricing scales down with volume, and everything is available for pickup seven days a week.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          The location sits on the edge of the Merlin community, about a mile past North Valley High School on the way toward the Hellgate Canyon stretch of the Rogue River. If you're rafting the Rogue or passing through on Highway 199 toward the Redwoods, it's a detour worth making — especially if you've been trying to figure out why your garden soil gives out after one season.
+        </p>
+      </div>
+
+      <!-- Callout: Quick Facts -->
+      <aside class="bg-accent/5 border border-accent/20 rounded-xl p-6">
+        <h3 class="font-serif text-lg font-bold mb-4 text-accent">Quick Facts</h3>
+        <ul class="space-y-3 text-sm text-muted-foreground">
+          <li class="flex items-start gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong class="text-foreground">Owner-operated</strong> by Cameron Daley</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong class="text-foreground">100% Organic</strong> ingredients</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span><strong class="text-foreground">Bulk pickup</strong> available seven days a week</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-accent font-bold">•</span>
+            <span>Serves <strong class="text-foreground">Grants Pass, Merlin, Medford, Ashland</strong> & the Rogue Valley</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="space-y-6">
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4">Contact</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-start gap-3">
+            <MapPin className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">8470 Monument Dr, Grants Pass, OR 97526</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <Phone className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href="tel:5414410510" class="text-foreground hover:text-accent">(541) 441-0510</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href="https://daleyorganics.com" target="_blank" rel="noopener" class="text-foreground hover:text-accent break-all">
+              daleyorganics.com
+            </a>
+          </li>
+          <li class="flex items-center gap-3">
+            <Building2 className="w-4 h-4 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">Organic Garden Supply</span>
+          </li>
+        </ul>
+
+        <div class="mt-5 pt-5 border-t border-border space-y-2">
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded hover:bg-primary/90 transition-colors"
+          >
+            Get Directions <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="https://daleyorganics.com"
+            target="_blank"
+            rel="noopener"
+            class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+          >
+            Visit Website <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="tel:5414410510"
+            class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5" /> Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Hours Card -->
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4">Hours</h3>
+        <table class="w-full text-sm">
+          <tr class="border-b border-border">
+            <td class="py-2 text-foreground font-medium">Monday - Sunday</td>
+            <td class="py-2 text-accent font-semibold text-right">8:00 AM – 5:00 PM</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Related Businesses -->
+      {related.length > 0 && (
+        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+          <h3 class="font-serif text-lg font-semibold mb-4">
+            More {industry.name} in {city.name}
+          </h3>
+          <ul class="space-y-3">
+            {related.map((b) => (
+              <li>
+                <a
+                  href={`/city/${city.slug}/${industry.slug}/${b.slug}`}
+                  class="flex items-center justify-between gap-2 text-sm group"
+                >
+                  <span class="text-foreground group-hover:text-accent transition-colors">
+                    {b.title}
+                  </span>
+                  {typeof b.rating === "number" && (
+                    <span class="flex items-center gap-1 text-muted-foreground text-xs flex-shrink-0">
+                      <Star className="w-3 h-3 fill-gold text-gold" />
+                      {b.rating.toFixed(1)}
+                    </span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/city/${city.slug}/${industry.slug}`}
+            class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings
+          </a>
+        </div>
+      )}
+    </aside>
+  </section>
+
+  <!-- Related Links -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
+</SiteLayout>

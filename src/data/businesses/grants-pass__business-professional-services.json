@@ -1,5 +1,18 @@
 [
   {
+    "slug": "leverageai",
+    "title": "Leverage AI",
+    "address": "744 NW Bellevue Place, Grants Pass, OR 97526",
+    "phone": "(541) 655-6144",
+    "rating": 5.0,
+    "reviews": null,
+    "category": "AI Search & Digital Strategy",
+    "website": "https://leverageai.network",
+    "googleUrl": "https://www.google.com/maps/place/744+NW+Bellevue+Pl,+Grants+Pass,+OR+97526/@42.5536,-123.3884,17z/",
+    "claimed": true,
+    "verified": true
+  },
+  {
     "slug": "wrap-it-up-graphics",
     "title": "Wrap It Up Graphics",
     "address": "2001 Foothill Blvd e4, Grants Pass, OR 97526",

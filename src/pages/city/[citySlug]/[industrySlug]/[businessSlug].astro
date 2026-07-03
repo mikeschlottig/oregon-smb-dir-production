@@ -78,7 +78,10 @@ const description = `${business.title} is a ${
 
 // Build badge text
 const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
-const badge = `★ Verified Listing${isTopRated ? " · Top Rated" : ""}`;
+const isVerified = business.verified === true;
+const badge = isVerified
+  ? `✓ Verified${isTopRated ? " · Top Rated" : ""}`
+  : `★ Verified Listing${isTopRated ? " · Top Rated" : ""}`;
 
 // Stats for TldrCard
 const stats = [

@@ -1,9 +1,11 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
 import { IndustryCard } from "@/components/cards/IndustryCard";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
-import { ChevronRight, MapPin } from "lucide-react";
+import { getBusinesses } from "@/data/businesses";
+import { ChevronRight } from "lucide-react";
 
 export async function getStaticPaths() {
   return cities.map((city) => ({
@@ -16,27 +18,34 @@ const { city } = Astro.props;
 const cityImageSrc = (city.image as any).src ?? city.image;
 const title = `${city.name}, Oregon — Local Business Directory`;
 const description = city.description;
+
+// Calculate real stats for TldrCard
+const cityIndustriesWithListings = industries.filter(ind => 
+  getBusinesses(city.slug, ind.slug).length > 0
+);
+const totalListings = cityIndustriesWithListings.reduce(
+  (sum, ind) => sum + getBusinesses(city.slug, ind.slug).length, 
+  0
+);
+
+const tldrStats = [
+  { value: cityIndustriesWithListings.length.toString(), label: "Industries" },
+  { value: totalListings.toString(), label: "Listings" },
+  { value: city.population, label: "Population" }
+];
 ---
 <SiteLayout title={title} description={description}>
-  <section class="relative h-80 md:h-[420px]">
-    <div
-      class="absolute inset-0 bg-cover bg-center"
-      style={`background-image: url(${cityImageSrc})`}
-    />
-    <div class="absolute inset-0 bg-gradient-to-b from-foreground/40 via-foreground/30 to-foreground/80" />
-    <div class="relative z-10 h-full flex flex-col justify-end px-4 pb-10 container mx-auto pt-20">
-      <nav class="flex items-center gap-2 text-white/70 text-sm mb-4">
-        <a href="/" class="hover:text-white">Home</a>
-        <ChevronRight className="w-4 h-4" />
-        <span class="text-white">{city.name}</span>
-      </nav>
-      <p class="flex items-center gap-2 text-gold text-sm mb-2 uppercase tracking-widest">
-        <MapPin className="w-4 h-4" /> Oregon I-5 Corridor
-      </p>
-      <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-2">{city.name}</h1>
-      <p class="text-white/85 text-lg max-w-2xl">{city.description}</p>
-    </div>
-  </section>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Cities", href: "/city" },
+      { label: city.name }
+    ]}
+    eyebrow={`Oregon I-5 Corridor`}
+    title={city.name}
+    tagline={`Discover ${totalListings}+ verified businesses serving ${city.name}, Oregon across ${cityIndustriesWithListings.length} industries.`}
+    stats={tldrStats}
+  />
 
   <section class="container mx-auto px-4 pt-16 pb-20">
     <div class="text-center mb-12">
@@ -45,7 +54,7 @@ const description = city.description;
         Find trusted local businesses in {city.name} across all major service categories.
       </p>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {industries.map((i) => <IndustryCard industry={i} citySlug={city.slug} />)}
     </div>
   </section>

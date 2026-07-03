@@ -1,5 +1,6 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
 import BusinessFilterGrid from "@/components/BusinessFilterGrid";
 import Pagination from "@/components/Pagination.astro";
 import { cities } from "@/data/cities";
@@ -27,6 +28,16 @@ const businesses = getBusinesses(city.slug, industry.slug);
 const totalPages = Math.max(1, Math.ceil(businesses.length / PER_PAGE));
 const pageSlice = businesses.slice(0, PER_PAGE);
 const baseUrl = `/city/${city.slug}/${industry.slug}/`;
+
+// Calculate stats for TldrCard
+const avgRating = businesses.length > 0
+  ? businesses.reduce((sum, b) => sum + (b.rating || 0), 0) / businesses.filter(b => b.rating).length
+  : 0;
+const tldrStats = [
+  { value: businesses.length.toString(), label: "Listings" },
+  { value: avgRating > 0 ? avgRating.toFixed(1) : "N/A", label: "Avg Rating" },
+  { value: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }), label: "Updated" }
+];
 
 const title = `${industry.name} in ${city.name}, Oregon`;
 const description = `${industry.description}. Browse ${
@@ -66,24 +77,17 @@ const jsonLd = businesses.length
   : undefined;
 ---
 <SiteLayout title={title} description={description} jsonLd={jsonLd}>
-  <section class="bg-muted pt-32 pb-12 px-4 border-b border-border">
-    <div class="container mx-auto">
-      <nav class="flex items-center flex-wrap gap-2 text-muted-foreground text-sm mb-4">
-        <a href="/" class="hover:text-foreground">Home</a>
-        <ChevronRight className="w-4 h-4" />
-        <a href={`/city/${city.slug}`} class="hover:text-foreground">{city.name}</a>
-        <ChevronRight className="w-4 h-4" />
-        <span class="text-foreground">{industry.name}</span>
-      </nav>
-      <p class="text-accent text-sm uppercase tracking-widest mb-2">{city.name}</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-3">
-        {industry.name} in {city.name}
-      </h1>
-      <p class="text-muted-foreground text-lg max-w-2xl">
-        {industry.description}. Browse {businesses.length > 0 ? businesses.length : "local"} verified provider{businesses.length === 1 ? "" : "s"} serving {city.name}.
-      </p>
-    </div>
-  </section>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: city.name, href: `/city/${city.slug}` },
+      { label: industry.name }
+    ]}
+    eyebrow={`${city.name}, OR`}
+    title={`${industry.name} in ${city.name}`}
+    tagline={`${businesses.length} verified ${industry.name.toLowerCase()} serving ${city.name}, Oregon.`}
+    stats={tldrStats}
+  />
 
   <section class="container mx-auto px-4 py-16">
     {businesses.length === 0 ? (

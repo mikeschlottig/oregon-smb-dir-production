@@ -1,0 +1,38 @@
+/* ============================================
+   Oregon SMB Directory — Design Tokens
+   Spec: docs/DESIGN_SPEC-2026-07-02.md
+   ============================================ */
+
+:root {
+  /* === Colors (Oregon-rooted palette) === */
+  --c-pine: #1A3329;
+  --c-river: #2A6049;
+  --c-sage: #5C7E6E;
+  --c-copper: #C45E2A;
+  --c-copper-lt: #F0C4A0;
+  --c-sky: #D4E8DF;
+  --c-stone: #F4F1EB;
+  --c-border: #DDE4DC;
+
+  /* === Spacing (4px base ladder) === */
+  --space-2: 8px;   /* icon gap, tag padding */
+  --space-4: 16px;  /* compact card/nav padding */
+  --space-6: 24px;  /* standard card padding, section gap */
+  --space-8: 32px;  /* hero card padding */
+  --space-12: 48px; /* section v-padding mobile */
+  --space-16: 64px; /* desktop section v-padding */
+
+  /* === Border Radius === */
+  --radius-sm: 4px;   /* buttons, badges */
+  --radius-md: 8px;   /* cards, chips, inputs */
+  --radius-lg: 16px;  /* TLDR card, modals */
+  --radius-full: 9999px; /* tags, pills, icon circles */
+
+  /* === Typography (font families) === */
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+
+  /* === Min touch target === */
+  --min-touch-target: 44px;
+}

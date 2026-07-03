@@ -1,0 +1,68 @@
+---
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  breadcrumb: BreadcrumbItem[];
+  eyebrow: string;
+  title: string;
+  tagline: string;
+  stats: StatItem[];
+}
+
+const { breadcrumb, eyebrow, title, tagline, stats } = Astro.props;
+---
+
+<section class="relative" style={`background-color: var(--c-pine);`}>
+  <div class="container mx-auto px-4 py-16 md:py-24">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm mb-6" style={`color: var(--c-copper-lt);`}>
+      {breadcrumb.map((item, i) => (
+        <>
+          {i > 0 && <span class="text-white/40">/</span>}
+          {item.href ? (
+            <a href={item.href} class="hover:text-white transition-colors">{item.label}</a>
+          ) : (
+            <span class="text-white">{item.label}</span>
+          )}
+        </>
+      ))}
+    </nav>
+
+    <!-- Eyebrow -->
+    <p class="eyebrow text-sm uppercase tracking-widest mb-3" style={`color: var(--c-copper);`}>
+      {eyebrow}
+    </p>
+
+    <!-- H1 Title (inside card as per spec) -->
+    <h1 class="font-playfair text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+      {title}
+    </h1>
+
+    <!-- Tagline -->
+    <p class="text-lg md:text-xl mb-8 max-w-2xl" style={`color: var(--c-sky);`}>
+      {tagline}
+    </p>
+
+    <!-- Stats Row -->
+    <div class="flex flex-wrap gap-6 md:gap-8">
+      {stats.map((stat) => (
+        <div class="flex flex-col">
+          <span class="stat text-3xl md:text-4xl" style={`color: var(--c-copper-lt);`}>
+            {stat.value}
+          </span>
+          <span class="text-sm mt-1" style={`color: var(--c-sky);`}>
+            {stat.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

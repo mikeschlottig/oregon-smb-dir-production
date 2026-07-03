@@ -45,7 +45,7 @@ const seoContent = generateCitySeoContent(city, cityIndustriesWithListings, allC
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const breadcrumbItems = [
   { name: "Home", url: siteUrl },
-  { name: "Cities", url: `${siteUrl}/city` },
+  { name: "Cities", url: `${siteUrl}/city/` },
   { name: city.name, url: `${siteUrl}/city/${city.slug}` },
 ];
 const schemas = [
@@ -57,7 +57,7 @@ const schemas = [
   <TldrCard
     breadcrumb={[
       { label: "Home", href: "/" },
-      { label: "Cities", href: "/city" },
+      { label: "Cities", href: "/city/" },
       { label: city.name }
     ]}
     eyebrow={city.region}

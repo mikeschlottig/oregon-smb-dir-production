@@ -31,7 +31,7 @@ export const Hero = () => (
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="/city"
+          href="/city/"
           className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3.5 rounded font-medium transition-all hover:shadow-elegant"
         >
           Explore Cities

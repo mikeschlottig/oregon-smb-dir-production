@@ -63,8 +63,8 @@ const faqs = generateIndustryFaqs(city, industry, businesses);
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const breadcrumbItems = [
   { name: "Home", url: siteUrl },
-  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
-  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}` },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}/` },
+  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}/` },
 ];
 const schemas = [
   ...industryPageSchema(city, industry, businesses, siteUrl),
@@ -75,7 +75,7 @@ const schemas = [
   <TldrCard
     breadcrumb={[
       { label: "Home", href: "/" },
-      { label: city.name, href: `/city/${city.slug}` },
+      { label: city.name, href: `/city/${city.slug}/` },
       { label: industry.name }
     ]}
     eyebrow={`${city.name}, OR`}

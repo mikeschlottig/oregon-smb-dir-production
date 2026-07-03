@@ -26,14 +26,16 @@ RESULT: DONE
 - **Script**: Inline script that imports pagefind module and provides real-time search with debouncing
 
 ### Breadcrumb Fixes
-1. **Navbar.tsx**: Fixed "Cities" link from `/#cities` to `/city` (visible nav)
-2. **city/[citySlug].astro**: Already had correct breadcrumbs pointing to `/city` (no change needed)
-3. **All breadcrumbs verified**: 
+1. **Navbar.tsx**: Fixed "Cities" link from `/#cities` to `/city/` (visible nav + mobile menu)
+2. **Hero.tsx**: Fixed "Explore Cities" link from `#cities` to `/city/`
+3. **city/[citySlug].astro**: Updated breadcrumb to use `/city/` (with trailing slash)
+4. **city/[citySlug]/[industrySlug].astro**: Updated breadcrumb to use trailing slashes
+5. **All breadcrumbs verified**: 
    - Home → `/` ✓
-   - Cities → `/city` ✓
+   - Cities → `/city/` ✓
    - Services → `/services` ✓
-   - City crumb → `/city/{slug}` ✓
-   - Industry crumb → `/city/{citySlug}/{industrySlug}` ✓
+   - City crumb → `/city/{slug}/` ✓
+   - Industry crumb → `/city/{citySlug}/{industrySlug}/` ✓
 
 ### Build Exit
 - **Exit code**: 0 (success)

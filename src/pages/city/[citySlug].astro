@@ -34,7 +34,8 @@ const totalListings = cityIndustriesWithListings.reduce(
 const tldrStats = [
   { value: cityIndustriesWithListings.length.toString(), label: "Industries" },
   { value: totalListings.toString(), label: "Listings" },
-  { value: city.population, label: "Population" }
+  { value: city.population, label: "Population" },
+  ...(city.county ? [{ value: `${city.county} Co.`, label: "County" }] : [])
 ];
 
 // Generate SEO content for city page
@@ -61,8 +62,9 @@ const schemas = [
     ]}
     eyebrow={city.region}
     title={city.name}
-    tagline={`Discover ${totalListings}+ verified businesses serving ${city.name}, Oregon across ${cityIndustriesWithListings.length} industries.`}
+    tagline={city.tagline}
     stats={tldrStats}
+    county={city.county}
   />
 
   <section class="container mx-auto px-4 pt-16 pb-20">

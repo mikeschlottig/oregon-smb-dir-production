@@ -16,9 +16,10 @@ interface Props {
   tagline: string;
   stats: StatItem[];
   badge?: string;
+  county?: string;
 }
 
-const { breadcrumb, eyebrow, title, tagline, stats, badge } = Astro.props;
+const { breadcrumb, eyebrow, title, tagline, stats, badge, county } = Astro.props;
 ---
 
 <section class="relative" style={`background-color: var(--c-pine);`}>
@@ -40,7 +41,7 @@ const { breadcrumb, eyebrow, title, tagline, stats, badge } = Astro.props;
     <!-- Eyebrow with optional badge -->
     <div class="flex items-center gap-3 mb-3">
       <p class="eyebrow text-sm uppercase tracking-widest" style={`color: var(--c-copper);`}>
-        {eyebrow}
+        {county ? `${eyebrow} · ${county} County` : eyebrow}
       </p>
       {badge && (
         <span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full" style={{ backgroundColor: 'var(--c-copper-lt)', color: 'var(--c-pine)' }}>

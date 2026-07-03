@@ -15,7 +15,7 @@ export function generateCitySeoContent(city: City, industries: Industry[], busin
   const industryNames = industries.slice(0, 3).map(i => i.name.toLowerCase());
   const topBizNames = topRated.map(b => b.title);
 
-  return `Discover verified local businesses serving ${city.name}, Oregon. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories in ${city.region}, including ${industryNames.slice(0, 2).join(" and ")} services.
+  return `Discover verified local businesses serving ${city.name}, Oregon${city.county ? ` in ${city.county} County` : ''}. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories in ${city.region}, including ${industryNames.slice(0, 2).join(" and ")} services.
 
 ${topBizNames.length > 0 ? `Local providers like ${topBizNames.slice(0, 2).join(" and ")} hold customer ratings of 4.5 stars or higher, reflecting strong community trust. ` : ""}Every listing is checked against Google Business data for active operation, and each includes a verified address, Google Maps directions, and recent customer reviews.
 

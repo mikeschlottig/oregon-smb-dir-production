@@ -5,6 +5,7 @@ import { MarqueeBanner } from "@/components/sections/MarqueeBanner";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { CityCard } from "@/components/cards/CityCard";
+import SearchBar from "@/components/SearchBar.astro";
 import { cities } from "@/data/cities";
 import { blogPosts, researchReports, bestOfLists } from "@/data/content";
 import { websiteSchema, breadcrumbSchema } from "@/lib/schema";
@@ -29,6 +30,17 @@ const schemas = [
 <SiteLayout title={title} description={description} schemas={schemas}>
   <Hero />
   <MarqueeBanner />
+  
+  <!-- Search Section -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="font-playfair text-2xl md:text-3xl font-bold mb-6 text-center" style="color: var(--c-pine);">
+        Search Oregon Businesses
+      </h2>
+      <SearchBar />
+    </div>
+  </section>
+  
   <AboutSection />
 
   <section id="cities" class="container mx-auto px-4 py-20 scroll-mt-20">

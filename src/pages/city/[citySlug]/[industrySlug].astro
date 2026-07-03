@@ -8,6 +8,8 @@ import Pagination from "@/components/Pagination.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
+import { serviceCategories, getCategoriesByIndustry } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
 import { generateIndustrySeoContent, generateIndustryFaqs } from "@/lib/seo-content";
 import { industryPageSchema, breadcrumbSchema } from "@/lib/schema";
 import { ChevronRight } from "lucide-react";
@@ -29,6 +31,12 @@ export async function getStaticPaths() {
 
 const { city, industry } = Astro.props;
 const businesses = getBusinesses(city.slug, industry.slug);
+
+// Get service categories for this industry that have ≥3 matching businesses in this city
+const serviceCategoriesForIndustry = getCategoriesByIndustry(industry.slug);
+const popularServices = serviceCategoriesForIndustry.filter(
+  (cat) => matchBusinesses(city.slug, cat).length >= 3
+);
 const totalPages = Math.max(1, Math.ceil(businesses.length / PER_PAGE));
 const pageSlice = businesses.slice(0, PER_PAGE);
 const baseUrl = `/city/${city.slug}/${industry.slug}/`;
@@ -134,4 +142,28 @@ const schemas = [
 
   <!-- FAQPage JSON-LD -->
   <FaqSchema faqs={faqs} />
+
+  <!-- Popular Services Section -->
+  {popularServices.length > 0 && (
+    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+      <h2 class="font-playfair text-2xl md:text-3xl font-bold mb-4" style="color: var(--c-pine);">
+        Popular Services in {city.name}
+      </h2>
+      <p class="mb-6" style="color: var(--c-sage);">
+        Explore specialized service categories available in {city.name}.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        {popularServices.map((cat) => (
+          <a
+            href={`/services/${industry.slug}/${cat.slug}/${city.slug}`}
+            class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors hover:opacity-80"
+            style="background-color: var(--c-river); color: white;"
+          >
+            {cat.displayName} ({matchBusinesses(city.slug, cat).length})
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 </SiteLayout>

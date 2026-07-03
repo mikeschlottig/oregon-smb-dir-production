@@ -1,0 +1,78 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import SearchBar from "@/components/SearchBar.astro";
+import { CityCard } from "@/components/cards/CityCard";
+import { cities } from "@/data/cities";
+import { getBusinesses } from "@/data/businesses";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const title = "Oregon Cities — Business Directory";
+const description = "Browse local businesses across 12 Oregon cities from Ashland to Portland Metro. Find verified businesses in your city.";
+
+// Calculate stats for each city
+const cityStats = cities.map(city => {
+  const industriesWithListings = ["construction-home-services", "restaurants", "retail", "healthcare", "automotive", "professional-services", "real-estate", "hospitality", "technology", "manufacturing", "education", "personal-services"].filter(indSlug =>
+    getBusinesses(city.slug, indSlug).length > 0
+  );
+  const totalListings = industriesWithListings.reduce(
+    (sum, indSlug) => sum + getBusinesses(city.slug, indSlug).length,
+    0
+  );
+  return { city, industriesCount: industriesWithListings.length, totalListings };
+});
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Cities", url: `${siteUrl}/city` },
+];
+const schemas = [
+  breadcrumbSchema(breadcrumbItems),
+];
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Cities" }
+    ]}
+    eyebrow="Oregon"
+    title="Oregon Cities"
+    tagline="Browse verified local businesses across 12 cities along the I-5 corridor and beyond."
+    stats={[
+      { value: cities.length.toString(), label: "Cities" },
+      { value: cityStats.reduce((sum, cs) => sum + cs.totalListings, 0).toString(), label: "Total Listings" },
+    ]}
+  />
+
+  <!-- Compact Search -->
+  <div class="container mx-auto px-4 -mt-8 mb-8">
+    <div class="max-w-xl mx-auto">
+      <SearchBar variant="compact" />
+    </div>
+  </div>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold mb-3" style="color: var(--c-pine);">
+        All Cities
+      </h2>
+      <p class="text-lg" style="color: var(--c-sage);">
+        Click a city to explore local businesses by industry.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {cityStats.map(({ city, industriesCount, totalListings }) => (
+        <div class="relative">
+          <CityCard city={city} />
+          <div class="absolute top-3 right-3 bg-card/90 backdrop-blur-sm rounded-lg px-3 py-1.5 text-xs font-medium shadow-soft" style="color: var(--c-pine);">
+            {totalListings} listings
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

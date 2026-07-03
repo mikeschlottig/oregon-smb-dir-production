@@ -1,0 +1,148 @@
+---
+interface Props {
+  variant?: "default" | "compact";
+}
+
+const { variant = "default" } = Astro.props;
+const isCompact = variant === "compact";
+---
+
+<div class:list={["pagefind-search-container", { compact: isCompact }]}>
+  <div class="relative">
+    <svg
+      class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
+      style="color: var(--c-sage);"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+    <input
+      type="search"
+      placeholder="Search businesses, industries, cities…"
+      class:list={[
+        "w-full pl-10 pr-4 border transition-colors focus:outline-none focus:ring-2",
+        isCompact ? "py-2 text-sm" : "py-3 text-base",
+      ]}
+      style={`
+        background-color: var(--c-stone);
+        border-color: var(--c-border);
+        border-radius: var(--radius-md);
+        min-height: 44px;
+        color: var(--c-pine);
+      `}
+      onfocus="this.style.borderColor='var(--c-river)'; this.style.boxShadow='0 0 0 2px var(--c-river)'"
+      onblur="this.style.borderColor='var(--c-border)'; this.style.boxShadow='none'"
+      data-pagefind-search
+    />
+  </div>
+  <div
+    id="pagefind-results"
+    class="mt-4"
+    style="color: var(--c-pine);"
+  >
+  </div>
+</div>
+
+<script is:inline>
+  // Load pagefind and set up search
+  /** @type {import('/pagefind/pagefind.js') | null} */
+  let pagefindModule = null;
+  
+  async function initPagefind() {
+    if (typeof window !== 'undefined' && !pagefindModule) {
+      try {
+        // @ts-ignore - pagefind is loaded globally by the integration
+        const module = await import('/pagefind/pagefind.js');
+        await module.init();
+        pagefindModule = module;
+      } catch (err) {
+        console.error('Failed to load pagefind:', err);
+      }
+    }
+  }
+
+  function setupSearch() {
+    const searchInputs = document.querySelectorAll('[data-pagefind-search]');
+    
+    searchInputs.forEach(input => {
+      /** @type {number | undefined} */
+      let debounceTimer;
+      
+      input.addEventListener('input', async (e) => {
+        const target = /** @type {HTMLInputElement} */ (e.target);
+        const query = target.value.trim();
+        
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+        
+        if (query.length < 2) {
+          const resultsContainer = target.closest('.pagefind-search-container')?.querySelector('#pagefind-results');
+          if (resultsContainer) {
+            resultsContainer.innerHTML = '';
+          }
+          return;
+        }
+        
+        debounceTimer = /** @type {number} */ (setTimeout(async () => {
+          if (!pagefindModule) {
+            await initPagefind();
+          }
+          
+          if (!pagefindModule) return;
+          
+          const searchResults = await pagefindModule.search(query);
+          const resultsContainer = target.closest('.pagefind-search-container')?.querySelector('#pagefind-results');
+          
+          if (resultsContainer) {
+            if (searchResults.results.length === 0) {
+              resultsContainer.innerHTML = '<p class="text-sm" style="color: var(--c-sage);">No results found.</p>';
+            } else {
+              const resultsHtml = await Promise.all(
+                searchResults.results.slice(0, 10).map(async (result) => {
+                  const data = await result.data();
+                  return `
+                    <a href="${data.url}" class="block p-3 rounded-lg mb-2 transition-colors hover:opacity-80" style="background-color: var(--c-stone);">
+                      <div class="font-medium" style="color: var(--c-pine);">${data.meta.title}</div>
+                      <div class="text-sm" style="color: var(--c-sage);">${data.excerpt || ''}</div>
+                    </a>
+                  `;
+                })
+              );
+              resultsContainer.innerHTML = resultsHtml.join('');
+            }
+          }
+        }, 300));
+      });
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSearch);
+  } else {
+    setupSearch();
+  }
+</script>
+
+<style>
+  .pagefind-search-container :global(.pagefind-result) {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    background-color: var(--c-stone);
+    transition: opacity 0.2s;
+  }
+  
+  .pagefind-search-container :global(.pagefind-result:hover) {
+    opacity: 0.8;
+  }
+</style>

@@ -148,6 +148,7 @@ export type Business = {
   title: string;
   address?: string | null;
   phone?: string | null;
+  email?: string | null;
   rating?: number | null;
   reviews?: number | null;
   category?: string | null;

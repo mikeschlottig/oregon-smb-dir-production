@@ -28,8 +28,11 @@ export const Footer = () => {
               <a href="/contact" className="hover:text-accent transition-colors">
                 Contact us
               </a>
-              <a href="mailto:leverage_labs_alpha@proton.me" className="hover:text-accent transition-colors">
-                leverage_labs_alpha@proton.me
+              <a href="mailto:contact@oregonsmbdirectory.com" className="hover:text-accent transition-colors">
+                contact@oregonsmbdirectory.com
+              </a>
+              <a href="tel:5414502082" className="hover:text-accent transition-colors">
+                (541) 450-2082
               </a>
             </div>
           </div>

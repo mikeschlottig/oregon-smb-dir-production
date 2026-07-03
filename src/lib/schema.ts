@@ -286,6 +286,8 @@ export function businessSchema(
 
   if (business.phone) schema.telephone = business.phone;
 
+  if (business.email) schema.email = business.email;
+
   const businessPath =
     business.slug ||
     business.title

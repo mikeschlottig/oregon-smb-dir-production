@@ -2,7 +2,7 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import ContactForm from "@/components/ContactForm";
 import { breadcrumbSchema } from "@/lib/schema";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const schemas = [
@@ -50,8 +50,14 @@ const schemas = [
           <ul class="space-y-3 text-muted-foreground">
             <li class="flex items-start gap-2.5">
               <Mail className="w-4 h-4 text-accent mt-0.5" />
-              <a href="mailto:leverage_labs_alpha@proton.me" class="hover:text-foreground">
-                leverage_labs_alpha@proton.me
+              <a href="mailto:contact@oregonsmbdirectory.com" class="hover:text-foreground">
+                contact@oregonsmbdirectory.com
+              </a>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <Phone className="w-4 h-4 text-accent mt-0.5" />
+              <a href="tel:5414502082" class="hover:text-foreground">
+                (541) 450-2082
               </a>
             </li>
             <li class="flex items-start gap-2.5">

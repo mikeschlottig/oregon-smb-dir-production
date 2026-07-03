@@ -13,7 +13,7 @@ export async function getStaticPaths() {
     const k = p.data.category;
     (byCat[k] ||= []).push(p);
   }
-  const paths: any[] = [];
+  const paths = [];
   for (const [cat, list] of Object.entries(byCat)) {
     list.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
     const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));

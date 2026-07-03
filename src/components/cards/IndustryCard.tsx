@@ -1,11 +1,10 @@
-import { ArrowRight } from "lucide-react";
 import * as Icons from "lucide-react";
 import type { Industry } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
 
 const countBadgeBase =
   "absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded-full";
-type Props = { industry: Industry; citySlug: string };
+export type Props = { industry: Industry; citySlug: string };
 
 export const IndustryCard = ({ industry, citySlug }: Props) => {
   const Icon =

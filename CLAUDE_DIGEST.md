@@ -1,55 +1,62 @@
 RESULT: DONE
 
-## Phase 5b: Service-Page Vertical (Pilot: Construction/Home Services)
+## Phase 6: Navigation Fixes + Pagefind Search
 
 ### Files Changed
-1. `src/data/serviceCategories.ts` (NEW) - ServiceCategory model + 5 pilot categories
-2. `src/data/matchBusinesses.ts` (NEW) - Shared business matching utility
-3. `src/lib/schema.ts` (MODIFIED) - Added `servicePageSchema` and `faqPageSchema` builders
-4. `src/pages/services/[industrySlug]/[categorySlug]/[citySlug].astro` (NEW) - Dynamic route template
-5. `src/pages/services/index.astro` (NEW) - Services index page
-6. `src/pages/city/[citySlug]/[industrySlug].astro` (MODIFIED) - Fixed pre-existing `key` prop error
-7. `src/pages/city/[citySlug]/[industrySlug]/[businessSlug].astro` (MODIFIED) - Fixed pre-existing `key` prop error
+1. `src/components/layout/Navbar.tsx` (MODIFIED) - Added "Services" nav link before "Best Of", fixed "Cities" link from `/#cities` to `/city`
+2. `src/pages/city/index.astro` (NEW) - Oregon Cities index page with CityCard grid
+3. `src/pages/city/[citySlug]/[industrySlug].astro` (MODIFIED) - Added "Popular Services" section for industries with service categories
+4. `src/components/SearchBar.astro` (NEW) - Pagefind search component with default and compact variants
+5. `src/pages/index.astro` (MODIFIED) - Added SearchBar below hero section
+6. `src/pages/city/index.astro` (MODIFIED) - Added compact SearchBar variant
+7. `astro.config.mjs` (MODIFIED) - Added astro-pagefind integration
+8. `package.json` (MODIFIED) - Added astro-pagefind@2.0.0 dependency
 
-### Pages Generated per Category
+### Search Implementation
+- **Approach**: astro-pagefind integration (not postbuild)
+- **Integration**: Added `pagefind()` to astro.config.mjs integrations array
+- **Indexing**: Pagefind automatically indexes 10,490 pages during build
+- **UI**: Custom SearchBar component with:
+  - Default variant (homepage): Full-width search with results dropdown
+  - Compact variant (city index): Smaller search bar for secondary pages
+  - Styling: Uses design tokens (`--c-stone`, `--c-river`, `--radius-md`)
+  - Min height: 44px as specified
+  - Placeholder: "Search businesses, industries, cities…"
+- **Script**: Inline script that imports pagefind module and provides real-time search with debouncing
 
-| Category      | Slug        | Pages | Cities Covered                                      |
-|---------------|-------------|-------|-----------------------------------------------------|
-| Roofing       | roofing     | 12    | All 12 cities                                       |
-| Plumbing      | plumbing    | 12    | All 12 cities                                       |
-| Electrical    | electrical   | 12    | All 12 cities                                       |
-| HVAC          | hvac        | 7     | Bend, Corvallis, Grants Pass, Portland, Roseburg, Salem, Springfield |
-| Landscaping   | landscaping | 12    | All 12 cities                                       |
-| **Total**     |             | **55**|                                                     |
+### Breadcrumb Fixes
+1. **Navbar.tsx**: Fixed "Cities" link from `/#cities` to `/city` (visible nav)
+2. **city/[citySlug].astro**: Already had correct breadcrumbs pointing to `/city` (no change needed)
+3. **All breadcrumbs verified**: 
+   - Home → `/` ✓
+   - Cities → `/city` ✓
+   - Services → `/services` ✓
+   - City crumb → `/city/{slug}` ✓
+   - Industry crumb → `/city/{citySlug}/{industrySlug}` ✓
 
-### Threshold-Skipped Combos: 5
-- HVAC + Albany (0 matches)
-- HVAC + Ashland (2 matches)
-- HVAC + Eugene (1 match)
-- HVAC + Klamath Falls (0 matches)
-- HVAC + Medford (2 matches)
-
-### Sample Built Page
-**URL**: `/services/construction-home-services/roofing/portland`
-- **H1**: "Roofing Contractors in Portland, Oregon"
-- **First Listing**: "Geek Roofing" (real business from `portland__construction-home-services.json`)
-- **Stats**: 43 verified listings, 4.8 avg rating, 650,000+ population
-- **No placeholder data**: 0 instances of "555-01" in built pages
-
-### Build Exit Code: 0
-- **Page count**: 10,489 (baseline: 10,433, increase: +56 pages)
-- **Validation**: `astro check` passed (0 errors)
-- **No `any`/`as any`**: Confirmed no TypeScript escapes in new code
-- **No invented facts**: License info uses conservative CCB verification phrasing; no invented prices, stats, or local claims
+### Build Exit
+- **Exit code**: 0 (success)
+- **Page count**: 10,490 pages (baseline: 10,433, increase: +57 pages)
+  - +1 for `/city/index.html`
+  - +55 service pages (from Phase 5b, already counted)
+  - Search component added to existing pages
+- **Pagefind**: Successfully indexed 10,490 pages
+- **Pagefind output**: `/dist/pagefind/` directory created with index files
+- **Validation**: `astro check` passed (0 errors in final build)
 
 ### Compliance Checklist
-- ✓ No placeholder/sample businesses
-- ✓ Pages only generated when ≥3 businesses match
-- ✓ No invented costs, prices, or local statistics
-- ✓ Conservative licensing language (CCB verification)
-- ✓ Reused existing schema builders (extended in-place)
-- ✓ Reused existing components (TldrCard, BusinessCard, JsonLd)
-- ✓ Used only design tokens from `tokens.css`
+- ✓ No links to non-generated pages (service links computed with matchBusinesses)
 - ✓ Did not modify `src/lib/seo-content.ts`
-- ✓ No `: any` / `as any` / bare `catch {}` / TODO comments
-- ✓ Not pushed to remote (dev branch only)
+- ✓ No restyling beyond scoped SearchBar component
+- ✓ No `: any` / `as any` / TODOs (used JSDoc types with `is:inline` script)
+- ✓ Pinned astro-pagefind to v2.0.0 in package.json
+- ✓ Did not push to remote (dev branch only)
+- ✓ Verified: `dist/pagefind` exists
+- ✓ Verified: `dist/city/index.html` exists
+- ✓ Verified: `/services` link present in `dist/index.html`
+
+### Services Vertical Entry Point
+- Added "Services" to main nav in Navbar (between "Cities" and "Best Of")
+- `/services/` index page already existed with proper hub layout
+- Service links computed with `matchBusinesses()` to ensure no 404s
+- Added "Popular Services in {City}" section to city×industry pages for industries with service categories (currently: construction-home-services)

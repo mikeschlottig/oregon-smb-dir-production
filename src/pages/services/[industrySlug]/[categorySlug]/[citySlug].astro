@@ -59,9 +59,10 @@ const nearbyCities = cities.filter((c) => {
   return matchBusinesses(c.slug, category).length >= 3;
 });
 
-// Related categories that meet threshold for THIS city
+// Related categories that meet threshold for THIS city (same industry only)
 const relatedCategoriesForCity = serviceCategories.filter((c) => {
   if (c.slug === category.slug) return false;
+  if (c.industrySlug !== industrySlug) return false;
   return matchBusinesses(city.slug, c).length >= 3;
 });
 

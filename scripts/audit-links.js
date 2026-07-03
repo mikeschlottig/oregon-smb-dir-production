@@ -49,11 +49,14 @@ function collectHtmlFiles(dir) {
 
 /** Extract all hrefs from HTML using regex (memory-efficient). */
 function extractHrefs(html) {
+  // Remove script tags and their content to avoid parsing JS code as HTML links
+  const htmlWithoutScripts = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+  
   const hrefs = [];
   // Match href="..." or href='...'
   const regex = /href\s*=\s*["']([^"']+)["']/gi;
   let match;
-  while ((match = regex.exec(html)) !== null) {
+  while ((match = regex.exec(htmlWithoutScripts)) !== null) {
     hrefs.push(match[1]);
   }
   return hrefs;
@@ -86,6 +89,20 @@ function checkLink(href, currentPageDir) {
       href.startsWith('mailto:') ||
       href.startsWith('tel:')) {
     return null; // Not an internal link
+  }
+
+  // Skip obvious non-URLs (template variables, tracing spans, etc.)
+  if (href.includes('${') || 
+      href === 'start_span' || 
+      href === 'end_span' ||
+      href.trim().startsWith(' ') ||
+      href.includes('&#')) {
+    return null; // Not a valid URL
+  }
+
+  // Skip image file extensions (these are not page links)
+  if (href.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)(\?|#|$)/i)) {
+    return null;
   }
 
   // Resolve relative to current page

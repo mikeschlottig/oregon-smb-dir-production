@@ -12,9 +12,9 @@ import { websiteSchema, breadcrumbSchema } from "@/lib/schema";
 import { MapPin, ArrowRight } from "lucide-react";
 
 const featured = {
-  bestOf: bestOfLists[0],
+  bestOf: bestOfLists.length > 0 ? bestOfLists[0] : null,
   blog: blogPosts[0],
-  report: researchReports[0],
+  report: researchReports.length > 0 ? researchReports[0] : null,
 };
 
 export const title = "Oregon Business Directory — Statewide Local Listings";
@@ -73,6 +73,7 @@ const schemas = [
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {featured.bestOf && (
       <a
         href={`/best-of/${featured.bestOf.slug}`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
@@ -86,6 +87,7 @@ const schemas = [
           See the picks <ArrowRight className="w-4 h-4" />
         </span>
       </a>
+      )}
       <a
         href={`/blog/${featured.blog.slug}`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
@@ -99,6 +101,7 @@ const schemas = [
           Read the article <ArrowRight className="w-4 h-4" />
         </span>
       </a>
+      {featured.report && (
       <a
         href={`/research/${featured.report.slug}`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
@@ -112,6 +115,7 @@ const schemas = [
           Open the report <ArrowRight className="w-4 h-4" />
         </span>
       </a>
+      )}
     </div>
   </section>
 </SiteLayout>

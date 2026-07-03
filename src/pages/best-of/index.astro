@@ -1,9 +1,25 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { bestOfLists } from "@/data/content";
+import { breadcrumbSchema } from "@/lib/schema";
 import { ArrowRight, Trophy } from "lucide-react";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Best Of — Oregon SMB Directory",
+    url: `${siteUrl}/best-of`,
+    description: "Editor-curated rankings of the standout businesses in every city we cover — built from customer reviews, expert reporting, and on-the-ground visits.",
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Best Of", url: `${siteUrl}/best-of` },
+  ]),
+];
 ---
-<SiteLayout title="Best Of — Oregon SMB Directory">
+<SiteLayout title="Best Of — Oregon SMB Directory" schemas={schemas}>
   <section class="bg-muted pt-32 pb-16 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Best Of 2026</p>

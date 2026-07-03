@@ -7,6 +7,7 @@ import { StatsSection } from "@/components/sections/StatsSection";
 import { CityCard } from "@/components/cards/CityCard";
 import { cities } from "@/data/cities";
 import { blogPosts, researchReports, bestOfLists } from "@/data/content";
+import { websiteSchema, breadcrumbSchema } from "@/lib/schema";
 import { MapPin, ArrowRight } from "lucide-react";
 
 const featured = {
@@ -15,30 +16,14 @@ const featured = {
   report: researchReports[0],
 };
 
-const siteOrigin = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Oregon SMB Directory",
-    url: siteOrigin,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteOrigin}/?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Oregon SMB Directory",
-    url: siteOrigin,
-    logo: `${siteOrigin}/og-default.jpg`,
-  },
+const schemas = [
+  ...websiteSchema(siteUrl),
+  breadcrumbSchema([{ name: "Home", url: siteUrl }]),
 ];
 ---
-<SiteLayout jsonLd={jsonLd}>
+<SiteLayout schemas={schemas}>
   <Hero />
   <MarqueeBanner />
   <AboutSection />

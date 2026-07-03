@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { bestOfLists } from "@/data/content";
+import { breadcrumbSchema } from "@/lib/schema";
 import { ChevronRight, Trophy } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -11,8 +12,24 @@ export async function getStaticPaths() {
 }
 
 const { list } = Astro.props;
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: list.title,
+    description: list.intro,
+    url: `${siteUrl}/best-of/${list.slug}`,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Best Of", url: `${siteUrl}/best-of` },
+    { name: list.category, url: `${siteUrl}/best-of/${list.slug}` },
+  ]),
+];
 ---
-<SiteLayout title={`${list.title} — Best Of`} description={list.intro}>
+<SiteLayout title={`${list.title} — Best Of`} description={list.intro} schemas={schemas}>
   <section class="bg-gradient-warm text-white pt-32 pb-16 px-4">
     <div class="container mx-auto max-w-4xl">
       <nav class="flex items-center gap-2 text-white/70 text-sm mb-6">

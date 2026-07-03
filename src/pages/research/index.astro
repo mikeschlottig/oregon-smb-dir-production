@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
+import { breadcrumbSchema } from "@/lib/schema";
 import { ArrowRight, FileText } from "lucide-react";
 
 const reports = (await getCollection("research")).sort((a, b) =>
@@ -11,10 +12,26 @@ const categoryCounts = reports.reduce<Record<string, number>>((acc, r) => {
   acc[r.data.category] = (acc[r.data.category] || 0) + 1;
   return acc;
 }, {});
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Research Library — Oregon SMB Directory",
+    url: `${siteUrl}/research`,
+    description: "Industry research reports and deep-dive analyses across Oregon's small-business economy.",
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Research", url: `${siteUrl}/research` },
+  ]),
+];
 ---
 <SiteLayout
   title="Research Library — Oregon SMB Directory"
   description="Industry research reports and deep-dive analyses across Oregon's small-business economy."
+  schemas={schemas}
 >
   <section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
     <div class="container mx-auto max-w-4xl text-center">

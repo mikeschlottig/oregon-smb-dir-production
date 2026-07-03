@@ -2,6 +2,7 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
+import { breadcrumbSchema } from "@/lib/schema";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -31,8 +32,25 @@ const formatDate = (iso: string) => {
   if (isNaN(d.getTime())) return iso;
   return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 };
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const categorySlug = slugifyCategory(categoryName);
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${categoryName} — Oregon SMB Directory Blog`,
+    url: `${siteUrl}/blog/category/${categorySlug}/`,
+    description: `All ${categoryName} stories from the Oregon SMB Directory blog.`,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Blog", url: `${siteUrl}/blog` },
+    { name: categoryName, url: `${siteUrl}/blog/category/${categorySlug}/` },
+  ]),
+];
 ---
-<SiteLayout title={`${categoryName} — Oregon SMB Directory Blog`} description={`All ${categoryName} stories from the Oregon SMB Directory blog.`}>
+<SiteLayout title={`${categoryName} — Oregon SMB Directory Blog`} description={`All ${categoryName} stories from the Oregon SMB Directory blog.`} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Category</p>

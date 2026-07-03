@@ -1,11 +1,28 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import ContactForm from "@/components/ContactForm";
+import { breadcrumbSchema } from "@/lib/schema";
 import { Mail, MapPin } from "lucide-react";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Contact — Oregon SMB Directory",
+    url: `${siteUrl}/contact`,
+    description: "Get in touch with the Oregon SMB Directory team. List your business, request press coverage, or send us feedback.",
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Contact", url: `${siteUrl}/contact` },
+  ]),
+];
 ---
 <SiteLayout
   title="Contact — Oregon SMB Directory"
   description="Get in touch with the Oregon SMB Directory team. List your business, request press coverage, or send us feedback."
+  schemas={schemas}
 >
   <section class="bg-muted pt-32 pb-12 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl">

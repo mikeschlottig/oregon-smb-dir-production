@@ -2,6 +2,7 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
+import { breadcrumbSchema } from "@/lib/schema";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -42,8 +43,25 @@ const formatDate = (iso: string) => {
   if (isNaN(d.getTime())) return iso;
   return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 };
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const categorySlug = slugifyCategory(categoryName);
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${categoryName} — Page ${currentPage}`,
+    url: `${siteUrl}/blog/category/${categorySlug}/${currentPage}/`,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Blog", url: `${siteUrl}/blog` },
+    { name: categoryName, url: `${siteUrl}/blog/category/${categorySlug}/` },
+    { name: `Page ${currentPage}`, url: `${siteUrl}/blog/category/${categorySlug}/${currentPage}/` },
+  ]),
+];
 ---
-<SiteLayout title={`${categoryName} — Page ${currentPage}`}>
+<SiteLayout title={`${categoryName} — Page ${currentPage}`} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Category · Page {currentPage}</p>

@@ -7,6 +7,7 @@ import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
 import { generateCitySeoContent } from "@/lib/seo-content";
+import { cityPageSchema, breadcrumbSchema } from "@/lib/schema";
 import { ChevronRight } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -39,8 +40,19 @@ const tldrStats = [
 // Generate SEO content for city page
 const allCityBusinesses = cityIndustriesWithListings.flatMap(ind => getBusinesses(city.slug, ind.slug));
 const seoContent = generateCitySeoContent(city, cityIndustriesWithListings, allCityBusinesses);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Cities", url: `${siteUrl}/city` },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
+];
+const schemas = [
+  ...cityPageSchema(city, cityIndustriesWithListings, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
 ---
-<SiteLayout title={title} description={description}>
+<SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
     breadcrumb={[
       { label: "Home", href: "/" },

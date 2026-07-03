@@ -3,13 +3,15 @@ import "@/styles/tokens.css";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import JsonLd from "@/components/JsonLd.astro";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   ogType?: "website" | "article";
-  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schemas?: any[];
 }
 
 const {
@@ -17,7 +19,7 @@ const {
   description = "Oregon's premier business directory for cities along the I-5 corridor — from Ashland to Portland Metro. 12 cities, 12 industries, thousands of trusted local businesses.",
   image = "/og-default.jpg",
   ogType = "website",
-  jsonLd,
+  schemas,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -25,8 +27,6 @@ const origin = Astro.site ?? Astro.url.origin;
 const canonical = new URL(pathname, origin).toString();
 const imageUrl = new URL(image, origin).toString();
 
-const escapeJsonLd = (value: unknown): string =>
-  JSON.stringify(value).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026");
 ---
 <!doctype html>
 <html lang="en">
@@ -72,9 +72,7 @@ const escapeJsonLd = (value: unknown): string =>
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-    {jsonLd && (
-      <script type="application/ld+json" set:html={escapeJsonLd(jsonLd)} />
-    )}
+    {schemas && schemas.length > 0 && <JsonLd data={schemas} />}
   </head>
   <body>
     <div class="min-h-screen flex flex-col">

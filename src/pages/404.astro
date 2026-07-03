@@ -1,7 +1,21 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { breadcrumbSchema } from "@/lib/schema";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "404 — Page Not Found",
+    url: Astro.url.href,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+  ]),
+];
 ---
-<SiteLayout title="404 — Page Not Found">
+<SiteLayout title="404 — Page Not Found" schemas={schemas}>
   <div class="flex min-h-screen items-center justify-center bg-muted">
     <div class="text-center">
       <h1 class="mb-4 text-4xl font-bold">404</h1>

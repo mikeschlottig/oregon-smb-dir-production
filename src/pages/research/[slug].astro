@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { getCollection, render } from "astro:content";
+import { reportSchema, breadcrumbSchema } from "@/lib/schema";
 import { ChevronRight, Download, FileText } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -16,28 +17,21 @@ const { Content, headings } = await render(report);
 
 const tocHeadings = headings.filter((h: any) => h.depth === 2 || h.depth === 3);
 
-const siteOrigin = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Report",
-  name: report.data.title,
-  description: report.data.summary,
-  about: report.data.category,
-  author: { "@type": "Organization", name: report.data.author || "LEVERAGE AI Research" },
-  publisher: {
-    "@type": "Organization",
-    name: "Oregon SMB Directory",
-    logo: { "@type": "ImageObject", url: `${siteOrigin}/og-default.jpg` },
-  },
-  datePublished: report.data.published,
-  url: `${siteOrigin}/research/${report.id}`,
-};
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const schemas = [
+  reportSchema(report, siteUrl),
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Research", url: `${siteUrl}/research` },
+    { name: report.data.title, url: `${siteUrl}/research/${report.id}` },
+  ]),
+];
 ---
 <SiteLayout
   title={`${report.data.title} — Oregon SMB Directory Research`}
   description={report.data.summary}
   ogType="article"
-  jsonLd={jsonLd}
+  schemas={schemas}
 >
   <header class="bg-primary text-primary-foreground pt-32 pb-14 px-4">
     <div class="container mx-auto max-w-5xl">

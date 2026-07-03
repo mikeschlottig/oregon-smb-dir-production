@@ -1,0 +1,15 @@
+---
+interface Props {
+  data: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { data } = Astro.props;
+
+// Escape <, >, & to prevent XSS in JSON-LD (required for Astro set:html)
+const escapeJson = (value: unknown): string =>
+  JSON.stringify(value, null, 2)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+---
+<script type="application/ld+json" set:html={escapeJson(data)} />

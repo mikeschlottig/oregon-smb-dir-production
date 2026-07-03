@@ -10,6 +10,7 @@ import {
   parseLatLng,
 } from "@/data/businesses";
 import { generateIndustryFaqs } from "@/lib/seo-content";
+import { businessSchema, breadcrumbSchema } from "@/lib/schema";
 import {
   ChevronRight,
   ExternalLink,
@@ -86,8 +87,21 @@ const stats = [
 
 // Generate FAQs for this industry
 const faqs = generateIndustryFaqs(city, industry, getBusinesses(city.slug, industry.slug));
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const businessPath = getBusinessPathSlug(city.slug, industry.slug, business);
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
+  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}` },
+  { name: business.title, url: `${siteUrl}/city/${city.slug}/${industry.slug}/${businessPath}` },
+];
+const schemas = [
+  businessSchema(business, city, industry, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
 ---
-<SiteLayout title={title} description={description}>
+<SiteLayout title={title} description={description} schemas={schemas}>
   <!-- Dark TLDR Header with TldrCard -->
   <TldrCard
     breadcrumb={[

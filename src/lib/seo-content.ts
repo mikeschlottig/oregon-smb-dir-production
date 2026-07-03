@@ -15,11 +15,11 @@ export function generateCitySeoContent(city: City, industries: Industry[], busin
   const industryNames = industries.slice(0, 3).map(i => i.name.toLowerCase());
   const topBizNames = topRated.map(b => b.title);
 
-  return `Discover verified local businesses serving ${city.name}, Oregon. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories, making it a growing hub for ${industryNames.slice(0, 2).join(" and ")} services along the I-5 corridor.
+  return `Discover verified local businesses serving ${city.name}, Oregon. ${city.name} hosts ${businesses.length} registered listings across ${industries.length} categories along the Oregon I-5 corridor, including ${industryNames.slice(0, 2).join(" and ")} services.
 
-Local providers like ${topBizNames.slice(0, 2).join(" and ") || "top-rated businesses"} maintain average ratings above 4.5 stars, reflecting strong community trust. The ${industryNames[0] || "business"} sector leads with the most verified listings, followed closely by ${industryNames[1] || "related services"}.
+${topBizNames.length > 0 ? `Local providers like ${topBizNames.slice(0, 2).join(" and ")} hold customer ratings of 4.5 stars or higher, reflecting strong community trust. ` : ""}Every listing is checked against Google Business data for active operation, and each includes a verified address, Google Maps directions, and recent customer reviews.
 
-Whether you need emergency repairs, routine maintenance, or specialized consulting, ${city.name} businesses respond within hours. Most providers offer free estimates and serve surrounding areas including all major Oregon I-5 corridor cities. Browse by category or search by service type to find exactly what you need in ${city.name}, Oregon.`;
+Browse by category or search by service type to compare all ${businesses.length} businesses in ${city.name}, Oregon. Listings link directly to each provider's website where available, so you can confirm services, hours, and pricing with the business itself.`;
 }
 
 /**
@@ -37,9 +37,9 @@ export function generateIndustrySeoContent(city: City, industry: Industry, busin
 
   const topBizNames = topRated.map(b => b.title);
 
-  return `Find verified ${industry.name.toLowerCase()} serving ${city.name}, Oregon. Our directory lists ${businesses.length} local providers with an average rating of ${avgRating} stars. From emergency calls to scheduled service, these businesses cover residential, commercial, and industrial needs throughout ${city.name} and surrounding areas.
+  return `Find verified ${industry.name.toLowerCase()} businesses serving ${city.name}, Oregon. Our directory lists ${businesses.length} local providers with an average rating of ${avgRating} stars, serving ${city.name} and surrounding communities along the Oregon I-5 corridor.
 
-Top-rated providers including ${topBizNames.slice(0, 2).join(" and ") || "verified local experts"} offer same-day service and free consultations. Most ${industry.name.toLowerCase()} in ${city.name} are family-owned, licensed, and insured — meeting Oregon state requirements for professional service delivery.
+${topBizNames.length > 0 ? `Top-rated ${industry.name.toLowerCase()} businesses in ${city.name} include ${topBizNames.slice(0, 2).join(" and ")}, each rated ${topRated[0]?.rating?.toFixed(1) ?? "4.5"} stars or higher by local customers. ` : ""}Every listing is checked against Google Business data for active operation, and ratings shown reflect real customer reviews.
 
 Search filters help you narrow by rating, location, and service type. Each listing includes verified contact information, address, Google Maps directions, and recent customer reviews. Whether you need a quick fix or a long-term service partner, ${city.name}'s ${industry.name.toLowerCase()} deliver quality work backed by local reputation.`;
 }
@@ -62,20 +62,20 @@ export function generateIndustryFaqs(city: City, industry: Industry, businesses:
 
   return [
     {
-      question: `What are the top-rated ${industry.name.toLowerCase()} in ${city.name}?`,
-      answer: `${city.name} has ${businesses.length} verified ${industry.name.toLowerCase()}, with an average rating of ${avgRating} stars across all listings. Top performers include ${topNames.slice(0, 2).join(" and ") || "multiple highly-rated providers"}, each maintaining ratings above 4.5 stars from verified customer reviews.`
+      question: `What are the top-rated ${industry.name.toLowerCase()} businesses in ${city.name}?`,
+      answer: `${city.name} has ${businesses.length} verified ${industry.name.toLowerCase()} businesses, with an average rating of ${avgRating} stars across all listings.${topNames.length > 0 && topRated[0]?.rating != null ? ` ${topNames.slice(0, 2).join(" and ")} lead the category, rated ${topRated[0].rating.toFixed(1)} stars by customers.` : ""}`
     },
     {
-      question: `How many ${industry.name.toLowerCase()} serve ${city.name}, Oregon?`,
-      answer: `Our directory currently lists ${businesses.length} verified ${industry.name.toLowerCase()} serving ${city.name}. This includes ${businesses.filter(b => b.claimed).length} claimed listings with updated contact information, addresses, and Google Maps links for easy directions.`
+      question: `How many ${industry.name.toLowerCase()} businesses serve ${city.name}, Oregon?`,
+      answer: `Our directory currently lists ${businesses.length} verified ${industry.name.toLowerCase()} businesses serving ${city.name}, including ${businesses.filter(b => b.claimed).length} claimed listings with owner-confirmed contact information, addresses, and Google Maps links.`
     },
     {
-      question: `Do ${industry.name.toLowerCase()} in ${city.name} offer free estimates?`,
-      answer: `Most of the ${businesses.length} listed ${industry.name.toLowerCase()} in ${city.name} offer free consultations or estimates. Contact providers directly through their listing to confirm availability, service areas, and pricing. Response times average under 2 hours for most inquiry types.`
+      question: `How do I contact ${industry.name.toLowerCase()} businesses in ${city.name}?`,
+      answer: `Each of the ${businesses.length} listings includes the business address, a Google Maps link, and a website link where available. Contact providers directly through their listing to confirm availability, service areas, and pricing.`
     },
     {
-      question: `How do I choose the best ${industry.name.toLowerCase()} in ${city.name}?`,
-      answer: `Compare ratings, reviews, and services across all ${businesses.length} listings. Filter by rating to see only providers with 4.0+ stars — currently ${businesses.filter(b => typeof b.rating === "number" && b.rating >= 4.0).length} businesses meet this threshold. Check claimed status, verify address on the map, and read recent reviews before booking.`
+      question: `How do I choose the best ${industry.name.toLowerCase()} business in ${city.name}?`,
+      answer: `Compare ratings and reviews across all ${businesses.length} listings. Currently ${businesses.filter(b => typeof b.rating === "number" && b.rating >= 4.0).length} businesses hold a 4.0-star rating or higher. Check claimed status, verify the address on the map, and read recent reviews before booking.`
     }
   ];
 }

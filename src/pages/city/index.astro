@@ -5,6 +5,7 @@ import SearchBar from "@/components/SearchBar.astro";
 import { CityCard } from "@/components/cards/CityCard";
 import { cities } from "@/data/cities";
 import { getBusinesses } from "@/data/businesses";
+import { industries } from "@/data/industries";
 import { breadcrumbSchema } from "@/lib/schema";
 
 const title = "Oregon Cities — Business Directory";
@@ -12,11 +13,11 @@ const description = "Browse local businesses across 12 Oregon cities from Ashlan
 
 // Calculate stats for each city
 const cityStats = cities.map(city => {
-  const industriesWithListings = ["construction-home-services", "restaurants", "retail", "healthcare", "automotive", "professional-services", "real-estate", "hospitality", "technology", "manufacturing", "education", "personal-services"].filter(indSlug =>
-    getBusinesses(city.slug, indSlug).length > 0
+  const industriesWithListings = industries.filter(ind =>
+    getBusinesses(city.slug, ind.slug).length > 0
   );
   const totalListings = industriesWithListings.reduce(
-    (sum, indSlug) => sum + getBusinesses(city.slug, indSlug).length,
+    (sum, ind) => sum + getBusinesses(city.slug, ind.slug).length,
     0
   );
   return { city, industriesCount: industriesWithListings.length, totalListings };

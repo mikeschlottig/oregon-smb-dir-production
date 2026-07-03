@@ -1,0 +1,71 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import { cities } from "@/data/cities";
+import { serviceCategories, type ServiceCategory } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
+
+// Build category-city grid: only show combinations with ≥3 businesses
+const categoryCityMap: {
+  category: ServiceCategory;
+  cities: (typeof cities)[0][];
+}[] = [];
+
+for (const category of serviceCategories) {
+  const validCities = cities.filter((c) => matchBusinesses(c.slug, category).length >= 3);
+  if (validCities.length > 0) {
+    categoryCityMap.push({ category, cities: validCities });
+  }
+}
+
+const title = "Local Services in Oregon";
+const description = "Find verified service professionals across Oregon — roofing, plumbing, electrical, HVAC, and landscaping contractors serving communities statewide.";
+---
+
+<SiteLayout title={title} description={description}>
+  <TldrCard
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
+    eyebrow="Oregon"
+    title="Local Services in Oregon"
+    tagline="Find verified service professionals across roofing, plumbing, electrical, HVAC, and landscaping."
+    stats={[
+      { value: serviceCategories.length.toString(), label: "Service Categories" },
+      { value: cities.length.toString(), label: "Cities Covered" },
+    ]}
+  />
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="font-playfair text-3xl md:text-4xl font-bold mb-3" style="color: var(--c-pine);">
+        Browse Services by Category
+      </h2>
+      <p class="text-lg" style="color: var(--c-sage);">
+        Click a category to see available cities with verified listings.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      {categoryCityMap.map(({ category, cities: validCities }) => (
+        <div>
+          <h3 class="font-playfair text-2xl font-bold mb-4" style="color: var(--c-pine);">
+            {category.displayName}
+          </h3>
+          <p class="mb-4 max-w-2xl" style="color: var(--c-sage);">
+            {category.shortDescription}
+          </p>
+          <div class="flex flex-wrap gap-3">
+            {validCities.map((c) => (
+              <a
+                href={`/services/${category.industrySlug}/${category.slug}/${c.slug}`}
+                class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors hover:opacity-80"
+                style="background-color: var(--c-sky); color: var(--c-pine);"
+              >
+                {c.name} ({matchBusinesses(c.slug, category).length})
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

@@ -385,3 +385,88 @@ export function reportSchema(
     url: `${base}/research/${report.id}`,
   };
 }
+
+/**
+ * Returns CollectionPage + ItemList schema for service category pages.
+ * Only includes aggregateRating if both rating and review count exist.
+ * @param city - City object
+ * @param category - ServiceCategory object
+ * @param industry - Industry object
+ * @param businesses - Array of Business objects matching this category
+ * @param siteUrl - Base site URL (no trailing slash)
+ */
+export function servicePageSchema(
+  city: { name: string; slug: string; county?: string },
+  category: { displayName: string; slug: string; industrySlug: string },
+  industry: { name: string; slug: string },
+  businesses: Business[],
+  siteUrl: string
+): Record<string, unknown>[] {
+  const base = siteUrl.replace(/\/$/, "");
+  const pageUrl = `${base}/services/${industry.slug}/${category.slug}/${city.slug}`;
+  
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `${category.displayName} in ${city.name}, Oregon`,
+      url: pageUrl,
+      description: `Find verified ${category.displayName.toLowerCase()} serving ${city.name} and surrounding communities.`,
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: businesses.length,
+        itemListElement: businesses.map((b, i) => {
+          const item: Record<string, unknown> = {
+            "@type": "LocalBusiness",
+            name: b.title,
+            url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`,
+          };
+          if (b.address) {
+            item.address = {
+              "@type": "PostalAddress",
+              streetAddress: b.address,
+              addressLocality: city.name,
+              addressRegion: "OR",
+              addressCountry: "US",
+            };
+          }
+          if (b.phone) item.telephone = b.phone;
+          if (b.rating != null && b.reviews != null) {
+            item.aggregateRating = {
+              "@type": "AggregateRating",
+              ratingValue: b.rating,
+              reviewCount: b.reviews,
+            };
+          }
+          if (b.category) item.description = b.category;
+          return {
+            "@type": "ListItem" as const,
+            position: i + 1,
+            item,
+          };
+        }),
+      },
+    },
+  ];
+}
+
+/**
+ * Returns FAQPage schema from FAQ items.
+ * @param faqs - Array of {question, answer} objects
+ */
+export function faqPageSchema(
+  faqs: { question: string; answer: string }[]
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}

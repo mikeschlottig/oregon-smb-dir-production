@@ -1,34 +1,32 @@
-# Phase 4 Execution Digest
-## RESULT
-Build completed successfully (`./node_modules/.bin/astro build` exit 0). All changes committed to `dev` branch (no push).
+RESULT: DONE
 
 ## Files Changed
-1. `src/data/cities.ts` — Added `region: string` field to `City` type and all city entries
-2. `src/pages/city/[citySlug].astro` — Updated TldrCard eyebrow to use `city.region`
-3. `src/lib/seo-content.ts` — Replaced hardcoded "Oregon I-5 Corridor" phrases with `city.region`-aware wording
-4. `src/pages/index.astro` — Updated homepage meta tags, hero section copy for statewide framing
-5. `src/lib/schema.ts` — Aligned Organization/WebSite schema names and descriptions to statewide framing
+1. `src/data/cities.ts` — Added optional `county?: string` field to City type and populated with correct Oregon counties for all 12 cities
+2. `src/components/TldrCard.astro` — Added optional `county` prop, updated eyebrow rendering to show `{region} · {county} County` format
+3. `src/pages/city/[citySlug].astro` — Pass county prop to TldrCard, use city.tagline as tagline, add county stat pill when present
+4. `src/lib/seo-content.ts` — Updated `generateCitySeoContent` to mention county in first paragraph when present
 
-## Region Value Per City (Full Table)
-| City          | Region                          |
-|---------------|---------------------------------|
-| Albany        | Oregon I-5 Corridor            |
-| Ashland       | Oregon I-5 Corridor            |
-| Bend          | Central Oregon                  |
-| Corvallis     | Willamette Valley               |
-| Eugene        | Oregon I-5 Corridor            |
-| Grants Pass   | Oregon I-5 Corridor            |
-| Klamath Falls | Klamath Basin · Southern Oregon|
-| Medford       | Oregon I-5 Corridor            |
-| Portland      | Oregon I-5 Corridor            |
-| Roseburg      | Oregon I-5 Corridor            |
-| Salem         | Oregon I-5 Corridor            |
-| Springfield   | Oregon I-5 Corridor            |
+## County Table
+| City | County |
+|------|--------|
+| Albany | Linn |
+| Ashland | Jackson |
+| Bend | Deschutes |
+| Corvallis | Benton |
+| Eugene | Lane |
+| Grants Pass | Josephine |
+| Klamath Falls | Klamath |
+| Medford | Jackson |
+| Portland | Multnomah |
+| Roseburg | Douglas |
+| Salem | Marion |
+| Springfield | Lane |
 
-## New Homepage Copy (Verbatim)
-- **H1**: "Oregon Business Directory" (rendered as two lines in Hero.tsx: "Oregon" + "<br/>" + "<span class='italic text-gold'>Business Directory</span>")
-- **Tagline**: "Statewide coverage: I-5 hubs, Corvallis, Bend & Klamath Falls"
-- **Meta Description**: "Oregon's most useful statewide business directory covering I-5 hubs from Ashland to Portland plus Corvallis, Bend, and Klamath Falls."
+## Build Exit Code
+0 (Successful)
 
-## Build Exit
-0 (success)
+## Commit
+- Branch: dev
+- Hash: 09493af
+- Message: "P5a: Add county field to cities, update TLDR card with county info, enhance SEO content"
+- No push performed

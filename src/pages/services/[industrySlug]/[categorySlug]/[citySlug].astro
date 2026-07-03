@@ -1,0 +1,255 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import BusinessCard from "@/components/cards/BusinessCard";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { getBusinesses, type Business } from "@/data/businesses";
+import { serviceCategories, type ServiceCategory } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
+import { servicePageSchema, breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { Check } from "lucide-react";
+
+export async function getStaticPaths() {
+  const paths: { params: { industrySlug: string; categorySlug: string; citySlug: string } }[] = [];
+
+  for (const category of serviceCategories) {
+    for (const city of cities) {
+      const businesses = matchBusinesses(city.slug, category);
+      if (businesses.length >= 3) {
+        paths.push({
+          params: {
+            industrySlug: category.industrySlug,
+            categorySlug: category.slug,
+            citySlug: city.slug,
+          },
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+function computeAvgRating(businesses: Business[]): number | null {
+  const rated = businesses.filter(
+    (b): b is Business & { rating: number } => typeof b.rating === "number"
+  );
+  if (rated.length === 0) return null;
+  const sum = rated.reduce((acc, b) => acc + b.rating, 0);
+  return Math.round((sum / rated.length) * 10) / 10;
+}
+
+const { industrySlug, categorySlug, citySlug } = Astro.params;
+
+const city = cities.find((c) => c.slug === citySlug);
+const category = serviceCategories.find((c) => c.slug === categorySlug && c.industrySlug === industrySlug);
+const industry = industries.find((i) => i.slug === industrySlug);
+
+if (!city || !category || !industry) {
+  return Astro.redirect("/404");
+}
+
+const businesses = matchBusinesses(citySlug, category);
+const avgRating = computeAvgRating(businesses);
+
+// Nearby cities that meet threshold for THIS category
+const nearbyCities = cities.filter((c) => {
+  if (c.slug === city.slug) return false;
+  return matchBusinesses(c.slug, category).length >= 3;
+});
+
+// Related categories that meet threshold for THIS city
+const relatedCategoriesForCity = serviceCategories.filter((c) => {
+  if (c.slug === category.slug) return false;
+  return matchBusinesses(city.slug, c).length >= 3;
+});
+
+// FAQ content: category FAQs + 1 data-backed local FAQ
+const localFaq = {
+  question: `How many ${category.pluralName} serve ${city.name}?`,
+  answer: `${city.name} has ${businesses.length} verified ${category.pluralName} listed in our directory. Each has been verified to ensure they meet basic business listing standards.`,
+};
+const allFaqs = [...category.faqs, localFaq];
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const pageUrl = `${siteUrl}/services/${industrySlug}/${categorySlug}/${citySlug}`;
+
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Services", url: `${siteUrl}/services` },
+  { name: industry.name, url: `${siteUrl}/services/${industrySlug}` },
+  { name: category.displayName, url: `${siteUrl}/services/${industrySlug}/${categorySlug}` },
+  { name: city.name, url: pageUrl },
+];
+
+const schemas = [
+  ...servicePageSchema(city, category, industry, businesses, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+  faqPageSchema(allFaqs),
+];
+
+const title = `${category.displayName} in ${city.name}, Oregon`;
+const description = `Find verified ${category.pluralName} serving ${city.name} and surrounding ${city.region} communities.`;
+
+const tldrStats = [
+  { value: businesses.length.toString(), label: "Listings" },
+  ...(avgRating ? [{ value: avgRating.toFixed(1), label: "Avg Rating" }] : []),
+  { value: city.population, label: "Population" },
+];
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: industry.name, href: `/services/${industrySlug}` },
+      { label: category.displayName, href: `/services/${industrySlug}/${categorySlug}` },
+      { label: city.name },
+    ]}
+    eyebrow={city.region}
+    title={title}
+    tagline={`${businesses.length} verified ${category.pluralName} serving ${city.name} and surrounding ${city.region} communities.`}
+    stats={tldrStats}
+    county={city.county}
+  />
+
+  <!-- TLDR highlighted box -->
+  <section class="container mx-auto px-4 py-8">
+    <div class="rounded-lg p-6 border-l-4" style="background-color: var(--c-stone); border-color: var(--c-copper);">
+      <p class="text-lg leading-relaxed" style="color: var(--c-pine);">
+        {category.tldr}
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Sections -->
+  {category.sections.map((section) => (
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="font-playfair text-3xl font-bold mb-6" style="color: var(--c-pine);">
+        {section.sectionTitle}
+      </h2>
+      <div class="prose max-w-none mb-8" style="color: var(--c-pine);">
+        <p>{section.body}</p>
+      </div>
+      <div class="rounded-lg p-6" style="background-color: var(--c-sky);">
+        <h3 class="font-inter text-lg font-semibold mb-4" style="color: var(--c-pine);">
+          Key Takeaways
+        </h3>
+        <ul class="space-y-3">
+          {section.takeaways.map((takeaway) => (
+            <li class="flex items-start gap-3">
+              <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: 'var(--c-river)' }} />
+              <span style="color: var(--c-pine);">{takeaway}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <!-- Listings -->
+  <section class="container mx-auto px-4 py-12">
+    <h2 class="font-playfair text-3xl font-bold mb-8" style="color: var(--c-pine);">
+      Verified {category.displayName} in {city.name}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {businesses.map((business) => (
+        <BusinessCard
+          business={business}
+          citySlug={city.slug}
+          industrySlug={industry.slug}
+          client:load
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Nearby Cities -->
+  {nearbyCities.length > 0 && (
+    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+      <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--c-pine);">
+        {category.displayName} in Nearby Cities
+      </h2>
+      <div class="flex flex-wrap gap-3">
+        {nearbyCities.map((nearbyCity) => (
+          <a
+            href={`/services/${industrySlug}/${categorySlug}/${nearbyCity.slug}`}
+            class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors"
+            style="background-color: var(--c-sky); color: var(--c-pine);"
+          >
+            {nearbyCity.name}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Related Categories -->
+  {relatedCategoriesForCity.length > 0 && (
+    <section class="container mx-auto px-4 py-12">
+      <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--c-pine);">
+        Related Services in {city.name}
+      </h2>
+      <div class="flex flex-wrap gap-3">
+        {relatedCategoriesForCity.map((relCat) => (
+          <a
+            href={`/services/${industrySlug}/${relCat.slug}/${city.slug}`}
+            class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors"
+            style="background-color: var(--c-river); color: white;"
+          >
+            {relCat.displayName}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+    <h2 class="font-playfair text-3xl font-bold mb-8" style="color: var(--c-pine);">
+      Frequently Asked Questions
+    </h2>
+    <div class="space-y-6">
+      {allFaqs.map((faq) => (
+        <div class="rounded-lg p-6" style="background-color: white; border: 1px solid var(--c-border);">
+          <h3 class="font-inter text-lg font-semibold mb-3" style="color: var(--c-pine);">
+            {faq.question}
+          </h3>
+          <p style="color: var(--c-sage);">{faq.answer}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- License Note -->
+  {category.licenseRequired && (
+    <aside class="container mx-auto px-4 py-8">
+      <div class="rounded-lg p-6 border" style="background-color: var(--c-copper-lt); border-color: var(--c-copper);">
+        <h3 class="font-inter text-lg font-semibold mb-2" style="color: var(--c-pine);">
+          Licensing Requirement
+        </h3>
+        <p style="color: var(--c-pine);">
+          {category.displayName} in Oregon are required to be licensed.
+          {category.licenseAuthority && (
+            <span>
+              Verify licensing through the {category.licenseAuthority}.
+              {category.licenseUrl && (
+                <a
+                  href={category.licenseUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="underline ml-1"
+                  style="color: var(--c-river);"
+                >
+                  Visit their website
+                </a>
+              )}
+            </span>
+          )}
+        </p>
+      </div>
+    </aside>
+  )}
+</SiteLayout>

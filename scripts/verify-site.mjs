@@ -37,7 +37,11 @@ import { fileURLToPath } from "node:url";
 import * as parse5 from "parse5";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DIST = join(ROOT, "dist");
+/** Overridable so scripts/falsify-gate.mjs can run the gate against a mutated copy. */
+const DIST = (() => {
+  const i = process.argv.indexOf("--dist");
+  return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : join(ROOT, "dist");
+})();
 const ORIGIN = "https://oregonsmbdirectory.com";
 
 const args = process.argv.slice(2);

@@ -105,25 +105,45 @@ interface ReportSchema {
  * @param fallbackLocality - the city the page is for
  */
 export function postalAddress(address: string, fallbackLocality: string): PostalAddress {
-  const match = address
-    .trim()
-    .match(/^(.*?),\s*([^,]+?),\s*([A-Z]{2})\s+(\d{5}(?:-\d{4})?)$/);
+  const text = address.trim();
 
-  if (match) {
-    const [, street, locality, region, postalCode] = match;
+  /** ZIP+4 appears both hyphenated and run together ("97321-1789", "973211789"). */
+  const ZIP = String.raw`(\d{5})(?:-?(\d{4}))?`;
+  const normaliseZip = (five: string, plusFour?: string) =>
+    plusFour ? `${five}-${plusFour}` : five;
+
+  // "<street>, <city>, <ST> <ZIP>" — 9,075 of 9,144 records.
+  const withStreet = text.match(new RegExp(String.raw`^(.*?),\s*([^,]+?),\s*([A-Z]{2})\s+${ZIP}$`));
+  if (withStreet) {
+    const [, street, locality, region, five, plusFour] = withStreet;
     return {
       "@type": "PostalAddress",
       streetAddress: street.trim(),
       addressLocality: locality.trim(),
       addressRegion: region,
-      postalCode,
+      postalCode: normaliseZip(five, plusFour),
       addressCountry: "US",
     };
   }
 
+  // "<city>, <ST> <ZIP>" — 58 records carry no street line at all. Emitting the whole
+  // string as streetAddress would claim the city is a street.
+  const noStreet = text.match(new RegExp(String.raw`^([^,]+),\s*([A-Z]{2})\s+${ZIP}$`));
+  if (noStreet) {
+    const [, locality, region, five, plusFour] = noStreet;
+    return {
+      "@type": "PostalAddress",
+      addressLocality: locality.trim(),
+      addressRegion: region,
+      postalCode: normaliseZip(five, plusFour),
+      addressCountry: "US",
+    };
+  }
+
+  // Anything else keeps its text as the street line: a wrong split is worse than none.
   return {
     "@type": "PostalAddress",
-    streetAddress: address.trim(),
+    streetAddress: text,
     addressLocality: fallbackLocality,
     addressRegion: "OR",
     addressCountry: "US",

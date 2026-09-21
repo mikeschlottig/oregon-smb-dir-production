@@ -59,20 +59,20 @@ echo " Starting Iteration $ITERATION..."
 # 1. State Injection: Fresh Context   
 # We cat the prompt and task file to ensure the agent sees the   
 # current state of the disk, not a stale memory.   
-# "[span_19](start_span)[span_19](end_span)"   
+# ""   
 INPUT=$(cat $PROMPT_FILE $TASK_FILE)   
   
 # 2. The Agentic Call: Headless Mode   
 # We use the -p flag to pipe input directly, bypassing interactive mode.   
 # This creates a fresh process and context for this specific iteration.   
-# "[span_93](start_span)[span_93](end_span)", "[span_94](start_span)[span_94](end_span)"   
+# "", ""   
 echo "$INPUT" | claude -p --dangerously-skip-permissions > agent_output.txt   
   
 # 3. The Stop Hook: Verification   
 # We check for the explicit completion promise string.   
 # Alternatively, we could run 'npm test' here.   
 # ""   
-if g[span_20](start_span)[span_20](end_span)rep -q "$EXIT_CRITERIA" agent_output.txt; then   
+if grep -q "$EXIT_CRITERIA" agent_output.txt; then   
 echo " Completion promise met!"   
   
 # 4. Secondary Verification (Optional but Recommended)   
@@ -94,7 +94,7 @@ fi
 # ""   
 done   
   
-echo " Failed to complete task [span_10](start_span)[span_10](end_span)within $MAX_ITERATIONS iterations."   
+echo " Failed to complete task within $MAX_ITERATIONS iterations."   
 exit 1   
 
 ###  3.2 The Stop-Hook and Completion Promises
@@ -181,7 +181,7 @@ In 2026, it is common to use for loops to apply simple transformations across ma
 
   * Scenario: "Add type hints to all Python files in src/."
   * Map (The For Loop):   
-# [span_95](start_span)[span_95](end_span)[span_96](start_span)[span_96](end_span)   
+#    
 find src -name "*.py" -print0 | xargs -0 -P 10 -I {} bash -c '   
 cat PROMPT_TYPE_HINT.md {} | claude -p > {}.tmp && mv {}.tmp {}   
 '   

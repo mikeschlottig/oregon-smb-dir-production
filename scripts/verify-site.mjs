@@ -30,7 +30,7 @@
  *   C17 EXEMPTION_SCOPE     only approved paths may declare themselves exempt
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { readdir } from "node:fs/promises";
 import { join, relative, dirname, posix } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -513,15 +513,23 @@ for (const [answer, pages] of dupAnswers) {
 }
 
 // --- sitemap: only resolvable, indexable URLs
-const sitemapFiles = [...fileSet].filter((p) => /^sitemap.*\.xml$/.test(p));
+//
+// Enumerated from disk, not from the HTML file set: reading the set meant only
+// sitemap-index.xml was ever seen, its one <loc> pointed at sitemap-0.xml, that was
+// filtered out as an .xml URL, and the check passed having inspected zero URLs.
+const sitemapFiles = readdirSync(DIST).filter((p) => /^sitemap.*\.xml$/.test(p));
+if (sitemapFiles.length === 0) {
+  failures.push({ check: "C16", page: "/", detail: "no sitemap file found in dist/" });
+}
 let sitemapUrls = [];
 for (const sm of sitemapFiles) {
   const xml = readFileSync(join(DIST, sm), "utf8");
   for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) sitemapUrls.push(m[1].trim());
 }
 sitemapUrls = [...new Set(sitemapUrls)].filter((u) => !/\.xml$/.test(u));
-if (sitemapFiles.length === 0) {
-  failures.push({ check: "C16", page: "/", detail: "no sitemap was emitted" });
+// A sitemap that lists no pages is not a passing sitemap.
+if (sitemapUrls.length === 0) {
+  failures.push({ check: "C16", page: "/", detail: "sitemap lists no page URLs" });
 }
 for (const url of sitemapUrls) {
   const fakeFile = join(DIST, "index.html"); // only used for the page label

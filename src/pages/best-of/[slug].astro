@@ -1,7 +1,8 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { bestOfLists } from "@/data/content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ChevronRight, Trophy } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -14,31 +15,26 @@ export async function getStaticPaths() {
 const { list } = Astro.props;
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Best Of", path: "/best-of/" },
+    { name: list.category },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: list.title,
     description: list.intro,
-    url: `${siteUrl}/best-of/${list.slug}`,
+    url: `${siteUrl}/best-of/${list.slug}/`,
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Best Of", url: `${siteUrl}/best-of` },
-    { name: list.category, url: `${siteUrl}/best-of/${list.slug}` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout title={`${list.title} — Best Of`} description={list.intro} schemas={schemas}>
   <section class="bg-gradient-warm text-white pt-32 pb-16 px-4">
     <div class="container mx-auto max-w-4xl">
-      <nav class="flex items-center gap-2 text-white/70 text-sm mb-6">
-        <a href="/" class="hover:text-white">Home</a>
-        <ChevronRight className="w-4 h-4" />
-        <a href="/best-of" class="hover:text-white">Best Of</a>
-        <ChevronRight className="w-4 h-4" />
-        <span class="text-white">{list.category}</span>
-      </nav>
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} tone="inverse" class="mb-6" />
       <p class="inline-flex items-center gap-2 text-gold text-xs uppercase tracking-widest mb-3">
         <Trophy className="w-4 h-4" /> {list.category} · {list.city} · {list.year}
       </p>

@@ -96,7 +96,7 @@ export function getBusinessRelatedLinks(args: {
   // 1. Industry page (city + industry)
   if (city && industry) {
     links.push({
-      href: `/city/${citySlug}/${industrySlug}`,
+      href: `/city/${citySlug}/${industrySlug}/`,
       label: `${industry.name} in ${city.name}`,
       reason: "industry",
     });
@@ -105,7 +105,7 @@ export function getBusinessRelatedLinks(args: {
   // 2. City page
   if (city) {
     links.push({
-      href: `/city/${citySlug}`,
+      href: `/city/${citySlug}/`,
       label: `${city.name} businesses`,
       reason: "city",
     });
@@ -119,7 +119,7 @@ export function getBusinessRelatedLinks(args: {
 
   for (const sibling of siblings) {
     links.push({
-      href: `/city/${citySlug}/${industrySlug}/${sibling.slug}`,
+      href: `/city/${citySlug}/${industrySlug}/${sibling.slug}/`,
       label: sibling.title,
       reason: "sibling-business",
     });
@@ -130,7 +130,7 @@ export function getBusinessRelatedLinks(args: {
   for (const cat of categories.slice(0, 3)) {
     if (hasServicePage(industrySlug, cat.slug, citySlug)) {
       links.push({
-        href: `/services/${industrySlug}/${cat.slug}/${citySlug}`,
+        href: `/services/${industrySlug}/${cat.slug}/${citySlug}/`,
         label: cat.displayName ?? `${industry?.name} services`,
         reason: "service",
       });
@@ -162,7 +162,7 @@ export function getCityIndustryRelatedLinks(args: {
   // 1. City hub
   if (city) {
     links.push({
-      href: `/city/${citySlug}`,
+      href: `/city/${citySlug}/`,
       label: `${city.name} — all industries`,
       reason: "city",
     });
@@ -172,7 +172,7 @@ export function getCityIndustryRelatedLinks(args: {
   const nearbyCities = getRegionCities(citySlug).slice(0, 3);
   for (const nearby of nearbyCities) {
     links.push({
-      href: `/city/${nearby.slug}/${industrySlug}`,
+      href: `/city/${nearby.slug}/${industrySlug}/`,
       label: `${industry?.name ?? industrySlug} in ${nearby.name}`,
       reason: "nearby-city",
     });
@@ -183,7 +183,7 @@ export function getCityIndustryRelatedLinks(args: {
   for (const cat of categories) {
     if (hasServicePage(industrySlug, cat.slug, citySlug)) {
       links.push({
-        href: `/services/${industrySlug}/${cat.slug}/${citySlug}`,
+        href: `/services/${industrySlug}/${cat.slug}/${citySlug}/`,
         label: `${cat.displayName} in ${city?.name ?? citySlug}`,
         reason: "service",
       });
@@ -219,7 +219,7 @@ export function getServicePageRelatedLinks(args: {
   // 1. City×industry page
   if (city && industry) {
     links.push({
-      href: `/city/${citySlug}/${industrySlug}`,
+      href: `/city/${citySlug}/${industrySlug}/`,
       label: `${industry.name} businesses in ${city.name}`,
       reason: "industry",
     });
@@ -228,7 +228,7 @@ export function getServicePageRelatedLinks(args: {
   // 2. City hub
   if (city) {
     links.push({
-      href: `/city/${citySlug}`,
+      href: `/city/${citySlug}/`,
       label: `${city.name} — all businesses`,
       reason: "city",
     });
@@ -241,7 +241,7 @@ export function getServicePageRelatedLinks(args: {
   for (const cat of otherCategories) {
     if (hasServicePage(industrySlug, cat.slug, citySlug)) {
       links.push({
-        href: `/services/${industrySlug}/${cat.slug}/${citySlug}`,
+        href: `/services/${industrySlug}/${cat.slug}/${citySlug}/`,
         label: `${cat.displayName} in ${city?.name ?? citySlug}`,
         reason: "service",
       });
@@ -253,7 +253,7 @@ export function getServicePageRelatedLinks(args: {
   for (const nearby of nearbyCities) {
     if (hasServicePage(industrySlug, categorySlug, nearby.slug)) {
       links.push({
-        href: `/services/${industrySlug}/${categorySlug}/${nearby.slug}`,
+        href: `/services/${industrySlug}/${categorySlug}/${nearby.slug}/`,
         label: `${category?.displayName ?? categorySlug} in ${nearby.name}`,
         reason: "nearby-city",
       });
@@ -283,7 +283,7 @@ export function getCityHubRelatedLinks(args: {
   const regionCities = getRegionCities(citySlug).slice(0, 8);
   for (const rc of regionCities) {
     links.push({
-      href: `/city/${rc.slug}`,
+      href: `/city/${rc.slug}/`,
       label: `${rc.name} businesses`,
       reason: "region-sibling",
     });
@@ -293,7 +293,7 @@ export function getCityHubRelatedLinks(args: {
   const topIndustries = industries.slice(0, 6);
   for (const ind of topIndustries) {
     links.push({
-      href: `/city/${citySlug}/${ind.slug}`,
+      href: `/city/${citySlug}/${ind.slug}/`,
       label: `${ind.name} in ${city?.name ?? citySlug}`,
       reason: "industry",
     });

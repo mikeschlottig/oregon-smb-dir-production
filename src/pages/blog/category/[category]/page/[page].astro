@@ -1,8 +1,11 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { blogCategories, getBlogCategory } from "@/data/blogCategories";
+import { pageCount, pageSlice as slicePage } from "@/lib/paginate";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -17,7 +20,7 @@ export async function getStaticPaths() {
   const paths = [];
   for (const [cat, list] of Object.entries(byCat)) {
     list.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-    const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    const totalPages = pageCount(list.length, PER_PAGE);
     for (let i = 2; i <= totalPages; i++) {
       paths.push({
         params: { category: slugifyCategory(cat), page: String(i) },
@@ -25,7 +28,7 @@ export async function getStaticPaths() {
           categoryName: cat,
           currentPage: i,
           totalPages,
-          pageSlice: list.slice((i - 1) * PER_PAGE, i * PER_PAGE),
+          pageSlice: slicePage(list, i, PER_PAGE),
         },
       });
     }
@@ -46,26 +49,35 @@ const formatDate = (iso: string) => {
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const categorySlug = slugifyCategory(categoryName);
+const categoryInfo = getBlogCategory(categoryName);
+
+const crumbs = trail([
+    { name: "Blog", path: "/blog/" },
+    { name: categoryName, path: `/blog/category/${categorySlug}/` },
+    { name: `Page ${currentPage}` },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `${categoryName} — Page ${currentPage}`,
-    url: `${siteUrl}/blog/category/${categorySlug}/${currentPage}/`,
+    url: `${siteUrl}/blog/category/${categorySlug}/page/${currentPage}/`,
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Blog", url: `${siteUrl}/blog` },
-    { name: categoryName, url: `${siteUrl}/blog/category/${categorySlug}/` },
-    { name: `Page ${currentPage}`, url: `${siteUrl}/blog/category/${categorySlug}/${currentPage}/` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout title={`${categoryName} — Page ${currentPage}`} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Category · Page {currentPage}</p>
       <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">{categoryName}</h1>
+      {categoryInfo && (
+        <p class="mt-5 text-muted-foreground text-left md:text-center max-w-3xl mx-auto leading-relaxed">
+          {categoryInfo.description}
+        </p>
+      )}
     </div>
   </section>
 
@@ -98,5 +110,20 @@ const schemas = [
     </div>
 
     <Pagination baseUrl={baseUrl} currentPage={currentPage} totalPages={totalPages} />
+  </section>
+  <section class="container mx-auto px-4 pb-16">
+    <h2 class="font-serif text-2xl font-bold mb-5">Other categories</h2>
+    <div class="flex flex-wrap gap-3">
+      {blogCategories
+        .filter((c) => c.name !== categoryName)
+        .map((c) => (
+          <a
+            href={`/blog/category/${slugifyCategory(c.name)}/`}
+            class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-muted text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            {c.name}
+          </a>
+        ))}
+    </div>
   </section>
 </SiteLayout>

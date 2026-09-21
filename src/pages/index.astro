@@ -8,7 +8,7 @@ import { CityCard } from "@/components/cards/CityCard";
 import SearchBar from "@/components/SearchBar.astro";
 import { cities } from "@/data/cities";
 import { blogPosts, researchReports, bestOfLists } from "@/data/content";
-import { websiteSchema, breadcrumbSchema } from "@/lib/schema";
+import { websiteSchema } from "@/lib/schema";
 import { MapPin, ArrowRight } from "lucide-react";
 
 const featured = {
@@ -24,7 +24,6 @@ const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 
 const schemas = [
   ...websiteSchema(siteUrl),
-  breadcrumbSchema([{ name: "Home", url: siteUrl }]),
 ];
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
@@ -75,7 +74,7 @@ const schemas = [
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {featured.bestOf && (
       <a
-        href={`/best-of/${featured.bestOf.slug}`}
+        href={`/best-of/${featured.bestOf.slug}/`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
       >
         <p class="text-xs uppercase tracking-widest text-accent mb-3 font-medium">Best Of</p>
@@ -89,7 +88,7 @@ const schemas = [
       </a>
       )}
       <a
-        href={`/blog/${featured.blog.slug}`}
+        href={`/blog/${featured.blog.slug}/`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
       >
         <p class="text-xs uppercase tracking-widest text-accent mb-3 font-medium">Blog</p>
@@ -103,7 +102,7 @@ const schemas = [
       </a>
       {featured.report && (
       <a
-        href={`/research/${featured.report.slug}`}
+        href={`/research/${featured.report.slug}/`}
         class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
       >
         <p class="text-xs uppercase tracking-widest text-accent mb-3 font-medium">Research Report</p>

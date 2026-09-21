@@ -183,7 +183,7 @@ export const ReportReader = ({ report }: { report: ResearchReport }) => {
 
           {report.citySlug && report.industrySlug && (
             <a
-              href={`/city/${report.citySlug}/${report.industrySlug}`}
+              href={`/city/${report.citySlug}/${report.industrySlug}/`}
               className="mt-6 inline-flex items-center gap-2 text-sm text-accent hover:text-primary transition-colors"
             >
               <Building2 className="w-4 h-4" /> View related listings

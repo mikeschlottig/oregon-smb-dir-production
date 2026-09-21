@@ -1,14 +1,21 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { publisher } from "@/data/publisher";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 
 const title = `Editorial and Data Quality Policy — ${publisher.name}`;
 const description = "How Oregon SMB Directory sources, qualifies, labels, corrects, and publishes local business records.";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([{ name: "Editorial & Data Quality" }]);
+const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
 ---
 
-<SiteLayout title={title} description={description}>
+<SiteLayout title={title} description={description} schemas={schemas} pageKind="utility">
   <header class="bg-muted pt-32 pb-12 px-4 border-b border-border">
     <div class="container mx-auto max-w-3xl">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-4" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Project-specific policy · August 2026</p>
       <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Editorial and data quality</h1>
       <p class="text-muted-foreground text-lg">The labels on this site describe the evidence available for a field; they do not imply owner participation unless an owner event is recorded.</p>

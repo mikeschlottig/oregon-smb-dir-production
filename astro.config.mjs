@@ -14,7 +14,12 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      // A sitemap is a list of URLs asking to be indexed, so anything carrying
+      // `noindex` must not appear in it. /best-of/ is published but empty — it is
+      // reachable for existing links and withheld from the index until it has lists.
+      filter: (page) => !page.includes("/best-of"),
+    }),
     pagefind(),
     mdx({
       rehypePlugins: [

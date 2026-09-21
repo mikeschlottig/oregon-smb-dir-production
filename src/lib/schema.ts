@@ -21,25 +21,6 @@ interface AggregateRating {
   [key: string]: unknown;
 }
 
-interface BreadcrumbItem {
-  "@type": "ListItem";
-  position: number;
-  item: {
-    "@type": "WebPage";
-    name: string;
-    url: string;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-}
-
-interface BreadcrumbListSchema {
-  "@context": "https://schema.org";
-  "@type": "BreadcrumbList";
-  itemListElement: BreadcrumbItem[];
-  [key: string]: unknown;
-}
-
 interface CollectionPageSchema {
   "@context": "https://schema.org";
   "@type": "CollectionPage";
@@ -143,26 +124,6 @@ export function websiteSchema(siteUrl: string): Record<string, unknown>[] {
 }
 
 /**
- * Returns BreadcrumbList schema from an array of {name, url} items.
- * @param items - Ordered breadcrumb items (first = home, last = current page)
- */
-export function breadcrumbSchema(items: { name: string; url: string }[]): BreadcrumbListSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, i) => ({
-      "@type": "ListItem" as const,
-      position: i + 1,
-      item: {
-        "@type": "WebPage" as const,
-        name: item.name,
-        url: item.url,
-      },
-    })),
-  };
-}
-
-/**
  * Returns CollectionPage + ItemList schema for city pages.
  * @param city - City object
  * @param industries - Array of industries with listings in this city
@@ -174,7 +135,7 @@ export function cityPageSchema(
   siteUrl: string
 ): Record<string, unknown>[] {
   const base = siteUrl.replace(/\/$/, "");
-  const cityUrl = `${base}/city/${city.slug}`;
+  const cityUrl = `${base}/city/${city.slug}/`;
   return [
     {
       "@context": "https://schema.org",
@@ -191,7 +152,7 @@ export function cityPageSchema(
           item: {
             "@type": "WebPage" as const,
             name: ind.name,
-            url: `${cityUrl}/${ind.slug}`,
+            url: `${cityUrl}${ind.slug}/`,
           },
         })),
       },
@@ -214,7 +175,7 @@ export function industryPageSchema(
   siteUrl: string
 ): Record<string, unknown>[] {
   const base = siteUrl.replace(/\/$/, "");
-  const pageUrl = `${base}/city/${city.slug}/${industry.slug}`;
+  const pageUrl = `${base}/city/${city.slug}/${industry.slug}/`;
   return [
     {
       "@context": "https://schema.org",
@@ -229,7 +190,7 @@ export function industryPageSchema(
           const item: Record<string, unknown> = {
             "@type": "LocalBusiness",
             name: b.title,
-            url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`,
+            url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
           if (b.address) {
             item.address = {
@@ -302,7 +263,7 @@ export function businessSchema(
       .replace(/&/g, "and")
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
-  schema.url = `${base}/city/${city.slug}/${industry.slug}/${businessPath}`;
+  schema.url = `${base}/city/${city.slug}/${industry.slug}/${businessPath}/`;
 
   if (hasPublishableRating(business)) {
     schema.aggregateRating = {
@@ -353,7 +314,7 @@ export function blogPostSchema(
       name: publisher.name,
       logo: { "@type": "ImageObject", url: `${base}/og-default.jpg` },
     },
-    mainEntityOfPage: `${base}/blog/${post.id}`,
+    mainEntityOfPage: `${base}/blog/${post.id}/`,
     articleSection: post.data.category,
     keywords: post.data.topics.join(", "),
   };
@@ -391,7 +352,7 @@ export function reportSchema(
       logo: { "@type": "ImageObject", url: `${base}/og-default.jpg` },
     },
     ...(report.data.published ? { datePublished: report.data.published } : {}),
-    url: `${base}/research/${report.id}`,
+    url: `${base}/research/${report.id}/`,
   };
 }
 
@@ -412,7 +373,7 @@ export function servicePageSchema(
   siteUrl: string
 ): Record<string, unknown>[] {
   const base = siteUrl.replace(/\/$/, "");
-  const pageUrl = `${base}/services/${industry.slug}/${category.slug}/${city.slug}`;
+  const pageUrl = `${base}/services/${industry.slug}/${category.slug}/${city.slug}/`;
   
   return [
     {
@@ -428,7 +389,7 @@ export function servicePageSchema(
           const item: Record<string, unknown> = {
             "@type": "LocalBusiness",
             name: b.title,
-            url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`,
+            url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
           if (b.address) {
             item.address = {

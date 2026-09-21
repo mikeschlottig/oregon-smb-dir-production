@@ -1,0 +1,41 @@
+---
+/**
+ * Standalone visible breadcrumb trail, for pages that do not use TldrCard.
+ * Takes the output of `visibleTrail(crumbs)` so the markup and the JSON-LD come
+ * from one declaration — see src/lib/breadcrumbs.ts.
+ */
+import type { VisibleCrumb } from "@/lib/breadcrumbs";
+
+interface Props {
+  crumbs: VisibleCrumb[];
+  /** "inverse" for trails sitting on a dark header. */
+  tone?: "default" | "inverse";
+  class?: string;
+}
+
+const { crumbs, tone = "default", class: className = "" } = Astro.props;
+
+const style =
+  tone === "inverse"
+    ? { link: "text-white/70 hover:text-white", current: "text-white", sep: "text-white/40" }
+    : {
+        link: "text-muted-foreground hover:text-foreground",
+        current: "text-foreground",
+        sep: "text-muted-foreground/50",
+      };
+---
+
+<nav aria-label="Breadcrumb" data-breadcrumb class={`text-sm ${className}`}>
+  <ol class="flex flex-wrap items-center gap-2">
+    {crumbs.map((item, i) => (
+      <li class="flex items-center gap-2">
+        {i > 0 && <span aria-hidden="true" class={style.sep}>/</span>}
+        {item.href ? (
+          <a data-crumb href={item.href} class={`${style.link} transition-colors`}>{item.label}</a>
+        ) : (
+          <span data-crumb aria-current="page" class={`${style.current} line-clamp-1`}>{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -4,7 +4,7 @@
     "title": "Zenway Fitness LLC",
     "address": "1212 SE Stephens St, Roseburg, OR 97470",
     "phone": "(208) 9065783",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 4,
     "category": "Personal trainer",
     "website": "https://www.facebook.com/stacyloumogavero?mibextid=LQQJ4d",
@@ -16,7 +16,7 @@
     "title": "Tom Keel Fitness Center",
     "address": "Roseburg, OR 97470",
     "phone": "(541) 4404600",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 1,
     "category": "Fitness center",
     "website": "https://umpqua.edu/",
@@ -105,6 +105,18 @@
     "category": "Physical fitness program",
     "website": "http://www.fitnessfirstroseburg.com/",
     "googleUrl": "https://www.google.com/maps/place/Fitness+First/@43.2519984,-123.3744047,11z/data=!4m10!1m2!2m1!1sGyms+Roseburg+Oregon!3m6!1s0x54c422c1ecb108c9:0x3388c67ecaaa05e4!8m2!3d43.2283003!4d-123.3511644!15sChRHeW1zIFJvc2VidXJnIE9yZWdvbloWIhRneW1zIHJvc2VidXJnIG9yZWdvbpIBGHBoeXNpY2FsX2ZpdG5lc3NfcHJvZ3JhbZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMUdNVTFVWkhWTk1GcDNWakZDVEZWcmNGRldWWEI2WVd4V1ZrOUlZeEFC4AEA-gEECB8QRg!16s%2Fg%2F1tkqz_c1?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "downtown-fitness",
+    "title": "Downtown Fitness",
+    "address": "722 SE Jackson St, Roseburg, OR 97470",
+    "phone": "(541) 6734848",
+    "rating": 4.5,
+    "reviews": 56,
+    "category": "Fitness center",
+    "website": "https://downtownfitnessusa.com/",
+    "googleUrl": "https://www.google.com/maps/place/Downtown+Fitness/@43.214733,-123.4562466,13z/data=!4m11!1m3!2m2!1sMassage+Therapists+Roseburg+Oregon!6e1!3m6!1s0x54c4232ef22c4521:0x8f0b2cf2970e8308!8m2!3d43.2076035!4d-123.345219!15sCiJNYXNzYWdlIFRoZXJhcGlzdHMgUm9zZWJ1cmcgT3JlZ29uWiQiIm1hc3NhZ2UgdGhlcmFwaXN0cyByb3NlYnVyZyBvcmVnb26SAQ5maXRuZXNzX2NlbnRlcpoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VRek5sOTZTMjFuUlJBQuABAPoBBAgREEQ!16s%2Fg%2F1tnl13lr?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
   }
 ]

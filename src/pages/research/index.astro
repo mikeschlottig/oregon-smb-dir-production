@@ -1,7 +1,8 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { getCollection } from "astro:content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ArrowRight, FileText } from "lucide-react";
 
 const reports = (await getCollection("research")).sort((a, b) =>
@@ -14,18 +15,19 @@ const categoryCounts = reports.reduce<Record<string, number>>((acc, r) => {
 }, {});
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Research" },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Research Library — Oregon SMB Directory",
-    url: `${siteUrl}/research`,
+    url: `${siteUrl}/research/`,
     description: "Industry research reports and deep-dive analyses across Oregon's small-business economy.",
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Research", url: `${siteUrl}/research` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout
@@ -35,6 +37,7 @@ const schemas = [
 >
   <section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
     <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} tone="inverse" class="mb-6" />
       <p class="text-gold text-sm uppercase tracking-widest mb-3">Research Library</p>
       <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">
         Deep Dives Across <span class="italic text-gold">Oregon</span>

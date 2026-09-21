@@ -4,7 +4,7 @@
     "title": "Sugar Magnolia Boutique",
     "address": "552 SE Main St, Roseburg, OR 97470",
     "phone": "(541) 7404337",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 19,
     "category": "Store",
     "website": "https://www.facebook.com/profile.php?id=100071414899787",
@@ -112,7 +112,7 @@
     "title": "RentACenter",
     "address": "161 NE Garden Valley Blvd, Roseburg, OR 97470",
     "phone": "(541) 4405335",
-    "rating": 4.0,
+    "rating": 4,
     "reviews": 89,
     "category": "Furniture store",
     "website": "https://locations.rentacenter.com/location/2517/?utm_source=google&utm_medium=organic&utm_campaign=localmaps",
@@ -124,7 +124,7 @@
     "title": "Umpqua Valley Habitat for Humanity ReStore",
     "address": "1026 NE Diamond Lake Blvd, Roseburg, OR 97470",
     "phone": "(541) 9006935",
-    "rating": 4.0,
+    "rating": 4,
     "reviews": 2,
     "category": "Furniture store",
     "website": "https://www.umpquavalleyhabitat.org/",
@@ -141,6 +141,18 @@
     "category": "Furniture store",
     "website": "https://www.aarons.com/locations/us/or/roseburg/1350-ne-stephens-st?y_source=1_MTUzNTI1NzktNzE1LWxvY2F0aW9uLndlYnNpdGU%3D",
     "googleUrl": "https://www.google.com/maps/place/Aaron's+Rent+To+Own/@43.234811,-123.4496317,13z/data=!4m10!1m2!2m1!1sFurniture+and+Mattress+Stores+Roseburg+Oregon!3m6!1s0x54c422c2e701d3e3:0x1625046635216d16!8m2!3d43.2251872!4d-123.3489003!15sCi1GdXJuaXR1cmUgYW5kIE1hdHRyZXNzIFN0b3JlcyBSb3NlYnVyZyBPcmVnb25aLyItZnVybml0dXJlIGFuZCBtYXR0cmVzcyBzdG9yZXMgcm9zZWJ1cmcgb3JlZ29ukgEPZnVybml0dXJlX3N0b3JlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5NYjFreWRDMVJSUkFC4AEA-gEECCMQLw!16s%2Fg%2F1tf9skb4?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "rife-s-home-furniture-mattress",
+    "title": "Rife's Home Furniture & Mattress",
+    "address": "2455 W Harvard Ave, Roseburg, OR 97471",
+    "phone": "(541) 6712493",
+    "rating": 4.7,
+    "reviews": 719,
+    "category": "Furniture store",
+    "website": "http://www.rifeshomefurnitureonline.com/",
+    "googleUrl": "https://www.google.com/maps/place/Rife's+Home+Furniture+%26+Mattress/@43.2119757,-123.4210906,13z/data=!4m11!1m3!2m2!1sUsed+Car+Dealerships+Roseburg+Oregon!6e6!3m6!1s0x54c43d301b31ac63:0x16cc55f10085d1bc!8m2!3d43.214042!4d-123.3806451!15sCiRVc2VkIENhciBEZWFsZXJzaGlwcyBSb3NlYnVyZyBPcmVnb25aJiIkdXNlZCBjYXIgZGVhbGVyc2hpcHMgcm9zZWJ1cmcgb3JlZ29ukgEPZnVybml0dXJlX3N0b3JlmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU42WDA5SVNsbDNFQUXgAQD6AQQIOhA7!16s%2Fg%2F11b75fsxsf?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
   }
 ]

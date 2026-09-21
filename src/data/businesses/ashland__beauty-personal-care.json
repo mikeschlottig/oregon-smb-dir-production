@@ -4,7 +4,7 @@
     "title": "B'Inspired Studio",
     "address": "250 Oak St #4, Ashland, OR 97520",
     "phone": "(541) 4884431",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 152,
     "category": "Hair salon",
     "website": "https://www.binspiredstudio.com/",
@@ -16,7 +16,7 @@
     "title": "Cherish Salon",
     "address": "393 E Main St, Ashland, OR 97520",
     "phone": "(541) 4824900",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 6,
     "category": "Beauty salon",
     "website": "https://www.cherishsalon.studio/",
@@ -28,7 +28,7 @@
     "title": "Soma Wellness Ashland",
     "address": "599 E Main St, Ashland, OR 97520",
     "phone": "",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 2,
     "category": "Spa and health club",
     "website": "https://www.somawellnessashland.com/",
@@ -285,6 +285,18 @@
     "category": "Beauty salon",
     "website": "",
     "googleUrl": "https://www.google.com/maps/place/Ashland+Nails+Spa+1+LLC/@42.196913,-122.7510889,14z/data=!4m10!1m2!2m1!1sHair+and+Nail+Salons+Ashland+Oregon!3m6!1s0x54cf0dc4402b3dc5:0xccf86536c93c3649!8m2!3d42.1841586!4d-122.6867156!15sCiNIYWlyIGFuZCBOYWlsIFNhbG9ucyBBc2hsYW5kIE9yZWdvblolIiNoYWlyIGFuZCBuYWlsIHNhbG9ucyBhc2hsYW5kIG9yZWdvbpIBDGJlYXV0eV9zYWxvbpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSbE9HVlRRbEZSRUFF4AEA-gEECAAQLg!16s%2Fg%2F11hytkpxt0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "illume-aesthetics",
+    "title": "Illume Aesthetics",
+    "address": "993 Siskiyou Blvd suite 1, Ashland, OR 97520",
+    "phone": "(541) 6318387",
+    "rating": 5,
+    "reviews": 826,
+    "category": "Medical spa",
+    "website": "https://illumeaesthetics.com/",
+    "googleUrl": "https://www.google.com/maps/place/Illume+Aesthetics/@42.1846377,-122.7267773,14z/data=!3m1!5s0x54cf0ca576710c39:0xa9b4bd73fb375f7c!4m11!1m3!2m2!1sMassage+Therapists+Ashland+Oregon!6e1!3m6!1s0x54cf0caf6bc27427:0x135a96f903a3922f!8m2!3d42.1891898!4d-122.6984731!15sCiFNYXNzYWdlIFRoZXJhcGlzdHMgQXNobGFuZCBPcmVnb25aIyIhbWFzc2FnZSB0aGVyYXBpc3RzIGFzaGxhbmQgb3JlZ29ukgELbWVkaWNhbF9zcGGaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnBLYzFOcmRGWlBSMmQzVlVWc1NHSXlWbmxPV0doU1ZrWmtjMDFZWXhBQuABAPoBBAgkEDI!16s%2Fg%2F11g8p4zt2k?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
   }
 ]

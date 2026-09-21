@@ -52,7 +52,7 @@ export const Navbar = ({ pathname = "/" }: { pathname?: string }) => {
             </a>
           ))}
           <a
-            href="/contact"
+            href="/contact/"
             className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-colors"
           >
             List Your Business
@@ -73,7 +73,7 @@ export const Navbar = ({ pathname = "/" }: { pathname?: string }) => {
               </a>
             ))}
             <a
-              href="/contact"
+              href="/contact/"
               className="bg-primary text-primary-foreground px-4 py-2.5 rounded text-center"
             >
               List Your Business

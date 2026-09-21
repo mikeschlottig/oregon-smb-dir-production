@@ -1,6 +1,5 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { breadcrumbSchema } from "@/lib/schema";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const schemas = [
@@ -10,9 +9,6 @@ const schemas = [
     name: "404 — Page Not Found",
     url: Astro.url.href,
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-  ]),
 ];
 ---
 <SiteLayout title="404 — Page Not Found" schemas={schemas}>

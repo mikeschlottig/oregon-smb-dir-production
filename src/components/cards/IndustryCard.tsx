@@ -14,7 +14,7 @@ export const IndustryCard = ({ industry, citySlug }: Props) => {
   const count = businesses.length;
   return (
     <a
-      href={`/city/${citySlug}/${industry.slug}`}
+      href={`/city/${citySlug}/${industry.slug}/`}
       className="group bg-card border border-border hover:border-[var(--c-sage)] rounded-lg p-6 cursor-pointer hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 block relative min-h-[44px]"
       style={{ borderRadius: "var(--radius-md)" }}
     >

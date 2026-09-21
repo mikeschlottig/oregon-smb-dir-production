@@ -1,8 +1,10 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { pageCount, pageSlice as slicePage } from "@/lib/paginate";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 const PER_PAGE = 12;
@@ -10,8 +12,8 @@ const PER_PAGE = 12;
 const allPosts = (await getCollection("blog")).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
-const totalPages = Math.max(1, Math.ceil(allPosts.length / PER_PAGE));
-const pageSlice = allPosts.slice(0, PER_PAGE);
+const totalPages = pageCount(allPosts.length, PER_PAGE);
+const pageSlice = slicePage(allPosts, 1, PER_PAGE);
 
 const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
   acc[p.data.category] = (acc[p.data.category] || 0) + 1;
@@ -28,23 +30,25 @@ const formatDate = (iso: string) => {
 };
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Blog" },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Blog — Oregon SMB Directory",
-    url: `${siteUrl}/blog`,
+    url: `${siteUrl}/blog/`,
     description: "Local guides, business advice, and on-the-ground reporting from every stop along Oregon's most-traveled corridor.",
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Blog", url: `${siteUrl}/blog` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout title="Stories from the I-5 — Oregon SMB Directory Blog" schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">The Blog</p>
       <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">Stories from the I-5</h1>
       <p class="text-muted-foreground text-lg max-w-2xl mx-auto">

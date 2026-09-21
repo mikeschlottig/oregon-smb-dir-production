@@ -1,7 +1,6 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
-import FaqSchema from "@/components/FaqSchema.astro";
 import RelatedLinks from "@/components/RelatedLinks.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
@@ -10,11 +9,12 @@ import {
   getBusinessPathSlug,
   parseLatLng,
 } from "@/data/businesses";
-import { generateIndustryFaqs } from "@/lib/seo-content";
-import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+
+import { hasDedicatedPage } from "@/data/dedicatedPages";
+import { businessSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import {
-  ChevronRight,
   ExternalLink,
   Globe,
   MapPin,
@@ -30,12 +30,12 @@ export async function getStaticPaths() {
     for (const industry of industries) {
       const businesses = getBusinesses(city.slug, industry.slug);
       for (const business of businesses) {
+        const businessSlug = getBusinessPathSlug(city.slug, industry.slug, business);
+        // A hand-written page already owns this URL; generating it here too would
+        // define the same route twice. See src/data/dedicatedPages.ts.
+        if (hasDedicatedPage(city.slug, industry.slug, businessSlug)) continue;
         paths.push({
-          params: {
-            citySlug: city.slug,
-            industrySlug: industry.slug,
-            businessSlug: getBusinessPathSlug(city.slug, industry.slug, business),
-          },
+          params: { citySlug: city.slug, industrySlug: industry.slug, businessSlug },
           props: { city, industry, business },
         });
       }
@@ -87,20 +87,16 @@ const stats = [
   { value: verificationLabel, label: "Record status" }
 ];
 
-// Generate FAQs for this industry
-const faqs = generateIndustryFaqs(city, industry, getBusinesses(city.slug, industry.slug));
-
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const businessPath = getBusinessPathSlug(city.slug, industry.slug, business);
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
-  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}` },
-  { name: business.title, url: `${siteUrl}/city/${city.slug}/${industry.slug}/${businessPath}` },
-];
+const crumbs = trail([
+  { name: city.name, path: `/city/${city.slug}/` },
+  { name: industry.name, path: `/city/${city.slug}/${industry.slug}/` },
+  { name: business.title },
+]);
 const schemas = [
   businessSchema(business, city, industry, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 
 // Compute related links for this business page
@@ -115,12 +111,7 @@ const relatedLinks = getBusinessRelatedLinks({
 <SiteLayout title={title} description={description} schemas={schemas}>
   <!-- Dark TLDR Header with TldrCard -->
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: city.name, href: `/city/${city.slug}` },
-      { label: industry.name, href: `/city/${city.slug}/${industry.slug}` },
-      { label: business.title }
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow={`${business.category || industry.name} in ${city.name}, OR`}
     title={business.title}
     tagline={`${business.category || industry.name} in ${city.name}, Oregon`}
@@ -271,7 +262,7 @@ const relatedLinks = getBusinessRelatedLinks({
             {related.map((b) => (
               <li>
                 <a
-                  href={`/city/${city.slug}/${industry.slug}/${getBusinessPathSlug(city.slug, industry.slug, b)}`}
+                  href={`/city/${city.slug}/${industry.slug}/${getBusinessPathSlug(city.slug, industry.slug, b)}/`}
                   class="flex items-center justify-between gap-2 text-sm group"
                 >
                   <span class="text-foreground group-hover:text-accent transition-colors">
@@ -288,7 +279,7 @@ const relatedLinks = getBusinessRelatedLinks({
             ))}
           </ul>
           <a
-            href={`/city/${city.slug}/${industry.slug}`}
+            href={`/city/${city.slug}/${industry.slug}/`}
             class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings
@@ -298,32 +289,24 @@ const relatedLinks = getBusinessRelatedLinks({
     </aside>
   </section>
 
-  <!-- FAQ Section -->
+  <!--
+    No FAQ block here by design. The questions this page used to carry were generated
+    from the city-industry aggregate, not from this business, so every listing in the
+    same city and industry shipped the identical four answers — 9,598 pages sharing
+    143 answer sets, each wrapped in its own FAQPage. The aggregate questions are
+    answered once, on the industry page linked below.
+  -->
   <section class="container mx-auto px-4 py-12 border-t" style="border-color: var(--c-border);">
-    <h3 class="font-playfair text-xl md:text-2xl font-bold mb-6" style="color: var(--c-pine);">
-      Frequently Asked Questions
-    </h3>
-    <div class="space-y-4 max-w-3xl">
-      {faqs.map((faq, i) => (
-        <details class="group border rounded-lg p-4" style="border-color: var(--c-border);">
-          <summary class="flex items-center justify-between cursor-pointer font-semibold" style="color: var(--c-pine);">
-            <span class="text-base">{faq.question}</span>
-            <span class="ml-4 flex-shrink-0 transition-transform group-open:rotate-180">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </span>
-          </summary>
-          <p class="mt-3 text-sm leading-relaxed" style="color: var(--c-pine);">
-            {faq.answer}
-          </p>
-        </details>
-      ))}
-    </div>
+    <p class="max-w-3xl text-sm leading-relaxed" style="color: var(--c-sage);">
+      Looking for how {business.title} compares with other {industry.name.toLowerCase()} in
+      {city.name}? The
+      <a href={`/city/${city.slug}/${industry.slug}/`} class="underline" style="color: var(--c-river);">
+        {industry.name} in {city.name}
+      </a>
+      page carries the full listing set, the rating distribution, and the questions that
+      apply across the whole category.
+    </p>
   </section>
-
-  <!-- FAQPage JSON-LD -->
-  <FaqSchema faqs={faqs} />
 
   <!-- Related Links (automatic internal linking) -->
   <RelatedLinks links={relatedLinks} heading="Related" />

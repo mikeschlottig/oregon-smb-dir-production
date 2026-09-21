@@ -22,5 +22,13 @@ const jsonLd = {
     },
   })),
 };
+
+// Escape <, > and & — the same guard JsonLd.astro applies. Without it a single
+// ampersand in a business name or answer breaks the script block on that page.
+const escapeJson = (value: unknown): string =>
+  JSON.stringify(value, null, 2)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
 ---
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd, null, 2)} />
+<script type="application/ld+json" set:html={escapeJson(jsonLd)} />

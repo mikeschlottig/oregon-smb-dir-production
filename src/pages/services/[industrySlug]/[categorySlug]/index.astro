@@ -1,0 +1,173 @@
+---
+/**
+ * Service category hub — /services/{industry}/{category}/
+ *
+ * Named by the breadcrumb trail on every city-level service page, so it must exist.
+ * It carries the category's own editorial sections and FAQs — content that was
+ * previously repeated on each city page — and routes to the cities that qualify.
+ */
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import FaqSchema from "@/components/FaqSchema.astro";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { serviceCategories } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+import { Check } from "lucide-react";
+
+export async function getStaticPaths() {
+  return serviceCategories
+    .filter((category) => cities.some((c) => matchBusinesses(c.slug, category).length >= 3))
+    .map((category) => ({
+      params: { industrySlug: category.industrySlug, categorySlug: category.slug },
+    }));
+}
+
+const { industrySlug, categorySlug } = Astro.params;
+const category = serviceCategories.find(
+  (c) => c.slug === categorySlug && c.industrySlug === industrySlug
+)!;
+const industry = industries.find((i) => i.slug === industrySlug)!;
+
+const qualifyingCities = cities
+  .map((city) => ({ city, count: matchBusinesses(city.slug, category).length }))
+  .filter((entry) => entry.count >= 3)
+  .sort((a, b) => b.count - a.count);
+
+const totalListings = qualifyingCities.reduce((n, entry) => n + entry.count, 0);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const pagePath = `/services/${industrySlug}/${categorySlug}/`;
+const crumbs = trail([
+  { name: "Services", path: "/services/" },
+  { name: industry.name, path: `/services/${industrySlug}/` },
+  { name: category.displayName },
+]);
+
+const title = `${category.displayName} in Oregon`;
+const description = `${category.shortDescription} ${totalListings} source-observed providers across ${qualifyingCities.length} Oregon cities.`;
+
+/**
+ * The category FAQ lives here, once, rather than on each of the city pages below —
+ * it answers questions about the category, not about any one city.
+ */
+const faqs = category.faqs;
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    url: `${siteUrl}${pagePath}`,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: qualifyingCities.length,
+      itemListElement: qualifyingCities.map(({ city }, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: `${category.displayName} in ${city.name}`,
+        item: `${siteUrl}${pagePath}${city.slug}/`,
+      })),
+    },
+  },
+  breadcrumbListSchema(crumbs, siteUrl),
+];
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={visibleTrail(crumbs)}
+    eyebrow={industry.name}
+    title={title}
+    tagline={`${totalListings} ${category.pluralName} across ${qualifyingCities.length} Oregon cities.`}
+    stats={[
+      { value: totalListings.toString(), label: "Qualified Listings" },
+      { value: qualifyingCities.length.toString(), label: "Cities" },
+    ]}
+  />
+
+  <section class="container mx-auto px-4 py-8">
+    <div class="rounded-lg p-6 border-l-4" style="background-color: var(--c-stone); border-color: var(--c-copper);">
+      <p class="text-lg leading-relaxed" style="color: var(--c-pine);">{category.tldr}</p>
+    </div>
+  </section>
+
+  {category.licenseRequired && category.licenseAuthority && (
+    <section class="container mx-auto px-4 pb-4">
+      <p class="text-sm" style="color: var(--c-river);">
+        Licensed trade in Oregon — verify current standing with the{" "}
+        {category.licenseUrl ? (
+          <a href={category.licenseUrl} rel="nofollow noopener" target="_blank" class="underline">
+            {category.licenseAuthority}
+          </a>
+        ) : (
+          category.licenseAuthority
+        )} before hiring.
+      </p>
+    </section>
+  )}
+
+  {category.sections.map((section) => (
+    <section class="container mx-auto px-4 py-10">
+      <h2 class="font-playfair text-3xl font-bold mb-6" style="color: var(--c-pine);">
+        {section.sectionTitle}
+      </h2>
+      <div class="prose max-w-none mb-8" style="color: var(--c-pine);">
+        <p>{section.body}</p>
+      </div>
+      <div class="rounded-lg p-6" style="background-color: var(--c-sky);">
+        <h3 class="font-inter text-lg font-semibold mb-4" style="color: var(--c-pine);">Key Takeaways</h3>
+        <ul class="space-y-3">
+          {section.takeaways.map((takeaway) => (
+            <li class="flex items-start gap-3">
+              <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--c-river)" }} />
+              <span style="color: var(--c-pine);">{takeaway}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))}
+
+  <section class="container mx-auto px-4 py-12">
+    <h2 class="font-playfair text-3xl font-bold mb-6" style="color: var(--c-pine);">
+      {category.displayName} by city
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {qualifyingCities.map(({ city, count }) => (
+        <a
+          href={`${pagePath}${city.slug}/`}
+          class="rounded-lg border p-5 transition-colors hover:border-current"
+          style="border-color: var(--c-stone); color: var(--c-pine);"
+        >
+          <span class="block font-inter text-lg font-semibold">{city.name}</span>
+          <span class="block text-sm" style="color: var(--c-sage);">
+            {count} qualified {count === 1 ? "listing" : "listings"} · {city.county} County
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {faqs.length > 0 && (
+    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+      <h2 class="font-playfair text-3xl font-bold mb-8" style="color: var(--c-pine);">
+        Questions about {category.pluralName}
+      </h2>
+      <div class="space-y-6 max-w-3xl">
+        {faqs.map((faq) => (
+          <div>
+            <h3 class="font-inter text-lg font-semibold mb-2" style="color: var(--c-pine);">
+              {faq.question}
+            </h3>
+            <p style="color: var(--c-sage);">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {faqs.length > 0 && <FaqSchema faqs={faqs} />}
+</SiteLayout>

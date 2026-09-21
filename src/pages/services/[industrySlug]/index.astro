@@ -1,0 +1,128 @@
+---
+/**
+ * Industry service hub — /services/{industry}/
+ *
+ * The breadcrumb trail on every service-category page names this level, so it has to
+ * exist. It lists the service categories in this industry that actually have cities
+ * meeting the publication threshold, which is what makes it a real page rather than
+ * a placeholder created to satisfy a link.
+ */
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { serviceCategories } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+
+export async function getStaticPaths() {
+  const withCategories = new Set(
+    serviceCategories
+      .filter((category) => cities.some((c) => matchBusinesses(c.slug, category).length >= 3))
+      .map((category) => category.industrySlug)
+  );
+  return industries
+    .filter((industry) => withCategories.has(industry.slug))
+    .map((industry) => ({ params: { industrySlug: industry.slug } }));
+}
+
+const { industrySlug } = Astro.params;
+const industry = industries.find((i) => i.slug === industrySlug)!;
+
+/** Categories in this industry, each with the cities that clear the threshold. */
+const categories = serviceCategories
+  .filter((category) => category.industrySlug === industrySlug)
+  .map((category) => ({
+    category,
+    cities: cities.filter((c) => matchBusinesses(c.slug, category).length >= 3),
+  }))
+  .filter((entry) => entry.cities.length > 0);
+
+const totalListings = categories.reduce(
+  (sum, { category, cities: cs }) =>
+    sum + cs.reduce((n, c) => n + matchBusinesses(c.slug, category).length, 0),
+  0
+);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+  { name: "Services", path: "/services/" },
+  { name: industry.name },
+]);
+
+const title = `${industry.name} Services in Oregon`;
+const description = `Browse ${categories.length} ${industry.name.toLowerCase()} service categories across ${cities.length} Oregon cities, selected through explicit provider-category policies.`;
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    url: `${siteUrl}/services/${industrySlug}/`,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: categories.length,
+      itemListElement: categories.map(({ category }, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: category.displayName,
+        item: `${siteUrl}/services/${industrySlug}/${category.slug}/`,
+      })),
+    },
+  },
+  breadcrumbListSchema(crumbs, siteUrl),
+];
+---
+
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={visibleTrail(crumbs)}
+    eyebrow="Oregon"
+    title={title}
+    tagline={`${categories.length} service categories drawn from ${totalListings} source-observed ${industry.name.toLowerCase()} records.`}
+    stats={[
+      { value: categories.length.toString(), label: "Service Categories" },
+      { value: totalListings.toString(), label: "Qualified Listings" },
+    ]}
+  />
+
+  <section class="container mx-auto px-4 py-14">
+    <h2 class="font-playfair text-3xl font-bold mb-3" style="color: var(--c-pine);">
+      {industry.name} categories
+    </h2>
+    <p class="mb-10 max-w-3xl" style="color: var(--c-sage);">
+      {industry.description} A category appears below only where at least three
+      source-observed providers in a city qualify under that category's selection policy.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {categories.map(({ category, cities: categoryCities }) => (
+        <article class="rounded-lg border p-6" style="border-color: var(--c-stone);">
+          <h3 class="font-inter text-xl font-semibold mb-2">
+            <a href={`/services/${industrySlug}/${category.slug}/`} style="color: var(--c-pine);">
+              {category.displayName}
+            </a>
+          </h3>
+          <p class="text-sm mb-4" style="color: var(--c-sage);">{category.shortDescription}</p>
+          {category.licenseRequired && category.licenseAuthority && (
+            <p class="text-xs mb-4" style="color: var(--c-river);">
+              Licensed trade — {category.licenseAuthority}
+            </p>
+          )}
+          <div class="flex flex-wrap gap-2">
+            {categoryCities.map((c) => (
+              <a
+                href={`/services/${industrySlug}/${category.slug}/${c.slug}/`}
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+                style="background-color: var(--c-sky); color: var(--c-pine);"
+              >
+                {c.name}
+              </a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

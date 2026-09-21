@@ -3,7 +3,7 @@ import type { City } from "@/data/cities";
 
 export const CityCard = ({ city }: { city: City }) => (
   <a
-    href={`/city/${city.slug}`}
+    href={`/city/${city.slug}/`}
     className="group relative rounded-xl overflow-hidden cursor-pointer shadow-soft hover:shadow-elegant transition-all duration-500 hover:-translate-y-1 bg-card block"
   >
     <div className="relative h-56 overflow-hidden bg-muted">

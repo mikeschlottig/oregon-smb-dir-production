@@ -4,7 +4,7 @@
     "title": "Carbon8",
     "address": "3201 Pacific Blvd SW, Albany, OR 97321",
     "phone": "(458) 2537466",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 16,
     "category": "Restaurant",
     "website": "https://www.carbon8soda.com/",
@@ -117,18 +117,6 @@
     "category": "Distillery",
     "website": "http://www.vivacityspirits.com/?utm_source=google-gmb-maps&utm_medium=gmb-website-button&utm_campaign=locl.io&utm_content=59d1d5d2-a9f1-41cb-9795-a1397c02ca50",
     "googleUrl": "https://www.google.com/maps/place/Vivacity+Spirits+LLC/@44.6309809,-123.2238552,12z/data=!4m11!1m3!2m2!1sCoffee+Shops+Albany+Oregon!6e5!3m6!1s0x54c0157b7b8009e9:0x79c35d8da249a5ec!8m2!3d44.6392607!4d-123.0940026!15sChpDb2ZmZWUgU2hvcHMgQWxiYW55IE9yZWdvblocIhpjb2ZmZWUgc2hvcHMgYWxiYW55IG9yZWdvbpIBCmRpc3RpbGxlcnmaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTUZwcE1VSk1XRlpXWW10U1MwMXROVVZhTWs1WVpWYzFVbVJIWXhBQuABAPoBBAgAECk!16s%2Fg%2F1thx8bgn?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
-    "claimed": true
-  },
-  {
-    "slug": "homegrown-oregon-weed-dispensary-albany",
-    "title": "Homegrown Oregon Weed Dispensary Albany",
-    "address": "921 SE 9th Ave, Albany, OR 97322",
-    "phone": "(541) 4972463",
-    "rating": 4.8,
-    "reviews": 447,
-    "category": "Cannabis store",
-    "website": "https://www.homegrownpnw.com/",
-    "googleUrl": "https://www.google.com/maps/place/Homegrown+Oregon+Weed+Dispensary+Albany/@44.6309809,-123.2238552,12z/data=!4m11!1m3!2m2!1sCoffee+Shops+Albany+Oregon!6e5!3m6!1s0x54c06d9613023703:0xe64387c4c7cfaab8!8m2!3d44.6326586!4d-123.092992!15sChpDb2ZmZWUgU2hvcHMgQWxiYW55IE9yZWdvblocIhpjb2ZmZWUgc2hvcHMgYWxiYW55IG9yZWdvbpIBDmNhbm5hYmlzX3N0b3JlmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5DTldKVU9FUjNFQUXgAQD6AQQIABA9!16s%2Fg%2F11hsn4n836?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
   },
   {
@@ -493,7 +481,7 @@
   },
   {
     "slug": "brick-mortar-caf",
-    "title": "Brick & Mortar Caf\u00e9",
+    "title": "Brick & Mortar Café",
     "address": "222 W 1st Ave STE 4, Albany, OR 97321",
     "phone": "(541) 7917845",
     "rating": 4.5,
@@ -952,7 +940,7 @@
     "title": "The Human Bean",
     "address": "952 Hill St SE, Albany, OR 97322",
     "phone": "(541) 9243831",
-    "rating": 4.0,
+    "rating": 4,
     "reviews": 27,
     "category": "Coffee shop",
     "website": "https://thehumanbean.com/",

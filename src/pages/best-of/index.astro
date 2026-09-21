@@ -1,27 +1,30 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { bestOfLists } from "@/data/content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ArrowRight, Trophy } from "lucide-react";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Best Of" },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Best Of — Oregon SMB Directory",
-    url: `${siteUrl}/best-of`,
+    url: `${siteUrl}/best-of/`,
     description: "Editorial ranking editions are paused while Oregon SMB Directory formalizes versioned methodology, evidence, and disclosure requirements.",
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Best Of", url: `${siteUrl}/best-of` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
-<SiteLayout title="Best Of — Oregon SMB Directory" schemas={schemas}>
+<SiteLayout title="Best Of — Oregon SMB Directory" schemas={schemas} noindex={bestOfLists.length === 0}>
   <section class="bg-muted pt-32 pb-16 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Editorial standards update</p>
       <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4">
         Best Of <span class="italic text-accent">Oregon</span>
@@ -37,7 +40,7 @@ const schemas = [
     <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
       {bestOfLists.map((b) => (
         <a
-          href={`/best-of/${b.slug}`}
+          href={`/best-of/${b.slug}/`}
           class="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
         >
           <div class="bg-gradient-warm px-7 py-6 text-white">

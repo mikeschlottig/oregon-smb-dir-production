@@ -4,7 +4,7 @@
     "title": "Dwell Street Market",
     "address": "626 SW 6th St, Grants Pass, OR 97526",
     "phone": "(458) 2504463",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 4,
     "category": "Furniture store",
     "website": "http://www.dwellhouse.com/",
@@ -16,7 +16,7 @@
     "title": "Bentwood Furniture Inc",
     "address": "310 NW Morgan Ln, Grants Pass, OR 97526",
     "phone": "(541) 4791641",
-    "rating": 5.0,
+    "rating": 5,
     "reviews": 1,
     "category": "Furniture maker",
     "website": "",
@@ -113,11 +113,23 @@
     "title": "Josephine Interiors & Market",
     "address": "125 SW G St, Grants Pass, OR 97526",
     "phone": "",
-    "rating": 4.0,
+    "rating": 4,
     "reviews": 4,
     "category": "Furniture store",
     "website": "https://shopjosephineinteriors.com/?fbclid=PAZXh0bgNhZW0CMTEAAabNxFqBSmetY9KnZir7_9eMEfGWJyB2u19Vk4DB2mn9Lzl0oJc389yWarM_aem_Aa0xCng3-m-FAPj4KOXEDzfrWHoeRUl_V483WEIj-DOrGq47MQ0r-GrZmVdBReWzUxf1zxNuuR3yoI50WTZ_pPX7",
     "googleUrl": "https://www.google.com/maps/place/Josephine+Interiors+%26+Market/@42.4352037,-123.4822202,12z/data=!4m10!1m2!2m1!1sFurniture+and+Mattress+Stores+Grants+Pass+Oregon!3m6!1s0x54c57b00593f486d:0xb051799cc71f1d65!8m2!3d42.4389237!4d-123.3278541!15sCjBGdXJuaXR1cmUgYW5kIE1hdHRyZXNzIFN0b3JlcyBHcmFudHMgUGFzcyBPcmVnb25aMiIwZnVybml0dXJlIGFuZCBtYXR0cmVzcyBzdG9yZXMgZ3JhbnRzIHBhc3Mgb3JlZ29ukgEPZnVybml0dXJlX3N0b3Jl4AEA!16s%2Fg%2F11y4hx0r7g?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "the-red-canary-mercantile",
+    "title": "The Red Canary Mercantile",
+    "address": "129 SE H St, Grants Pass, OR 97526",
+    "phone": "(541) 4790581",
+    "rating": 4.4,
+    "reviews": 25,
+    "category": "Thrift store",
+    "website": "",
+    "googleUrl": "https://www.google.com/maps/place/The+Red+Canary+Mercantile/@46.423669,-129.9427085,4z/data=!4m10!1m2!2m1!1sElectricians+Grants+Pass+Oregon!3m6!1s0x54c57bbecc847f61:0x742c876621a78a57!8m2!3d42.437841!4d-123.327009!15sCh9FbGVjdHJpY2lhbnMgR3JhbnRzIFBhc3MgT3JlZ29uWiEiH2VsZWN0cmljaWFucyBncmFudHMgcGFzcyBvcmVnb26SAQx0aHJpZnRfc3RvcmWaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTlZReVJrUmFWbGwwWVROV01VNXFWWGhSYlVwR1ZHNUNURlJ0WXhBQuABAPoBBAgAEDA!16s%2Fg%2F11j0rj0b08?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
   }
 ]

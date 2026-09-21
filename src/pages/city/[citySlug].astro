@@ -8,7 +8,8 @@ import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
 import { generateCitySeoContent } from "@/lib/seo-content";
-import { cityPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { cityPageSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getCityHubRelatedLinks } from "@/lib/link-graph";
 import { ChevronRight } from "lucide-react";
 
@@ -45,14 +46,13 @@ const allCityBusinesses = cityIndustriesWithListings.flatMap(ind => getBusinesse
 const seoContent = generateCitySeoContent(city, cityIndustriesWithListings, allCityBusinesses);
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: "Cities", url: `${siteUrl}/city/` },
-  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
-];
+const crumbs = trail([
+  { name: "Cities", path: "/city/" },
+  { name: city.name },
+]);
 const schemas = [
   ...cityPageSchema(city, cityIndustriesWithListings, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 
 // Compute related links for city hub page
@@ -63,11 +63,7 @@ const relatedLinks = getCityHubRelatedLinks({
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: "Cities", href: "/city/" },
-      { label: city.name }
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}
     title={city.name}
     tagline={city.tagline}

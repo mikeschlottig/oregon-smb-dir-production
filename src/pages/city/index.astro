@@ -6,7 +6,7 @@ import { CityCard } from "@/components/cards/CityCard";
 import { cities } from "@/data/cities";
 import { getBusinesses } from "@/data/businesses";
 import { industries } from "@/data/industries";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 
 const title = "Oregon Cities — Business Directory";
 const description = "Browse source-observed local business records across 12 Oregon cities and statewide regional collections.";
@@ -24,21 +24,17 @@ const cityStats = cities.map(city => {
 });
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: "Cities", url: `${siteUrl}/city` },
-];
+const crumbs = trail([
+  { name: "Cities" },
+]);
 const schemas = [
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: "Cities" }
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow="Oregon"
     title="Oregon Cities"
     tagline="Browse source-observed local business records across 12 Oregon cities."

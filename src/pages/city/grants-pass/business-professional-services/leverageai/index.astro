@@ -2,12 +2,13 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import RelatedLinks from "@/components/RelatedLinks.astro";
-import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+import { businessSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import { getBusinesses } from "@/data/businesses";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
-import { ChevronRight, ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2 } from "lucide-react";
+import { ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2 } from "lucide-react";
 
 const city = cities.find(c => c.slug === "grants-pass")!;
 const industry = industries.find(i => i.slug === "business-professional-services")!;
@@ -18,12 +19,11 @@ const title = "Leverage AI — AI Search & Digital Strategy in Grants Pass, OR";
 const description = "Leverage AI builds local demand systems for Oregon service businesses — AI search optimization, custom web design, and lead capture infrastructure. Based in Grants Pass, OR.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: "Grants Pass", url: `${siteUrl}/city/grants-pass` },
-  { name: "Business & Professional Services", url: `${siteUrl}/city/grants-pass/business-professional-services` },
-  { name: "Leverage AI", url: `${siteUrl}/city/grants-pass/business-professional-services/leverageai` },
-];
+const crumbs = trail([
+  { name: "Grants Pass", path: "/city/grants-pass/" },
+  { name: "Business & Professional Services", path: "/city/grants-pass/business-professional-services/" },
+  { name: "Leverage AI" },
+]);
 
 const schemas = [
   businessSchema({
@@ -39,7 +39,7 @@ const schemas = [
     claimed: false,
     verified: false,
   }, city, industry, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 
 const relatedLinks = getBusinessRelatedLinks({
@@ -56,12 +56,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&out
 
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: "Grants Pass", href: "/city/grants-pass" },
-      { label: "Business & Professional Services", href: "/city/grants-pass/business-professional-services" },
-      { label: "Leverage AI" }
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow="AI Search & Digital Strategy in Grants Pass, OR"
     title="Leverage AI"
     tagline="Local demand systems for Oregon service businesses — connecting visibility, website trust, lead capture, and response speed into one measurable growth engine."
@@ -239,7 +234,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&out
             {related.map((b) => (
               <li>
                 <a
-                  href={`/city/${city.slug}/${industry.slug}/${b.slug}`}
+                  href={`/city/${city.slug}/${industry.slug}/${b.slug}/`}
                   class="flex items-center justify-between gap-2 text-sm group"
                 >
                   <span class="text-foreground group-hover:text-accent transition-colors">
@@ -256,7 +251,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&out
             ))}
           </ul>
           <a
-            href={`/city/${city.slug}/${industry.slug}`}
+            href={`/city/${city.slug}/${industry.slug}/`}
             class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings

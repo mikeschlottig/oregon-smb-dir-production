@@ -11,6 +11,18 @@ interface Props {
   description?: string;
   image?: string;
   ogType?: "website" | "article";
+  /**
+   * Keep the URL reachable but out of the index. Used for sections that exist
+   * structurally but carry no publishable content yet — an empty section that ranks
+   * is worse than one that is simply not offered to the index.
+   */
+  noindex?: boolean;
+  /**
+   * "utility" marks contact / policy / accessibility pages. They are indexable and
+   * deliberately short: the build gate's word floor is a content-page rule and reads
+   * this attribute to know which pages it governs.
+   */
+  pageKind?: "content" | "utility";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schemas?: any[];
 }
@@ -20,6 +32,8 @@ const {
   description = publisher.description,
   image = "/og-default.jpg",
   ogType = "website",
+  noindex = false,
+  pageKind = "content",
   schemas,
 } = Astro.props;
 
@@ -42,6 +56,7 @@ const imageUrl = new URL(image, origin).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,7 +90,7 @@ const imageUrl = new URL(image, origin).toString();
     <meta name="twitter:image" content={imageUrl} />
     {schemas && schemas.length > 0 && <JsonLd data={schemas} />}
   </head>
-  <body>
+  <body data-page-kind={pageKind}>
     <div class="min-h-screen flex flex-col">
       <Navbar pathname={pathname} client:load />
       <main class="flex-1">

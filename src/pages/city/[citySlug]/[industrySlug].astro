@@ -9,14 +9,15 @@ import RelatedLinks from "@/components/RelatedLinks.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { getBusinesses } from "@/data/businesses";
-import { serviceCategories, getCategoriesByIndustry } from "@/data/serviceCategories";
+import { getCategoriesByIndustry } from "@/data/serviceCategories";
 import { matchBusinesses } from "@/data/matchBusinesses";
 import { generateIndustrySeoContent, generateIndustryFaqs } from "@/lib/seo-content";
-import { industryPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { industryPageSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+import { pageCount, pageSlice as slicePage } from "@/lib/paginate";
 import { getCityIndustryRelatedLinks } from "@/lib/link-graph";
 import { ChevronRight } from "lucide-react";
 
-export const PER_PAGE = 15;
 
 export async function getStaticPaths() {
   const paths: any[] = [];
@@ -39,8 +40,8 @@ const serviceCategoriesForIndustry = getCategoriesByIndustry(industry.slug);
 const popularServices = serviceCategoriesForIndustry.filter(
   (cat) => matchBusinesses(city.slug, cat).length >= 3
 );
-const totalPages = Math.max(1, Math.ceil(businesses.length / PER_PAGE));
-const pageSlice = businesses.slice(0, PER_PAGE);
+const totalPages = pageCount(businesses.length);
+const pageSlice = slicePage(businesses, 1);
 const baseUrl = `/city/${city.slug}/${industry.slug}/`;
 
 // Calculate stats for TldrCard
@@ -67,14 +68,13 @@ const seoContent = generateIndustrySeoContent(city, industry, businesses);
 const faqs = generateIndustryFaqs(city, industry, businesses);
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: city.name, url: `${siteUrl}/city/${city.slug}/` },
-  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}/` },
-];
+const crumbs = trail([
+  { name: city.name, path: `/city/${city.slug}/` },
+  { name: industry.name },
+]);
 const schemas = [
   ...industryPageSchema(city, industry, businesses, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 
 // Compute related links for city×industry page
@@ -86,11 +86,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: city.name, href: `/city/${city.slug}/` },
-      { label: industry.name }
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow={`${city.name}, OR`}
     title={`${industry.name} in ${city.name}`}
     tagline={`${businesses.length} source-observed ${industry.name.toLowerCase()} records serving ${city.name}, Oregon.`}
@@ -105,7 +101,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
           We're actively curating {industry.name.toLowerCase()} records in {city.name}. Want to request a listing review?
         </p>
         <a
-          href={`/contact?city=${city.slug}&industry=${industry.slug}`}
+          href={`/contact/?city=${city.slug}&industry=${industry.slug}`}
           class="inline-block bg-primary text-primary-foreground px-6 py-3 rounded font-medium hover:bg-primary/90 transition-colors"
         >
           List Your Business
@@ -168,7 +164,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
       <div class="flex flex-wrap gap-3">
         {popularServices.map((cat) => (
           <a
-            href={`/services/${industry.slug}/${cat.slug}/${city.slug}`}
+            href={`/services/${industry.slug}/${cat.slug}/${city.slug}/`}
             class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors hover:opacity-80"
             style="background-color: var(--c-river); color: white;"
           >

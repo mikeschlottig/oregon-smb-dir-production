@@ -37,7 +37,7 @@ export const Hero = () => (
           Explore Cities
         </a>
         <a
-          href="/contact"
+          href="/contact/"
           className="bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/30 text-white px-8 py-3.5 rounded font-medium transition-all"
         >
           List Your Business

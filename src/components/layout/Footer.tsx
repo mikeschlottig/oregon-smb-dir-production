@@ -26,7 +26,7 @@ export const Footer = () => {
               {publisher.description}
             </p>
             <div className="flex flex-col gap-1.5 text-sm opacity-60">
-              <a href="/contact" className="hover:text-accent transition-colors">
+              <a href="/contact/" className="hover:text-accent transition-colors">
                 Contact us
               </a>
               <a href={`mailto:${publisher.supportEmail}`} className="hover:text-accent transition-colors">
@@ -45,7 +45,7 @@ export const Footer = () => {
             <ul className="space-y-2 text-sm opacity-80">
               {cities.map((c) => (
                 <li key={c.slug}>
-                  <a href={`/city/${c.slug}`} className="hover:text-accent transition-colors">
+                  <a href={`/city/${c.slug}/`} className="hover:text-accent transition-colors">
                     {c.name}
                   </a>
                 </li>
@@ -72,12 +72,12 @@ export const Footer = () => {
               {right.map((i) => (
                 <li key={i.slug}>{i.name}</li>
               ))}
-              <li className="pt-2"><a href="/blog" className="hover:text-accent transition-colors">Blog</a></li>
-              <li><a href="/research" className="hover:text-accent transition-colors">Research Reports</a></li>
-              <li><a href="/best-of" className="hover:text-accent transition-colors">Best Of</a></li>
+              <li className="pt-2"><a href="/blog/" className="hover:text-accent transition-colors">Blog</a></li>
+              <li><a href="/research/" className="hover:text-accent transition-colors">Research Reports</a></li>
+              <li><a href="/best-of/" className="hover:text-accent transition-colors">Best Of</a></li>
               <li><a href={publisher.editorialPolicyUrl} className="hover:text-accent transition-colors">Editorial &amp; Data Quality</a></li>
               <li><a href="/accessibility/" className="hover:text-accent transition-colors">Accessibility</a></li>
-              <li><a href="/contact" className="hover:text-accent transition-colors">Contact</a></li>
+              <li><a href="/contact/" className="hover:text-accent transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>

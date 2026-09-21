@@ -1,8 +1,10 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { pageCount, pageSlice as slicePage } from "@/lib/paginate";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getCollection } from "astro:content";
-import { breadcrumbSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -10,7 +12,7 @@ export async function getStaticPaths() {
   const posts = (await getCollection("blog")).sort(
     (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
   );
-  const totalPages = Math.max(1, Math.ceil(posts.length / PER_PAGE));
+  const totalPages = pageCount(posts.length, PER_PAGE);
   const paths = [];
   for (let i = 2; i <= totalPages; i++) {
     paths.push({
@@ -18,7 +20,7 @@ export async function getStaticPaths() {
       props: {
         currentPage: i,
         totalPages,
-        pageSlice: posts.slice((i - 1) * PER_PAGE, i * PER_PAGE),
+        pageSlice: slicePage(posts, i, PER_PAGE),
       },
     });
   }
@@ -35,23 +37,25 @@ const formatDate = (iso: string) => {
 };
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Blog", path: "/blog/" },
+    { name: `Page ${currentPage}` },
+]);
+
 const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `Stories from the I-5 — Page ${currentPage}`,
-    url: `${siteUrl}/blog/${currentPage}/`,
+    url: `${siteUrl}/blog/page/${currentPage}/`,
   },
-  breadcrumbSchema([
-    { name: "Home", url: siteUrl },
-    { name: "Blog", url: `${siteUrl}/blog` },
-    { name: `Page ${currentPage}`, url: `${siteUrl}/blog/${currentPage}/` },
-  ]),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout title={`Stories from the I-5 — Page ${currentPage}`} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">The Blog · Page {currentPage}</p>
       <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">Stories from the I-5</h1>
     </div>

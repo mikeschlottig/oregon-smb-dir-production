@@ -1,7 +1,10 @@
 ---
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { getCollection, render } from "astro:content";
-import { blogPostSchema, breadcrumbSchema } from "@/lib/schema";
+import { cities } from "@/data/cities";
+import { blogPostSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { ChevronRight, Calendar, Clock, User, MapPin } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -24,15 +27,21 @@ const formatDate = (iso: string) => {
 
 const tocHeadings = headings.filter((h: any) => h.depth === 2 || h.depth === 3);
 
+/**
+ * Most blog posts cover small I-5 towns that have no directory page — only the twelve
+ * cities in `cities` do. Linking the byline town unconditionally produced 40 dead
+ * internal links, so the label stays plain text unless the page actually exists.
+ */
+const hasCityPage = cities.some((c) => c.slug === post.data.citySlug);
+
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: "Blog", url: `${siteUrl}/blog` },
-  { name: post.data.title, url: `${siteUrl}/blog/${post.id}` },
-];
+const crumbs = trail([
+  { name: "Blog", path: "/blog/" },
+  { name: post.data.title },
+]);
 const schemas = [
   blogPostSchema(post, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
+  breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
 <SiteLayout
@@ -42,13 +51,7 @@ const schemas = [
 >
   <article class="pt-32 pb-20 px-4">
     <div class="container mx-auto max-w-3xl">
-      <nav class="flex items-center gap-2 text-muted-foreground text-sm mb-8 flex-wrap">
-        <a href="/" class="hover:text-foreground">Home</a>
-        <ChevronRight className="w-4 h-4" />
-        <a href="/blog/" class="hover:text-foreground">Blog</a>
-        <ChevronRight className="w-4 h-4" />
-        <span class="text-foreground line-clamp-1">{post.data.title}</span>
-      </nav>
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
 
       <p class="text-accent text-xs font-medium uppercase tracking-widest mb-4">{post.data.category}</p>
       <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-6">{post.data.title}</h1>
@@ -59,9 +62,15 @@ const schemas = [
         {post.data.date && <span class="inline-flex items-center gap-2"><Calendar className="w-4 h-4 text-accent" />{formatDate(post.data.date)}</span>}
         {post.data.readTime && <span class="inline-flex items-center gap-2"><Clock className="w-4 h-4 text-accent" />{post.data.readTime}</span>}
         {post.data.city && (
-          <a href={`/city/${post.data.citySlug}/`} class="inline-flex items-center gap-2 hover:text-foreground">
-            <MapPin className="w-4 h-4 text-accent" />{post.data.city}
-          </a>
+          hasCityPage ? (
+            <a href={`/city/${post.data.citySlug}/`} class="inline-flex items-center gap-2 hover:text-foreground">
+              <MapPin className="w-4 h-4 text-accent" />{post.data.city}
+            </a>
+          ) : (
+            <span class="inline-flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-accent" />{post.data.city}
+            </span>
+          )
         )}
       </div>
 

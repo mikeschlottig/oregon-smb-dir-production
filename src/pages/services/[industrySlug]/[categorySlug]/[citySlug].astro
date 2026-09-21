@@ -7,7 +7,8 @@ import { industries } from "@/data/industries";
 import type { Business } from "@/data/businesses";
 import { serviceCategories } from "@/data/serviceCategories";
 import { matchBusinesses, matchBusinessesWithQualification } from "@/data/matchBusinesses";
-import { servicePageSchema, breadcrumbSchema, faqPageSchema } from "@/lib/schema";
+import { servicePageSchema, faqPageSchema } from "@/lib/schema";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { Check } from "lucide-react";
 
 export async function getStaticPaths() {
@@ -67,28 +68,32 @@ const relatedCategoriesForCity = serviceCategories.filter((c) => {
   return matchBusinesses(city.slug, c).length >= 3;
 });
 
-// FAQ content: category FAQs + 1 data-backed local FAQ
-const localFaq = {
-  question: `How many ${category.pluralName} serve ${city.name}?`,
-  answer: `${city.name} has ${businesses.length} ${category.pluralName} in this directory collection. Results qualify through a direct match to the source-observed provider category under selection policy service-intent:${category.slug} version 1.`,
-};
-const allFaqs = [...category.faqs, localFaq];
+/**
+ * Only the city-specific question lives here. The category's own FAQ answers are
+ * identical for all twelve cities, so they belong on the category hub
+ * (/services/{industry}/{category}/) and are linked from it — repeating them here
+ * would put the same answer text on a dozen URLs.
+ */
+const localFaqs = [
+  {
+    question: `How many ${category.pluralName} serve ${city.name}?`,
+    answer: `${city.name} has ${businesses.length} ${category.pluralName} in this directory collection. Results qualify through a direct match to the source-observed provider category under selection policy service-intent:${category.slug} version 1.`,
+  },
+];
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
-const pageUrl = `${siteUrl}/services/${industrySlug}/${categorySlug}/${citySlug}`;
 
-const breadcrumbItems = [
-  { name: "Home", url: siteUrl },
-  { name: "Services", url: `${siteUrl}/services` },
-  { name: industry.name, url: `${siteUrl}/services/${industrySlug}` },
-  { name: category.displayName, url: `${siteUrl}/services/${industrySlug}/${categorySlug}` },
-  { name: city.name, url: pageUrl },
-];
+const crumbs = trail([
+  { name: "Services", path: "/services/" },
+  { name: industry.name, path: `/services/${industrySlug}/` },
+  { name: category.displayName, path: `/services/${industrySlug}/${categorySlug}/` },
+  { name: city.name },
+]);
 
 const schemas = [
   ...servicePageSchema(city, category, industry, businesses, siteUrl),
-  breadcrumbSchema(breadcrumbItems),
-  faqPageSchema(allFaqs),
+  breadcrumbListSchema(crumbs, siteUrl),
+  faqPageSchema(localFaqs),
 ];
 
 const title = `${category.displayName} in ${city.name}, Oregon`;
@@ -103,13 +108,7 @@ const tldrStats = [
 
 <SiteLayout title={title} description={description} schemas={schemas}>
   <TldrCard
-    breadcrumb={[
-      { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
-      { label: industry.name, href: `/services/${industrySlug}` },
-      { label: category.displayName, href: `/services/${industrySlug}/${categorySlug}` },
-      { label: city.name },
-    ]}
+    breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}
     title={title}
     tagline={`${businesses.length} ${category.pluralName} selected through source-observed provider categories.`}
@@ -182,7 +181,7 @@ const tldrStats = [
       <div class="flex flex-wrap gap-3">
         {nearbyCities.map((nearbyCity) => (
           <a
-            href={`/services/${industrySlug}/${categorySlug}/${nearbyCity.slug}`}
+            href={`/services/${industrySlug}/${categorySlug}/${nearbyCity.slug}/`}
             class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors"
             style="background-color: var(--c-sky); color: var(--c-pine);"
           >
@@ -202,7 +201,7 @@ const tldrStats = [
       <div class="flex flex-wrap gap-3">
         {relatedCategoriesForCity.map((relCat) => (
           <a
-            href={`/services/${industrySlug}/${relCat.slug}/${city.slug}`}
+            href={`/services/${industrySlug}/${relCat.slug}/${city.slug}/`}
             class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors"
             style="background-color: var(--c-river); color: white;"
           >
@@ -216,10 +215,10 @@ const tldrStats = [
   <!-- FAQ -->
   <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
     <h2 class="font-playfair text-3xl font-bold mb-8" style="color: var(--c-pine);">
-      Frequently Asked Questions
+      {category.displayName} in {city.name}
     </h2>
     <div class="space-y-6">
-      {allFaqs.map((faq) => (
+      {localFaqs.map((faq) => (
         <div class="rounded-lg p-6" style="background-color: white; border: 1px solid var(--c-border);">
           <h3 class="font-inter text-lg font-semibold mb-3" style="color: var(--c-pine);">
             {faq.question}
@@ -228,6 +227,11 @@ const tldrStats = [
         </div>
       ))}
     </div>
+    <p class="mt-6 text-sm" style="color: var(--c-sage);">
+      General questions about {category.pluralName} — licensing, what to ask, how to
+      compare quotes — are answered on the
+      <a href={`/services/${industrySlug}/${categorySlug}/`} class="underline">{category.displayName} overview</a>.
+    </p>
   </section>
 
   <!-- License Note -->

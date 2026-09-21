@@ -7,7 +7,7 @@ import { industries } from "@/data/industries";
 import type { Business } from "@/data/businesses";
 import { serviceCategories } from "@/data/serviceCategories";
 import { matchBusinesses, matchBusinessesWithQualification } from "@/data/matchBusinesses";
-import { servicePageSchema, faqPageSchema } from "@/lib/schema";
+import { servicePageSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { Check } from "lucide-react";
 
@@ -93,7 +93,6 @@ const crumbs = trail([
 const schemas = [
   ...servicePageSchema(city, category, industry, businesses, siteUrl),
   breadcrumbListSchema(crumbs, siteUrl),
-  faqPageSchema(localFaqs),
 ];
 
 const title = `${category.displayName} in ${city.name}, Oregon`;
@@ -223,7 +222,7 @@ const tldrStats = [
           <h3 class="font-inter text-lg font-semibold mb-3" style="color: var(--c-pine);">
             {faq.question}
           </h3>
-          <p style="color: var(--c-sage);">{faq.answer}</p>
+          <p data-faq-answer style="color: var(--c-sage);">{faq.answer}</p>
         </div>
       ))}
     </div>

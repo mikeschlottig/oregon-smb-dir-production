@@ -8,7 +8,6 @@
  */
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
-import FaqSchema from "@/components/FaqSchema.astro";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { serviceCategories } from "@/data/serviceCategories";
@@ -162,12 +161,11 @@ const schemas = [
             <h3 class="font-inter text-lg font-semibold mb-2" style="color: var(--c-pine);">
               {faq.question}
             </h3>
-            <p style="color: var(--c-sage);">{faq.answer}</p>
+            <p data-faq-answer style="color: var(--c-sage);">{faq.answer}</p>
           </div>
         ))}
       </div>
     </section>
   )}
 
-  {faqs.length > 0 && <FaqSchema faqs={faqs} />}
 </SiteLayout>

@@ -2,7 +2,6 @@
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import SeoTextBlock from "@/components/SeoTextBlock.astro";
-import FaqSchema from "@/components/FaqSchema.astro";
 import BusinessFilterGrid from "@/components/BusinessFilterGrid";
 import Pagination from "@/components/Pagination.astro";
 import RelatedLinks from "@/components/RelatedLinks.astro";
@@ -69,6 +68,7 @@ const faqs = generateIndustryFaqs(city, industry, businesses);
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
+  { name: "Cities", path: "/city/" },
   { name: city.name, path: `/city/${city.slug}/` },
   { name: industry.name },
 ]);
@@ -141,7 +141,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
               </svg>
             </span>
           </summary>
-          <p class="mt-3 text-sm leading-relaxed" style="color: var(--c-pine);">
+          <p data-faq-answer class="mt-3 text-sm leading-relaxed" style="color: var(--c-pine);">
             {faq.answer}
           </p>
         </details>
@@ -150,7 +150,6 @@ const relatedLinks = getCityIndustryRelatedLinks({
   </section>
 
   <!-- FAQPage JSON-LD -->
-  <FaqSchema faqs={faqs} />
 
   <!-- Popular Services Section -->
   {popularServices.length > 0 && (

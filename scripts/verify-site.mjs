@@ -70,7 +70,7 @@ function textOf(node) {
   return out;
 }
 
-function textOfVisible(node) {
+function textOfVisible(node, { excludeFurniture = false } = {}) {
   let out = "";
   const skip = new Set(["script", "style", "noscript", "template"]);
   const rec = (n) => {
@@ -79,6 +79,15 @@ function textOfVisible(node) {
       return;
     }
     if (skip.has(n.tagName)) return;
+    // Navigation, pagination and search controls are page furniture. They repeat on
+    // every page, so counting them towards a content floor lets a page meet the floor
+    // without saying anything — which is exactly how a paginated tail page passed.
+    if (excludeFurniture) {
+      if (n.tagName === "nav" || n.tagName === "form") return;
+      const role = attr(n, "role");
+      if (role === "navigation" || role === "search") return;
+      if (attr(n, "data-furniture") !== undefined) return;
+    }
     for (const c of childrenOf(n)) rec(c);
   };
   rec(node);
@@ -252,6 +261,7 @@ for (const extra of ["og-default.jpg", "favicon.ico", "sitemap-index.xml", "site
 
 const faqGroups = new Map(); // whole-set hash -> [pages]
 const faqAnswers = new Map(); // single answer text -> [pages]
+const faqFrames = new Map(); // answer with data masked -> count
 const noindexPages = new Set();
 const wordCounts = [];
 const typeCounts = new Map();
@@ -347,29 +357,33 @@ for (const file of files) {
     }
   }
 
-  // --- FAQ
-  for (const s of schemas.filter((x) => x?.["@type"] === "FAQPage")) {
-    const me = s.mainEntity;
-    if (!Array.isArray(me) || me.length === 0) {
-      fail("C11", file, "FAQPage mainEntity empty");
-      continue;
-    }
+  // --- FAQ (read from the rendered page, not from FAQPage markup)
+  //
+  // Google deprecated the FAQ rich result on 2026-05-07 and removed its documentation
+  // on 2026-06-12, so the site no longer emits FAQPage. The questions and answers are
+  // still on the page and still have to be unique, so the check reads what a reader
+  // actually sees: <p data-faq-answer>.
+  const faqNodes = [];
+  for (const n of walk(doc)) {
+    if (attr(n, "data-faq-answer") !== undefined) faqNodes.push(n);
+  }
+  if (faqNodes.length > 0) {
     const pairs = [];
-    for (const q of me) {
-      const name = q?.name;
-      const text = q?.acceptedAnswer?.text;
-      if (q?.["@type"] !== "Question") fail("C11", file, "FAQ entry is not a Question", q?.["@type"]);
-      if (typeof name !== "string" || !name.trim()) fail("C11", file, "FAQ question has no name");
-      if (typeof text !== "string" || !text.trim()) fail("C11", file, "FAQ answer has no text");
-      pairs.push(`${name}\u0000${text}`);
-      // Answer-level, not set-level: two pages sharing one answer is the duplicate
-      // content problem, even when the rest of their FAQ differs.
-      if (typeof text === "string" && text.trim()) {
-        const key = text.trim();
-        if (!faqAnswers.has(key)) faqAnswers.set(key, []);
-        const seen = faqAnswers.get(key);
-        if (!seen.includes(pagePath)) seen.push(pagePath);
+    for (const node of faqNodes) {
+      const text = textOfVisible(node).replace(/\s+/g, " ").trim();
+      if (!text) {
+        fail("C11", file, "FAQ answer element is empty");
+        continue;
       }
+      pairs.push(text);
+      if (!faqAnswers.has(text)) faqAnswers.set(text, []);
+      const seen = faqAnswers.get(text);
+      if (!seen.includes(pagePath)) seen.push(pagePath);
+
+      // Frame = the answer with its data masked out.
+      const frame = text.replace(/\d[\d,.]*/g, "#").replace(/\b[A-Z][a-z]+\b/g, "X");
+      if (!faqFrames.has(frame)) faqFrames.set(frame, 0);
+      faqFrames.set(frame, faqFrames.get(frame) + 1);
     }
     const hash = pairs.join("\u0001");
     if (!faqGroups.has(hash)) faqGroups.set(hash, []);
@@ -377,7 +391,9 @@ for (const file of files) {
   }
 
   // --- links
-  if (!isErrorPage && !isRedirectStub) {
+  // Redirect stubs are checked too: their whole purpose is one link, and a stub
+  // pointing at a non-canonical path turns a single redirect into a chain.
+  if (!isErrorPage) {
     for (const n of walk(doc)) {
       if (n.tagName !== "a") continue;
       const href = attr(n, "href");
@@ -409,26 +425,60 @@ for (const file of files) {
   }
 
   // --- required fields by @type
-  for (const s of schemas) {
-    const t = s?.["@type"];
+  //
+  // Walks every typed node in every block, not just the roots. The site's ratings and
+  // business objects live inside CollectionPage.mainEntity.itemListElement[].item; a
+  // root-only loop validated none of them.
+  const typedNodes = [];
+  const collectTyped = (node, depth) => {
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node)) {
+      for (const n of node) collectTyped(n, depth);
+      return;
+    }
+    if (typeof node["@type"] === "string") typedNodes.push({ node, depth });
+    for (const v of Object.values(node)) collectTyped(v, depth + 1);
+  };
+  for (const root of schemas) collectTyped(root, 0);
+
+  for (const { node: s, depth } of typedNodes) {
+    const t = s["@type"];
+    const where = depth === 0 ? t : `nested ${t}`;
     const need = (cond, what) => {
-      if (!cond) fail("C14", file, `${t} is missing ${what}`);
+      if (!cond) fail("C14", file, `${where} is missing ${what}`);
     };
-    // A root node without @context is not read as schema.org at all.
-    const ctx = s?.["@context"];
-    const ctxOk =
-      ctx === "https://schema.org" ||
-      ctx === "http://schema.org" ||
-      (Array.isArray(ctx) && ctx.includes("https://schema.org")) ||
-      (ctx && typeof ctx === "object" && !Array.isArray(ctx));
-    if (!ctxOk) fail("C14", file, `${t} root node has no usable @context`, JSON.stringify(ctx));
+
+    // Only a root node needs @context; nested nodes inherit it.
+    if (depth === 0) {
+      const ctx = s["@context"];
+      const ctxOk =
+        ctx === "https://schema.org" ||
+        ctx === "http://schema.org" ||
+        (Array.isArray(ctx) && ctx.includes("https://schema.org")) ||
+        (ctx && typeof ctx === "object" && !Array.isArray(ctx));
+      if (!ctxOk) fail("C14", file, `${t} root node has no usable @context`, JSON.stringify(ctx));
+    }
+
     if (t === "LocalBusiness") {
       need(typeof s.name === "string" && s.name.trim(), "name");
-      if (s.address) {
-        need(s.address.addressLocality, "address.addressLocality");
-        need(s.address.addressRegion, "address.addressRegion");
-        need(s.address.addressCountry, "address.addressCountry");
+      if (typeof s.url === "string" && !s.url.startsWith(ORIGIN)) {
+        fail("C14", file, `${where} url is off-origin`, s.url);
       }
+    } else if (t === "PostalAddress") {
+      need(typeof s.addressLocality === "string" && s.addressLocality.trim(), "addressLocality");
+      need(typeof s.addressRegion === "string" && s.addressRegion.trim(), "addressRegion");
+      need(typeof s.addressCountry === "string" && s.addressCountry.trim(), "addressCountry");
+      // streetAddress is the street line. If it still carries the locality, region and
+      // ZIP, the address was never split and the other properties merely repeat it.
+      if (typeof s.streetAddress === "string" && /,\s*[A-Z]{2}\s+\d{5}(-\d{4})?$/.test(s.streetAddress.trim())) {
+        fail("C14", file, `${where}.streetAddress still contains locality/region/postal code`, s.streetAddress);
+      }
+    } else if (t === "AggregateRating") {
+      const v = Number(s.ratingValue);
+      const c = Number(s.reviewCount);
+      if (!(v >= 1 && v <= 5)) fail("C14", file, `${where}.ratingValue out of range`, s.ratingValue);
+      if (!(Number.isInteger(c) && c >= 1)) fail("C14", file, `${where}.reviewCount is not a positive integer`, s.reviewCount);
+      if (!s.itemReviewed && depth === 0) fail("C14", file, "root AggregateRating has no itemReviewed");
     } else if (t === "BlogPosting") {
       need(typeof s.headline === "string" && s.headline.trim(), "headline");
       need(typeof s.datePublished === "string" && s.datePublished.trim(), "datePublished");
@@ -442,35 +492,28 @@ for (const file of files) {
     } else if (t === "Report") {
       need(typeof s.name === "string" && s.name.trim(), "name");
       need(typeof s.url === "string" && s.url.startsWith(ORIGIN), "an on-origin url");
-    } else if (t === "CollectionPage" || t === "WebPage") {
+    } else if (t === "CollectionPage" || (t === "WebPage" && depth === 0)) {
       need(typeof s.name === "string" && s.name.trim(), "name");
-      // A page's own schema must name the page it is on. A URL that points at a
-      // different route — or at one that does not exist — describes another page.
       if (typeof s.url === "string" && s.url !== pageUrl) {
         fail("C14", file, `${t}.url is not this page's URL`, s.url);
       } else {
         need(typeof s.url === "string", "url");
       }
-      const list = s.mainEntity?.itemListElement;
+    } else if (t === "ItemList") {
+      const list = s.itemListElement;
       if (Array.isArray(list)) {
-        if (s.mainEntity.numberOfItems !== list.length) {
-          fail("C14", file, "CollectionPage numberOfItems disagrees with the list length", `${s.mainEntity.numberOfItems} vs ${list.length}`);
+        if (s.numberOfItems !== list.length) {
+          fail("C14", file, "ItemList numberOfItems disagrees with the list length", `${s.numberOfItems} vs ${list.length}`);
         }
         list.forEach((li, i) => {
-          if (li.position !== i + 1) fail("C14", file, "CollectionPage ListItem position out of order", li.position);
+          if (li?.position !== i + 1) fail("C14", file, "ItemList ListItem position out of order", li?.position);
         });
+      } else {
+        fail("C14", file, "ItemList has no itemListElement array");
       }
     } else if (t === "Organization" || t === "WebSite") {
       need(typeof s.name === "string" && s.name.trim(), "name");
-      need(typeof s.url === "string" && s.url.startsWith(ORIGIN), "an on-origin url");
-    }
-    // AggregateRating is emitted nested; check it wherever it appears.
-    const ar = s?.aggregateRating;
-    if (ar) {
-      const v = Number(ar.ratingValue);
-      const c = Number(ar.reviewCount);
-      if (!(v >= 1 && v <= 5)) fail("C14", file, "aggregateRating.ratingValue out of range", ar.ratingValue);
-      if (!(Number.isInteger(c) && c >= 1)) fail("C14", file, "aggregateRating.reviewCount is not a positive integer", ar.reviewCount);
+      if (depth === 0) need(typeof s.url === "string" && s.url.startsWith(ORIGIN), "an on-origin url");
     }
   }
 
@@ -483,7 +526,7 @@ for (const file of files) {
     if (!main) {
       fail("C13", file, "page has no <main> element to measure");
     } else {
-      const wc = wordCount(textOfVisible(main));
+      const wc = wordCount(textOfVisible(main, { excludeFurniture: true }));
       wordCounts.push({ page: urlPathFor(file), words: wc });
       if (wc < MIN_WORDS) fail("C13", file, `main content below ${MIN_WORDS} words`, wc);
     }
@@ -565,6 +608,9 @@ const report = {
   sitemapUrls: sitemapUrls.length,
   faqDuplicateGroups: dupFaq.length,
   faqDuplicateAnswers: dupAnswers.length,
+  faqAnswers: faqAnswers.size,
+  faqDistinctFrames: faqFrames.size,
+  faqLargestFrame: Math.max(0, ...faqFrames.values()),
   faqLargestGroup: Math.max(0, ...dupFaq.map(([, p]) => p.length)),
   failureCounts: byCheck,
   totalFailures: failures.length,
@@ -579,6 +625,7 @@ const line = (k, v) => console.log(`  ${k.padEnd(26)} ${v}`);
 console.log(`\nverify-site — ${files.length} pages, ${ldBlocks} JSON-LD blocks`);
 line("word count p0/p5/p50", `${report.wordDistribution.p0} / ${report.wordDistribution.p05} / ${report.wordDistribution.p50}`);
 line("FAQ duplicate groups", `${dupFaq.length} (largest: ${report.faqLargestGroup} pages)`);
+line("FAQ answers / frames", `${faqAnswers.size} answers across ${faqFrames.size} sentence frames (largest frame: ${report.faqLargestFrame})`);
 console.log("\n  failures by check:");
 const LABEL = {
   C01: "JSONLD_PARSE", C02: "BREADCRUMB_PRESENT", C03: "BREADCRUMB_SHAPE",

@@ -20,6 +20,7 @@ const description = "Daley Organics is a premium organic soil, compost, and fert
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
+  { name: "Cities", path: "/city/" },
   { name: "Grants Pass", path: "/city/grants-pass/" },
   { name: "Retail & Shopping", path: "/city/grants-pass/retail-shopping/" },
   { name: "Daley Organics" },

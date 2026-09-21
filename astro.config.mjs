@@ -22,8 +22,11 @@ const emptyIndustryPaths = new Set(
 export default defineConfig({
   site: "https://oregonsmbdirectory.com",
   redirects: {
+    // Target carries the trailing slash. Without it, Cloudflare Workers static assets
+    // (html_handling defaults to auto-trailing-slash) answers the slashless path with
+    // a 307 to the slashed one, turning one redirect into a two-hop chain.
     "/research/oregon-law-firm-ai-search-report-1":
-      "/research/oregon-law-firm-ai-search-report",
+      "/research/oregon-law-firm-ai-search-report/",
   },
   integrations: [
     react(),

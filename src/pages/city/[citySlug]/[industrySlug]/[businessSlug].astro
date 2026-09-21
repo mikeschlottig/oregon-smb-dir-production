@@ -87,9 +87,44 @@ const stats = [
   { value: verificationLabel, label: "Record status" }
 ];
 
+/**
+ * Where this listing sits among its peers, stated in numbers drawn from this city and
+ * industry. A business page is otherwise a name, an address and a generated sentence —
+ * legitimately short, but short enough that the class as a whole sat within a few words
+ * of the content floor. This is the one thing a directory can say about a listing that
+ * no other page on the site says.
+ */
+const peers = getBusinesses(city.slug, industry.slug);
+const ratedPeers = peers.filter(
+  (b): b is typeof b & { rating: number } => typeof b.rating === "number"
+);
+const sameCategory = business.category
+  ? peers.filter((b) => b.category === business.category)
+  : [];
+const betterRated =
+  typeof business.rating === "number"
+    ? ratedPeers.filter((b) => b.rating > business.rating).length
+    : null;
+
+const peerContext = [
+  `${business.title} is one of ${peers.length} ${industry.name.toLowerCase()} record${peers.length === 1 ? "" : "s"} the directory holds for ${city.name}, ${city.county} County.`,
+  business.category && sameCategory.length > 1
+    ? `${sameCategory.length} of those share the same source-observed provider category, ${business.category.toLowerCase()}.`
+    : business.category
+      ? `It is the only ${city.name} record in this industry filed under ${business.category.toLowerCase()}.`
+      : "",
+  typeof business.rating === "number" && ratedPeers.length > 1
+    ? `${ratedPeers.length} of the ${peers.length} carry a rating that clears the publication gate; ${betterRated} of them rate higher than this one${observationDate ? `, measured against source records observed through ${observationDate}` : ""}.`
+    : `Ratings are published only where the value, review count, observation date and record identity agree with the source evidence.`,
+  `Details here are source-observed rather than owner-confirmed, so confirm hours, service area and pricing with the business before relying on them.`,
+]
+  .filter(Boolean)
+  .join(" ");
+
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const businessPath = getBusinessPathSlug(city.slug, industry.slug, business);
 const crumbs = trail([
+  { name: "Cities", path: "/city/" },
   { name: city.name, path: `/city/${city.slug}/` },
   { name: industry.name, path: `/city/${city.slug}/${industry.slug}/` },
   { name: business.title },
@@ -155,6 +190,13 @@ const relatedLinks = getBusinessRelatedLinks({
               ? `The source record showed a ${business.rating.toFixed(1)}-star rating across ${business.reviews.toLocaleString()} reviews${observationDate ? ` when observed in ${observationDate}` : ""}.`
               : `The source record showed a ${business.rating.toFixed(1)}-star rating.`
             : "Contact them directly for service details, availability, and quotes."}
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-serif text-2xl font-bold mb-3">How this listing sits in {city.name}</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          {peerContext}
         </p>
       </div>
     </div>

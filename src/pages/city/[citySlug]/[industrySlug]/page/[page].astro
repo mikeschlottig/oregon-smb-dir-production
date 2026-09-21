@@ -38,6 +38,7 @@ const description = `${industry.description}. Browse ${businesses.length} source
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
+  { name: "Cities", path: "/city/" },
   { name: city.name, path: `/city/${city.slug}/` },
   { name: industry.name, path: `/city/${city.slug}/${industry.slug}/` },
   { name: `Page ${currentPage}` },

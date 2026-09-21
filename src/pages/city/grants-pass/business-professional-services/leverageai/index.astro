@@ -20,6 +20,7 @@ const description = "Leverage AI builds local demand systems for Oregon service 
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
+  { name: "Cities", path: "/city/" },
   { name: "Grants Pass", path: "/city/grants-pass/" },
   { name: "Business & Professional Services", path: "/city/grants-pass/business-professional-services/" },
   { name: "Leverage AI" },

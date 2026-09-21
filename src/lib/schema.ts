@@ -10,6 +10,7 @@ interface PostalAddress {
   streetAddress?: string;
   addressLocality: string;
   addressRegion: string;
+  postalCode?: string;
   addressCountry: string;
   [key: string]: unknown;
 }
@@ -85,6 +86,48 @@ interface ReportSchema {
   datePublished?: string;
   url: string;
   [key: string]: unknown;
+}
+
+/**
+ * Splits a source address string into schema.org PostalAddress components.
+ *
+ * The listing data stores one flat string — "37 E Main St, Ashland, OR 97520". Emitting
+ * that whole string as `streetAddress` is wrong twice over: schema.org defines
+ * `streetAddress` as the street number and name only, and doing so both repeats the
+ * locality and region that are already their own properties and drops `postalCode`
+ * entirely.
+ *
+ * Only a confident parse is split. Anything that does not match the
+ * "<street>, <city>, <ST> <ZIP>" shape keeps its original text as `streetAddress`,
+ * because a wrong split is worse than an unsplit one.
+ *
+ * @param address - the raw address string from the listing
+ * @param fallbackLocality - the city the page is for
+ */
+export function postalAddress(address: string, fallbackLocality: string): PostalAddress {
+  const match = address
+    .trim()
+    .match(/^(.*?),\s*([^,]+?),\s*([A-Z]{2})\s+(\d{5}(?:-\d{4})?)$/);
+
+  if (match) {
+    const [, street, locality, region, postalCode] = match;
+    return {
+      "@type": "PostalAddress",
+      streetAddress: street.trim(),
+      addressLocality: locality.trim(),
+      addressRegion: region,
+      postalCode,
+      addressCountry: "US",
+    };
+  }
+
+  return {
+    "@type": "PostalAddress",
+    streetAddress: address.trim(),
+    addressLocality: fallbackLocality,
+    addressRegion: "OR",
+    addressCountry: "US",
+  };
 }
 
 // --- Builder Functions ---
@@ -198,13 +241,7 @@ export function industryPageSchema(
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
           if (b.address) {
-            item.address = {
-              "@type": "PostalAddress",
-              streetAddress: b.address,
-              addressLocality: city.name,
-              addressRegion: "OR",
-              addressCountry: "US",
-            };
+            item.address = postalAddress(b.address, city.name);
           }
           if (b.phone) item.telephone = b.phone;
           if (hasPublishableRating(b)) {
@@ -248,13 +285,7 @@ export function businessSchema(
   };
 
   if (business.address) {
-    schema.address = {
-      "@type": "PostalAddress",
-      streetAddress: business.address,
-      addressLocality: city.name,
-      addressRegion: "OR",
-      addressCountry: "US",
-    };
+    schema.address = postalAddress(business.address, city.name);
   }
 
   if (business.phone) schema.telephone = business.phone;
@@ -397,13 +428,7 @@ export function servicePageSchema(
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
           if (b.address) {
-            item.address = {
-              "@type": "PostalAddress",
-              streetAddress: b.address,
-              addressLocality: city.name,
-              addressRegion: "OR",
-              addressCountry: "US",
-            };
+            item.address = postalAddress(b.address, city.name);
           }
           if (b.phone) item.telephone = b.phone;
           if (hasPublishableRating(b)) {
@@ -423,25 +448,4 @@ export function servicePageSchema(
       },
     },
   ];
-}
-
-/**
- * Returns FAQPage schema from FAQ items.
- * @param faqs - Array of {question, answer} objects
- */
-export function faqPageSchema(
-  faqs: { question: string; answer: string }[]
-): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
 }

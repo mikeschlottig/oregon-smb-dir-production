@@ -43,7 +43,7 @@ const crumbs = trail([
   { name: `Page ${currentPage}` },
 ]);
 const schemas = [
-  ...industryPageSchema(city, industry, pageSlice, siteUrl),
+  ...industryPageSchema(city, industry, pageSlice, siteUrl, `/city/${city.slug}/${industry.slug}/page/${currentPage}/`),
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---

@@ -21,7 +21,7 @@ const getInitials = (title: string): string => {
 export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLabel }: Props) => {
   const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
   const initials = getInitials(business.title);
-  const businessPath = `/city/${citySlug}/${industrySlug}/${getBusinessPathSlug(citySlug, industrySlug, business)}`;
+  const businessPath = `/city/${citySlug}/${industrySlug}/${getBusinessPathSlug(citySlug, industrySlug, business)}/`;
 
   return (
     <article className="bg-white border rounded-lg p-6 hover:shadow-lg hover:border-[var(--c-sage)] transition-all duration-300 flex flex-col group" style={{ borderColor: 'var(--c-border)' }}>

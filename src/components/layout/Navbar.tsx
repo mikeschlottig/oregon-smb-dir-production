@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 const links = [
   { text: "Home", href: "/" },
   { text: "Cities", href: "/city/" },
-  { text: "Services", href: "/services" },
-  { text: "Best Of", href: "/best-of" },
-  { text: "Blog", href: "/blog" },
-  { text: "Reports", href: "/research" },
+  { text: "Services", href: "/services/" },
+  { text: "Best Of", href: "/best-of/" },
+  { text: "Blog", href: "/blog/" },
+  { text: "Reports", href: "/research/" },
 ];
 
 export const Navbar = ({ pathname = "/" }: { pathname?: string }) => {

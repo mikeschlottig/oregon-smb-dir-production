@@ -45,16 +45,17 @@ repaired here.
 | **C05** | `BREADCRUMB_HOME` | the first crumb is named `Home` and its `item` is exactly `https://oregonsmbdirectory.com/` | C05 = 0 |
 | **C06** | `BREADCRUMB_TERMINAL` | the final crumb is the current page; if it carries `item` at all, that URL equals the page's canonical URL | C06 = 0 |
 | **C07** | `BREADCRUMB_URLS` | every crumb URL is absolute, on-origin, ends in a trailing slash, and resolves to a page the build emitted | C07 = 0 |
-| **C08** | `BREADCRUMB_MATCH` | the visible trail equals the JSON-LD trail, label for label, in order. The visible trail is found by `nav[data-breadcrumb]` and read from its `[data-crumb]` elements | C08 = 0 |
+| **C08** | `BREADCRUMB_MATCH` | the visible trail equals the JSON-LD trail, **label for label and href for href**, in order. The visible trail is found by `nav[data-breadcrumb]` and read from its `[data-crumb]` elements | C08 = 0 |
 
 ## C. Routes and canonicals
 
 | id | check | passes when | proof |
 |---|---|---|---|
 | **C09** | `CANONICAL` | every page has exactly one `<link rel="canonical">`, absolute, equal to its own URL. Exempt: `/404.html` and redirect stubs, which point at their target by design | C09 = 0 |
-| **C10** | `LINKS` | every internal `href` resolves to a file the build emitted | C10 = 0 |
+| **C10** | `LINKS` | every internal `href` resolves to a file the build emitted — site-absolute, origin-absolute **and relative** | C10 = 0 |
 | **C15** | `TRAILING_SLASH` | every internal link uses the canonical trailing-slash spelling. A link to the non-slash form still resolves but names a second URL for one page | C15 = 0 |
 | **C16** | `SITEMAP` | a sitemap exists; every URL in it is on-origin and resolves; no `noindex` page appears in it | C16 = 0 |
+| **C17** | `EXEMPTION_SCOPE` | a page declaring `data-page-kind="utility"` is one of the approved utility paths. A page cannot exempt itself from the content floor by markup alone | C17 = 0 |
 
 **One route definition per URL.** `src/data/dedicatedPages.ts` lists URLs owned by a
 hand-written page; the dynamic business route skips them. Adding another hand-written
@@ -65,7 +66,7 @@ page without adding it to that set re-creates the collision.
 | id | check | passes when | proof |
 |---|---|---|---|
 | **C12** | `FAQ_UNIQUE` | no two pages share an identical FAQ answer **set**, and no single FAQ answer text appears on more than one page | C12 = 0 |
-| **C13** | `THIN` | every indexable content page renders at least **150 words** inside `<main>` | C13 = 0 |
+| **C13** | `THIN` | every indexable content page renders at least **150 words** inside `<main>`. A page with no `<main>` element fails rather than being skipped | C13 = 0 |
 
 **Scope of C13.** The floor governs indexable content pages. Two declared exemptions,
 both visible in the HTML so the gate can see them rather than trusting a list:
@@ -74,18 +75,25 @@ both visible in the HTML so the gate can see them rather than trusting a list:
   indexable and deliberately short; padding them would be exactly the generic filler this
   repair removes.
 - `<meta name="robots" content="noindex, follow">` — a page withheld from the index is not
-  competing for a ranking. Currently only `/best-of/`, which has zero lists to show, and
-  which `astro.config.mjs` also excludes from the sitemap.
+  competing for a ranking. Currently `/best-of/`, which has zero lists to show, and any
+  city-industry page whose listing shard is empty (`/city/corvallis/real-estate/` at time
+  of writing). `astro.config.mjs` reads the same shards to keep both out of the sitemap.
+
+Both exemptions are read from `<head>` and `<body>` through the parsed document, not by
+matching the raw HTML: a string that merely looks like a meta tag must not be able to buy
+a page an exemption. The utility exemption is additionally bounded by `UTILITY_PATHS` in
+the gate (C17), so a template bug cannot exempt a listing page by stamping an attribute.
 
 **Pagination floor.** `src/lib/paginate.ts` folds any final page holding fewer than
-`MIN_LAST_PAGE` (6) items back into the page before it. Six cards is the smallest slice
-measured to clear the 150-word floor at ~24 words per card plus ~40 words of furniture.
+`MIN_LAST_PAGE` (8) items back into the page before it. Re-measured after the first pass:
+six-item pages still landed at 128-147 words, so the observed rate is ~18 words per card
+plus ~35 of page furniture and eight is the smallest slice that clears 150.
 
 ## E. Data integrity
 
 | check | passes when | proof |
 |---|---|---|
-| Category placement | no listing sits in an industry shard its provider category unambiguously contradicts | `node scripts/fix-categories.mjs --dry` reports 0 moves |
+| Category placement | no listing sits in an industry shard its provider category unambiguously contradicts | `node scripts/fix-categories.mjs --dry` **exits non-zero** if it finds any |
 | Publication gates | ratings publish only with value, review count, observation date and record identity in agreement | `npm run audit:publication` exits 0 |
 
 The category rule is intentionally narrow: a listing moves only when its shard holds ≤2 of
@@ -98,7 +106,7 @@ cross-industry categories are left alone — "Massage therapist" is 259 health-w
 
 1. `npm run build` exits 0 — this runs `audit:publication`, `astro check`, `astro build`,
    then `verify-site.mjs`.
-2. `node scripts/verify-site.mjs` reports **0** for C01–C16.
+2. `node scripts/verify-site.mjs` reports **0** for C01–C17.
 3. `npx wrangler deploy`.
 4. Re-run the gate against the deployed origin before calling it done.
 

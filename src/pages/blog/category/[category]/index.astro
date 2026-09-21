@@ -40,6 +40,19 @@ const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const categorySlug = slugifyCategory(categoryName);
 const categoryInfo = getBlogCategory(categoryName);
 
+/**
+ * A category with fewer than three posts cannot carry a page on its own listing.
+ * Rather than pad it, show what else is recent across the blog.
+ */
+const SPARSE_CATEGORY = 3;
+const recentElsewhere =
+  all.length < SPARSE_CATEGORY
+    ? (await getCollection("blog"))
+        .filter((p) => p.data.category !== categoryName)
+        .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+        .slice(0, 6)
+    : [];
+
 const crumbs = trail([
     { name: "Blog", path: "/blog/" },
     { name: categoryName },
@@ -102,6 +115,31 @@ const schemas = [
 
     <Pagination baseUrl={baseUrl} currentPage={1} totalPages={totalPages} />
   </section>
+  {recentElsewhere.length > 0 && (
+    <section class="container mx-auto px-4 pb-16">
+      <h2 class="font-serif text-2xl font-bold mb-3">More from the blog</h2>
+      <p class="text-muted-foreground mb-6 max-w-3xl">
+        {categoryName} is a small collection — {all.length} stor{all.length === 1 ? "y" : "ies"} so far.
+        These are the most recent pieces from the rest of the blog, covering the same I-5
+        corridor towns from different angles.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {recentElsewhere.map((p) => (
+          <a
+            href={`/blog/${p.id}/`}
+            class="bg-card border border-border rounded-xl p-5 hover:shadow-elegant transition-all"
+          >
+            <span class="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
+              {p.data.category}
+            </span>
+            <span class="block font-serif text-lg font-bold leading-snug mb-2">{p.data.title}</span>
+            <span class="block text-sm text-muted-foreground line-clamp-3">{p.data.excerpt}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
   <section class="container mx-auto px-4 pb-16">
     <h2 class="font-serif text-2xl font-bold mb-5">Other categories</h2>
     <div class="flex flex-wrap gap-3">

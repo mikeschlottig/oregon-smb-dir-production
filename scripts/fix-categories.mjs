@@ -27,7 +27,9 @@ const DRY = process.argv.includes("--dry");
 const MINORITY_MAX = 2;
 const MAJORITY_RATIO = 10;
 /** Labels too generic for a majority vote to mean anything. */
-const GENERIC_CATEGORIES = new Set(["Store", "Shop", "Business", "Service", "Establishment"]);
+const GENERIC_CATEGORIES = new Set(
+  ["Store", "Shop", "Business", "Service", "Establishment"].map((c) => c.toLowerCase())
+);
 
 const shardFiles = readdirSync(DIR).filter((f) => f.includes("__") && f.endsWith(".json"));
 const parse = (f) => {
@@ -54,7 +56,7 @@ for (const f of shardFiles) {
 // 2. decide the home industry per category, and which placements are misfiles
 const misfiled = new Map(); // "category|industry" -> correct industry
 for (const [category, m] of tally) {
-  if (GENERIC_CATEGORIES.has(category)) continue;
+  if (GENERIC_CATEGORIES.has(category.trim().toLowerCase())) continue;
   const ranked = [...m.entries()].sort((a, b) => b[1] - a[1]);
   const [home, homeCount] = ranked[0];
   for (const [industry, count] of ranked.slice(1)) {
@@ -104,8 +106,16 @@ for (const m of moves) {
 console.log(`\n${moved.length} listings moved, ${moves.length - moved.length} left in place`);
 
 if (DRY) {
-  console.log("dry run — nothing written");
-  process.exit(0);
+  // CHECKLIST.md cites this invocation as the proof for category placement, so it
+  // has to be falsifiable: a dry run that finds work to do is a failing gate, not a
+  // report. A check whose every outcome is "clean" is indistinguishable from a
+  // broken one.
+  console.log(
+    moved.length === 0
+      ? "dry run — no misfiled listings"
+      : `dry run — ${moved.length} misfiled listing(s) found; nothing written`
+  );
+  process.exit(moved.length === 0 ? 0 : 1);
 }
 
 const touched = [...new Set(moves.filter((m) => m.status === "moved").flatMap((m) => [m.from, m.to]))];

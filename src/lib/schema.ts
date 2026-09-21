@@ -172,10 +172,15 @@ export function industryPageSchema(
   city: City,
   industry: Industry,
   businesses: Business[],
-  siteUrl: string
+  siteUrl: string,
+  /**
+   * Site-absolute path of the page emitting this schema. Paginated pages pass their
+   * own path; without it every /page/N/ URL described itself as page 1.
+   */
+  pagePath?: string
 ): Record<string, unknown>[] {
   const base = siteUrl.replace(/\/$/, "");
-  const pageUrl = `${base}/city/${city.slug}/${industry.slug}/`;
+  const pageUrl = pagePath ? `${base}${pagePath}` : `${base}/city/${city.slug}/${industry.slug}/`;
   return [
     {
       "@context": "https://schema.org",

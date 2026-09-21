@@ -44,6 +44,28 @@ const totalListings = categories.reduce(
   0
 );
 
+/**
+ * Per-city coverage for this industry. An industry with a single service category
+ * would otherwise render as a title and one card — a hub thin enough to be a stub.
+ * This is the page's own data, not filler: how many qualifying providers each city
+ * has in this industry, which is the question the hub exists to answer.
+ */
+const cityCoverage = cities
+  .map((city) => ({
+    city,
+    count: categories.reduce(
+      (n, { category }) => n + matchBusinesses(city.slug, category).length,
+      0
+    ),
+    categoryCount: categories.filter(
+      ({ category }) => matchBusinesses(city.slug, category).length >= 3
+    ).length,
+  }))
+  .filter((entry) => entry.count > 0)
+  .sort((a, b) => b.count - a.count);
+
+const licensedCategories = categories.filter(({ category }) => category.licenseRequired);
+
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
   { name: "Services", path: "/services/" },
@@ -122,6 +144,41 @@ const schemas = [
             ))}
           </div>
         </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 pb-16">
+    <h2 class="font-playfair text-2xl font-bold mb-3" style="color: var(--c-pine);">
+      {industry.name} coverage by city
+    </h2>
+    <p class="mb-6 max-w-3xl" style="color: var(--c-sage);">
+      {totalListings} qualifying {industry.name.toLowerCase()} providers are spread across
+      {cityCoverage.length} of the {cities.length} cities this directory covers. A city
+      appears in a service category only where at least three providers there qualify
+      under that category's selection policy, so the counts below are what passed the
+      gate rather than what the source files contain.
+      {licensedCategories.length > 0 && (
+        <span>
+          {" "}{licensedCategories.length} of these {categories.length} categories cover
+          licensed trades in Oregon — verify a provider's current standing with the
+          issuing authority named on the category page before hiring.
+        </span>
+      )}
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {cityCoverage.map(({ city, count, categoryCount }) => (
+        <a
+          href={`/city/${city.slug}/${industrySlug}/`}
+          class="rounded-lg border p-5"
+          style="border-color: var(--c-stone); color: var(--c-pine);"
+        >
+          <span class="block font-inter text-lg font-semibold">{city.name}</span>
+          <span class="block text-sm" style="color: var(--c-sage);">
+            {count} qualifying provider{count === 1 ? "" : "s"} across {categoryCount}
+            {" "}service categor{categoryCount === 1 ? "y" : "ies"} · {city.county} County
+          </span>
+        </a>
       ))}
     </div>
   </section>

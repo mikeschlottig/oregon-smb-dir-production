@@ -27,6 +27,7 @@
  *   C14 SCHEMA_REQUIRED     required fields present per emitted @type
  *   C15 TRAILING_SLASH      internal links use the canonical trailing-slash form
  *   C16 SITEMAP             sitemap lists only resolvable, indexable URLs
+ *   C17 EXEMPTION_SCOPE     only approved paths may declare themselves exempt
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from "node:fs";
@@ -85,6 +86,41 @@ function textOfVisible(node) {
 }
 
 const wordCount = (s) => (s.replace(/\s+/g, " ").trim().match(/\S+/g) ?? []).length;
+
+const findTag = (doc, tag) => {
+  for (const n of walk(doc)) if (n.tagName === tag) return n;
+  return null;
+};
+const findHead = (doc) => findTag(doc, "head");
+const findBody = (doc) => findTag(doc, "body");
+
+/**
+ * Meta lookups read <head> through the parsed tree rather than regexing the whole
+ * document: a string that merely looks like a meta tag, anywhere in the body or in a
+ * <template>, must not be able to grant a page an exemption.
+ */
+const hasMeta = (head, attrName, value) => {
+  if (!head) return false;
+  for (const n of childrenOf(head)) {
+    if (n.tagName !== "meta") continue;
+    if ((attr(n, attrName) ?? "").toLowerCase() === value) return true;
+  }
+  return false;
+};
+const metaContent = (head, name) => {
+  if (!head) return null;
+  for (const n of childrenOf(head)) {
+    if (n.tagName !== "meta") continue;
+    if ((attr(n, "name") ?? "").toLowerCase() === name) return attr(n, "content") ?? null;
+  }
+  return null;
+};
+
+/**
+ * Paths permitted to declare themselves utility pages and so sit below the content
+ * floor. The page must still make the declaration — this set only bounds who may.
+ */
+const UTILITY_PATHS = new Set(["/contact/", "/accessibility/", "/editorial-policy/"]);
 
 /* -------------------------------------------------------------- dist walk */
 
@@ -190,13 +226,15 @@ function visibleTrail(doc) {
       attr(n, "data-breadcrumb") !== undefined ||
       (attr(n, "aria-label") ?? "").toLowerCase() === "breadcrumb";
     if (!isCrumb) continue;
-    const labels = [];
+    const crumbs = [];
     for (const c of walk(n)) {
       if (attr(c, "data-crumb") === undefined) continue;
-      const t = textOfVisible(c).replace(/\s+/g, " ").trim();
-      labels.push(t);
+      crumbs.push({
+        label: textOfVisible(c).replace(/\s+/g, " ").trim(),
+        href: attr(c, "href") ?? null,
+      });
     }
-    return labels;
+    return crumbs;
   }
   return null;
 }
@@ -227,15 +265,23 @@ for (const file of files) {
   const isErrorPage = pagePath === "/404.html";
   // Astro emits a meta-refresh stub for each configured redirect. It carries the
   // target's canonical by design and is not a page of its own.
-  const isRedirectStub = /<meta http-equiv="refresh"/i.test(html);
+  const head = findHead(doc);
+  const isRedirectStub = hasMeta(head, "http-equiv", "refresh");
   // Home carries WebSite + Organization; a one-item breadcrumb says nothing.
   const breadcrumbExempt = isErrorPage || isRedirectStub || pagePath === "/";
   // A page withheld from the index is not competing for a ranking, so the content
   // floor does not govern it. Utility pages (contact, policy, accessibility) are
   // indexable and deliberately short; they declare themselves in the layout.
-  const isNoindex = /<meta name="robots" content="noindex/i.test(html);
+  const isNoindex = (metaContent(head, "robots") ?? "").toLowerCase().includes("noindex");
   if (isNoindex) noindexPages.add(pagePath);
-  const isUtility = /<body data-page-kind="utility"/i.test(html);
+  // F9 counter-proposal: the page declares its kind AND the path must be one
+  // allowed to make that declaration. A markup-only rule lets a template bug
+  // exempt any page; a path-only rule cannot see what the page actually is.
+  const declaresUtility = attr(findBody(doc), "data-page-kind") === "utility";
+  const isUtility = declaresUtility && UTILITY_PATHS.has(pagePath);
+  if (declaresUtility && !isUtility) {
+    fail("C17", file, "page declares data-page-kind=\"utility\" but is not an approved utility path");
+  }
 
   // --- collect ld+json
   const schemas = [];
@@ -279,8 +325,23 @@ for (const file of files) {
     const visible = visibleTrail(doc);
     if (names && visible) {
       const a = names.join(" › ");
-      const b = visible.join(" › ");
+      const b = visible.map((v) => v.label).join(" › ");
       if (a !== b) fail("C08", file, "visible trail differs from JSON-LD trail", `${b}  !=  ${a}`);
+
+      // Labels matching is not enough: a visible crumb can link somewhere the
+      // JSON-LD does not claim, and the reader and the crawler then disagree about
+      // where the trail goes.
+      const items = crumbs[0].itemListElement ?? [];
+      if (visible.length === items.length) {
+        visible.forEach((v, i) => {
+          const li = items[i];
+          const ldUrl = typeof li?.item === "string" ? li.item : li?.item?.["@id"] ?? null;
+          const visibleUrl = v.href ? new URL(v.href, ORIGIN).toString() : null;
+          if (visibleUrl !== ldUrl) {
+            fail("C08", file, `crumb ${i + 1} link disagrees with its JSON-LD item`, `${visibleUrl} != ${ldUrl}`);
+          }
+        });
+      }
     } else if (names && !visible && !breadcrumbExempt) {
       fail("C08", file, "no machine-identifiable visible breadcrumb nav (needs data-breadcrumb)");
     }
@@ -322,10 +383,19 @@ for (const file of files) {
       const href = attr(n, "href");
       if (!href) continue;
       let path = null;
-      if (href.startsWith("/")) path = href;
-      else if (href.startsWith(ORIGIN)) path = href.slice(ORIGIN.length) || "/";
+      if (href.startsWith("//")) continue;
+      if (/^[a-z][a-z0-9+.-]*:/i.test(href)) {
+        // absolute URL with a scheme — only ours is ours to check
+        if (href.startsWith(ORIGIN)) path = href.slice(ORIGIN.length) || "/";
+      } else if (href.startsWith("/")) {
+        path = href;
+      } else if (href.startsWith("#")) {
+        continue;
+      } else {
+        // relative: resolve against this page's directory
+        path = new URL(href, ORIGIN + pagePath).pathname;
+      }
       if (path === null) continue;
-      if (path.startsWith("//")) continue;
       if (!resolves(path, fileSet)) fail("C10", file, "internal link 404s", href);
 
       // Canonical form: a page URL ends in "/". A link to the non-slash spelling
@@ -344,6 +414,14 @@ for (const file of files) {
     const need = (cond, what) => {
       if (!cond) fail("C14", file, `${t} is missing ${what}`);
     };
+    // A root node without @context is not read as schema.org at all.
+    const ctx = s?.["@context"];
+    const ctxOk =
+      ctx === "https://schema.org" ||
+      ctx === "http://schema.org" ||
+      (Array.isArray(ctx) && ctx.includes("https://schema.org")) ||
+      (ctx && typeof ctx === "object" && !Array.isArray(ctx));
+    if (!ctxOk) fail("C14", file, `${t} root node has no usable @context`, JSON.stringify(ctx));
     if (t === "LocalBusiness") {
       need(typeof s.name === "string" && s.name.trim(), "name");
       if (s.address) {
@@ -357,7 +435,10 @@ for (const file of files) {
       need(s.author?.name, "author.name");
       need(s.publisher?.name, "publisher.name");
       need(s.publisher?.logo?.url, "publisher.logo.url");
-      need(typeof s.mainEntityOfPage === "string", "mainEntityOfPage");
+      need(
+        typeof s.mainEntityOfPage === "string" || typeof s.mainEntityOfPage?.["@id"] === "string",
+        "mainEntityOfPage as a URL string or an object with @id"
+      );
     } else if (t === "Report") {
       need(typeof s.name === "string" && s.name.trim(), "name");
       need(typeof s.url === "string" && s.url.startsWith(ORIGIN), "an on-origin url");
@@ -396,10 +477,16 @@ for (const file of files) {
   // --- thin content
   let main = null;
   for (const n of walk(doc)) if (n.tagName === "main") { main = n; break; }
-  if (main && !isErrorPage && !isRedirectStub && !isNoindex && !isUtility) {
-    const wc = wordCount(textOfVisible(main));
-    wordCounts.push({ page: urlPathFor(file), words: wc });
-    if (wc < MIN_WORDS) fail("C13", file, `main content below ${MIN_WORDS} words`, wc);
+  if (!isErrorPage && !isRedirectStub && !isNoindex && !isUtility) {
+    // No <main> is a failure, not a skip: a page with no main region has no
+    // content region to measure, which is the thinnest a page can be.
+    if (!main) {
+      fail("C13", file, "page has no <main> element to measure");
+    } else {
+      const wc = wordCount(textOfVisible(main));
+      wordCounts.push({ page: urlPathFor(file), words: wc });
+      if (wc < MIN_WORDS) fail("C13", file, `main content below ${MIN_WORDS} words`, wc);
+    }
   }
 }
 
@@ -490,7 +577,7 @@ const LABEL = {
   C04: "BREADCRUMB_POSITION", C05: "BREADCRUMB_HOME", C06: "BREADCRUMB_TERMINAL",
   C07: "BREADCRUMB_URLS", C08: "BREADCRUMB_MATCH", C09: "CANONICAL", C10: "LINKS",
   C11: "FAQ_SHAPE", C12: "FAQ_UNIQUE", C13: "THIN", C14: "SCHEMA_REQUIRED",
-  C15: "TRAILING_SLASH", C16: "SITEMAP",
+  C15: "TRAILING_SLASH", C16: "SITEMAP", C17: "EXEMPTION_SCOPE",
 };
 for (const id of Object.keys(LABEL)) {
   const n = byCheck[id] ?? 0;

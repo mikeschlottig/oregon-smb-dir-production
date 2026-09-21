@@ -46,38 +46,44 @@ Search filters help you narrow by rating, location, and provider category. Conta
 }
 
 /**
- * Generates 4 FAQ Q&As for industry pages.
- * Each answer contains a real numeric fact from data.
+ * FAQ Q&As for a city-industry page.
+ *
+ * Two questions, both answered from this page's own data. The previous version had
+ * four, and the last two ("how do I contact…", "how do I choose…") were generic
+ * advice whose only variable was a listing count — so any two pages that happened to
+ * hold the same number of listings shipped byte-identical answers. Every answer below
+ * names the city, the industry, and at least two independent numbers, which is what
+ * makes it belong to one page.
+ *
+ * @param city - the city this page is for
+ * @param industry - the industry this page is for
+ * @param businesses - the listings on this page
  */
 export function generateIndustryFaqs(city: City, industry: Industry, businesses: Business[]): Array<{ question: string; answer: string }> {
-  const topRated = businesses
-    .filter(b => typeof b.rating === "number")
-    .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
-    .slice(0, 3);
+  const industryLabel = industry.name.toLowerCase();
 
   const rated = businesses.filter((b): b is Business & { rating: number } => typeof b.rating === "number");
   const avgRating = rated.length > 0
     ? (rated.reduce((sum, b) => sum + b.rating, 0) / rated.length).toFixed(1)
-    : "N/A";
+    : null;
 
+  const topRated = [...rated].sort((a, b) => b.rating - a.rating).slice(0, 2);
   const topNames = topRated.map(b => b.title);
+  const fourPlus = rated.filter(b => b.rating >= 4.0).length;
+
+  /** Distinct provider categories present, which differ city to city. */
+  const categories = [...new Set(businesses.map(b => b.category).filter(Boolean) as string[])];
 
   return [
     {
-      question: `What are the top-rated ${industry.name.toLowerCase()} businesses in ${city.name}?`,
-      answer: `${city.name} has ${businesses.length} ${industry.name.toLowerCase()} directory records.${avgRating !== "N/A" ? ` Ratings that pass the source-observation gate average ${avgRating} stars.` : " No ratings currently meet the publication requirements."}${topNames.length > 0 && topRated[0]?.rating != null ? ` Source-observed ratings are available for ${topNames.slice(0, 2).join(" and ")}.` : ""}`
+      question: `How many ${industryLabel} businesses serve ${city.name}, Oregon?`,
+      answer: `The directory holds ${businesses.length} ${industryLabel} record${businesses.length === 1 ? "" : "s"} for ${city.name} in ${city.county} County, spanning ${categories.length} distinct provider categor${categories.length === 1 ? "y" : "ies"}${categories.length > 0 ? ` such as ${categories.slice(0, 3).join(", ")}` : ""}. Records are source-observed; owner participation is stated only where an auditable verification event exists.`,
     },
     {
-      question: `How many ${industry.name.toLowerCase()} businesses serve ${city.name}, Oregon?`,
-      answer: `Our directory currently lists ${businesses.length} ${industry.name.toLowerCase()} business records serving ${city.name}. Records are source-observed; owner participation is stated only when an auditable verification event exists.`
+      question: `Which ${industryLabel} businesses in ${city.name} have the strongest source-observed ratings?`,
+      answer: avgRating === null
+        ? `None of the ${businesses.length} ${industryLabel} records for ${city.name} currently carry a rating that clears the publication gate, so no ratings are shown on this page. A rating publishes only when its value, review count, observation date and record identity all agree with the imported source evidence.`
+        : `Across the ${rated.length} of ${businesses.length} ${city.name} ${industryLabel} records whose ratings clear the publication gate, the average is ${avgRating} stars and ${fourPlus} sit at 4.0 or higher${topNames.length > 0 ? `, led by ${topNames.join(" and ")}` : ""}. Ratings are source-observed rather than owner-confirmed, so confirm current standing before hiring.`,
     },
-    {
-      question: `How do I contact ${industry.name.toLowerCase()} businesses in ${city.name}?`,
-      answer: `Each of the ${businesses.length} listings includes the business address, a Google Maps link, and a website link where available. Contact providers directly through their listing to confirm availability, service areas, and pricing.`
-    },
-    {
-      question: `How do I choose the best ${industry.name.toLowerCase()} business in ${city.name}?`,
-      answer: `Compare provider categories, locations, and the ratings that pass publication gates across all ${businesses.length} listings. Currently ${businesses.filter(b => typeof b.rating === "number" && b.rating >= 4.0).length} businesses have a source-observed rating of 4.0 stars or higher. Confirm current details directly before booking.`
-    }
   ];
 }

@@ -11,11 +11,12 @@
 export const PER_PAGE = 15;
 
 /**
- * Measured against the baseline build: a listing page renders ~24 words per card on
- * top of ~40 words of page furniture, so six cards is the smallest slice that clears
- * the 150-word floor the build gate enforces.
+ * Re-measured after the first pass. Six cards was an over-estimate of words per card:
+ * pages holding six still came in at 128-147 words against the 150-word floor. The
+ * observed rate is ~18 words per card plus ~35 words of page furniture, so eight is
+ * the smallest slice that clears 150 with margin.
  */
-export const MIN_LAST_PAGE = 6;
+export const MIN_LAST_PAGE = 8;
 
 export interface PageRange {
   /** 1-based page number. */

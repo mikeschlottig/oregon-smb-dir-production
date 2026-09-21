@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "the-garage-fitness-studio",
+    "title": "The Garage Fitness Studio",
+    "address": "4050 Main St, Springfield, OR 97478",
+    "phone": "(541) 3376810",
+    "rating": 5.0,
+    "reviews": 7,
+    "category": "Fitness center",
+    "website": "",
+    "googleUrl": "https://www.google.com/maps/place/The+Garage+Fitness+Studio/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e1502be5f765:0x86ed125ba8385e9a!8m2!3d44.0460919!4d-122.9677087!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBDmZpdG5lc3NfY2VudGVymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxV1ZFMXJVa3RSYkUweVdWWkdVbVJWY0U5V1ZGWnNUbnBPYjFnd1JSQULgAQD6AQQIfBBK!16s%2Fg%2F11vwj_1z3t?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "fuerte-fitness",
+    "title": "Fuerte Fitness",
+    "address": "4107 Industrial Ave Unit 1, Springfield, OR 97478",
+    "phone": "",
+    "rating": 5.0,
+    "reviews": 2,
+    "category": "Gym",
+    "website": "",
+    "googleUrl": "https://www.google.com/maps/place/Fuerte+Fitness/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e1b549909bcd:0x7b0903ce81794360!8m2!3d44.0544643!4d-122.9683588!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbpIBA2d5beABAA!16s%2Fg%2F11nn4c5ldq?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "seek-fitness",
+    "title": "SEEK Fitness",
+    "address": "528 Harlow Rd B, Springfield, OR 97477",
+    "phone": "(541) 5130466",
+    "rating": 5.0,
+    "reviews": 1,
+    "category": "Personal trainer",
+    "website": "https://www.seek-fit.com/",
+    "googleUrl": "https://www.google.com/maps/place/SEEK+Fitness/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e13c0161e965:0x40e49674f812a1b4!8m2!3d44.0712372!4d-123.0347226!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbpIBEHBlcnNvbmFsX3RyYWluZXLgAQA!16s%2Fg%2F11sy570ppj?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "superhero-jiu-jitsu-academy",
+    "title": "Superhero Jiu Jitsu Academy",
+    "address": "1485 Mohawk Blvd, Springfield, OR 97477",
+    "phone": "(541) 6003371",
+    "rating": 4.9,
+    "reviews": 108,
+    "category": "Martial arts school",
+    "website": "http://www.superherojj.com/",
+    "googleUrl": "https://www.google.com/maps/place/Superhero+Jiu+Jitsu+Academy/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e05a5ac6fa27:0x2f02317541cc0d28!8m2!3d44.0577949!4d-122.9994597!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBE21hcnRpYWxfYXJ0c19zY2hvb2yaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTnNYM0pNWmtaQkVBReABAPoBBAgAEDo!16s%2Fg%2F1q62hl9j0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "checkered-past-mma-gym",
+    "title": "Checkered Past MMA Gym",
+    "address": "1414 Main St, Springfield, OR 97477",
+    "phone": "(775) 3798602",
+    "rating": 4.9,
+    "reviews": 37,
+    "category": "Martial arts school",
+    "website": "https://www.checkeredpastmma.com/",
+    "googleUrl": "https://www.google.com/maps/place/Checkered+Past+MMA+Gym/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e1c23b5b46a1:0xb49b0eb8de7a8933!8m2!3d44.0461539!4d-123.0047693!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBE21hcnRpYWxfYXJ0c19zY2hvb2yaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVUlFlRnB4Y1UxUkVBReABAPoBBAgLEDQ!16s%2Fg%2F11fk3w61zw?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "northwest-ninja-park",
+    "title": "Northwest Ninja Park",
+    "address": "873 Shelley St, Springfield, OR 97477",
+    "phone": "(541) 6008224",
+    "rating": 4.9,
+    "reviews": 37,
+    "category": "Gym",
+    "website": "https://www.nwninjapark.com/",
+    "googleUrl": "https://www.google.com/maps/place/Northwest+Ninja+Park/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e1953dcfbbdf:0xe4dcb9eb190c2680!8m2!3d44.0644636!4d-123.0397754!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBA2d5bZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSWWNEaEhlV0ZuRUFF4AEA-gEECB8QJQ!16s%2Fg%2F11dyml0xcr?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "forever-strong-performance-fitness",
+    "title": "Forever Strong Performance Fitness",
+    "address": "5250 High Banks Rd, Springfield, OR 97478",
+    "phone": "(541) 7048666",
+    "rating": 4.5,
+    "reviews": 42,
+    "category": "Gym",
+    "website": "",
+    "googleUrl": "https://www.google.com/maps/place/Forever+Strong+Performance+Fitness/@44.0637265,-123.0338528,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e09441a2b2b3:0x1e1a7d0d35ee5504!8m2!3d44.0577468!4d-122.9384231!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBA2d5bZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSYU5VNTFXbEZuRUFF4AEA-gEECAAQLg!16s%2Fg%2F11bwghm4lk?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "bob-keefer-center",
+    "title": "Bob Keefer Center",
+    "address": "250 S 32nd St, Springfield, OR 97478",
+    "phone": "(541) 7364544",
+    "rating": 4.4,
+    "reviews": 210,
+    "category": "Recreation center",
+    "website": "http://www.willamalane.org/bkc",
+    "googleUrl": "https://www.google.com/maps/place/Bob+Keefer+Center/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e05e39fbda23:0x7ac7d047d3c4135b!8m2!3d44.0438499!4d-122.9826582!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBEXJlY3JlYXRpb25fY2VudGVymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJrYmsxVU9EWjNSUkFC4AEA-gEECAAQLQ!16s%2Fg%2F1tfwk29r?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "planet-fitness",
+    "title": "Planet Fitness",
+    "address": "4223 Main St, Springfield, OR 97478",
+    "phone": "(541) 7449000",
+    "rating": 4.1,
+    "reviews": 675,
+    "category": "Gym",
+    "website": "https://www.planetfitness.com/gyms/springfield-or?utm_medium=organic&utm_source=extnet",
+    "googleUrl": "https://www.google.com/maps/place/Planet+Fitness/@44.0637265,-123.0338528,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e09294135d0f:0x53bbe0886b354dd2!8m2!3d44.044911!4d-122.9616905!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBA2d5bZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuVFVOM2JYSnlRMHBCRUFF4AEA-gEECC0QRA!16s%2Fg%2F11b6xftlkw?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "og-studios",
+    "title": "OG Studios",
+    "address": "129 14th St, Springfield, OR 97477",
+    "phone": "(541) 6363609",
+    "rating": 4.0,
+    "reviews": 4,
+    "category": "Yoga studio",
+    "website": "",
+    "googleUrl": "https://www.google.com/maps/place/OG+Studios/@44.094458,-123.2488093,12z/data=!4m11!1m3!2m2!1sGyms+Springfield+Oregon!6e1!3m6!1s0x54c0e1802671ab99:0x18ffe358cb243045!8m2!3d44.0463132!4d-123.0047696!15sChdHeW1zIFNwcmluZ2ZpZWxkIE9yZWdvbloZIhdneW1zIHNwcmluZ2ZpZWxkIG9yZWdvbpIBC3lvZ2Ffc3R1ZGlvmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU53YVZsaE5FOW5FQUXgAQD6AQQIaRAj!16s%2Fg%2F11k9fkhmq3?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  }
+]

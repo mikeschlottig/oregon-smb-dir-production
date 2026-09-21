@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Ben The Builder Inc",
+    "address": "Ashland, OR",
+    "phone": "(541) 482-3344",
+    "rating": 4.9,
+    "reviews": 28,
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.1946,-122.7095"
+  },
+  {
+    "title": "Ashland Remodeling / Stokes Built Inc",
+    "address": "Ashland, OR",
+    "phone": "(541) 482-1991",
+    "rating": 4.8,
+    "reviews": 47,
+    "category": "Remodeler",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.1946,-122.7095"
+  },
+  {
+    "title": "Jon Turrell Quality Homes Inc.",
+    "address": "Ashland, OR",
+    "phone": "(541) 488-7700",
+    "rating": 5,
+    "reviews": 22,
+    "category": "Custom home builder",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.1946,-122.7095"
+  }
+]

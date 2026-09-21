@@ -1,0 +1,27 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { publisher } from "@/data/publisher";
+
+const title = `Accessibility — ${publisher.name}`;
+const description = "Accessibility target, current improvements, and feedback path for Oregon SMB Directory.";
+---
+
+<SiteLayout title={title} description={description}>
+  <header class="bg-muted pt-32 pb-12 px-4 border-b border-border">
+    <div class="container mx-auto max-w-3xl">
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Accessibility · August 2026</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Accessibility</h1>
+      <p class="text-muted-foreground text-lg">Oregon SMB Directory targets WCAG 2.2 Level AA and treats accessibility feedback as a correction request.</p>
+    </div>
+  </header>
+
+  <main class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
+    <h2>Current approach</h2>
+    <p>Search and filter controls use persistent labels, result counts are announced, keyboard users can skip to results, active pagination is identified, telephone numbers are linked, maps have textual alternatives, and form errors are associated with their fields and summarized.</p>
+    <p>The site supports visible keyboard focus and reduced-motion preferences through its shared styles. Automated checks are supplemented with keyboard and zoom review during releases.</p>
+
+    <h2>Report a barrier</h2>
+    <p>Email <a href={`mailto:${publisher.supportEmail}?subject=Accessibility%20feedback`}>{publisher.supportEmail}</a> with the page address, the task you were trying to complete, and the browser or assistive technology used if known. You can also call <a href={`tel:${publisher.supportPhone}`}>{publisher.supportPhoneDisplay}</a>.</p>
+    <p>We will acknowledge accessibility reports and prioritize barriers that prevent access to business records, corrections, or contact paths.</p>
+  </main>
+</SiteLayout>

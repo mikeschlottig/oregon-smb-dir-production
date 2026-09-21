@@ -1,0 +1,92 @@
+---
+/**
+ * RelatedLinks.astro — Renders "Related" section with links from link-graph.
+ *
+ * Mount near page bottom, above footer.
+ * H2 "Related", token-styled chip/list (same pattern as existing nearby-cities nav).
+ *
+ * @prop {Array<{href: string, label: string, reason: string}>} links
+ * @prop {string} [heading="Related"]
+ */
+const { links, heading = "Related" } = Astro.props;
+
+// Don't render if no links
+if (!links || links.length === 0) return null;
+---
+
+<section class="related-links-section" aria-label={heading}>
+  <h2 class="related-links-heading">{heading}</h2>
+  <nav class="related-links-nav">
+    <ul class="related-links-list">
+      {links.map((link: { href: string; label: string; reason: string }) => (
+        <li class="related-links-item">
+          <a href={link.href} class="related-link-chip">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</section>
+
+<style>
+  .related-links-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .related-links-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-text, #1f2937);
+  }
+
+  .related-links-nav {
+    /* no additional styles */
+  }
+
+  .related-links-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .related-links-item {
+    /* no additional styles */
+  }
+
+  .related-link-chip {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background-color: var(--color-chip-bg, #f3f4f6);
+    color: var(--color-chip-text, #374151);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    border: 1px solid var(--color-chip-border, #d1d5db);
+  }
+
+  .related-link-chip:hover {
+    background-color: var(--color-chip-hover-bg, #e5e7eb);
+    color: var(--color-chip-hover-text, #111827);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .related-links-list {
+      flex-direction: column;
+    }
+
+    .related-link-chip {
+      display: block;
+      text-align: center;
+    }
+  }
+</style>

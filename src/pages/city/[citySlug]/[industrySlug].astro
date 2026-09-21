@@ -1,0 +1,185 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import SeoTextBlock from "@/components/SeoTextBlock.astro";
+import FaqSchema from "@/components/FaqSchema.astro";
+import BusinessFilterGrid from "@/components/BusinessFilterGrid";
+import Pagination from "@/components/Pagination.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { getBusinesses } from "@/data/businesses";
+import { serviceCategories, getCategoriesByIndustry } from "@/data/serviceCategories";
+import { matchBusinesses } from "@/data/matchBusinesses";
+import { generateIndustrySeoContent, generateIndustryFaqs } from "@/lib/seo-content";
+import { industryPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { getCityIndustryRelatedLinks } from "@/lib/link-graph";
+import { ChevronRight } from "lucide-react";
+
+export const PER_PAGE = 15;
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  for (const city of cities) {
+    for (const industry of industries) {
+      paths.push({
+        params: { citySlug: city.slug, industrySlug: industry.slug },
+        props: { city, industry },
+      });
+    }
+  }
+  return paths;
+}
+
+const { city, industry } = Astro.props;
+const businesses = getBusinesses(city.slug, industry.slug);
+
+// Get service categories for this industry that have ≥3 matching businesses in this city
+const serviceCategoriesForIndustry = getCategoriesByIndustry(industry.slug);
+const popularServices = serviceCategoriesForIndustry.filter(
+  (cat) => matchBusinesses(city.slug, cat).length >= 3
+);
+const totalPages = Math.max(1, Math.ceil(businesses.length / PER_PAGE));
+const pageSlice = businesses.slice(0, PER_PAGE);
+const baseUrl = `/city/${city.slug}/${industry.slug}/`;
+
+// Calculate stats for TldrCard
+const ratedBusinesses = businesses.filter(
+  (business): business is typeof business & { rating: number } =>
+    typeof business.rating === "number",
+);
+const avgRating = ratedBusinesses.length > 0
+  ? ratedBusinesses.reduce((sum, business) => sum + business.rating, 0) / ratedBusinesses.length
+  : 0;
+const tldrStats = [
+  { value: businesses.length.toString(), label: "Listings" },
+  { value: avgRating > 0 ? avgRating.toFixed(1) : "N/A", label: "Avg Rating" },
+  { value: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }), label: "Updated" }
+];
+
+const title = `${industry.name} in ${city.name}, Oregon`;
+const description = `${industry.description}. Browse ${
+  businesses.length || "local"
+} business records serving ${city.name}.`;
+
+// Generate SEO content and FAQs
+const seoContent = generateIndustrySeoContent(city, industry, businesses);
+const faqs = generateIndustryFaqs(city, industry, businesses);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}/` },
+  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}/` },
+];
+const schemas = [
+  ...industryPageSchema(city, industry, businesses, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+// Compute related links for city×industry page
+const relatedLinks = getCityIndustryRelatedLinks({
+  citySlug: city.slug,
+  industrySlug: industry.slug,
+  baseUrl: siteUrl,
+});
+---
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: city.name, href: `/city/${city.slug}/` },
+      { label: industry.name }
+    ]}
+    eyebrow={`${city.name}, OR`}
+    title={`${industry.name} in ${city.name}`}
+    tagline={`${businesses.length} source-observed ${industry.name.toLowerCase()} records serving ${city.name}, Oregon.`}
+    stats={tldrStats}
+  />
+
+  <section class="container mx-auto px-4 py-16">
+    {businesses.length === 0 ? (
+      <div class="max-w-xl mx-auto text-center py-20">
+        <h2 class="font-serif text-2xl font-bold mb-3">Listings coming soon</h2>
+        <p class="text-muted-foreground mb-6">
+          We're actively curating {industry.name.toLowerCase()} records in {city.name}. Want to request a listing review?
+        </p>
+        <a
+          href={`/contact?city=${city.slug}&industry=${industry.slug}`}
+          class="inline-block bg-primary text-primary-foreground px-6 py-3 rounded font-medium hover:bg-primary/90 transition-colors"
+        >
+          List Your Business
+        </a>
+      </div>
+    ) : (
+      <>
+        <BusinessFilterGrid
+          client:load
+          businesses={businesses}
+          pageSlice={pageSlice}
+          citySlug={city.slug}
+          industrySlug={industry.slug}
+          industryName={industry.name}
+        />
+        <Pagination baseUrl={baseUrl} currentPage={1} totalPages={totalPages} />
+      </>
+    )}
+  </section>
+
+  <!-- SEO Text Block -->
+  <SeoTextBlock title={`About ${industry.name} in ${city.name}`} html={seoContent} />
+
+  <!-- FAQ Section -->
+  <section class="container mx-auto px-4 py-12 border-t" style="border-color: var(--c-border);">
+    <h3 class="font-playfair text-xl md:text-2xl font-bold mb-6" style="color: var(--c-pine);">
+      Frequently Asked Questions
+    </h3>
+    <div class="space-y-4 max-w-3xl">
+      {faqs.map((faq, i) => (
+        <details class="group border rounded-lg p-4" style="border-color: var(--c-border);">
+          <summary class="flex items-center justify-between cursor-pointer font-semibold" style="color: var(--c-pine);">
+            <span class="text-base">{faq.question}</span>
+            <span class="ml-4 flex-shrink-0 transition-transform group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--c-pine);">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQPage JSON-LD -->
+  <FaqSchema faqs={faqs} />
+
+  <!-- Popular Services Section -->
+  {popularServices.length > 0 && (
+    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+      <h2 class="font-playfair text-2xl md:text-3xl font-bold mb-4" style="color: var(--c-pine);">
+        Popular Services in {city.name}
+      </h2>
+      <p class="mb-6" style="color: var(--c-sage);">
+        Explore specialized service categories available in {city.name}.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        {popularServices.map((cat) => (
+          <a
+            href={`/services/${industry.slug}/${cat.slug}/${city.slug}`}
+            class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium transition-colors hover:opacity-80"
+            style="background-color: var(--c-river); color: white;"
+          >
+            {cat.displayName} ({matchBusinesses(city.slug, cat).length})
+            <ChevronRight className="w-4 h-4 ml-2" />
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
+</SiteLayout>

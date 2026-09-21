@@ -1,0 +1,200 @@
+[
+  {
+    "title": "Jordan \"JJ\" Kramer - John L Scott, Realtors",
+    "address": "871 Medford Center Dr, Medford, OR 97504",
+    "phone": "(541) 840-2992",
+    "rating": 4.9,
+    "reviews": 101,
+    "category": "Real estate agency",
+    "website": "http://calljjtoday.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.333602299999995,-122.86716709999999"
+  },
+  {
+    "title": "Ford Real Estate",
+    "address": "624 S Riverside Ave, Medford, OR 97501",
+    "phone": "(541) 773-2088",
+    "rating": 4.9,
+    "reviews": 106,
+    "category": "Real estate agency",
+    "website": "http://propertyofsouthernoregon.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3210884,-122.8665633"
+  },
+  {
+    "title": "Hokanson Realty",
+    "address": "815 Bennett Ave, Medford, OR 97504",
+    "phone": "(541) 772-7653",
+    "rating": 4.7,
+    "reviews": 91,
+    "category": "Real estate agency",
+    "website": "https://www.jaredhokanson.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3329203,-122.8640064"
+  },
+  {
+    "title": "Staci Drewien - Medford Realtor | EXP Luxury of Southern Oregon",
+    "address": "710 Cardley Ave, Medford, OR 97504",
+    "phone": "(541) 840-8659",
+    "rating": 5,
+    "reviews": 67,
+    "category": "Real estate agency",
+    "website": "https://stacidrewien.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.336118899999995,-122.8680619"
+  },
+  {
+    "title": "Steve Thomas - EXP Realty LLC",
+    "address": "710 Cardley Ave, Medford, OR 97504",
+    "phone": "(541) 224-6563",
+    "rating": 4.9,
+    "reviews": 286,
+    "category": "Real estate agent",
+    "website": "http://stevethomasgroup.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.336118899999995,-122.8680619"
+  },
+  {
+    "title": "The Rutledge Property Group",
+    "address": "2732 American Ave, Medford, OR 97504",
+    "phone": "(541) 778-9677",
+    "rating": 5,
+    "reviews": 199,
+    "category": "Real estate agency",
+    "website": "http://541sold.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.357472099999995,-122.8586296"
+  },
+  {
+    "title": "Jake Rockwell - Rockwell Group | eXp Realty LLC",
+    "address": "839 E Jackson St Suite B, Medford, OR 97504",
+    "phone": "(541) 292-4444",
+    "rating": 4.9,
+    "reviews": 296,
+    "category": "Real estate agency",
+    "website": "http://www.rockwellrealestate.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.33132,-122.862586"
+  },
+  {
+    "title": "Ellie George Realtor- Home Quest Realty",
+    "address": "548 Business Park Dr, Medford, OR 97504",
+    "phone": "(541) 774-5503",
+    "rating": 5,
+    "reviews": 90,
+    "category": "Real estate agent",
+    "website": "http://www.elliegeorge.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3722578,-122.8830538"
+  },
+  {
+    "title": "RE/MAX Integrity Medford",
+    "address": "3539 Heathrow Way # 200, Medford, OR 97504",
+    "phone": "(541) 770-3325",
+    "rating": 4.5,
+    "reviews": 43,
+    "category": "Real estate agency",
+    "website": "https://integrity-northwest-medford-or.remax.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3675515,-122.8796587"
+  },
+  {
+    "title": "Alice Lema Real Estate, Home & Land Real Estate",
+    "address": "1175 E Main St Suite 1F, Medford, OR 97504",
+    "phone": "(541) 301-7980",
+    "rating": 5,
+    "reviews": 18,
+    "category": "Real estate agent",
+    "website": "https://www.alicelema.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.328198799999996,-122.8588568"
+  },
+  {
+    "title": "Dallin George Team - Home Quest Realty",
+    "address": "548 Business Park Dr, Medford, OR 97504",
+    "phone": "(541) 840-4966",
+    "rating": 4.8,
+    "reviews": 46,
+    "category": "Real estate agency",
+    "website": "https://www.dallingeorge.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3722578,-122.8830538"
+  },
+  {
+    "title": "Cornerstone Real Estate Group | eXp Realty LLC",
+    "address": "853 Spring St, Medford, OR 97504",
+    "phone": "(541) 200-3954",
+    "rating": 5,
+    "reviews": 55,
+    "category": "Real estate agency",
+    "website": "https://cornerstone4sale.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.338283399999995,-122.86252309999999"
+  },
+  {
+    "title": "Michele Fleisher - John L Scott Real Estate",
+    "address": "871 Medford Center, Medford, OR 97504",
+    "phone": "(541) 538-8554",
+    "rating": 5,
+    "reviews": 25,
+    "category": "Real estate agency",
+    "website": "https://michelefleisher.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.333757899999995,-122.86703929999999"
+  },
+  {
+    "title": "Rasmussen Real Estate Group",
+    "address": "871 Medford Center, Medford, OR 97504",
+    "phone": "(541) 890-3150",
+    "rating": 5,
+    "reviews": 18,
+    "category": "Real estate agency",
+    "website": "https://terryrasmussen.johnlscott.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.333648,-122.866965"
+  },
+  {
+    "title": "Windermere Van Vleet and Associates",
+    "address": "1117 E Jackson St, Medford, OR 97504",
+    "phone": "(541) 779-6520",
+    "rating": 4.3,
+    "reviews": 24,
+    "category": "Real estate agency",
+    "website": "http://www.windermerevanvleet.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3313839,-122.8584561"
+  },
+  {
+    "title": "Doug Morse Group - John L. Scott, Medford",
+    "address": "871 Medford Center, Medford, OR 97504",
+    "phone": "(541) 944-6000",
+    "rating": 4.9,
+    "reviews": 55,
+    "category": "Real estate agency",
+    "website": "https://dougmorse.johnlscott.com/home",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3337401,-122.8669869"
+  },
+  {
+    "title": "Summit & Sage Properties",
+    "address": "710 Cardley Ave, Medford, OR 97504",
+    "phone": "(541) 633-6305",
+    "rating": 5,
+    "reviews": 28,
+    "category": "Real estate agency",
+    "website": "http://summitandsageproperties.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.336110999999995,-122.868062"
+  },
+  {
+    "title": "Kelli Hokinson Group: Realtor in Medford , Jacksonville, Eagle Point, Central Point, and Ashland, OR",
+    "address": "710 Cardley Ave, Medford, OR 97504",
+    "rating": 5,
+    "reviews": 21,
+    "category": "Real estate agency",
+    "website": "https://gregorysmith.exprealty.com/index.php",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3361107,-122.8680617"
+  },
+  {
+    "title": "Elle Powell @ RE/MAX Integrity",
+    "address": "3539 Heathrow Way # 200, Medford, OR 97504",
+    "rating": 5,
+    "reviews": 28,
+    "category": "Real estate agent",
+    "website": "http://www.ellepowell.realtor/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3676848,-122.8795779"
+  },
+  {
+    "title": "RE/MAX Platinum",
+    "address": "2594 E Barnett Rd STE B, Medford, OR 97504",
+    "phone": "(541) 734-5500",
+    "rating": 4.4,
+    "reviews": 21,
+    "category": "Real estate agency",
+    "website": "http://platinumbrokers.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3157229,-122.83613249999999"
+  }
+]

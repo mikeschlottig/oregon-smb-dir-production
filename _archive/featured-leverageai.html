@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leverage AI — Featured Listing | Oregon SMB Directory</title>
+  <meta name="description" content="Leverage AI builds local demand systems for Oregon service businesses — AI search optimization, custom web design, and lead capture infrastructure. Based in Grants Pass, OR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --bg-warm: #f5f3ef;
+      --surface: #ffffff;
+      --text: #1a1a18;
+      --text-secondary: #5a5a54;
+      --text-muted: #8a8a82;
+      --border: #e4e2dc;
+      --border-light: #eeece8;
+      --featured-gold: #b8860b;
+      --featured-gold-light: #daa520;
+      --featured-bg: #fdf9f0;
+      --featured-border: #e8d5a8;
+      --accent: #1d4e89;
+      --accent-light: #e8eff8;
+      --accent-muted: #6a9bc5;
+      --amber: #d4900f;
+      --amber-light: #fef6e4;
+      --star-gold: #e8a317;
+      --link: #1d4e89;
+      --nav-bg: #1a2332;
+      --nav-text: #e8e6e0;
+      --footer-bg: #1a2332;
+      --cta-bg: #1d4e89;
+      --cta-hover: #163d6c;
+      --radius: 8px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--nav-bg);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      color: var(--nav-text);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { opacity: 0.5; font-weight: 400; display: block; font-size: 0.72rem; letter-spacing: 0.03em; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    /* ── FEATURED BANNER ── */
+    .featured-banner {
+      background: linear-gradient(135deg, var(--featured-bg) 0%, #fef6e0 100%);
+      border-bottom: 2px solid var(--featured-border);
+      padding: 0.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .featured-badge {
+      background: var(--featured-gold);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+    }
+    .featured-banner p {
+      font-size: 0.78rem;
+      color: var(--featured-gold);
+      font-weight: 500;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 1rem 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .breadcrumb a { color: var(--link); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .hero-content { padding-top: 0.5rem; }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .hero-tagline {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .meta-icon {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .btn-primary { background: var(--cta-bg); color: #fff; }
+    .btn-primary:hover { background: var(--cta-hover); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--text-secondary); background: var(--bg-warm); }
+    .btn-icon { width: 15px; height: 15px; }
+
+    /* ── MAP ── */
+    .hero-map {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .hero-map iframe {
+      width: 100%;
+      height: 380px;
+      border: 0;
+      display: block;
+    }
+    .map-caption {
+      background: var(--surface);
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-light);
+    }
+    .map-address { font-size: 0.8rem; color: var(--text-secondary); }
+    .map-link {
+      font-size: 0.78rem;
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .map-link:hover { text-decoration: underline; }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-area {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+    }
+
+    .editorial h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .editorial p {
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .editorial p:last-child { margin-bottom: 0; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .service-chip {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    /* ── CASE STUDY CALLOUT ── */
+    .case-study-callout {
+      background: linear-gradient(135deg, var(--accent-light) 0%, #f0f5fb 100%);
+      border: 1px solid #c5d8ed;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .case-study-callout h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .case-study-callout p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+    .case-study-stats {
+      display: flex;
+      gap: 2rem;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-card h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .contact-row:last-child { margin-bottom: 0; }
+    .contact-row svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+    .contact-row a { color: var(--link); text-decoration: none; }
+    .contact-row a:hover { text-decoration: underline; }
+
+    .hours-table { width: 100%; font-size: 0.85rem; }
+    .hours-table tr { border-bottom: 1px solid var(--border-light); }
+    .hours-table td { padding: 0.4rem 0; color: var(--text-secondary); }
+    .hours-table td:first-child { font-weight: 500; color: var(--text); width: 50%; }
+    .hours-open { color: var(--accent) !important; font-weight: 600 !important; }
+    .hours-closed { color: var(--text-muted) !important; }
+
+    .social-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      background: var(--bg-warm);
+      border: 1px solid var(--border-light);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-link:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-muted);
+    }
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--text-secondary);
+    }
+
+    /* ── REVIEW CARD ── */
+    .review-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+    .review-section > h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+    .review-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--featured-gold);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 2rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .review-card::before {
+      content: '\201C';
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 4rem;
+      color: var(--featured-border);
+      position: absolute;
+      top: 0.25rem;
+      left: 1rem;
+      line-height: 1;
+    }
+    .review-body {
+      font-size: 1.05rem;
+      color: var(--text);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+    }
+    .review-attribution {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 2rem;
+    }
+    .review-author { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+    .review-date { font-size: 0.78rem; color: var(--text-muted); }
+    .review-source {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .star {
+      width: 16px;
+      height: 16px;
+      fill: var(--star-gold);
+    }
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 0.4rem;
+      padding-left: 2rem;
+    }
+    .review-stars .star { width: 14px; height: 14px; }
+
+    /* ── RELATED ── */
+    .related-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+    .related-section h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .related-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .related-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent-muted); }
+    .related-card h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .related-card p { font-size: 0.78rem; color: var(--text-muted); }
+    .related-rating {
+      font-size: 0.82rem;
+      color: var(--star-gold);
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--footer-bg);
+      color: var(--nav-text);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .footer-brand span { opacity: 0.5; font-weight: 400; display: block; font-size: 0.75rem; margin-top: 0.25rem; }
+    .footer p { font-size: 0.78rem; opacity: 0.6; }
+    .footer h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      margin-bottom: 0.75rem;
+    }
+    .footer ul { list-style: none; }
+    .footer li { margin-bottom: 0.35rem; }
+    .footer a { color: var(--nav-text); text-decoration: none; font-size: 0.82rem; opacity: 0.7; }
+    .footer a:hover { opacity: 1; }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.72rem;
+      opacity: 0.4;
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .content-area { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 2rem; }
+      .nav-links { display: none; }
+      .case-study-stats { flex-direction: column; gap: 0.75rem; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 0 1rem 2rem; }
+      .content-area { padding: 0 1rem 2rem; }
+      .review-section { padding: 0 1rem 2rem; }
+      .related-section { padding: 0 1rem 2rem; }
+      .breadcrumb { padding: 1rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="https://oregonsmbdirectory.com/" class="nav-logo">
+      Oregon SMB<span>Business Directory</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://oregonsmbdirectory.com/">Home</a></li>
+      <li><a href="https://oregonsmbdirectory.com/city/">Cities</a></li>
+      <li><a href="https://oregonsmbdirectory.com/services">Services</a></li>
+      <li><a href="https://oregonsmbdirectory.com/best-of">Best Of</a></li>
+      <li><a href="https://oregonsmbdirectory.com/blog">Blog</a></li>
+      <li><a href="https://oregonsmbdirectory.com/contact">List Your Business</a></li>
+    </ul>
+  </nav>
+
+  <!-- FEATURED BANNER -->
+  <div class="featured-banner">
+    <span class="featured-badge">★ Featured</span>
+    <p>This is a Featured Listing — a verified, premium business profile on Oregon SMB Directory</p>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="https://oregonsmbdirectory.com/">Home</a> /
+    <a href="https://oregonsmbdirectory.com/city/grants-pass">Grants Pass</a> /
+    <a href="https://oregonsmbdirectory.com/city/grants-pass/business-professional-services">Business &amp; Professional Services</a> /
+    Leverage AI
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">AI Search &amp; Digital Strategy · Grants Pass, OR</div>
+      <h1>Leverage AI</h1>
+      <p class="hero-tagline">Local demand systems for Oregon service businesses — connecting visibility, website trust, lead capture, and response speed into one measurable growth engine.</p>
+
+      <div class="hero-meta">
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Grants Pass, Oregon
+        </div>
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Mon–Sat · By Appointment
+        </div>
+        <div class="meta-item">
+          <svg class="meta-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Solo Operator · Founder-Led
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="tel:5414502082" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (541) 450-2082
+        </a>
+        <a href="https://leverageai.network/" class="btn btn-outline" target="_blank">Visit Website</a>
+        <a href="mailto:mike@leverageai.network" class="btn btn-outline">Email Mike</a>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="hero-map">
+      <iframe
+        src="https://www.google.com/maps?q=Leverage+AI+744+NW+Bellevue+Place+Grants+Pass+OR+97526&hl=en&z=15&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Leverage AI location on Google Maps">
+      </iframe>
+      <div class="map-caption">
+        <span class="map-address">744 NW Bellevue Place, Grants Pass, OR 97526</span>
+        <a href="https://www.google.com/maps?q=744+NW+Bellevue+Place+Grants+Pass+OR+97526" class="map-link" target="_blank">Open in Google Maps →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-area">
+    <div class="editorial">
+      <h2>AI-First Digital Strategy, Built on the Ground in Southern Oregon</h2>
+      <p>Most digital agencies along the I-5 corridor pitch some version of the same playbook: build a website, run ads, wait for the phone to ring. Leverage AI starts from a different premise entirely. Mike Schlottig, who founded the studio in 2025, noticed that the businesses winning local work in 2026 aren't the ones with the biggest ad budgets — they're the ones that show up when someone asks ChatGPT, Perplexity, or Google's AI Overview who can solve their problem in their town.</p>
+
+      <p>That observation turned into a practice. From a home office on Bellevue Place in Grants Pass, Schlottig builds what he calls "local demand systems" — connected infrastructure that ties together a business's search visibility, website credibility, lead capture, and follow-up speed into a single measurable pipeline. He works directly with service businesses across the Rogue Valley and the broader Oregon I-5 corridor, from HVAC contractors in Medford to organic suppliers right here in Grants Pass.</p>
+
+      <p>What makes the approach unusual is the tooling. Schlottig is a systems architect by background, not a marketer who learned to blog. He writes the schema markup himself, builds custom Cloudflare Worker infrastructure for his clients' websites, designs entity-strength architectures that make businesses machine-readable to AI systems, and deploys lead-response automation that fires before a prospect's attention cools. Every engagement starts with a diagnostic audit that maps exactly where a business leaks demand.</p>
+
+      <p>The studio operates on a no-lock-in model — no long-term contracts, no retainers with vague deliverables. Schlottig takes appointments Monday through Saturday and works directly with every client. There's no account manager, no handoff to a junior associate. If you're on a call with Leverage AI, you're talking to the person who's going to do the work.</p>
+
+      <p>For Oregon service businesses that have outgrown template websites and generic SEO advice, this is a different kind of partner — one that treats local search visibility, AI discoverability, and website performance as engineering problems, not marketing ones.</p>
+
+      <div class="services-grid">
+        <div class="service-chip">AI Search Optimization</div>
+        <div class="service-chip">Custom Web Design</div>
+        <div class="service-chip">Local Visibility Systems</div>
+        <div class="service-chip">Lead Capture &amp; AI Follow-Up</div>
+        <div class="service-chip">Schema &amp; Entity Architecture</div>
+        <div class="service-chip">GBP Optimization</div>
+        <div class="service-chip">Diagnostic Audits</div>
+        <div class="service-chip">Search Data Architecture</div>
+      </div>
+
+      <!-- CASE STUDY CALLOUT -->
+      <div class="case-study-callout">
+        <h3>Featured Case Study — Daley Organics</h3>
+        <p>Rebuilt the content architecture and schema markup for a Grants Pass organic soil supplier with zero AI search presence. Within 90 days, the business appeared in AI-generated recommendations across multiple platforms.</p>
+        <div class="case-study-stats">
+          <div class="stat-item">
+            <span class="stat-value">#1</span>
+            <span class="stat-label">Google result for brand name</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">Top 3</span>
+            <span class="stat-label">Near-me intent searches</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">90 days</span>
+            <span class="stat-label">To AI citation presence</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Contact</h3>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>744 NW Bellevue Place<br>Grants Pass, OR 97526</span>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <a href="tel:5414502082">(541) 450-2082</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:mike@leverageai.network">mike@leverageai.network</a>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          <a href="https://leverageai.network/" target="_blank">leverageai.network</a>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Hours</h3>
+        <table class="hours-table">
+          <tr><td>Monday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Tuesday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Wednesday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Thursday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Friday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Saturday</td><td class="hours-open">10:00 AM – 8:00 PM</td></tr>
+          <tr><td>Sunday</td><td class="hours-closed">Closed</td></tr>
+        </table>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.5rem;">By appointment only</p>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Find Leverage AI Online</h3>
+        <div class="social-links">
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/schlottig/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/profile.php?id=61575834658691" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/mikeschlottig44/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <!-- Medium -->
+          <a href="https://medium.com/@mikeschlottig44" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+            <svg viewBox="0 0 24 24"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42 3.38 2.88 3.38 6.42zm2.84 0c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75c.66 0 1.19 2.58 1.19 5.75z"/></svg>
+          </a>
+          <!-- Nextdoor -->
+          <a href="https://nextdoor.com/pages/jon-schlottig/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Nextdoor">
+            <svg viewBox="0 0 24 24"><path d="M12 2L3 9v12h6v-7h6v7h6V9z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-card" style="background: var(--amber-light); border-color: #e8d5a8;">
+        <h3 style="color: var(--amber);">Why Leverage AI</h3>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" stroke="var(--amber)"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span><strong>No contracts</strong> — no lock-in, no retainers</span>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" stroke="var(--amber)"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span><strong>Founder-direct</strong> — talk to the builder</span>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" stroke="var(--amber)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          <span><strong>AI-native</strong> — built for how search works now</span>
+        </div>
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" stroke="var(--amber)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Serves <strong>Grants Pass, Medford, Ashland</strong> &amp; the I-5 corridor</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FEATURED REVIEW -->
+  <section class="review-section">
+    <h2>Client Testimonial</h2>
+    <div class="review-card">
+      <div class="review-stars">
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.47l-4.94 2.8.94-5.5-4-3.9 5.53-.86z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.47l-4.94 2.8.94-5.5-4-3.9 5.53-.86z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.47l-4.94 2.8.94-5.5-4-3.9 5.53-.86z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.47l-4.94 2.8.94-5.5-4-3.9 5.53-.86z"/></svg>
+        <svg class="star" viewBox="0 0 20 20"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.47l-4.94 2.8.94-5.5-4-3.9 5.53-.86z"/></svg>
+      </div>
+      <p class="review-body">Leverage AI completely changed how our brand shows up in AI-generated search. Within 90 days of their optimization work, our product was being cited by ChatGPT and Perplexity for our core use cases. The pipeline impact was immediate and measurable. They don't just talk strategy — they engineer results.</p>
+      <div class="review-attribution">
+        <div>
+          <div class="review-author">Daley Organics — Client Case Study</div>
+          <div class="review-date">2025</div>
+        </div>
+        <div class="review-source">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          leverageai.network
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED -->
+  <section class="related-section">
+    <h2>More Business &amp; Professional Services in Grants Pass</h2>
+    <div class="related-grid">
+      <a href="https://oregonsmbdirectory.com/city/grants-pass/business-professional-services" class="related-card">
+        <h4>View All Business Services</h4>
+        <p>Marketing, consulting, IT, and professional services</p>
+        <div class="related-rating" style="color: var(--accent);">Browse all →</div>
+      </a>
+      <a href="https://oregonsmbdirectory.com/city/grants-pass" class="related-card">
+        <h4>All Grants Pass Businesses</h4>
+        <p>Browse every verified listing in Grants Pass</p>
+        <div class="related-rating" style="color: var(--accent);">Explore →</div>
+      </a>
+      <a href="https://oregonsmbdirectory.com/best-of" class="related-card">
+        <h4>Best Of Oregon</h4>
+        <p>Top-rated businesses across the I-5 corridor</p>
+        <div class="related-rating" style="color: var(--accent);">See rankings →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Oregon SMB<span>Business Directory</span></div>
+        <p>Oregon's premier business directory for cities along the I-5 corridor — from Ashland to Portland.</p>
+      </div>
+      <div>
+        <h4>Cities</h4>
+        <ul>
+          <li><a href="https://oregonsmbdirectory.com/city/grants-pass">Grants Pass</a></li>
+          <li><a href="https://oregonsmbdirectory.com/city/medford">Medford</a></li>
+          <li><a href="https://oregonsmbdirectory.com/city/ashland">Ashland</a></li>
+          <li><a href="https://oregonsmbdirectory.com/city/eugene">Eugene</a></li>
+          <li><a href="https://oregonsmbdirectory.com/city/portland">Portland</a></li>
+          <li><a href="https://oregonsmbdirectory.com/city/salem">Salem</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="#">Business & Professional</a></li>
+          <li><a href="#">Construction & Home</a></li>
+          <li><a href="#">Food & Dining</a></li>
+          <li><a href="#">Health & Medical</a></li>
+          <li><a href="#">Retail & Shopping</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://oregonsmbdirectory.com/blog">Blog</a></li>
+          <li><a href="https://oregonsmbdirectory.com/research">Research Reports</a></li>
+          <li><a href="https://oregonsmbdirectory.com/best-of">Best Of</a></li>
+          <li><a href="https://oregonsmbdirectory.com/contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Oregon SMB Directory. All rights reserved. Serving the Northwest I-5 Corridor.
+    </div>
+  </footer>
+
+</body>
+</html>

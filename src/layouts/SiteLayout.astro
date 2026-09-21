@@ -1,0 +1,87 @@
+---
+import "@/styles/tokens.css";
+import "@/styles/globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import JsonLd from "@/components/JsonLd.astro";
+import { publisher } from "@/data/publisher";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  ogType?: "website" | "article";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schemas?: any[];
+}
+
+const {
+  title = `${publisher.name} — Statewide Local Business Records`,
+  description = publisher.description,
+  image = "/og-default.jpg",
+  ogType = "website",
+  schemas,
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const origin = Astro.site ?? Astro.url.origin;
+const canonical = new URL(pathname, origin).toString();
+const imageUrl = new URL(image, origin).toString();
+
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Typography from design spec */
+      h1 { font-family: var(--font-playfair); font-weight: 700; }
+      h2 { font-family: var(--font-playfair); font-weight: 700; }
+      h3, .card-title { font-family: var(--font-inter); font-weight: 600; }
+      body, .body-text { font-family: var(--font-inter); font-weight: 400; }
+      .eyebrow { font-family: var(--font-inter); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+      .stat, .mono { font-family: var(--font-jetbrains); font-weight: 600; }
+    </style>
+
+    <meta property="og:site_name" content="Oregon SMB Directory" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    {schemas && schemas.length > 0 && <JsonLd data={schemas} />}
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <Navbar pathname={pathname} client:load />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

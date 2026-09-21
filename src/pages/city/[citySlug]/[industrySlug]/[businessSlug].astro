@@ -1,0 +1,330 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import FaqSchema from "@/components/FaqSchema.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import {
+  getBusinesses,
+  getBusinessPathSlug,
+  parseLatLng,
+} from "@/data/businesses";
+import { generateIndustryFaqs } from "@/lib/seo-content";
+import { businessSchema, breadcrumbSchema } from "@/lib/schema";
+import { getBusinessRelatedLinks } from "@/lib/link-graph";
+import {
+  ChevronRight,
+  ExternalLink,
+  Globe,
+  MapPin,
+  Phone,
+  Star,
+  ArrowLeft,
+  Building2,
+} from "lucide-react";
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  for (const city of cities) {
+    for (const industry of industries) {
+      const businesses = getBusinesses(city.slug, industry.slug);
+      for (const business of businesses) {
+        paths.push({
+          params: {
+            citySlug: city.slug,
+            industrySlug: industry.slug,
+            businessSlug: getBusinessPathSlug(city.slug, industry.slug, business),
+          },
+          props: { city, industry, business },
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { city, industry, business } = Astro.props;
+
+const coords = parseLatLng(business.googleUrl);
+const mapsDirections = coords
+  ? `https://www.google.com/maps/dir/?api=1&destination=${coords.lat},${coords.lng}`
+  : business.googleUrl ??
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${business.title} ${business.address ?? city.name}`,
+    )}`;
+
+const embedSrc = coords
+  ? `https://www.google.com/maps?q=${coords.lat},${coords.lng}&hl=en&z=15&output=embed`
+  : `https://www.google.com/maps?q=${encodeURIComponent(
+      `${business.title} ${business.address ?? city.name}`,
+    )}&hl=en&z=15&output=embed`;
+
+const related = getBusinesses(city.slug, industry.slug)
+  .filter((b) => b.title !== business.title)
+  .slice(0, 4);
+
+const title = `${business.title} — ${industry.name} in ${city.name}, OR`;
+const description = `${business.title} is a ${
+  business.category?.toLowerCase() ?? industry.name.toLowerCase()
+} serving ${city.name}, Oregon. ${industry.description}.`;
+
+const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
+const observationDate = business.ratingObservation
+  ? new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(
+      new Date(business.ratingObservation.observedAt),
+    )
+  : null;
+const verificationLabel = business.verification
+  ? business.verification.status.replaceAll("_", " ")
+  : "Source observed";
+const badge = `${verificationLabel}${isTopRated ? " · 4.8+ source rating" : ""}`;
+
+// Stats for TldrCard
+const stats = [
+  { value: typeof business.rating === "number" ? business.rating.toFixed(1) : "N/A", label: "Rating" },
+  { value: typeof business.reviews === "number" ? business.reviews.toLocaleString() : "N/A", label: "Reviews" },
+  { value: verificationLabel, label: "Record status" }
+];
+
+// Generate FAQs for this industry
+const faqs = generateIndustryFaqs(city, industry, getBusinesses(city.slug, industry.slug));
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const businessPath = getBusinessPathSlug(city.slug, industry.slug, business);
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
+  { name: industry.name, url: `${siteUrl}/city/${city.slug}/${industry.slug}` },
+  { name: business.title, url: `${siteUrl}/city/${city.slug}/${industry.slug}/${businessPath}` },
+];
+const schemas = [
+  businessSchema(business, city, industry, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+// Compute related links for this business page
+const relatedLinks = getBusinessRelatedLinks({
+  citySlug: city.slug,
+  industrySlug: industry.slug,
+  businessSlug: businessPath,
+  businesses: getBusinesses(city.slug, industry.slug),
+  baseUrl: siteUrl,
+});
+---
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <!-- Dark TLDR Header with TldrCard -->
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: city.name, href: `/city/${city.slug}` },
+      { label: industry.name, href: `/city/${city.slug}/${industry.slug}` },
+      { label: business.title }
+    ]}
+    eyebrow={`${business.category || industry.name} in ${city.name}, OR`}
+    title={business.title}
+    tagline={`${business.category || industry.name} in ${city.name}, Oregon`}
+    stats={stats}
+    badge={badge}
+  />
+
+  <section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 space-y-8">
+      <div class="rounded-xl overflow-hidden border border-border shadow-sm bg-muted">
+        <iframe
+          title={`Map of ${business.title}`}
+          src={embedSrc}
+          width="100%"
+          height="360"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="block w-full"
+        />
+        <div class="p-4 flex flex-wrap items-center justify-between gap-3 bg-card">
+          <p class="text-sm text-muted-foreground flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-accent" />
+            {business.address ?? `${city.name}, OR`}
+          </p>
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+          >
+            Open in Google Maps <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="font-serif text-2xl font-bold mb-3">About {business.title}</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          {business.title} is listed as a {business.category?.toLowerCase() ?? industry.name.toLowerCase()} serving the {city.name} area. {industry.description}. {typeof business.rating === "number"
+            ? typeof business.reviews === "number"
+              ? `The source record showed a ${business.rating.toFixed(1)}-star rating across ${business.reviews.toLocaleString()} reviews${observationDate ? ` when observed in ${observationDate}` : ""}.`
+              : `The source record showed a ${business.rating.toFixed(1)}-star rating.`
+            : "Contact them directly for service details, availability, and quotes."}
+        </p>
+      </div>
+    </div>
+
+    <aside class="space-y-6">
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4">Contact</h3>
+        <ul class="space-y-3 text-sm">
+          {business.address && (
+            <li class="flex items-start gap-3">
+              <MapPin className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+              <span class="text-muted-foreground">{business.address}</span>
+            </li>
+          )}
+          {business.phone && (
+            <li class="flex items-center gap-3">
+              <Phone className="w-4 h-4 text-accent flex-shrink-0" />
+              <a href={`tel:${business.phone}`} class="text-foreground hover:text-accent">
+                {business.phone}
+              </a>
+            </li>
+          )}
+          {business.website && business.websiteStatus === "confirmed" && (
+            <li class="flex items-center gap-3">
+              <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+              <a
+                href={business.website}
+                target="_blank"
+                rel="noreferrer"
+                class="text-foreground hover:text-accent break-all"
+              >
+                {business.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              </a>
+            </li>
+          )}
+          {!business.website && business.websiteStatus === "unconfirmed" && (
+            <li class="flex items-center gap-3">
+              <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+              <span class="text-muted-foreground">Website not confirmed</span>
+            </li>
+          )}
+          {business.websiteStatus === "quarantined" && (
+            <li class="flex items-center gap-3">
+              <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+              <span class="text-muted-foreground">Website withheld pending review</span>
+            </li>
+          )}
+          {business.category && (
+            <li class="flex items-center gap-3">
+              <Building2 className="w-4 h-4 text-accent flex-shrink-0" />
+              <span class="text-muted-foreground">{business.category}</span>
+            </li>
+          )}
+        </ul>
+
+        <div class="mt-5 pt-5 border-t border-border space-y-2">
+          <a
+            href={mapsDirections}
+            target="_blank"
+            rel="noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded hover:bg-primary/90 transition-colors"
+          >
+            Get Directions <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+          {business.website && business.websiteStatus === "confirmed" && (
+            <a
+              href={business.website}
+              target="_blank"
+              rel="noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+            >
+              Visit Website <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
+          {business.phone && (
+            <a
+              href={`tel:${business.phone}`}
+              class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" /> Call Now
+            </a>
+          )}
+        </div>
+      </div>
+
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm text-sm">
+        <h3 class="font-serif text-lg font-semibold mb-3">Data provenance</h3>
+        <p class="text-muted-foreground leading-relaxed">
+          This is a source-observed directory record, not an owner-confirmed profile unless a specific verification event appears above.
+          {business.ratingObservation && (
+            <> Rating evidence is tied to provider record <code>{business.ratingObservation.sourceRecordId}</code> and was observed {observationDate}.</>
+          )}
+        </p>
+        <a href="/contact/?topic=listing-correction" class="inline-flex mt-3 text-accent hover:underline">
+          Request a correction
+        </a>
+      </div>
+
+      {related.length > 0 && (
+        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+          <h3 class="font-serif text-lg font-semibold mb-4">
+            More {industry.name} in {city.name}
+          </h3>
+          <ul class="space-y-3">
+            {related.map((b) => (
+              <li>
+                <a
+                  href={`/city/${city.slug}/${industry.slug}/${getBusinessPathSlug(city.slug, industry.slug, b)}`}
+                  class="flex items-center justify-between gap-2 text-sm group"
+                >
+                  <span class="text-foreground group-hover:text-accent transition-colors">
+                    {b.title}
+                  </span>
+                  {typeof b.rating === "number" && (
+                    <span class="flex items-center gap-1 text-muted-foreground text-xs flex-shrink-0">
+                      <Star className="w-3 h-3 fill-gold text-gold" />
+                      {b.rating.toFixed(1)}
+                    </span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/city/${city.slug}/${industry.slug}`}
+            class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings
+          </a>
+        </div>
+      )}
+    </aside>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="container mx-auto px-4 py-12 border-t" style="border-color: var(--c-border);">
+    <h3 class="font-playfair text-xl md:text-2xl font-bold mb-6" style="color: var(--c-pine);">
+      Frequently Asked Questions
+    </h3>
+    <div class="space-y-4 max-w-3xl">
+      {faqs.map((faq, i) => (
+        <details class="group border rounded-lg p-4" style="border-color: var(--c-border);">
+          <summary class="flex items-center justify-between cursor-pointer font-semibold" style="color: var(--c-pine);">
+            <span class="text-base">{faq.question}</span>
+            <span class="ml-4 flex-shrink-0 transition-transform group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed" style="color: var(--c-pine);">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQPage JSON-LD -->
+  <FaqSchema faqs={faqs} />
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
+</SiteLayout>

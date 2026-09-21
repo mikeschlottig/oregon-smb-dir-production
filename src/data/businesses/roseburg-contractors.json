@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Zerbach Construction",
+    "address": "288 NE Ward Ave",
+    "phone": "(541) 957-9307",
+    "category": "General contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Zerbach%20Construction&query_place_id=ChIJs0avyMg9xFQRTvqIK1jEjl8",
+    "rating": 5.0,
+    "reviews": 12,
+    "website": "https://zerbachconstruction.com"
+  },
+  {
+    "title": "Addcox Heating Center",
+    "address": "831 NW Highland St",
+    "phone": "(458) 803-9573",
+    "category": "HVAC contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Addcox%20Heating%20Center&query_place_id=ChIJMXLcJcUixFQRI1bMbiyBLMs",
+    "rating": 4.9,
+    "reviews": 784,
+    "website": "https://addcox.com"
+  },
+  {
+    "title": "Apex Ace Home Center",
+    "address": "1494 NE Stephens St",
+    "phone": "(541) 673-5127",
+    "category": "Hardware store",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Apex%20Ace%20Home%20Center&query_place_id=ChIJ7zDnHsIixFQRxk5e0YmEpzo",
+    "rating": 4.8,
+    "reviews": 150,
+    "website": "https://acehardware.com/store-details/03226"
+  },
+  {
+    "title": "Pacific Air Comfort Inc",
+    "address": "1440 NE Dee St",
+    "phone": "(541) 672-9510",
+    "category": "HVAC contractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Pacific%20Air%20Comfort%20Inc&query_place_id=ChIJ34zKIMIixFQRCzI6Nn8cIIA",
+    "rating": 4.3,
+    "reviews": 49,
+    "website": "https://pacificaircomfort.com"
+  }
+]

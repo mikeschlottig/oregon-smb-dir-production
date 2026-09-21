@@ -1,0 +1,127 @@
+[
+  {
+    "title": "A Consolidated Construction, LLC",
+    "address": "1525 Sunny Cir, Grants Pass, OR 97527",
+    "phone": "(541) 226-1740",
+    "rating": 5,
+    "reviews": 4,
+    "category": "Concrete contractor",
+    "website": "https://aconsolidatedconstruction.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4194798,-123.30812619999999"
+  },
+  {
+    "title": "Riverside Ready Mix Inc",
+    "address": "531 SE Mill St, Grants Pass, OR 97526",
+    "phone": "(541) 476-1424",
+    "rating": 4.1,
+    "reviews": 21,
+    "category": "Concrete contractor",
+    "website": "https://www.riversidereadymixinc.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.432746099999996,-123.3177662"
+  },
+  {
+    "title": "Brown Bear Masonry & Concrete LLC",
+    "address": "375 Sleepy Hollow Loop, Grants Pass, OR 97527",
+    "phone": "(541) 659-9622",
+    "rating": 5,
+    "reviews": 2,
+    "category": "Concrete contractor",
+    "website": "https://brownbearmasonry.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.385566999999995,-123.41668209999999"
+  },
+  {
+    "title": "Copeland Sand & Gravel",
+    "address": "695 SE J St, Grants Pass, OR 97526",
+    "phone": "(541) 476-4441",
+    "rating": 3.6,
+    "reviews": 35,
+    "category": "Paving contractor",
+    "website": "https://www.copelandsandandgravel.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.434122599999995,-123.31716709999999"
+  },
+  {
+    "title": "323 Construction",
+    "phone": "(541) 226-1395",
+    "rating": 5,
+    "reviews": 15,
+    "category": "Concrete contractor",
+    "website": "http://323construction.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4959444,-123.4931115"
+  },
+  {
+    "title": "Pro Edge Concrete",
+    "address": "352 Carter Dr, Grants Pass, OR 97526",
+    "phone": "(541) 499-7627",
+    "rating": 3,
+    "reviews": 2,
+    "category": "Concrete contractor",
+    "website": "https://pro-edgeconcrete.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4867766,-123.4329427"
+  },
+  {
+    "title": "Legion Concrete LLC",
+    "phone": "(541) 660-0504",
+    "rating": 5,
+    "reviews": 83,
+    "category": "Concrete contractor",
+    "website": "http://legionconcrete.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.969052999999995,-122.031454"
+  },
+  {
+    "title": "Calafiore Custom Concrete LLC",
+    "phone": "(541) 761-6598",
+    "rating": 4.6,
+    "reviews": 10,
+    "category": "Concrete contractor",
+    "website": "https://www.facebook.com/Calafiore-Custom-Concrete-312386819190830/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.3895775,-123.6355749"
+  },
+  {
+    "title": "Moser Paving & Excavating",
+    "address": "210 Ringuette St, Grants Pass, OR 97527",
+    "phone": "(541) 479-2424",
+    "rating": 3.5,
+    "reviews": 30,
+    "category": "Paving contractor",
+    "website": "http://www.moserpaving.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4247401,-123.33932949999999"
+  },
+  {
+    "title": "Durbin Concrete LLC",
+    "phone": "(541) 441-9535",
+    "rating": 5,
+    "reviews": 2,
+    "category": "Concrete contractor",
+    "website": "http://www.durbinconcrete.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4959444,-123.1623324"
+  },
+  {
+    "title": "Custom Concrete & Masonry",
+    "phone": "(541) 476-1591",
+    "rating": 5,
+    "reviews": 4,
+    "category": "Concrete contractor",
+    "website": "https://www.facebook.com/CCM.DLR",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.346771,-123.2233785"
+  },
+  {
+    "title": "Cascade Block",
+    "address": "1559 Dowell Rd, Grants Pass, OR 97527",
+    "phone": "(541) 479-1323",
+    "rating": 4.5,
+    "reviews": 27,
+    "category": "Building materials store",
+    "website": "https://www.willamettegraystone.com/history.php",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.4215325,-123.36658059999999"
+  },
+  {
+    "title": "Copeland Paving Inc",
+    "address": "140 Aggregate Ave, Grants Pass, OR 97527",
+    "phone": "(541) 862-2390",
+    "rating": 4,
+    "reviews": 28,
+    "category": "Paving contractor",
+    "website": "http://cpipaving.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=42.339514,-123.335895"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "rogue-regency-inn-medford-airport",
+    "title": "Rogue Regency Inn Medford Airport",
+    "address": "2300 Biddle Rd, Medford, OR 97504",
+    "phone": "(541) 7701234",
+    "rating": 4.0,
+    "reviews": 852,
+    "category": "Hotels",
+    "website": "http://www.rogueregency.com/",
+    "googleUrl": "https://www.google.com/maps/place/Rogue+Regency+Inn+Medford+Airport/@42.3406248,-122.8740404,13z/data=!4m14!1m3!2m2!1sHotels+Medford+Oregon!6e3!3m9!1s0x54cf7bbca9d624b3:0x1412d2fb52a18e9c!5m2!4m1!1i2!8m2!3d42.353173!4d-122.874327!15sChVIb3RlbHMgTWVkZm9yZCBPcmVnb25aFyIVaG90ZWxzIG1lZGZvcmQgb3JlZ29ukgEFaG90ZWzgAQA!16s%2Fg%2F1thp7qr2?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "hampton-inn-medford",
+    "title": "Hampton Inn Medford",
+    "address": "1122 Morrow Rd, Medford, OR 97504",
+    "phone": "(541) 7790660",
+    "rating": 3.8,
+    "reviews": 852,
+    "category": "Hotels",
+    "website": "https://www.hilton.com/en/hotels/mfrorhx-hampton-medford/?SEO_id=GMB-AMER-HX-MFRORHX&y_source=1_MjA4MjAyNy03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D",
+    "googleUrl": "https://www.google.com/maps/place/Hampton+Inn+Medford/@42.3406248,-122.8740404,13z/data=!4m14!1m3!2m2!1sHotels+Medford+Oregon!6e3!3m9!1s0x54cf7bb72b46b617:0xf24145ceecb80c4!5m2!4m1!1i2!8m2!3d42.3463752!4d-122.8726091!15sChVIb3RlbHMgTWVkZm9yZCBPcmVnb25aFyIVaG90ZWxzIG1lZGZvcmQgb3JlZ29ukgEFaG90ZWzgAQA!16s%2Fg%2F1tk8nb42?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "quality-inn-suites-medford-airport",
+    "title": "Quality Inn & Suites Medford Airport",
+    "address": "1950 Biddle Rd, Medford, OR 97504",
+    "phone": "(541) 2276016",
+    "rating": 3.8,
+    "reviews": 852,
+    "category": "Hotels",
+    "website": "https://www.choicehotels.com/oregon/medford/quality-inn-hotels/or201?mc=llgoxxpx",
+    "googleUrl": "https://www.google.com/maps/place/Quality+Inn+%26+Suites+Medford+Airport/@42.3406248,-122.8740404,13z/data=!4m14!1m3!2m2!1sHotels+Medford+Oregon!6e3!3m9!1s0x54cf7bb0ab5b8e3f:0x14a5f782dc4df860!5m2!4m1!1i2!8m2!3d42.347735!4d-122.873337!15sChVIb3RlbHMgTWVkZm9yZCBPcmVnb25aFyIVaG90ZWxzIG1lZGZvcmQgb3JlZ29ukgEFaG90ZWzgAQA!16s%2Fg%2F1v8y3rz9?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  },
+  {
+    "slug": "motel-6-medford-or-north",
+    "title": "Motel 6 Medford, OR North",
+    "address": "US 5 &, 2400 Biddle Rd, Crater Lake Hwy #62, Medford, OR 97504",
+    "phone": "(541) 7790550",
+    "rating": 3.5,
+    "reviews": 2356,
+    "category": "Hotels",
+    "website": "https://www.motel6.com/property/motel-medford-or-oregon-us-294249?lid=Local_Milestone&travelAgentNumber=TA001305&corporatePlusNumber=CP792N5W&utm_source=google%20my%20business&utm_medium=organic%20listing&utm_campaign=visit%20website&utm_content=global",
+    "googleUrl": "https://www.google.com/maps/place/Motel+6+Medford,+OR+-+North/@42.3406248,-122.8740404,13z/data=!4m13!1m3!2m2!1sHotels+Medford+Oregon!6e3!3m8!1s0x54cf7bbcbeb374c5:0xe4738a1373726722!5m2!4m1!1i2!8m2!3d42.3537315!4d-122.87472!16s%2Fg%2F1th1cg3s?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true
+  }
+]

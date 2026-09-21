@@ -1,0 +1,190 @@
+[
+  {
+    "title": "Noble Root",
+    "address": "401 NE 19th Ave Suite 200, Portland, OR 97232",
+    "phone": "(503) 208-6133",
+    "category": "Landscape designer",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Noble%20Root&query_place_id=ChIJtbFZrp2plVQRR6KM1pj64K8",
+    "rating": 5.0,
+    "reviews": 47,
+    "website": "https://nobleroot.com"
+  },
+  {
+    "title": "Harmony Design Northwest",
+    "address": "2835 SW Spring Garden St, Portland, OR 97219",
+    "phone": "(503) 347-1182",
+    "category": "Landscape designer",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Harmony%20Design%20Northwest&query_place_id=ChIJBXzc_qALlVQR58mzz8L9kQc",
+    "rating": 5.0,
+    "reviews": 27,
+    "website": "https://harmonydesignnw.com"
+  },
+  {
+    "title": "My Good Neighbor PDX",
+    "address": "16123 SE Rural Ct, Portland, OR 97236",
+    "phone": "(503) 300-5557",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=My%20Good%20Neighbor%20PDX&query_place_id=ChIJp69sIDmnlVQR8NvMkOHN3sc",
+    "rating": 5.0,
+    "reviews": 24,
+    "website": "https://mygoodneighborpdx.com"
+  },
+  {
+    "title": "Earth Ecology, LLC",
+    "address": "11528 SE Boise St, Portland, OR 97266",
+    "phone": "(858) 774-7900",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Earth%20Ecology%2C%20LLC&query_place_id=ChIJqamFVDGtlVQR78W4KgCgGqI",
+    "rating": 5.0,
+    "reviews": 21,
+    "website": "https://earthecology.org"
+  },
+  {
+    "title": "All Things Wilson | Professional Landscape Services",
+    "address": "4207 SE Woodstock Blvd Suite 117, Portland, OR 97206, United States",
+    "phone": "+1 503-893-8001",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=All%20Things%20Wilson%20%7C%20Professional%20Landscape%20Services&query_place_id=ChIJXzKLXLH3YyIRjY5A7U7JUnk",
+    "rating": 5.0,
+    "reviews": 16,
+    "website": "https://allthingswilsonpdx.com"
+  },
+  {
+    "title": "ER BLINI Landscaping LLC",
+    "address": "13822 SE Mitchell St, Portland, OR 97236, United States",
+    "phone": "+1 503-374-5459",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=ER%20BLINI%20Landscaping%20LLC&query_place_id=ChIJ9Tg1mczRaI4R1lR_IUOitQQ",
+    "rating": 5.0,
+    "reviews": 10,
+    "website": "https://erblinilandscapingllc.com"
+  },
+  {
+    "title": "Donna Giguere Landscape Design",
+    "address": "3651 SE Bybee Blvd, Portland, OR 97202, United States",
+    "phone": "+1 503-777-1177",
+    "category": "Landscape designer",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Donna%20Giguere%20Landscape%20Design&query_place_id=ChIJpxrG3LoKlVQRPrNT4EuwDfk",
+    "rating": 5.0,
+    "reviews": 8,
+    "website": "https://giguerelandscapedesign.com"
+  },
+  {
+    "title": "Berserker Gnome Landscapes",
+    "address": "N Richmond and, N Smith St, Portland, OR 97203",
+    "phone": "(503) 715-7949",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Berserker%20Gnome%20Landscapes&query_place_id=ChIJU8DAS4MqYoYR0P8flWJ1Y8g",
+    "rating": 5.0,
+    "reviews": 5,
+    "website": "https://berserkergnome.com"
+  },
+  {
+    "title": "Lazy-Daze-Greenery LLC",
+    "address": "7832 N Leadbetter Rd, Portland, OR 97203",
+    "phone": "(943) 666-3215",
+    "category": "Landscape architect",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Lazy-Daze-Greenery%20LLC&query_place_id=ChIJt21HDLKplVQRlb1WmIPkTuY",
+    "rating": 5.0,
+    "reviews": 1
+  },
+  {
+    "title": "Foxhaven",
+    "address": "2723a N Hayden Island Dr, Portland, OR 97217",
+    "phone": "(503) 984-8537",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Foxhaven&query_place_id=ChIJl96HgXOplVQR_9vAtUEbB1c",
+    "rating": 5.0,
+    "reviews": 1
+  },
+  {
+    "title": "Grasstains Landscape Design & Build",
+    "address": "5255 NE 74th Ave, Portland, OR 97218",
+    "phone": "(503) 515-4842",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Grasstains%20Landscape%20Design%20%26%20Build&query_place_id=ChIJq2zLGZGmlVQRgV8MZsDCLvo",
+    "rating": 4.9,
+    "reviews": 60,
+    "website": "https://grasstainslandscaping.com"
+  },
+  {
+    "title": "Ross NW Watergardens",
+    "address": "1127 NE 160th Ave, Portland, OR 97230",
+    "phone": "(503) 761-3683",
+    "category": "Landscape designer",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Ross%20NW%20Watergardens&query_place_id=ChIJ_7zhopOflVQRB3HmUs3QatQ",
+    "rating": 4.9,
+    "reviews": 45,
+    "website": "https://rossnwwatergardens.com/portland-landscape-design"
+  },
+  {
+    "title": "Prestige Landscape & Tree Service",
+    "address": "4646 NE Buffalo St, Portland, OR 97218",
+    "phone": "(503) 933-0773",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Prestige%20Landscape%20%26%20Tree%20Service&query_place_id=ChIJkRtWjV-nlVQRMx3l94QceCs",
+    "rating": 4.8,
+    "reviews": 102,
+    "website": "https://prestige-landscape.com"
+  },
+  {
+    "title": "Good Green Neighbors",
+    "address": "1724 SE 34th Ave, Portland, OR 97214",
+    "phone": "(503) 453-6057",
+    "category": "Lawn care service",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Good%20Green%20Neighbors&query_place_id=ChIJIRnZO46glVQRNJ18sQ6Gh-g",
+    "rating": 4.7,
+    "reviews": 33,
+    "website": "https://goodgreenneighbors.com"
+  },
+  {
+    "title": "Garcia Yard Maintenance LLC",
+    "address": "7217 SE Henry St, Portland, OR 97206, United States",
+    "phone": "+1 503-774-2237",
+    "category": "Lawn care service",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Garcia%20Yard%20Maintenance%20LLC&query_place_id=ChIJAT0LfRuglVQR-BPxMwAGcxQ",
+    "rating": 4.7,
+    "reviews": 12,
+    "website": "https://garciayardmaintenancellc.com"
+  },
+  {
+    "title": "Blessing Landscapes",
+    "address": "7219 NE 47th Ave, Portland, OR 97218",
+    "phone": "(503) 284-3557",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Blessing%20Landscapes&query_place_id=ChIJ0Zq545CmlVQRxOD_mrFpysw",
+    "rating": 4.6,
+    "reviews": 103,
+    "website": "https://blessingland.com"
+  },
+  {
+    "title": "Precision Landscape Services, Inc.",
+    "address": "10726 SE Division St, Portland, OR 97266",
+    "phone": "(503) 257-7997",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Precision%20Landscape%20Services%2C%20Inc.&query_place_id=ChIJsQIG9cehlVQRGZI-vQxayBQ",
+    "rating": 4.4,
+    "reviews": 52,
+    "website": "https://precisionlandscape.com"
+  },
+  {
+    "title": "Sunrise Landscapers Portland",
+    "address": "8407 #B NE Fremont St, Portland, OR 97220",
+    "phone": "(503) 658-1828",
+    "category": "Landscaper",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Sunrise%20Landscapers%20Portland&query_place_id=ChIJm7kGfFOclVQRmA77aryjeTA",
+    "rating": 4.3,
+    "reviews": 41,
+    "website": "https://sunriselandscapeportland.com"
+  },
+  {
+    "title": "Garden Center at The Home Depot",
+    "address": "1728 N Tomahawk Island Dr, Portland, OR 97217",
+    "phone": "(503) 289-9200",
+    "category": "Garden center",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Garden%20Center%20at%20The%20Home%20Depot&query_place_id=ChIJ3_lTTpyolVQRGzmmnKiW2rw",
+    "rating": 3.8,
+    "reviews": 4,
+    "website": "https://homedepot.com/l/Jantzen-Beach/OR/Portland/97217/4007/garden-center"
+  }
+]

@@ -1,0 +1,331 @@
+[
+  {
+    "title": "Marcum Chiropractic Clinic",
+    "address": "4310 N Interstate Ave, Portland, OR 97217",
+    "phone": "(503) 388-9288",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Marcum%20Chiropractic%20Clinic&query_place_id=ChIJ9Rb4OYGhlVQRJAkAvtpIVxM",
+    "rating": 5.0,
+    "reviews": 285,
+    "website": "https://marcumchiropractic.com"
+  },
+  {
+    "title": "Overlook Chiropractic Clinic",
+    "address": "2064 N Killingsworth St #4439, Portland, OR 97217",
+    "phone": "(503) 719-7742",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Overlook%20Chiropractic%20Clinic&query_place_id=ChIJidg7WHSnlVQReUdpXV45FHc",
+    "rating": 5.0,
+    "reviews": 220,
+    "website": "https://overlookchiropractic.com"
+  },
+  {
+    "title": "City Chiropractic",
+    "address": "806 SW Broadway #350, Portland, OR 97205",
+    "phone": "(503) 224-9513",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=City%20Chiropractic&query_place_id=ChIJX53tIQUKlVQRGjf9_OtBs2g",
+    "rating": 5.0,
+    "reviews": 173,
+    "website": "https://citychiropracticpdx.com"
+  },
+  {
+    "title": "North Portland Wellness Group",
+    "address": "2215 N Lombard St, Portland, OR 97217",
+    "phone": "(503) 893-4407",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Portland%20Wellness%20Group&query_place_id=ChIJXQJxkFOnlVQRElR1Ba6Qw5U",
+    "rating": 5.0,
+    "reviews": 139,
+    "website": "https://npwgchiro.com"
+  },
+  {
+    "title": "Rogue Chiropractors and Spine Center",
+    "address": "2525 NW Lovejoy St #101, Portland, OR 97210",
+    "phone": "(503) 746-9926",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Rogue%20Chiropractors%20and%20Spine%20Center&query_place_id=ChIJU231dHcJlVQR7mIe6IbdHrM",
+    "rating": 5.0,
+    "reviews": 127,
+    "website": "https://roguespinecenter.com"
+  },
+  {
+    "title": "Jewell Chiropractic & Wellness",
+    "address": "8315 N Denver Ave, Portland, OR 97217",
+    "phone": "(971) 420-2198",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Jewell%20Chiropractic%20%26%20Wellness&query_place_id=ChIJf0mRKwwLlVQRFoEligKwjPM",
+    "rating": 5.0,
+    "reviews": 107,
+    "website": "https://jewellchiropractic.com"
+  },
+  {
+    "title": "Portland Chiropractic Group",
+    "address": "2031 E Burnside St, Portland, OR 97214",
+    "phone": "(503) 224-2100",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Portland%20Chiropractic%20Group&query_place_id=ChIJgwO-kruglVQR8raQlupvrz0",
+    "rating": 5.0,
+    "reviews": 94,
+    "website": "https://portlandchiropracticgroup.com"
+  },
+  {
+    "title": "Accident Care Chiropractic",
+    "address": "1868 N Lombard St, Portland, OR 97217",
+    "phone": "(503) 477-7841",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Accident%20Care%20Chiropractic&query_place_id=ChIJTaadarKnlVQRbmq7EEPUZ3A",
+    "rating": 5.0,
+    "reviews": 75,
+    "website": "https://accidentcarechiropractic.com/north-portland-clinic"
+  },
+  {
+    "title": "Foundation Chiropractic",
+    "address": "8035 SE Holgate Blvd, Portland, OR 97206",
+    "phone": "(503) 267-2723",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Foundation%20Chiropractic&query_place_id=ChIJAzT418yhlVQRGOEVUYqFaN4",
+    "rating": 5.0,
+    "reviews": 75,
+    "website": "https://foundchiro.com"
+  },
+  {
+    "title": "North Portland Chiropractic Clinic",
+    "address": "3605 N Lombard St, Portland, OR 97217",
+    "phone": "(503) 285-4137",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Portland%20Chiropractic%20Clinic&query_place_id=ChIJ8y3L5JWnlVQRI0skPgHKyYc",
+    "rating": 5.0,
+    "reviews": 54,
+    "website": "https://northportlandchiro.com"
+  },
+  {
+    "title": "Solutions Sports & Spine Chiropractors of Clackamas",
+    "address": "7200 SE 92nd Ave, Portland, OR 97266",
+    "phone": "(971) 266-0957",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Solutions%20Sports%20%26%20Spine%20Chiropractors%20of%20Clackamas&query_place_id=ChIJ_aj9xCV1lVQRVZ1Hi5ajOkQ",
+    "rating": 5.0,
+    "reviews": 49,
+    "website": "https://solutionssportsandspine.com"
+  },
+  {
+    "title": "Stumptown Chiropractic",
+    "address": "7232 N Burlington Ave, Portland, OR 97203",
+    "phone": "(503) 893-8336",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Stumptown%20Chiropractic&query_place_id=ChIJtY7ugf8HlVQRu5Scq10QMIc",
+    "rating": 5.0,
+    "reviews": 46,
+    "website": "https://stumptownchiro.com"
+  },
+  {
+    "title": "Family Roots Chiropractic",
+    "address": "728 NE Dekum St, Portland, OR 97211",
+    "phone": "(503) 568-1906",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Family%20Roots%20Chiropractic&query_place_id=ChIJ2-BP6OyglVQRjTwl0XVFqEQ",
+    "rating": 5.0,
+    "reviews": 39,
+    "website": "https://familyrootschiro.com"
+  },
+  {
+    "title": "Vida Wellness Studio",
+    "address": "7429 N Lombard St, Portland, OR 97203",
+    "phone": "(503) 468-5845",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Vida%20Wellness%20Studio&query_place_id=ChIJYSwHl22plVQRXMStfmnkZVY",
+    "rating": 5.0,
+    "reviews": 38,
+    "website": "https://vidapdxchiro.com"
+  },
+  {
+    "title": "Lemongrass Chiropractic",
+    "address": "3537 N Williams Ave, Portland, OR 97227",
+    "phone": "(971) 801-8848",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Lemongrass%20Chiropractic&query_place_id=ChIJCTJD9hCnlVQRCLzkwPtDxoY",
+    "rating": 5.0,
+    "reviews": 36,
+    "website": "https://lemongrasschiropractic.com"
+  },
+  {
+    "title": "Far East Chiropractic",
+    "address": "8136 SE Foster Rd #220, Portland, OR 97206",
+    "phone": "(503) 208-2642",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Far%20East%20Chiropractic&query_place_id=ChIJFdrtjsqhlVQRMafZnuFT6CQ",
+    "rating": 5.0,
+    "reviews": 16
+  },
+  {
+    "title": "Center for Chiropractic + Wellness",
+    "address": "3241 NE Broadway St, Portland, OR 97232",
+    "phone": "(503) 282-8582",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Center%20for%20Chiropractic%20%2B%20Wellness&query_place_id=ChIJFWD8Is6glVQRwdIkGRvXZOw",
+    "rating": 4.9,
+    "reviews": 319,
+    "website": "https://center4chiropractic.com"
+  },
+  {
+    "title": "Laurelhurst Chiropractic",
+    "address": "2705 E Burnside St # 213, Portland, OR 97214",
+    "phone": "(971) 333-2656",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Laurelhurst%20Chiropractic&query_place_id=ChIJ734JsgQKlVQRusypI1DEkIE",
+    "rating": 4.9,
+    "reviews": 311,
+    "website": "https://laurelhurstchiropractic.com"
+  },
+  {
+    "title": "Hosmer Chiropractic Health | Pearl District",
+    "address": "1030 NW Marshall St, Portland, OR 97209",
+    "phone": "(503) 227-2279",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Hosmer%20Chiropractic%20Health%20%7C%20Pearl%20District&query_place_id=ChIJU9wWDv4JlVQRzFF9Jm-jROY",
+    "rating": 4.9,
+    "reviews": 294,
+    "website": "https://hosmerchiropractic.com/pearl-district"
+  },
+  {
+    "title": "Pacific Chiropractic & Wellness Center / Portland",
+    "address": "17221 SE Division St, Portland, OR 97236",
+    "phone": "(503) 760-0778",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Pacific%20Chiropractic%20%26%20Wellness%20Center%20%2F%20Portland&query_place_id=ChIJbbqdyQMKlVQR-WTHScYhqdI",
+    "rating": 4.9,
+    "reviews": 223,
+    "website": "https://portlandchiropractor.com"
+  },
+  {
+    "title": "Bridgetown Chiropractic and Wellness PC",
+    "address": "7727 NE Glisan St, Portland, OR 97213",
+    "phone": "(503) 490-5647",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Bridgetown%20Chiropractic%20and%20Wellness%20PC&query_place_id=ChIJp5uBqBqhlVQRuQPHeaAK9c0",
+    "rating": 4.9,
+    "reviews": 175,
+    "website": "https://bridgetownchiropractic.com"
+  },
+  {
+    "title": "Bridgetown Chiropractic and Wellness, North Portland Office",
+    "address": "5828 N Lombard St suite b, Portland, OR 97203",
+    "phone": "(503) 490-5647",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Bridgetown%20Chiropractic%20and%20Wellness%2C%20North%20Portland%20Office&query_place_id=ChIJa1Fv6O-nlVQR5Vvb8sG5sQ4",
+    "rating": 4.9,
+    "reviews": 159,
+    "website": "https://bridgetownchiropractic.com"
+  },
+  {
+    "title": "Parkside Clinic",
+    "address": "2408 SE 60th Ave, Portland, OR 97206",
+    "phone": "(503) 772-1215",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Parkside%20Clinic&query_place_id=ChIJzX8eTlmglVQRisSx_u9BgK4",
+    "rating": 4.9,
+    "reviews": 132,
+    "website": "https://parksidepdx.com"
+  },
+  {
+    "title": "PDX Chiropractor",
+    "address": "2850 SE 82nd Ave Suite #10, Portland, OR 97266",
+    "phone": "(503) 777-3000",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Chiropractor&query_place_id=ChIJs6nZ9EuglVQRVJewq5s_HTM",
+    "rating": 4.9,
+    "reviews": 100,
+    "website": "https://cura-chiro.com"
+  },
+  {
+    "title": "Mississippi Chiropractic, P.C.",
+    "address": "3737 N Mississippi Ave, Portland, OR 97227",
+    "phone": "(503) 467-4511",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Mississippi%20Chiropractic%2C%20P.C.&query_place_id=ChIJDcFNEWqnlVQRkgoyLIvWnG8",
+    "rating": 4.9,
+    "reviews": 82,
+    "website": "https://chiropdx.com"
+  },
+  {
+    "title": "Connect Chiropractic & Wellness",
+    "address": "1418 N Sumner St, Portland, OR 97217",
+    "phone": "(503) 954-1660",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Connect%20Chiropractic%20%26%20Wellness&query_place_id=ChIJb_Mz8z6nlVQRggNIySGC6E4",
+    "rating": 4.9,
+    "reviews": 75,
+    "website": "https://connectchiropracticpdx.com"
+  },
+  {
+    "title": "Accident & Wellness Chiropractic",
+    "address": "4124 SE 82nd Ave #700, Portland, OR 97266",
+    "phone": "(503) 206-8863",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Accident%20%26%20Wellness%20Chiropractic&query_place_id=ChIJ096wxjmglVQRDWaXzs3tPXc",
+    "rating": 4.9,
+    "reviews": 55,
+    "website": "https://accidentwellness.com"
+  },
+  {
+    "title": "Chiropractic Healing Hands For You",
+    "address": "4615 SE Woodstock Blvd, Portland, OR 97206",
+    "phone": "(503) 771-1974",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Chiropractic%20Healing%20Hands%20For%20You&query_place_id=ChIJoXMhs6AKlVQRzXobxbQM6aU",
+    "rating": 4.9,
+    "reviews": 41,
+    "website": "https://chiropractichealinghands.com"
+  },
+  {
+    "title": "Veeva Chiropractic (formerly Centro Chiropractic)",
+    "address": "8136 SE Foster Rd #220, Portland, OR 97206",
+    "phone": "(503) 328-6300",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Veeva%20Chiropractic%20(formerly%20Centro%20Chiropractic)&query_place_id=ChIJYZQnpF6hlVQRkB5F6c5r7l0",
+    "rating": 4.8,
+    "reviews": 68,
+    "website": "https://veevaclinics.com"
+  },
+  {
+    "title": "Portland Chiropractic",
+    "address": "Ninth Floor, 1220 SW Morrison St #900, Portland, OR 97205",
+    "phone": "(503) 213-3745",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Portland%20Chiropractic&query_place_id=ChIJuy_YUQYKlVQRycPam5DeGhw",
+    "rating": 4.8,
+    "reviews": 60,
+    "website": "https://portlandchi.com"
+  },
+  {
+    "title": "Walsh Chiropractic",
+    "address": "9216 N Calhoun Ave, Portland, OR 97203",
+    "phone": "(503) 515-5338",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Walsh%20Chiropractic&query_place_id=ChIJ7QIW3gGolVQR4icjy-yKZEE",
+    "rating": 4.8,
+    "reviews": 17,
+    "website": "https://walshchiropractic.org"
+  },
+  {
+    "title": "The Wellness Center PDX",
+    "address": "3150 SE Belmont St, Portland, OR 97214",
+    "phone": "(503) 389-5545",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=The%20Wellness%20Center%20PDX&query_place_id=ChIJW-VGMS-hlVQRnk7_plCNF2Y",
+    "rating": 4.7,
+    "reviews": 577,
+    "website": "https://thewellnesscenterpdx.org"
+  },
+  {
+    "title": "Woodstock Chiropractic",
+    "address": "8029 SE Woodstock Blvd, Portland, OR 97206",
+    "phone": "(503) 774-1776",
+    "category": "Chiropractor",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Woodstock%20Chiropractic&query_place_id=ChIJ2QF2zBiglVQR1GjmcmPUAk4",
+    "rating": 4.7,
+    "reviews": 62,
+    "website": "https://woodstockchiropracticclinic.com"
+  }
+]

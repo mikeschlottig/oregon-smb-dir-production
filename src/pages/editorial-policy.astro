@@ -1,0 +1,38 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { publisher } from "@/data/publisher";
+
+const title = `Editorial and Data Quality Policy — ${publisher.name}`;
+const description = "How Oregon SMB Directory sources, qualifies, labels, corrects, and publishes local business records.";
+---
+
+<SiteLayout title={title} description={description}>
+  <header class="bg-muted pt-32 pb-12 px-4 border-b border-border">
+    <div class="container mx-auto max-w-3xl">
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Project-specific policy · August 2026</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Editorial and data quality</h1>
+      <p class="text-muted-foreground text-lg">The labels on this site describe the evidence available for a field; they do not imply owner participation unless an owner event is recorded.</p>
+    </div>
+  </header>
+
+  <main class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
+    <h2>Record labels</h2>
+    <ul>
+      <li><strong>Source observed</strong> means a field appeared in an identified public provider record.</li>
+      <li><strong>Directory reviewed</strong> requires a dated comparison and evidence identifiers.</li>
+      <li><strong>Owner claimed</strong> requires a completed claim event. It is not inferred from provider data.</li>
+      <li><strong>License verified</strong> requires a license identifier, authority, and check date.</li>
+    </ul>
+
+    <h2>Publication gates</h2>
+    <p>Ratings publish only when the value and review count agree with an imported observation that has a provider record identity and observation date. Known cell-level or conflicting ratings are suppressed. Duplicate listing identities are withheld until their locations can be resolved.</p>
+    <p>Service pages use versioned selection policies based on source-observed provider categories. Business names and broad industry membership do not qualify a record for a narrow service page.</p>
+    <p>Business websites are not linked until a validation record confirms the relationship and contains no unresolved risk flags. Suspicious or directory-like domains are quarantined.</p>
+
+    <h2>Rankings and sponsorship</h2>
+    <p>New “Best Of” editions are paused until each edition can publish its candidate universe, eligibility rules, methodology version, evidence cut-off, author and editor, sponsorship disclosure, and corrections process. Payment does not purchase a ranking.</p>
+
+    <h2>Corrections</h2>
+    <p>To challenge a name, category, address, status, rating observation, or website relationship, email <a href={`mailto:${publisher.supportEmail}`}>{publisher.supportEmail}</a> or use the <a href={publisher.correctionUrl}>listing-correction form</a>. Include the business name, city, disputed field, and supporting source. Disputed fields may be suppressed while evidence is reviewed.</p>
+  </main>
+</SiteLayout>

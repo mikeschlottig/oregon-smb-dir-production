@@ -1,0 +1,68 @@
+---
+interface Props {
+  baseUrl: string;
+  currentPage: number;
+  totalPages: number;
+}
+
+const { baseUrl, currentPage, totalPages } = Astro.props;
+
+const pageHref = (n: number) => (n === 1 ? baseUrl : `${baseUrl}page/${n}/`);
+
+const windowSize = 2;
+const start = Math.max(1, currentPage - windowSize);
+const end = Math.min(totalPages, currentPage + windowSize);
+const pages: (number | "…")[] = [];
+if (start > 1) {
+  pages.push(1);
+  if (start > 2) pages.push("…");
+}
+for (let i = start; i <= end; i++) pages.push(i);
+if (end < totalPages) {
+  if (end < totalPages - 1) pages.push("…");
+  pages.push(totalPages);
+}
+
+const prevHref = currentPage > 1 ? pageHref(currentPage - 1) : null;
+const nextHref = currentPage < totalPages ? pageHref(currentPage + 1) : null;
+---
+
+{totalPages > 1 && (
+  <nav class="flex items-center justify-center gap-2 mt-12 flex-wrap" aria-label="Pagination">
+    {prevHref ? (
+      <a
+        href={prevHref}
+        class="px-3 py-2 rounded border border-border text-sm hover:bg-muted transition-colors"
+        rel="prev"
+      >← Prev</a>
+    ) : (
+      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground/50 cursor-not-allowed">← Prev</span>
+    )}
+
+    {pages.map((p) =>
+      p === "…" ? (
+        <span class="px-2 text-muted-foreground">…</span>
+      ) : p === currentPage ? (
+        <span
+          class="px-3 py-2 rounded border border-primary bg-primary text-primary-foreground text-sm font-medium"
+          aria-current="page"
+        >{p}</span>
+      ) : (
+        <a
+          href={pageHref(p)}
+          class="px-3 py-2 rounded border border-border text-sm hover:bg-muted transition-colors"
+        >{p}</a>
+      )
+    )}
+
+    {nextHref ? (
+      <a
+        href={nextHref}
+        class="px-3 py-2 rounded border border-border text-sm hover:bg-muted transition-colors"
+        rel="next"
+      >Next →</a>
+    ) : (
+      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground/50 cursor-not-allowed">Next →</span>
+    )}
+  </nav>
+)}

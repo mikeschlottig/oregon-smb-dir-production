@@ -1,0 +1,93 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import Pagination from "@/components/Pagination.astro";
+import { getCollection } from "astro:content";
+import { breadcrumbSchema } from "@/lib/schema";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
+
+export async function getStaticPaths() {
+  const slugifyCategory = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const posts = await getCollection("blog");
+  const categories = Array.from(new Set(posts.map((p) => p.data.category)));
+  return categories.map((cat) => ({
+    params: { category: slugifyCategory(cat) },
+    props: { categoryName: cat },
+  }));
+}
+
+const PER_PAGE = 12;
+const slugifyCategory = (c: string) => c.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const { categoryName } = Astro.props;
+const all = (await getCollection("blog"))
+  .filter((p) => p.data.category === categoryName)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const totalPages = Math.max(1, Math.ceil(all.length / PER_PAGE));
+const pageSlice = all.slice(0, PER_PAGE);
+const baseUrl = `/blog/category/${slugifyCategory(categoryName)}/`;
+
+const formatDate = (iso: string) => {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+};
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const categorySlug = slugifyCategory(categoryName);
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${categoryName} — Oregon SMB Directory Blog`,
+    url: `${siteUrl}/blog/category/${categorySlug}/`,
+    description: `All ${categoryName} stories from the Oregon SMB Directory blog.`,
+  },
+  breadcrumbSchema([
+    { name: "Home", url: siteUrl },
+    { name: "Blog", url: `${siteUrl}/blog` },
+    { name: categoryName, url: `${siteUrl}/blog/category/${categorySlug}/` },
+  ]),
+];
+---
+<SiteLayout title={`${categoryName} — Oregon SMB Directory Blog`} description={`All ${categoryName} stories from the Oregon SMB Directory blog.`} schemas={schemas}>
+  <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
+    <div class="container mx-auto max-w-4xl text-center">
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Category</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">{categoryName}</h1>
+      <p class="text-muted-foreground">{all.length} stor{all.length === 1 ? "y" : "ies"}</p>
+      <p class="mt-4"><a href="/blog/" class="text-primary hover:underline text-sm">← All categories</a></p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      {pageSlice.map((p) => (
+        <a
+          href={`/blog/${p.id}/`}
+          class="group bg-card border border-border rounded-xl p-7 hover:shadow-elegant hover:-translate-y-1 transition-all duration-300 flex flex-col"
+        >
+          <div class="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+            <span class="bg-muted px-2.5 py-1 rounded-full text-accent font-medium uppercase tracking-wider">
+              {p.data.category}
+            </span>
+            {p.data.city && <span>· {p.data.city}</span>}
+          </div>
+          <h2 class="font-serif text-2xl font-bold leading-snug text-foreground group-hover:text-primary transition-colors mb-3">
+            {p.data.title}
+          </h2>
+          <p class="text-muted-foreground text-sm leading-relaxed flex-1">{p.data.excerpt}</p>
+          <div class="mt-5 pt-5 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
+            <span class="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{formatDate(p.data.date)}</span>
+            <span class="inline-flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{p.data.readTime}</span>
+          </div>
+          <span class="mt-4 inline-flex items-center gap-2 text-primary font-medium text-sm group-hover:gap-3 transition-all">
+            Read article <ArrowRight className="w-4 h-4" />
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <Pagination baseUrl={baseUrl} currentPage={1} totalPages={totalPages} />
+  </section>
+</SiteLayout>

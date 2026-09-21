@@ -1,0 +1,95 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import TldrCard from "@/components/TldrCard.astro";
+import SeoTextBlock from "@/components/SeoTextBlock.astro";
+import RelatedLinks from "@/components/RelatedLinks.astro";
+import { IndustryCard } from "@/components/cards/IndustryCard";
+import { cities } from "@/data/cities";
+import { industries } from "@/data/industries";
+import { getBusinesses } from "@/data/businesses";
+import { generateCitySeoContent } from "@/lib/seo-content";
+import { cityPageSchema, breadcrumbSchema } from "@/lib/schema";
+import { getCityHubRelatedLinks } from "@/lib/link-graph";
+import { ChevronRight } from "lucide-react";
+
+export async function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { citySlug: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+const cityImageSrc = (city.image as any).src ?? city.image;
+const title = `${city.name}, Oregon — Local Business Directory`;
+const description = city.description;
+
+// Calculate real stats for TldrCard
+const cityIndustriesWithListings = industries.filter(ind => 
+  getBusinesses(city.slug, ind.slug).length > 0
+);
+const totalListings = cityIndustriesWithListings.reduce(
+  (sum, ind) => sum + getBusinesses(city.slug, ind.slug).length, 
+  0
+);
+
+const tldrStats = [
+  { value: cityIndustriesWithListings.length.toString(), label: "Industries" },
+  { value: totalListings.toString(), label: "Listings" },
+  { value: city.population, label: "Population" },
+  ...(city.county ? [{ value: `${city.county} Co.`, label: "County" }] : [])
+];
+
+// Generate SEO content for city page
+const allCityBusinesses = cityIndustriesWithListings.flatMap(ind => getBusinesses(city.slug, ind.slug));
+const seoContent = generateCitySeoContent(city, cityIndustriesWithListings, allCityBusinesses);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const breadcrumbItems = [
+  { name: "Home", url: siteUrl },
+  { name: "Cities", url: `${siteUrl}/city/` },
+  { name: city.name, url: `${siteUrl}/city/${city.slug}` },
+];
+const schemas = [
+  ...cityPageSchema(city, cityIndustriesWithListings, siteUrl),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+// Compute related links for city hub page
+const relatedLinks = getCityHubRelatedLinks({
+  citySlug: city.slug,
+  baseUrl: siteUrl,
+});
+---
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <TldrCard
+    breadcrumb={[
+      { label: "Home", href: "/" },
+      { label: "Cities", href: "/city/" },
+      { label: city.name }
+    ]}
+    eyebrow={city.region}
+    title={city.name}
+    tagline={city.tagline}
+    stats={tldrStats}
+    county={city.county}
+  />
+
+  <section class="container mx-auto px-4 pt-16 pb-20">
+    <div class="text-center mb-12">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-3">Browse by Industry</h2>
+      <p class="text-muted-foreground text-lg">
+        Find trusted local businesses in {city.name} across all major service categories.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {industries.map((i) => <IndustryCard industry={i} citySlug={city.slug} />)}
+    </div>
+  </section>
+
+  <!-- SEO Text Block -->
+  <SeoTextBlock title={`About ${city.name}, Oregon`} html={seoContent} />
+
+  <!-- Related Links (automatic internal linking) -->
+  <RelatedLinks links={relatedLinks} heading="Related" />
+</SiteLayout>

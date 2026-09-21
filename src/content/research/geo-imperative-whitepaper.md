@@ -52,7 +52,7 @@ This paper provides:
 
 * * *
 
-[](generated-image-1775850066423.png)The Paradigm Shift: From traditional search rankings to AI-generated citations
+![The Paradigm Shift: From traditional search rankings to AI-generated citations](/research/whitepaper-geo/generated-image-1775850066423.png)
 
 * * *
 
@@ -217,7 +217,7 @@ I call this **GEO Prompt Testing** — the practice of crafting and running prom
 
 This is the GEO equivalent of keyword research in traditional SEO. Except instead of finding which keywords have volume and low competition, you're finding **which prompts cite you, which cite competitors, and which cite nobody you'd expect**.
 
-[](generated-image-1775850066124.png)GEO Prompt Testing Process: Prompts flow through multiple AI engines to produce a citation audit
+![GEO Prompt Testing Process: Prompts flow through multiple AI engines to produce a citation audit](/research/whitepaper-geo/generated-image-1775850066124.png)
 
 ## The GEO Prompt Testing Framework
 
@@ -416,7 +416,7 @@ Structured formats that AI engines extract well:
 
   * **FAQ format** (Question as heading → Direct answer as first sentence)
 
-[](generated-image-1775850071951.png)The Citation Paradox: By citing authoritative sources, your content becomes more citable by AI engines
+![The Citation Paradox: By citing authoritative sources, your content becomes more citable by AI engines](/research/whitepaper-geo/generated-image-1775850071951.png)
 
 ### Principle 4: Attribute External Sources (The Citation Paradox)
 
@@ -538,7 +538,7 @@ Small operators can publish and update content in hours, not weeks. When a new t
 
 **GEO rewards speed to authority.** The first well-structured, deeply knowledgeable source on an emerging topic often becomes the default citation.
 
-[](generated-image-1775850065058.png)The Solo Builder's AI Visibility: Outsized influence through depth and expertise
+![The Solo Builder's AI Visibility: Outsized influence through depth and expertise](/research/whitepaper-geo/generated-image-1775850065058.png)
 
 ## The Solo Builder's GEO Playbook
 

@@ -10,7 +10,7 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
-  }
+  },
 
   // Custom domain routes in Cloudflare account (ceo@leverageai.network)
   "routes": [

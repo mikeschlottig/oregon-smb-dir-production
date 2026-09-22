@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run audit:publication && astro check && astro build && node scripts/verify-site.mjs",
+    "build": "npm run audit:publication && astro check && astro build && node scripts/verify-site.mjs && node scripts/test-search.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "audit:links": "node scripts/link-audit.mjs",
@@ -14,6 +14,7 @@
     "import:audit-evidence": "node scripts/import-publication-evidence.mjs",
     "verify": "node scripts/verify-site.mjs",
     "verify:report": "node scripts/verify-site.mjs --report-only --json reports/site-verify.json",
+    "test:search": "node scripts/test-search.mjs",
     "audit:categories": "node scripts/fix-categories.mjs --dry"
   },
   "dependencies": {

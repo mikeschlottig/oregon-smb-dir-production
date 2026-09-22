@@ -61,7 +61,7 @@ const relatedLinks = getCityHubRelatedLinks({
   baseUrl: siteUrl,
 });
 ---
-<SiteLayout title={title} description={description} schemas={schemas}>
+<SiteLayout title={title} description={description} schemas={schemas} city={city.name} pageType="city">
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}

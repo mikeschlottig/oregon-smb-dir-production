@@ -105,7 +105,7 @@ const tldrStats = [
 ];
 ---
 
-<SiteLayout title={title} description={description} schemas={schemas}>
+<SiteLayout title={title} description={description} schemas={schemas} city={city.name} industry={industry.name} pageType="service">
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}
@@ -156,7 +156,7 @@ const tldrStats = [
     </h2>
     <p class="mb-6 text-sm" style="color: var(--c-sage);">
       Selection policy <code>service-intent:{category.slug}@1</code> includes businesses only when
-      their source-observed provider category directly qualifies for this service collection.
+      their source-observed provider category directly qualifies for this service collection ({category.pluralName}).
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {qualifiedBusinesses.map(({ business, qualification }) => (
@@ -171,9 +171,9 @@ const tldrStats = [
     </div>
   </section>
 
-  <!-- Nearby Cities -->
+  <!-- Nearby Cities — excluded from Pagefind so other city names never pollute this city's index -->
   {nearbyCities.length > 0 && (
-    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);">
+    <section class="container mx-auto px-4 py-12" style="background-color: var(--c-stone);" data-pagefind-ignore="all">
       <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--c-pine);">
         {category.displayName} in Nearby Cities
       </h2>
@@ -191,9 +191,9 @@ const tldrStats = [
     </section>
   )}
 
-  <!-- Related Categories -->
+  <!-- Related Categories — excluded from Pagefind so unrelated service terms do not bleed -->
   {relatedCategoriesForCity.length > 0 && (
-    <section class="container mx-auto px-4 py-12">
+    <section class="container mx-auto px-4 py-12" data-pagefind-ignore="all">
       <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--c-pine);">
         Related Services in {city.name}
       </h2>

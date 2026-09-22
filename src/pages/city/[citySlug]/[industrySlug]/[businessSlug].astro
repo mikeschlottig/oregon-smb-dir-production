@@ -11,6 +11,8 @@ import {
 } from "@/data/businesses";
 
 import { hasDedicatedPage } from "@/data/dedicatedPages";
+import { serviceCategories } from "@/data/serviceCategories";
+import { qualifyBusinessForService } from "@/data/serviceSelectionPolicies";
 import { businessSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
@@ -134,6 +136,35 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 
+// Colloquial search term map for consumer intent
+const colloquialMap: Record<string, string[]> = {
+  roofing: ["roofer", "roofers", "roofing contractor", "roof repair", "roof replacement"],
+  plumbing: ["plumber", "plumbers", "drain cleaning"],
+  electrical: ["electrician", "electricians", "electrical contractor"],
+  hvac: ["heating and cooling", "ac repair", "hvac technician"],
+  "real-estate-agents": ["realtor", "realtors", "real estate agent", "real estate agents"],
+  auto_repair: ["mechanic", "mechanics", "auto repair"],
+  dentists: ["dentist", "dentists", "dental care"],
+  chiropractors: ["chiropractor", "chiropractors"],
+  veterinarians: ["vet", "veterinarian", "animal hospital"],
+  landscaping: ["landscaper", "landscapers", "lawn care"],
+};
+
+const matchingServices = serviceCategories.filter((cat) =>
+  cat.industrySlug === industry.slug && qualifyBusinessForService(business, cat)
+);
+const serviceSynonyms = Array.from(
+  new Set([
+    ...(business.category ? [business.category.toLowerCase()] : []),
+    ...matchingServices.flatMap((s) => [
+      s.displayName.toLowerCase(),
+      s.pluralName.toLowerCase(),
+      ...s.matchTerms,
+      ...(colloquialMap[s.slug] || []),
+    ]),
+  ])
+);
+
 // Compute related links for this business page
 const relatedLinks = getBusinessRelatedLinks({
   citySlug: city.slug,
@@ -143,7 +174,14 @@ const relatedLinks = getBusinessRelatedLinks({
   baseUrl: siteUrl,
 });
 ---
-<SiteLayout title={title} description={description} schemas={schemas}>
+<SiteLayout
+  title={title}
+  description={description}
+  schemas={schemas}
+  city={city.name}
+  industry={industry.name}
+  pageType="business"
+>
   <!-- Dark TLDR Header with TldrCard -->
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
@@ -192,6 +230,25 @@ const relatedLinks = getBusinessRelatedLinks({
             : "Contact them directly for service details, availability, and quotes."}
         </p>
       </div>
+
+      {matchingServices.length > 0 && (
+        <div>
+          <h2 class="font-serif text-2xl font-bold mb-3">Specializations &amp; Services</h2>
+          <div class="flex flex-wrap gap-2 mb-2">
+            {matchingServices.map((s) => (
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+                style="background-color: var(--c-sky); color: var(--c-pine);"
+              >
+                {s.displayName}
+              </span>
+            ))}
+          </div>
+          <p class="text-xs text-muted-foreground">
+            Search keywords: {serviceSynonyms.slice(0, 10).join(", ")}.
+          </p>
+        </div>
+      )}
 
       <div>
         <h2 class="font-serif text-2xl font-bold mb-3">How this listing sits in {city.name}</h2>
@@ -296,7 +353,7 @@ const relatedLinks = getBusinessRelatedLinks({
       </div>
 
       {related.length > 0 && (
-        <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <div class="bg-card border border-border rounded-xl p-6 shadow-sm" data-pagefind-ignore="all">
           <h3 class="font-serif text-lg font-semibold mb-4">
             More {industry.name} in {city.name}
           </h3>

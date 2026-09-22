@@ -7,7 +7,7 @@ const { variant = "default" } = Astro.props;
 const isCompact = variant === "compact";
 ---
 
-<div class:list={["pagefind-search-container", { compact: isCompact }]}>
+<div class:list={["pagefind-search-container relative", { compact: isCompact }]} data-pagefind-ignore="all">
   <div class="relative">
     <svg
       class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
@@ -26,7 +26,7 @@ const isCompact = variant === "compact";
     </svg>
     <input
       type="search"
-      placeholder="Search businesses, industries, cities…"
+      placeholder="Search businesses, services, cities (e.g. Medford roofing)…"
       class:list={[
         "w-full pl-10 pr-4 border transition-colors focus:outline-none focus:ring-2",
         isCompact ? "py-2 text-sm" : "py-3 text-base",
@@ -41,25 +41,39 @@ const isCompact = variant === "compact";
       onfocus="this.style.borderColor='var(--c-river)'; this.style.boxShadow='0 0 0 2px var(--c-river)'"
       onblur="this.style.borderColor='var(--c-border)'; this.style.boxShadow='none'"
       data-pagefind-search
+      autocomplete="off"
     />
   </div>
   <div
-    id="pagefind-results"
-    class="mt-4"
+    class="pagefind-results-box mt-3 space-y-2"
     style="color: var(--c-pine);"
   >
   </div>
 </div>
 
 <script is:inline>
-  // Load pagefind and set up search
   /** @type {import('/pagefind/pagefind.js') | null} */
   let pagefindModule = null;
-  
+  let activeQuerySeq = 0;
+
+  const OREGON_CITIES = [
+    { name: "Albany", slug: "albany" },
+    { name: "Ashland", slug: "ashland" },
+    { name: "Bend", slug: "bend" },
+    { name: "Corvallis", slug: "corvallis" },
+    { name: "Eugene", slug: "eugene" },
+    { name: "Grants Pass", slug: "grants-pass" },
+    { name: "Klamath Falls", slug: "klamath-falls" },
+    { name: "Medford", slug: "medford" },
+    { name: "Portland", slug: "portland" },
+    { name: "Roseburg", slug: "roseburg" },
+    { name: "Salem", slug: "salem" },
+    { name: "Springfield", slug: "springfield" }
+  ];
+
   async function initPagefind() {
     if (typeof window !== 'undefined' && !pagefindModule) {
       try {
-        // @ts-ignore - pagefind is loaded globally by the integration
         const module = await import('/pagefind/pagefind.js');
         await module.init();
         pagefindModule = module;
@@ -69,58 +83,136 @@ const isCompact = variant === "compact";
     }
   }
 
+  function detectCityInQuery(rawQuery) {
+    const lower = rawQuery.toLowerCase();
+    for (const c of OREGON_CITIES) {
+      const nameLower = c.name.toLowerCase();
+      if (lower.includes(nameLower) || lower.includes(c.slug)) {
+        return c;
+      }
+    }
+    return null;
+  }
+
   function setupSearch() {
-    const searchInputs = document.querySelectorAll('[data-pagefind-search]');
+    const searchContainers = document.querySelectorAll('.pagefind-search-container');
     
-    searchInputs.forEach(input => {
+    searchContainers.forEach(container => {
+      const input = container.querySelector('[data-pagefind-search]');
+      const resultsContainer = container.querySelector('.pagefind-results-box');
+      if (!input || !resultsContainer) return;
+
       /** @type {number | undefined} */
       let debounceTimer;
-      
+
       input.addEventListener('input', async (e) => {
         const target = /** @type {HTMLInputElement} */ (e.target);
         const query = target.value.trim();
-        
+        const currentSeq = ++activeQuerySeq;
+
         if (debounceTimer) {
           clearTimeout(debounceTimer);
         }
-        
+
         if (query.length < 2) {
-          const resultsContainer = target.closest('.pagefind-search-container')?.querySelector('#pagefind-results');
-          if (resultsContainer) {
-            resultsContainer.innerHTML = '';
-          }
+          resultsContainer.innerHTML = '';
           return;
         }
-        
+
         debounceTimer = /** @type {number} */ (setTimeout(async () => {
           if (!pagefindModule) {
             await initPagefind();
           }
-          
-          if (!pagefindModule) return;
-          
-          const searchResults = await pagefindModule.search(query);
-          const resultsContainer = target.closest('.pagefind-search-container')?.querySelector('#pagefind-results');
-          
-          if (resultsContainer) {
+          if (!pagefindModule || currentSeq !== activeQuerySeq) return;
+
+          try {
+            const detectedCity = detectCityInQuery(query);
+            
+            // Perform Pagefind search
+            const searchResults = await pagefindModule.search(query);
+            if (currentSeq !== activeQuerySeq) return;
+
             if (searchResults.results.length === 0) {
-              resultsContainer.innerHTML = '<p class="text-sm" style="color: var(--c-sage);">No results found.</p>';
-            } else {
-              const resultsHtml = await Promise.all(
-                searchResults.results.slice(0, 10).map(async (result) => {
-                  const data = await result.data();
-                  return `
-                    <a href="${data.url}" class="block p-3 rounded-lg mb-2 transition-colors hover:opacity-80" style="background-color: var(--c-stone);">
-                      <div class="font-medium" style="color: var(--c-pine);">${data.meta.title}</div>
-                      <div class="text-sm" style="color: var(--c-sage);">${data.excerpt || ''}</div>
-                    </a>
-                  `;
-                })
-              );
-              resultsContainer.innerHTML = resultsHtml.join('');
+              resultsContainer.innerHTML = `
+                <div class="p-4 rounded-lg text-sm text-center" style="background-color: var(--c-stone); color: var(--c-sage);">
+                  No directory records found matching "${query}". Try searching by city name, category, or business name.
+                </div>
+              `;
+              return;
             }
+
+            // Load data for top results
+            const rawDataList = await Promise.all(
+              searchResults.results.slice(0, 15).map(r => r.data())
+            );
+            if (currentSeq !== activeQuerySeq) return;
+
+            // Prioritize results matching the detected city
+            const sortedData = rawDataList.slice().sort((a, b) => {
+              if (detectedCity) {
+                const aMatch = (a.meta?.city?.toLowerCase() === detectedCity.name.toLowerCase()) ||
+                               a.url.includes('/' + detectedCity.slug + '/');
+                const bMatch = (b.meta?.city?.toLowerCase() === detectedCity.name.toLowerCase()) ||
+                               b.url.includes('/' + detectedCity.slug + '/');
+                if (aMatch && !bMatch) return -1;
+                if (!aMatch && bMatch) return 1;
+              }
+              return 0;
+            });
+
+            const resultsHtml = sortedData.slice(0, 10).map((data) => {
+              const url = data.url.startsWith('/') ? data.url : '/' + data.url;
+              const title = data.meta?.title || 'Listing Details';
+              const city = data.meta?.city || '';
+              const industry = data.meta?.industry || '';
+              const rawType = data.meta?.type || '';
+              const typeLabel = rawType === 'business' ? 'Business' :
+                                rawType === 'service' ? 'Service Collection' :
+                                rawType === 'category' ? 'Industry Hub' :
+                                rawType === 'city' ? 'City Hub' : '';
+
+              const cleanExcerpt = data.excerpt ? data.excerpt.replace(/<(?!\/?(mark)\b)[^>]+>/gi, '') : '';
+
+              return `
+                <a
+                  href="${url}"
+                  class="block p-3.5 rounded-lg border transition-all duration-150 hover:shadow-md"
+                  style="background-color: #ffffff; border-color: var(--c-border);"
+                >
+                  <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+                    ${city ? `
+                      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold" style="background-color: var(--c-pine); color: #ffffff;">
+                        ${city}
+                      </span>
+                    ` : ''}
+                    ${industry ? `
+                      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium" style="background-color: var(--c-sky); color: var(--c-pine);">
+                        ${industry}
+                      </span>
+                    ` : ''}
+                    ${typeLabel ? `
+                      <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] uppercase tracking-wider font-semibold opacity-75" style="background-color: var(--c-stone); color: var(--c-pine);">
+                        ${typeLabel}
+                      </span>
+                    ` : ''}
+                  </div>
+                  <div class="font-serif font-bold text-base leading-snug" style="color: var(--c-pine);">
+                    ${title}
+                  </div>
+                  ${cleanExcerpt ? `
+                    <div class="text-xs leading-relaxed mt-1 line-clamp-2" style="color: var(--c-sage);">
+                      ${cleanExcerpt}
+                    </div>
+                  ` : ''}
+                </a>
+              `;
+            });
+
+            resultsContainer.innerHTML = resultsHtml.join('');
+          } catch (err) {
+            console.error('Pagefind search error:', err);
           }
-        }, 300));
+        }, 250));
       });
     });
   }
@@ -134,15 +226,11 @@ const isCompact = variant === "compact";
 </script>
 
 <style>
-  .pagefind-search-container :global(.pagefind-result) {
-    margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    border-radius: var(--radius-md);
-    background-color: var(--c-stone);
-    transition: opacity 0.2s;
-  }
-  
-  .pagefind-search-container :global(.pagefind-result:hover) {
-    opacity: 0.8;
+  .pagefind-results-box mark {
+    background-color: #fef08a;
+    color: #854d0e;
+    padding: 0.1em 0.25em;
+    border-radius: 0.2rem;
+    font-weight: 600;
   }
 </style>

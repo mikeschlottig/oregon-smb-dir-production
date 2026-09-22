@@ -226,3 +226,50 @@ URL of the page carrying it — so this class cannot recur silently.
 **Result:** held. 31,750 schema violations had bypassed C14 entirely because they were nested inside `itemListElement[].item`.
 
 **Fix:** Refactored C14 in `scripts/verify-site.mjs` to recursively traverse the complete JSON-LD object tree, validating required properties on all nested entities.
+
+---
+
+## H16 — Unbounded Pagefind indexing bleeds cross-city links into search — **CONFIRMED**
+
+**Prediction:** Pagefind indexed the full HTML document on every page because `SiteLayout.astro` lacked `data-pagefind-body` on `<main>`, and universal furniture (`<Navbar>`, `<Footer>`, cross-city `<section>` widgets) lacked `data-pagefind-ignore`. Because `Footer.tsx` lists all 12 Oregon cities on every page, and service landing pages list all 11 nearby cities in their "Nearby Cities" section, every Eugene page contained the word "Medford" and every Medford page contained "Eugene". Consequently, queries like "medford roofing" matched Eugene plumbers and cross-city competitors.
+
+**Result:** held. Pagefind indexed all 10,564 pages globally. Searching "medford" in the raw Pagefind index returned 1,302 results across all cities; searching "medford roofing" matched 124 pages including Result #115 ("Plumbers in Eugene, Oregon") and Result #44 ("Roofing Contractors in Eugene, Oregon").
+
+**Fix:** Enforce strict Pagefind indexing boundaries:
+1. Put `data-pagefind-body` on `<main>` in `SiteLayout.astro`.
+2. Add `data-pagefind-ignore` to `<Navbar>`, `<Footer>`, `RelatedLinks.astro`, and the "Nearby Cities" and "Related Services" recommendation sections in service landing pages.
+3. Add Pagefind metadata and filter attributes (`data-pagefind-meta="city:..."`, `data-pagefind-meta="industry:..."`, `data-pagefind-meta="type:..."`) to all searchable pages.
+
+---
+
+## H17 — Paginated index slices pollute search results — **CONFIRMED**
+
+**Prediction:** Paginated listing pages (`/city/[citySlug]/[industrySlug]/page/[page]/`, pages 2 through 8+) were being indexed by Pagefind as standalone results (e.g. "Construction & Home Services in Medford — Page 8"), crowding out actual businesses and canonical category hubs.
+
+**Result:** held. Top search results for "medford roofing" contained paginated index slices ("Construction & Home Services in Medford — Page 8", "Page 7", "Page 6") that offered no direct business contact info.
+
+**Fix:** Add `pagefindIgnore?: boolean` to `SiteLayout.astro` and pass `pagefindIgnore={true}` on all paginated slice templates (`src/pages/city/[citySlug]/[industrySlug]/page/[page].astro`), restricting the search index to canonical hubs and business detail records.
+
+---
+
+## H18 — Service intent and plural synonym mismatch in business records — **CONFIRMED**
+
+**Prediction:** Local businesses are categorized under formal Google Place types (e.g. "Roofing contractor", "Plumber"), none of which contain the colloquial plural forms (e.g. "roofers", "plumbers"). When a user searches for "medford roofers", Medford businesses fail to match because they lack the word "roofers", while service landing pages in distant cities (Klamath Falls, Salem, Portland, Eugene) match because their editorial prose contains "roofer" and "roofers" alongside "Medford" in the nearby-cities section.
+
+**Result:** held. Querying "medford roofers" returned 13 results: 10 service landing pages in other cities (Klamath Falls #0, Salem #1, Portland #2, Medford #3, Eugene #4), and 0 individual Medford roofing businesses.
+
+**Fix:** Add localized synonym/intent tags to business profile templates (`[businessSlug].astro`) and service category pages, matching colloquial search terms ("roofers", "plumbers", "electricians", "realtors") to the qualified service categories.
+
+---
+
+## H19 — Asynchronous race conditions and missing city badges in SearchBar — **CONFIRMED**
+
+**Prediction:** `SearchBar.astro` handled debounced input without an in-flight request guard or cancellation token. In rapid typing scenarios or network latency jitter, an earlier query (e.g. "real estate") could resolve after a subsequent query (e.g. "medford roofers"), overwriting the dropdown with stale results. Additionally, search results lacked City and Industry badges, preventing users from recognizing cross-city results before navigating.
+
+**Result:** held. Inspecting `SearchBar.astro` revealed no request sequence counter or input validation upon Promise resolution, allowing stale async callbacks to overwrite the DOM. Furthermore, results rendered only raw titles and excerpts with no location or industry indicators.
+
+**Fix:** 
+1. Implement a monotonic `requestId` counter in `SearchBar.astro` to discard any async results that do not match the current input.
+2. Render clear location, industry, and type badges (`[Medford]`, `[Construction]`, `[Business]`) on every search result item.
+3. Detect city names in user queries to automatically prioritize or filter results matching the targeted city.
+

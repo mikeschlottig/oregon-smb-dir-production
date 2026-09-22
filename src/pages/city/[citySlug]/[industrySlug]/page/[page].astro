@@ -48,7 +48,7 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
-<SiteLayout title={title} description={description} schemas={schemas}>
+<SiteLayout title={title} description={description} schemas={schemas} pagefindIgnore={true}>
   <section class="bg-muted pt-32 pb-12 px-4 border-b border-border">
     <div class="container mx-auto">
       <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />

@@ -14,7 +14,7 @@ const { links, heading = "Related" } = Astro.props;
 if (!links || links.length === 0) return null;
 ---
 
-<section class="related-links-section" aria-label={heading}>
+<section class="related-links-section" aria-label={heading} data-pagefind-ignore="all">
   <h2 class="related-links-heading">{heading}</h2>
   <nav class="related-links-nav">
     <ul class="related-links-list">

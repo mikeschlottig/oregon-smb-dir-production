@@ -84,7 +84,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
   baseUrl: siteUrl,
 });
 ---
-<SiteLayout title={title} description={description} schemas={schemas} noindex={businesses.length === 0}>
+<SiteLayout title={title} description={description} schemas={schemas} noindex={businesses.length === 0} city={city.name} industry={industry.name} pageType="category">
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
     eyebrow={`${city.name}, OR`}

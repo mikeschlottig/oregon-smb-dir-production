@@ -25,6 +25,14 @@ interface Props {
   pageKind?: "content" | "utility";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   schemas?: any[];
+  /** Exclude this entire page from Pagefind search index (e.g. paginated listing slices) */
+  pagefindIgnore?: boolean;
+  /** Primary city scope for Pagefind filters and result badges */
+  city?: string;
+  /** Primary industry scope for Pagefind filters and result badges */
+  industry?: string;
+  /** Page classification for Pagefind search (e.g. business, service, category, city, guide) */
+  pageType?: "business" | "service" | "category" | "city" | "guide" | "content";
 }
 
 const {
@@ -35,6 +43,10 @@ const {
   noindex = false,
   pageKind = "content",
   schemas,
+  pagefindIgnore = false,
+  city,
+  industry,
+  pageType,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -92,11 +104,45 @@ const imageUrl = new URL(image, origin).toString();
   </head>
   <body data-page-kind={pageKind}>
     <div class="min-h-screen flex flex-col">
-      <Navbar pathname={pathname} client:load />
-      <main class="flex-1">
+      <div data-pagefind-ignore="all">
+        <Navbar pathname={pathname} client:load />
+      </div>
+      <main
+        class="flex-1"
+        {...(pagefindIgnore ? { "data-pagefind-ignore": "all" } : { "data-pagefind-body": true })}
+      >
+        {city && (
+          <span
+            style="display:none;"
+            data-pagefind-meta="city"
+            data-pagefind-filter="city"
+          >
+            {city}
+          </span>
+        )}
+        {industry && (
+          <span
+            style="display:none;"
+            data-pagefind-meta="industry"
+            data-pagefind-filter="industry"
+          >
+            {industry}
+          </span>
+        )}
+        {pageType && (
+          <span
+            style="display:none;"
+            data-pagefind-meta="type"
+            data-pagefind-filter="type"
+          >
+            {pageType}
+          </span>
+        )}
         <slot />
       </main>
-      <Footer />
+      <div data-pagefind-ignore="all">
+        <Footer />
+      </div>
     </div>
   </body>
 </html>

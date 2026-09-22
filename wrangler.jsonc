@@ -12,11 +12,9 @@
     "not_found_handling": "404-page"
   }
 
-  // Custom domain — uncomment after DNS for oregonsmbdirectory.com is live in
-  // this CF account. Both apex and www hit this Worker; redirect www → apex
-  // can be done with a Page Rule or a small `main` handler.
-  // "routes": [
-  //   { "pattern": "oregonsmbdirectory.com/*", "custom_domain": true },
-  //   { "pattern": "www.oregonsmbdirectory.com/*", "custom_domain": true }
-  // ]
+  // Custom domain routes in Cloudflare account (ceo@leverageai.network)
+  "routes": [
+    { "pattern": "oregonsmbdirectory.com", "custom_domain": true },
+    { "pattern": "www.oregonsmbdirectory.com", "custom_domain": true }
+  ]
 }

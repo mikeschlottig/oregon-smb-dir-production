@@ -166,3 +166,63 @@ Both pointed structured data at a URL the site never serves.
 
 **Fix:** corrected, and C14 now requires a `CollectionPage`/`WebPage` `url` to equal the
 URL of the page carrying it — so this class cannot recur silently.
+
+---
+
+## H10 — `PostalAddress` packs locality, region, and ZIP into `streetAddress` — **CONFIRMED**
+
+**Prediction (Adversarial Audit F1):** LocalBusiness schemas pack the entire address string into `streetAddress` and omit `postalCode`, violating Schema.org's definition of `streetAddress`.
+
+**Result:** held. 31,750 nested `PostalAddress` instances across the directory had locality, region, and ZIP bundled into the street line.
+
+**Fix:** `src/lib/schema.ts#postalAddress` parses addresses into discrete `streetAddress`, `addressLocality`, `addressRegion`, and normalized `postalCode` fields, handling full addresses, missing street lines, and ZIP+4 variants.
+
+---
+
+## H11 — City-descendant breadcrumbs skip the `/city/` parent level — **CONFIRMED**
+
+**Prediction (Adversarial Audit F2):** City-industry and business pages emit breadcrumbs linking directly from the city to Home, skipping the `/city/` ("Cities") parent hub.
+
+**Result:** held. Inconsistent hierarchy across all 5 city-descendant page templates.
+
+**Fix:** Added `{ name: "Cities", path: "/city/" }` to all city-descendant breadcrumb trails (`src/pages/city/[citySlug]/[industrySlug].astro`, `[businessSlug].astro`, `page/[page].astro`, and dedicated pages), establishing a unified `Home > Cities > City > Industry > [Business]` hierarchy.
+
+---
+
+## H12 — Redirect stubs omit trailing slashes — **CONFIRMED**
+
+**Prediction (Adversarial Audit F3):** Astro redirect stubs without trailing slashes cause redirect chains on Cloudflare Workers Static Assets.
+
+**Result:** held. Target in `astro.config.mjs` lacked a trailing slash, triggering an unnecessary second 307 hop under Cloudflare's `auto-trailing-slash` behavior.
+
+**Fix:** Added trailing slash to redirect target in `astro.config.mjs` and updated `scripts/verify-site.mjs` to validate redirect stubs rather than skipping them.
+
+---
+
+## H13 — Content word floor met by page furniture — **CONFIRMED**
+
+**Prediction (Adversarial Audit F4):** Low-listing paginated pages clear the 150-word content floor using breadcrumbs, search bars, and navigation markup rather than distinct prose.
+
+**Result:** held. Excluding furniture dropped the measured floor on borderline pages below 150 words.
+
+**Fix:** Updated `scripts/verify-site.mjs` to exclude nav, search, and form furniture from the word count calculation; added genuine comparative entity copy to `[businessSlug].astro` comparing each listing against its city/industry peer cohort; increased pagination minimum floor in `src/lib/paginate.ts`.
+
+---
+
+## H14 — Templated FAQ answers and deprecated FAQPage schema — **CONFIRMED**
+
+**Prediction (Adversarial Audit F5):** FAQ answers across city-industry pages were structurally identical template frames with only numeric counts varying. Furthermore, Google officially deprecated `FAQPage` rich results in May 2026 and removed the documentation in June 2026.
+
+**Result:** held. 488 `FAQPage` structured data blocks provided no rich result benefit, while visible FAQ answers needed true uniqueness.
+
+**Fix:** Removed `FAQPage` JSON-LD schema generation entirely. Converted FAQ answers into genuine on-page editorial text, reading visible text via `<p data-faq-answer>` in `scripts/verify-site.mjs` to ensure sentence frames are distinct.
+
+---
+
+## H15 — Verification gate was blind to nested schema — **CONFIRMED**
+
+**Prediction (Adversarial Audit F6):** `scripts/verify-site.mjs` only checked root-level schema nodes for `AggregateRating` and required properties, ignoring deeply nested `CollectionPage` items.
+
+**Result:** held. 31,750 schema violations had bypassed C14 entirely because they were nested inside `itemListElement[].item`.
+
+**Fix:** Refactored C14 in `scripts/verify-site.mjs` to recursively traverse the complete JSON-LD object tree, validating required properties on all nested entities.

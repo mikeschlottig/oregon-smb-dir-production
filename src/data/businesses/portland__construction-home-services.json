@@ -1394,14 +1394,43 @@
   {
     "slug": "xcelent-concrete-services",
     "title": "Xcelent Concrete Services",
-    "address": "",
-    "phone": "(503) 6760172",
+    "address": "11954 NE Glisan St #347, Portland, OR 97220",
+    "phone": "(503) 676-0172",
     "rating": 4.8,
     "reviews": 124,
     "category": "Concrete contractor",
-    "website": "http://www.xcelentconcrete.com/",
+    "website": "https://xcelentconcrete.com/",
     "googleUrl": "https://www.google.com/maps/place/Xcelent+Concrete+Services/@45.525725,-123.8663614,9z/data=!4m10!1m2!2m1!1sConcrete+Contractors+Portland+Oregon!3m6!1s0x5495a1e4e4f79d63:0xec38d68bf238a397!8m2!3d45.5224907!4d-122.622596!15sCiRDb25jcmV0ZSBDb250cmFjdG9ycyBQb3J0bGFuZCBPcmVnb25aJiIkY29uY3JldGUgY29udHJhY3RvcnMgcG9ydGxhbmQgb3JlZ29ukgETY29uY3JldGVfY29udHJhY3RvcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQycEtja3hVYkhSa00xcHVZVlZXVEdWSVFqVlVNMW8yVG10TmQySldSUkFC4AEA-gEECBwQRQ!16s%2Fg%2F11h7krtwls?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
-    "claimed": true
+    "claimed": true,
+    "email": "xcelentconcrete0@gmail.com",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "Owner listing request via the directory contact form; website resolved and names the business; phone and address read from the business's own site.",
+      "verifiedAt": "2026-09-23T07:30:00Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/8",
+        "web:xcelentconcrete.com@2026-09-23"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://xcelentconcrete.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_submission",
+        "site_title_match",
+        "site_phone_match"
+      ],
+      "riskFlags": []
+    }
   },
   {
     "slug": "prestige-landscape-tree-service",

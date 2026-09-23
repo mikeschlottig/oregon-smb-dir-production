@@ -526,5 +526,45 @@
     "website": "https://www.24hourfitness.com/gyms/portland-or/hollywood-or-super-sport?Adb_id=GGL_LOC_ACQ_CDP",
     "googleUrl": "https://www.google.com/maps/place/24+Hour+Fitness/@45.5340972,-122.8093275,12z/data=!4m11!1m3!2m2!1sGyms+Portland+Oregon!6e1!3m6!1s0x5495a0da20aabfbb:0x898f584e30b1d9fa!8m2!3d45.5336805!4d-122.6197962!15sChRHeW1zIFBvcnRsYW5kIE9yZWdvbloWIhRneW1zIHBvcnRsYW5kIG9yZWdvbpIBA2d5bZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQydEZNbVZIYkVwVWJEbFZZbXBuTUdGSVFqWmhhemx3VkZaUmVGTnJSUkFC4AEA-gEECAAQPg!16s%2Fg%2F1tctrcn_?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "cascadia-putting-club",
+    "title": "Cascadia Putting Club",
+    "address": null,
+    "phone": "(503) 782-9775",
+    "email": "alan@cascadiaputtingclub.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Mobile mini golf rental",
+    "website": "https://www.cascadiaputtingclub.com/",
+    "googleUrl": null,
+    "verification": {
+      "status": "owner_claimed",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "owner_email"
+      ],
+      "method": "Owner listing request via the directory contact form with email confirmation; website resolved and names the business.",
+      "verifiedAt": "2026-09-17T22:49:48Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/24",
+        "web:cascadiaputtingclub.com@2026-09-23"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://www.cascadiaputtingclub.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_submission",
+        "owner_email_domain_match",
+        "site_title_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

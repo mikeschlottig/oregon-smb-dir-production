@@ -562,5 +562,46 @@
     "website": "https://www.getg5.com/",
     "googleUrl": "https://www.google.com/maps/place/G5/@44.656282,-121.7795571,8z/data=!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Bend+Oregon!3m6!1s0x54b8c627e52ab2a1:0x2ceb1ebfa470a0a7!8m2!3d44.0463052!4d-121.3088997!15sCixXZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBCZW5kIE9yZWdvbpIBEG1hcmtldGluZ19hZ2VuY3ngAQA!16s%2Fg%2F1thtcvzt?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "capital-nomics",
+    "title": "Capital Nomics",
+    "address": "2900 NW Clearwater Dr, Bend, OR 97703",
+    "phone": "(458) 202-4825",
+    "email": "capitalnomicspro@gmail.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Business valuation consultant",
+    "website": "https://capitalnomics.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Capital%20Nomics&query_place_id=ChIJ53IVEGzIuFQR9dhzn9OFpGY",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "Owner listing request via the directory contact form; website resolved and names the business; phone matches both the website and the Google Business Profile.",
+      "verifiedAt": "2026-09-23T07:30:00Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/13",
+        "web:capitalnomics.com@2026-09-23",
+        "gbp:ChIJ53IVEGzIuFQR9dhzn9OFpGY"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://capitalnomics.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "site_title_match",
+        "site_phone_match",
+        "gbp_phone_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

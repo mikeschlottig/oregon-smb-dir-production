@@ -2158,5 +2158,46 @@
     "website": "https://evolutionhealthcareandfitness.com/?UTM_source=GBP_listing&UTM_medium=organic&source=gmb",
     "googleUrl": "https://www.google.com/maps/place/Evolution+Healthcare+and+Fitness/@45.5340972,-122.8093275,12z/data=!4m11!1m3!2m2!1sGyms+Portland+Oregon!6e1!3m6!1s0x5495a0a5980d1a95:0xb8d800bd578570b4!8m2!3d45.5224311!4d-122.6564577!15sChRHeW1zIFBvcnRsYW5kIE9yZWdvbloWIhRneW1zIHBvcnRsYW5kIG9yZWdvbpIBDGNoaXJvcHJhY3RvcpoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSQ01XOTJZekpCUlJBQuABAPoBBQiNARA5!16s%2Fg%2F11b6_h4lxs?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "north-tabor-dental",
+    "title": "North Tabor Dental",
+    "address": "5553 NE Glisan St #200, Portland, OR 97213",
+    "phone": "(503) 331-1322",
+    "email": "northtabordental@gmail.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Dentist",
+    "website": "https://northtabordental.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Tabor%20Dental&query_place_id=ChIJ_0ls_-CglVQRa_ANkBDgrv0",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "Owner listing request via the directory contact form; website resolved and names the practice; phone matches both the website and the Google Business Profile.",
+      "verifiedAt": "2026-09-23T07:30:00Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/12",
+        "web:northtabordental.com@2026-09-23",
+        "gbp:ChIJ_0ls_-CglVQRa_ANkBDgrv0"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://northtabordental.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "site_title_match",
+        "site_phone_match",
+        "gbp_phone_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

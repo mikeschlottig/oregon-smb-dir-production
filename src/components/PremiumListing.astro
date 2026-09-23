@@ -1,0 +1,250 @@
+---
+/**
+ * Body of a premium listing page. Rendered by the business route in place of the
+ * standard body when src/data/premiumListings.ts has a profile for the listing, so the
+ * listing keeps its one canonical URL. No client islands: everything here is static HTML.
+ */
+import type { Business } from "@/data/businesses";
+import type { City } from "@/data/cities";
+import type { Industry } from "@/data/industries";
+import type { PremiumListing } from "@/data/premiumListings";
+import { getBusinessPathSlug } from "@/data/businesses";
+import { ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2, Clock, BadgeCheck } from "lucide-react";
+
+interface Props {
+  business: Business;
+  city: City;
+  industry: Industry;
+  premium: PremiumListing;
+  mapsDirections: string;
+  embedSrc: string;
+  related: Business[];
+}
+
+const { business, city, industry, premium, mapsDirections, embedSrc, related } = Astro.props;
+
+const websiteConfirmed = Boolean(business.website && business.websiteStatus === "confirmed");
+const websiteLabel = business.website?.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+const tel = business.phone?.replace(/[^\d+]/g, "");
+
+const to12h = (hhmm: string) => {
+  const [h, m] = hhmm.split(":").map(Number);
+  const suffix = h >= 12 ? "PM" : "AM";
+  return `${((h + 11) % 12) + 1}:${String(m).padStart(2, "0")} ${suffix}`;
+};
+const dayRange = (days: string[]) =>
+  days.length > 2 ? `${days[0]}–${days[days.length - 1]}` : days.join(" & ");
+
+const verifiedOn = business.verification
+  ? new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(
+      new Date(business.verification.verifiedAt),
+    )
+  : null;
+---
+
+<!-- Custom banner -->
+<section class="border-b" style="background-color: var(--c-pine); border-color: var(--c-border);">
+  <div class="container mx-auto px-4 py-8 md:py-10">
+    <p class="text-xs uppercase tracking-[0.18em] mb-3" style="color: var(--c-sky);">{premium.banner.eyebrow}</p>
+    <p class="font-serif text-2xl md:text-3xl leading-snug max-w-3xl text-white" style="overflow-wrap: anywhere;">
+      {premium.banner.statement}
+    </p>
+  </div>
+</section>
+
+<section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div class="lg:col-span-2 space-y-10 min-w-0">
+    <!-- Quotable answer block -->
+    <div class="bg-muted/50 border-l-4 border-accent p-6 rounded-r-lg">
+      <h2 class="font-serif text-xl font-bold mb-3 text-foreground">Quick answer</h2>
+      <p class="text-foreground leading-relaxed" data-quotable="true">{premium.quickAnswer}</p>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-2xl font-bold mb-4">About {business.title}</h2>
+      {premium.about.map((paragraph) => (
+        <p class="text-muted-foreground leading-relaxed mb-4 last:mb-0">{paragraph}</p>
+      ))}
+    </div>
+
+    <div>
+      <h2 class="font-serif text-2xl font-bold mb-4">Services</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {premium.services.map((service) => (
+          <li class="bg-accent/10 text-accent font-medium px-4 py-2.5 rounded-lg text-sm">{service}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="rounded-xl overflow-hidden border border-border shadow-sm bg-muted">
+      <iframe
+        title={`Map of ${business.title}`}
+        src={embedSrc}
+        width="100%"
+        height="320"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="block w-full"
+      />
+      <div class="p-4 flex flex-wrap items-center justify-between gap-3 bg-card">
+        <p class="text-sm text-muted-foreground flex items-center gap-2 min-w-0">
+          <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
+          <span style="overflow-wrap: anywhere;">{business.address ?? `Serving ${premium.serviceAreas.slice(0, 3).join(", ")}`}</span>
+        </p>
+        <a
+          href={mapsDirections}
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+        >
+          Open in Google Maps <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-2xl font-bold mb-4">Questions about {business.title}</h2>
+      <div class="divide-y border-y" style="border-color: var(--c-border);">
+        {premium.faqs.map((faq) => (
+          <details class="group py-4">
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4 font-medium text-foreground">
+              <span>{faq.question}</span>
+              <span class="text-accent flex-shrink-0 transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 text-muted-foreground leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <aside class="space-y-6 min-w-0">
+    <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+      <h3 class="font-serif text-lg font-semibold mb-4">Contact</h3>
+      <ul class="space-y-3 text-sm">
+        {business.address && (
+          <li class="flex items-start gap-3">
+            <MapPin className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">{business.address}</span>
+          </li>
+        )}
+        {business.phone && (
+          <li class="flex items-center gap-3">
+            <Phone className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href={`tel:${tel}`} class="text-foreground hover:text-accent">{business.phone}</a>
+          </li>
+        )}
+        {websiteConfirmed && (
+          <li class="flex items-center gap-3">
+            <Globe className="w-4 h-4 text-accent flex-shrink-0" />
+            <a href={business.website!} target="_blank" rel="noopener" class="text-foreground hover:text-accent break-all">
+              {websiteLabel}
+            </a>
+          </li>
+        )}
+        {business.category && (
+          <li class="flex items-center gap-3">
+            <Building2 className="w-4 h-4 text-accent flex-shrink-0" />
+            <span class="text-muted-foreground">{business.category}</span>
+          </li>
+        )}
+      </ul>
+      <div class="mt-5 pt-5 border-t border-border space-y-2">
+        {business.phone && (
+          <a
+            href={`tel:${tel}`}
+            class="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-2.5 rounded hover:bg-primary/90 transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5" /> Call {business.phone}
+          </a>
+        )}
+        {websiteConfirmed && (
+          <a
+            href={business.website!}
+            target="_blank"
+            rel="noopener"
+            class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+          >
+            Visit website <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        )}
+        <a
+          href={mapsDirections}
+          target="_blank"
+          rel="noreferrer"
+          class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
+        >
+          Get directions <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+
+    {premium.hours && premium.hours.length > 0 && (
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+        <h3 class="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
+          <Clock className="w-4 h-4 text-accent" /> Hours
+        </h3>
+        <ul class="space-y-2 text-sm">
+          {premium.hours.map((h) => (
+            <li class="flex justify-between gap-4">
+              <span class="text-foreground">{dayRange(h.days)}</span>
+              <span class="text-muted-foreground">{to12h(h.opens)} – {to12h(h.closes)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
+      <h3 class="font-serif text-lg font-semibold mb-3">Service area</h3>
+      <p class="text-sm text-muted-foreground leading-relaxed">{premium.serviceAreas.join(" · ")}</p>
+      <ul class="mt-4 pt-4 border-t border-border space-y-2 text-sm">
+        {premium.facts.map((fact) => (
+          <li class="flex items-center gap-2 text-foreground">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" aria-hidden="true"></span>{fact}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {business.verification && (
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm text-sm">
+        <h3 class="font-serif text-lg font-semibold mb-3 flex items-center gap-2">
+          <BadgeCheck className="w-4 h-4 text-accent" /> Verified listing
+        </h3>
+        <p class="text-muted-foreground leading-relaxed">
+          {business.verification.method} Checked {verifiedOn}.
+        </p>
+        <a href="/contact/?topic=listing-correction" class="inline-flex mt-3 text-accent hover:underline">
+          Request a correction
+        </a>
+      </div>
+    )}
+
+    {related.length > 0 && (
+      <div class="bg-card border border-border rounded-xl p-6 shadow-sm" data-pagefind-ignore="all">
+        <h3 class="font-serif text-lg font-semibold mb-4">More {industry.name} in {city.name}</h3>
+        <ul class="space-y-3">
+          {related.map((b) => (
+            <li>
+              <a
+                href={`/city/${city.slug}/${industry.slug}/${getBusinessPathSlug(city.slug, industry.slug, b)}/`}
+                class="flex items-center justify-between gap-2 text-sm group"
+              >
+                <span class="text-foreground group-hover:text-accent transition-colors">{b.title}</span>
+                {typeof b.rating === "number" && (
+                  <span class="flex items-center gap-1 text-muted-foreground text-xs flex-shrink-0">
+                    <Star className="w-3 h-3 fill-gold text-gold" />{b.rating.toFixed(1)}
+                  </span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a href={`/city/${city.slug}/${industry.slug}/`} class="inline-flex items-center gap-1 text-sm text-accent mt-4 hover:underline">
+          <ArrowLeft className="w-3.5 h-3.5" /> Back to all listings
+        </a>
+      </div>
+    )}
+  </aside>
+</section>

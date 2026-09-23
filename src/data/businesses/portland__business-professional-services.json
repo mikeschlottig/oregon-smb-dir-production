@@ -550,5 +550,169 @@
     "website": "https://epicdesignlabs.com/",
     "googleUrl": "https://www.google.com/maps/place/Epic+Design+Labs/@45.5110947,-127.5409777,7z/data=!3m1!5s0x549509dea2a99f89:0x11d2f26408492fd1!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Portland+Oregon!3m6!1s0x5495b380029a2e45:0xb9e8ee8b565aed26!8m2!3d45.5437383!4d-122.7044046!15sCjBXZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBQb3J0bGFuZCBPcmVnb25aMiIwd2ViIGRlc2lnbiBhbmQgZGlnaXRhbCBtYXJrZXRpbmcgcG9ydGxhbmQgb3JlZ29ukgEQd2Vic2l0ZV9kZXNpZ25lcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyeHNZV0ZxVG5aYVZURXhXREJLTkdWdWNERmlNV1F4Vld4cmVrMXNSUkFC4AEA-gEECGoQJA!16s%2Fg%2F12nqgnkkb?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "deepli-clean",
+    "title": "Deepli Clean",
+    "address": "10121 SE Sunnyside Rd #300, Clackamas, OR 97015",
+    "phone": "(802) 433-3754",
+    "email": "ryaz@oregon-clean.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Commercial cleaning service",
+    "website": "https://deepliclean.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Deepli%20Clean&query_place_id=ChIJZ1Zzyzwg6GcRcn-fRTAHw6s",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "Owner listing request via the directory contact form; website resolved and names the business; phone matches both the website and the Google Business Profile.",
+      "verifiedAt": "2026-09-23T07:30:00Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/9",
+        "web:deepliclean.com@2026-09-23",
+        "gbp:ChIJZ1Zzyzwg6GcRcn-fRTAHw6s"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://deepliclean.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_submission",
+        "site_title_match",
+        "gbp_phone_match"
+      ],
+      "riskFlags": []
+    }
+  },
+  {
+    "slug": "apex-business-marketing",
+    "title": "Apex Business Marketing",
+    "address": "1485 SE Jacquelin Dr, Hillsboro, OR 97123",
+    "phone": "(564) 208-4838",
+    "email": "brussell@apexbusinessmarketing.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Marketing consultant",
+    "website": "https://apexbusinessmarketing.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=Apex%20Business%20Marketing&query_place_id=ChIJwb0sxytEhQURY7ocXSiWkGE",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "Owner listing request via the directory contact form; website resolved; submitted phone matches the Google Business Profile.",
+      "verifiedAt": "2026-09-23T07:30:00Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/10",
+        "web:apexbusinessmarketing.com@2026-09-23",
+        "gbp:ChIJwb0sxytEhQURY7ocXSiWkGE"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://apexbusinessmarketing.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_submission",
+        "gbp_phone_match"
+      ],
+      "riskFlags": []
+    }
+  },
+  {
+    "slug": "pdx-fingerprinting-hillsboro",
+    "title": "PDX Fingerprinting — Hillsboro",
+    "address": "9620 NE Tanasbourne Dr Suite 300, Hillsboro, OR 97124",
+    "phone": "(503) 212-0678",
+    "email": "info@pdxfingerprinting.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Fingerprinting service",
+    "website": "https://pdxfingerprinting.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Fingerprinting%20Hillsboro&query_place_id=ChIJx2sGoRgPlVQRfbbX3Tj32tU",
+    "verification": {
+      "status": "owner_claimed",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address",
+        "owner_email"
+      ],
+      "method": "Owner listing request via the directory contact form with email confirmation; address matches the Google Business Profile; phone matches the website and profile.",
+      "verifiedAt": "2026-09-22T20:38:57Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/25",
+        "web:pdxfingerprinting.com@2026-09-23",
+        "gbp:ChIJx2sGoRgPlVQRfbbX3Tj32tU"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://pdxfingerprinting.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_email_domain_match",
+        "site_title_match",
+        "gbp_phone_match"
+      ],
+      "riskFlags": []
+    }
+  },
+  {
+    "slug": "pdx-fingerprinting-lake-oswego",
+    "title": "PDX Fingerprinting — Lake Oswego",
+    "address": "5 Centerpointe Dr Suite 400, Lake Oswego, OR 97035",
+    "phone": "(971) 394-4150",
+    "email": "info@pdxfingerprinting.com",
+    "rating": null,
+    "reviews": null,
+    "category": "Fingerprinting service",
+    "website": "https://pdxfingerprinting.com/",
+    "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Fingerprinting%20Lake%20Oswego&query_place_id=ChIJgREz0xJzlVQR1Wg6SuhB_RE",
+    "verification": {
+      "status": "owner_claimed",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address",
+        "owner_email"
+      ],
+      "method": "Owner listing request via the directory contact form with email confirmation; address matches the Google Business Profile.",
+      "verifiedAt": "2026-09-22T20:38:57Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/25",
+        "web:pdxfingerprinting.com@2026-09-23",
+        "gbp:ChIJgREz0xJzlVQR1Wg6SuhB_RE"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://pdxfingerprinting.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T07:30:00Z",
+      "confirmationSources": [
+        "owner_email_domain_match",
+        "site_title_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

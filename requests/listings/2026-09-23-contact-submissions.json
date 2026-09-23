@@ -1,0 +1,269 @@
+{
+  "batch": "2026-09-23-contact-submissions",
+  "source": "D1 oregonsmbdirectory.contact_submissions",
+  "checkedAt": "2026-09-23T07:30:00Z",
+  "listings": [
+    {
+      "submissionId": 8,
+      "tier": "premium",
+      "mode": "patch",
+      "note": "Already listed from source data; keep its Maps URL and rating, add owner-confirmed details.",
+      "shard": "portland__construction-home-services",
+      "record": {
+        "slug": "xcelent-concrete-services",
+        "title": "Xcelent Concrete Services",
+        "address": "11954 NE Glisan St #347, Portland, OR 97220",
+        "phone": "(503) 676-0172",
+        "email": "xcelentconcrete0@gmail.com",
+        "website": "https://xcelentconcrete.com/",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "Owner listing request via the directory contact form; website resolved and names the business; phone and address read from the business's own site.",
+          "verifiedAt": "2026-09-23T07:30:00Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/8", "web:xcelentconcrete.com@2026-09-23"]
+        },
+        "websiteValidation": {
+          "url": "https://xcelentconcrete.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_submission", "site_title_match", "site_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 9,
+      "tier": "premium",
+      "shard": "portland__business-professional-services",
+      "record": {
+        "slug": "deepli-clean",
+        "title": "Deepli Clean",
+        "address": "10121 SE Sunnyside Rd #300, Clackamas, OR 97015",
+        "phone": "(802) 433-3754",
+        "email": "ryaz@oregon-clean.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Commercial cleaning service",
+        "website": "https://deepliclean.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=Deepli%20Clean&query_place_id=ChIJZ1Zzyzwg6GcRcn-fRTAHw6s",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "Owner listing request via the directory contact form; website resolved and names the business; phone matches both the website and the Google Business Profile.",
+          "verifiedAt": "2026-09-23T07:30:00Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/9", "web:deepliclean.com@2026-09-23", "gbp:ChIJZ1Zzyzwg6GcRcn-fRTAHw6s"]
+        },
+        "websiteValidation": {
+          "url": "https://deepliclean.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_submission", "site_title_match", "gbp_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 10,
+      "tier": "premium",
+      "shard": "portland__business-professional-services",
+      "record": {
+        "slug": "apex-business-marketing",
+        "title": "Apex Business Marketing",
+        "address": "1485 SE Jacquelin Dr, Hillsboro, OR 97123",
+        "phone": "(564) 208-4838",
+        "email": "brussell@apexbusinessmarketing.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Marketing consultant",
+        "website": "https://apexbusinessmarketing.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=Apex%20Business%20Marketing&query_place_id=ChIJwb0sxytEhQURY7ocXSiWkGE",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "Owner listing request via the directory contact form; website resolved; submitted phone matches the Google Business Profile.",
+          "verifiedAt": "2026-09-23T07:30:00Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/10", "web:apexbusinessmarketing.com@2026-09-23", "gbp:ChIJwb0sxytEhQURY7ocXSiWkGE"]
+        },
+        "websiteValidation": {
+          "url": "https://apexbusinessmarketing.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_submission", "gbp_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 12,
+      "tier": "premium",
+      "shard": "portland__health-medical",
+      "record": {
+        "slug": "north-tabor-dental",
+        "title": "North Tabor Dental",
+        "address": "5553 NE Glisan St #200, Portland, OR 97213",
+        "phone": "(503) 331-1322",
+        "email": "northtabordental@gmail.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Dentist",
+        "website": "https://northtabordental.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Tabor%20Dental&query_place_id=ChIJ_0ls_-CglVQRa_ANkBDgrv0",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "Owner listing request via the directory contact form; website resolved and names the practice; phone matches both the website and the Google Business Profile.",
+          "verifiedAt": "2026-09-23T07:30:00Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/12", "web:northtabordental.com@2026-09-23", "gbp:ChIJ_0ls_-CglVQRa_ANkBDgrv0"]
+        },
+        "websiteValidation": {
+          "url": "https://northtabordental.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["site_title_match", "site_phone_match", "gbp_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 13,
+      "tier": "premium",
+      "shard": "bend__business-professional-services",
+      "record": {
+        "slug": "capital-nomics",
+        "title": "Capital Nomics",
+        "address": "2900 NW Clearwater Dr, Bend, OR 97703",
+        "phone": "(458) 202-4825",
+        "email": "capitalnomicspro@gmail.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Business valuation consultant",
+        "website": "https://capitalnomics.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=Capital%20Nomics&query_place_id=ChIJ53IVEGzIuFQR9dhzn9OFpGY",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "Owner listing request via the directory contact form; website resolved and names the business; phone matches both the website and the Google Business Profile.",
+          "verifiedAt": "2026-09-23T07:30:00Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/13", "web:capitalnomics.com@2026-09-23", "gbp:ChIJ53IVEGzIuFQR9dhzn9OFpGY"]
+        },
+        "websiteValidation": {
+          "url": "https://capitalnomics.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["site_title_match", "site_phone_match", "gbp_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 24,
+      "tier": "verified",
+      "shard": "portland__sports-fitness",
+      "record": {
+        "slug": "cascadia-putting-club",
+        "title": "Cascadia Putting Club",
+        "address": null,
+        "phone": "(503) 782-9775",
+        "email": "alan@cascadiaputtingclub.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Mobile mini golf rental",
+        "website": "https://www.cascadiaputtingclub.com/",
+        "googleUrl": null,
+        "verification": {
+          "status": "owner_claimed",
+          "scope": ["business_name", "website", "phone", "owner_email"],
+          "method": "Owner listing request via the directory contact form with email confirmation; website resolved and names the business.",
+          "verifiedAt": "2026-09-17T22:49:48Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/24", "web:cascadiaputtingclub.com@2026-09-23"]
+        },
+        "websiteValidation": {
+          "url": "https://www.cascadiaputtingclub.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_submission", "owner_email_domain_match", "site_title_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 25,
+      "tier": "verified",
+      "shard": "portland__business-professional-services",
+      "record": {
+        "slug": "pdx-fingerprinting-hillsboro",
+        "title": "PDX Fingerprinting — Hillsboro",
+        "address": "9620 NE Tanasbourne Dr Suite 300, Hillsboro, OR 97124",
+        "phone": "(503) 212-0678",
+        "email": "info@pdxfingerprinting.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Fingerprinting service",
+        "website": "https://pdxfingerprinting.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Fingerprinting%20Hillsboro&query_place_id=ChIJx2sGoRgPlVQRfbbX3Tj32tU",
+        "verification": {
+          "status": "owner_claimed",
+          "scope": ["business_name", "website", "phone", "address", "owner_email"],
+          "method": "Owner listing request via the directory contact form with email confirmation; address matches the Google Business Profile; phone matches the website and profile.",
+          "verifiedAt": "2026-09-22T20:38:57Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/25", "web:pdxfingerprinting.com@2026-09-23", "gbp:ChIJx2sGoRgPlVQRfbbX3Tj32tU"]
+        },
+        "websiteValidation": {
+          "url": "https://pdxfingerprinting.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_email_domain_match", "site_title_match", "gbp_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 25,
+      "tier": "verified",
+      "shard": "portland__business-professional-services",
+      "record": {
+        "slug": "pdx-fingerprinting-lake-oswego",
+        "title": "PDX Fingerprinting — Lake Oswego",
+        "address": "5 Centerpointe Dr Suite 400, Lake Oswego, OR 97035",
+        "phone": "(971) 394-4150",
+        "email": "info@pdxfingerprinting.com",
+        "rating": null,
+        "reviews": null,
+        "category": "Fingerprinting service",
+        "website": "https://pdxfingerprinting.com/",
+        "googleUrl": "https://www.google.com/maps/search/?api=1&query=PDX%20Fingerprinting%20Lake%20Oswego&query_place_id=ChIJgREz0xJzlVQR1Wg6SuhB_RE",
+        "verification": {
+          "status": "owner_claimed",
+          "scope": ["business_name", "website", "phone", "address", "owner_email"],
+          "method": "Owner listing request via the directory contact form with email confirmation; address matches the Google Business Profile.",
+          "verifiedAt": "2026-09-22T20:38:57Z",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/25", "web:pdxfingerprinting.com@2026-09-23", "gbp:ChIJgREz0xJzlVQR1Wg6SuhB_RE"]
+        },
+        "websiteValidation": {
+          "url": "https://pdxfingerprinting.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-23T07:30:00Z",
+          "confirmationSources": ["owner_email_domain_match", "site_title_match"],
+          "riskFlags": []
+        }
+      }
+    }
+  ]
+}

@@ -109,12 +109,20 @@ const badge = [
   .filter(Boolean)
   .join(" · ");
 
-// Stats for TldrCard
-const stats = [
-  { value: typeof business.rating === "number" ? business.rating.toFixed(1) : "N/A", label: "Rating" },
-  { value: typeof business.reviews === "number" ? business.reviews.toLocaleString() : "N/A", label: "Reviews" },
-  { value: verificationLabel, label: "Record status" }
-];
+// Stats for TldrCard. Premium listings without a published rating lead with what the
+// profile does establish instead of two "N/A" cells.
+const hasRating = typeof business.rating === "number";
+const stats = premium && !hasRating
+  ? [
+      { value: verificationLabel, label: "Record status" },
+      { value: city.name, label: "Location" },
+      { value: String(premium.services.length), label: "Services listed" },
+    ]
+  : [
+      { value: hasRating ? business.rating!.toFixed(1) : "N/A", label: "Rating" },
+      { value: typeof business.reviews === "number" ? business.reviews.toLocaleString() : "N/A", label: "Reviews" },
+      { value: verificationLabel, label: "Record status" },
+    ];
 
 /**
  * Where this listing sits among its peers, stated in numbers drawn from this city and
@@ -250,9 +258,9 @@ const relatedLinks = getBusinessRelatedLinks({
   <!-- Dark TLDR Header with TldrCard -->
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
-    eyebrow={`${business.category || industry.name} in ${city.name}, OR`}
+    eyebrow={premium?.banner.eyebrow ?? `${business.category || industry.name} in ${city.name}, OR`}
     title={business.title}
-    tagline={`${business.category || industry.name} in ${city.name}, Oregon`}
+    tagline={premium?.banner.statement ?? `${business.category || industry.name} in ${city.name}, Oregon`}
     stats={stats}
     badge={badge}
   />

@@ -24,7 +24,7 @@ from pathlib import Path
 from lx import directory
 from lx.runner import StaleSelectorsError, extract_rows, run
 from lx.store import RunStore
-from lx.targets import Target, load_targets
+from lx.targets import Target, load_targets, place_target
 
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / "output"
@@ -72,7 +72,9 @@ def cmd_reparse(args) -> int:
     store = RunStore(OUTPUT / args.run)
     n = 0
     for ev in store.evidence():
-        t = Target(**json.loads(ev["spec"]))
+        spec = json.loads(ev["spec"])
+        # Re-derive from the URL so a fixed parser (e.g. place-ID → feature-ID) applies to old runs.
+        t = place_target(spec["url"], spec["target_id"], name_hint=spec.get("name_hint"), **spec.get("meta", {})) if spec["kind"] == "place" else Target(**spec)
         html = Path(ev["html_path"]).read_text(encoding="utf-8")
         rows = extract_rows(t, html, ev["final_url"] or "", ev["page_kind"] or "unknown")
         store.save_rows(t.target_id, rows)
@@ -120,6 +122,22 @@ def cmd_queue(args) -> int:
     return 0
 
 
+def cmd_sweep(args) -> int:
+    from lx import sweep
+    gates = sweep.plan(args.cities, args.industries)
+    done = sweep.done_gates()
+    for g in gates:
+        mark = "done" if (g["city_slug"], g["industry"]) in done else "    "
+        print(f"{mark} {g['city_slug']:14} {g['industry']:32} '{g['phrase']}'")
+    print(f"\n{len(gates)} gates × 49 pins = {len(gates) * 49} pin searches; {len(done)} gates complete; "
+          f"≈{(len(gates) - len(done)) * 49 * 16.5 / 3600:.1f} h at the Medford run's 16.5 s/pin")
+    if not args.yes:
+        print("Not run. Pass --yes to start (real Chrome on Google Maps; resumable).")
+        return 2
+    sweep.run_sweep(args.cities, args.industries, headless=args.headless)
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="lx", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -146,6 +164,13 @@ def main(argv=None) -> int:
     p.add_argument("--cities", nargs="*")
     p.add_argument("--industries", nargs="*")
     p.set_defaults(fn=cmd_queue)
+
+    p = sub.add_parser("sweep", help="12-city BCRF-49 sweep: city × industry query × 49 pins × top 20")
+    p.add_argument("--cities", nargs="*")
+    p.add_argument("--industries", nargs="*")
+    p.add_argument("--yes", action="store_true")
+    p.add_argument("--headless", action="store_true")
+    p.set_defaults(fn=cmd_sweep)
 
     args = ap.parse_args(argv)
     return args.fn(args)

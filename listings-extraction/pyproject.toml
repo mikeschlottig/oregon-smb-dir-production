@@ -13,6 +13,7 @@ dependencies = [
     "rarlx",
     "patchright==1.62.3",
     "scrapling==0.4.15",
+    "polars>=1.44.2",
 ]
 
 [project.scripts]

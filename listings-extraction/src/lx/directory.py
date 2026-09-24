@@ -58,7 +58,7 @@ def _in_oregon(lat: float, lng: float) -> bool:
 
 
 @lru_cache(maxsize=1)
-def centroids() -> Dict[str, Tuple[float, float]]:
+def _oregon_pins() -> Dict[str, List[Tuple[float, float]]]:
     pins: Dict[str, List[Tuple[float, float]]] = {}
     for shard in shards():
         city = shard.split("__")[0]
@@ -68,6 +68,16 @@ def centroids() -> Dict[str, Tuple[float, float]]:
             pin = pin_of(r.get("googleUrl") or "")
             if pin and "!3d" in (r.get("googleUrl") or "") and _in_oregon(*pin):
                 pins.setdefault(city, []).append(pin)
+    return pins
+
+
+def centroid_pin_counts() -> Dict[str, int]:
+    return {c: len(p) for c, p in _oregon_pins().items()}
+
+
+@lru_cache(maxsize=1)
+def centroids() -> Dict[str, Tuple[float, float]]:
+    pins = _oregon_pins()
     return {
         city: (round(statistics.median(p[0] for p in pts), 6), round(statistics.median(p[1] for p in pts), 6))
         for city, pts in pins.items() if len(pts) >= 5

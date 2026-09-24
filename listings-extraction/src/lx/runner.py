@@ -35,7 +35,7 @@ from rarlx.bcrf49_linux import (
 )
 from rarlx.fields import extract_full_listings
 
-from lx.place_fields import extract_place, missing_core
+from lx.place_fields import extract_place, missing_core, page_kind as page_kind_of
 from lx.store import RunStore
 from lx.targets import Target, feature_id_of
 from lx import visit as visits
@@ -57,7 +57,12 @@ def address_region(address: Optional[str]) -> Optional[str]:
 
 def extract_rows(target: Target, html: str, final_url: str, page_kind: str) -> List[Dict[str, Any]]:
     """Rows for one visit. Place target → at most one row; search target → every card."""
-    if target.kind == "search":
+    if target.kind == "search" and page_kind_of(html) == "place":
+        # A unique enough phrase makes Maps open the place itself instead of a list
+        # (seen live: "Cascadia Putting Club Portland Oregon").
+        rows = [extract_place(html, final_url)]
+        rows[0]["_resolved_from"] = "search_to_place"
+    elif target.kind == "search":
         rows = extract_full_listings(html, max_rank=20)
     elif page_kind == "list":
         # The place URL resolved to a list: keep only the card that is this place.
@@ -78,17 +83,14 @@ def identity(target: Target, row: Dict[str, Any], html: str) -> str:
     got = (row.get("feature_id") or feature_id_of(row.get("maps_url") or "") or "").lower() or None
     if target.expect_feature_id and got:
         return "match" if got == target.expect_feature_id else "mismatch"
-    if target.expect_place_id:
-        if row.get("place_id") == target.expect_place_id:
-            return "match"
-        # A place page carries its own ChIJ id in the page state; a different place's would not.
-        return "match" if target.expect_place_id in html else "mismatch" if row.get("place_id") else "unknown"
+    # A place-ID target's expected feature ID is decoded from the place ID (targets.py). The
+    # page's own text is never evidence: it echoes the request URL, place ID included.
     return "unknown"
 
 
 def _usable(target: Target, rows: List[Dict[str, Any]]) -> bool:
     if target.kind == "search":
-        return len(rows) > 0
+        return len(rows) > 0 and bool(rows[0].get("business_name"))
     return bool(rows) and bool(rows[0].get("business_name"))
 
 

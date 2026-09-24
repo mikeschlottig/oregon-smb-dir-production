@@ -1,6 +1,7 @@
 // Audits every JSON-LD block in dist/ against rubric.mjs. See rubric.mjs for the layers.
 //
-//   node scripts/jsonld-audit/audit.mjs                  audit dist/, write reports
+//   node scripts/jsonld-audit/audit.mjs --site https://oregonsmbdirectory.com   the live site (sitemap)
+//   node scripts/jsonld-audit/audit.mjs                  the local build in dist/
 //   node scripts/jsonld-audit/audit.mjs --strict         also exit 1 on any ERROR
 //   node scripts/jsonld-audit/audit.mjs --route /blog/   only paths starting with /blog/
 //   node scripts/jsonld-audit/audit.mjs --self-test      prove the rubric: every rule fires
@@ -193,7 +194,11 @@ const pageTypeLayer = (roots, page, pt, out) => {
 export const auditHtml = async (html, route) => {
   const { roots, errors, canonical } = extract(html);
   const page = { route, canonical };
-  const pt = PAGE_TYPES.find((p) => p.match.test(route)) ?? null;
+  // A noindex page (redirect stub, empty list, 404) asks not to be indexed, so no page-type
+  // requirement applies. Found live: /research/oregon-law-firm-ai-search-report-1/ is a
+  // redirect stub, which the first dist/ run wrongly flagged PAGE_NO_JSONLD.
+  const noindex = /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+  const pt = noindex ? { id: "noindex", required: [], noJsonLdExpected: true } : PAGE_TYPES.find((p) => p.match.test(route)) ?? null;
   const issues = errors.map((e) => issue("JSONLD_PARSE", "ERROR", "(block)", e));
   pageTypeLayer(roots, page, pt, issues);
   roots.forEach(({ node }, i) => {
@@ -254,12 +259,65 @@ const routeOf = (dist, file) => {
   return rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length) : rel;
 };
 
+// Live mode: every URL in the site's sitemap index, fetched over HTTPS, audited exactly as
+// the built files are. Sitemaps list only indexable pages, so /404.html is not in this set.
+const sitemapUrls = async (site) => {
+  const xml = async (u) => {
+    const r = await fetch(u, { headers: { "user-agent": UA } });
+    if (!r.ok) throw new Error(`${u} → HTTP ${r.status}`);
+    return r.text();
+  };
+  const locs = (s) => [...s.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/g)].map((m) => m[1]);
+  const index = await xml(new URL("/sitemap-index.xml", site).href);
+  const urls = [];
+  for (const sm of locs(index)) urls.push(...locs(await xml(sm)));
+  return [...new Set(urls)];
+};
+const UA = "oregonsmbdirectory-jsonld-audit/1.0 (+https://oregonsmbdirectory.com/)";
+
+const fetchPages = async (site, only, concurrency, onPage) => {
+  const urls = (await sitemapUrls(site)).filter((u) => !only || new URL(u).pathname.startsWith(only));
+  const failures = [];
+  let next = 0;
+  const worker = async () => {
+    while (next < urls.length) {
+      const u = urls[next++];
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const r = await fetch(u, { headers: { "user-agent": UA }, redirect: "manual" });
+          if (r.status >= 300 && r.status < 400) { failures.push({ url: u, status: r.status }); break; }
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          await onPage(new URL(u).pathname, await r.text());
+          break;
+        } catch (e) {
+          if (attempt === 3) failures.push({ url: u, error: String(e.message ?? e) });
+          else await new Promise((res) => setTimeout(res, 500 * attempt));
+        }
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: concurrency }, worker));
+  return { total: urls.length, failures };
+};
+
 const run = async () => {
-  const dist = path.resolve(root, opt("--dist") ?? "dist");
   const only = opt("--route");
-  const files = (await collect(dist)).filter((f) => !only || routeOf(dist, f).startsWith(only)).sort();
+  const site = opt("--site");
   const pages = [];
-  for (const f of files) pages.push(await auditHtml(await readFile(f, "utf8"), routeOf(dist, f)));
+  let fetchReport = null;
+  if (site) {
+    const t0 = Date.now();
+    fetchReport = await fetchPages(site, only, Number(opt("--concurrency") ?? 8), async (route, html) => {
+      pages.push(await auditHtml(html, route));
+    });
+    pages.sort((a, b) => a.route.localeCompare(b.route));
+    console.log(`fetched ${pages.length}/${fetchReport.total} sitemap URLs from ${site} in ${((Date.now() - t0) / 1000).toFixed(0)} s; ${fetchReport.failures.length} failed`);
+    for (const f of fetchReport.failures.slice(0, 10)) console.log(`  FETCH FAIL ${f.url} ${f.status ?? f.error}`);
+  } else {
+    const dist = path.resolve(root, opt("--dist") ?? "dist");
+    const files = (await collect(dist)).filter((f) => !only || routeOf(dist, f).startsWith(only)).sort();
+    for (const f of files) pages.push(await auditHtml(await readFile(f, "utf8"), routeOf(dist, f)));
+  }
 
   // Aggregate.
   const byType = new Map();
@@ -285,13 +343,15 @@ const run = async () => {
   const totals = { pages: pages.length, PERFECT: perfect.length, WARNING: pages.filter((p) => p.status === "WARNING").length, ERROR: pages.filter((p) => p.status === "ERROR").length };
 
   const date = new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" });
-  const meta = { date, vocabulary: vocab.VOCAB_VERSION, adobeValidator: ADOBE_VERSION, site: SITE.origin, ratingsSource: SITE.ratingsSource, route: only ?? "all" };
+  const source = site ? `live ${site}` : `built files ${path.relative(root, path.resolve(root, opt("--dist") ?? "dist"))}/`;
+  const tag = site ? "live" : "dist";
+  const meta = { date, source, vocabulary: vocab.VOCAB_VERSION, adobeValidator: ADOBE_VERSION, site: SITE.origin, ratingsSource: SITE.ratingsSource, route: only ?? "all", fetch: fetchReport };
   await mkdir(path.join(root, "reports"), { recursive: true });
-  const jsonPath = path.join("reports", `jsonld-audit-${date}.json`);
+  const jsonPath = path.join("reports", `jsonld-audit-${tag}-${date}.json`);
   await writeFile(path.join(root, jsonPath), JSON.stringify({ meta, totals, pageTypes: Object.fromEntries([...byType].map(([k, v]) => [k, { ...v, rootTypes: Object.fromEntries(v.rootTypes) }])), rules, perfect, pages }, null, 1));
 
   const md = [];
-  md.push(`# JSON-LD audit — ${date}`, "");
+  md.push(`# JSON-LD audit — ${date}`, "", `Source: **${source}**`, "");
   md.push(`${totals.pages} pages · **${totals.PERFECT} perfect** · ${totals.WARNING} warnings only · ${totals.ERROR} with errors`, "");
   md.push(`Vocabulary ${meta.vocabulary} · @adobe/structured-data-validator ${ADOBE_VERSION} · ratings source: ${SITE.ratingsSource} · rubric: scripts/jsonld-audit/rubric.mjs`, "");
   md.push("## By page type", "", "| page type | pages | perfect | warning | error | root types |", "|---|---:|---:|---:|---:|---|");
@@ -307,7 +367,7 @@ const run = async () => {
   }
   md.push("", `## Perfect pages (${perfect.length})`, "");
   md.push(perfect.length ? perfect.map((r) => `- \`${r}\``).join("\n") : "_None._");
-  const mdPath = path.join("reports", `jsonld-audit-${date}.md`);
+  const mdPath = path.join("reports", `jsonld-audit-${tag}-${date}.md`);
   await writeFile(path.join(root, mdPath), md.join("\n") + "\n");
 
   console.log(`${totals.pages} pages · PERFECT ${totals.PERFECT} · WARNING ${totals.WARNING} · ERROR ${totals.ERROR}`);

@@ -134,14 +134,21 @@ def extract_place(html: str, final_url: str = "") -> Dict[str, Any]:
     ])
 
     # Hours: the weekly table's aria-label ("Monday, 8 AM to 5 PM; Tuesday, …"), else rows.
-    hours_label = next((l for l in labels if re.match(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),", l)), None)
+    # One aria-label per weekday ("Friday, 8 AM to 4 PM, Copy open hours"); keep one per day.
+    day_labels: Dict[str, str] = {}
+    for l in labels:
+        m = re.match(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s*(.+)$", l)
+        if m:
+            day_labels.setdefault(m.group(1), re.sub(r",?\s*Copy open hours$", "", m.group(2)).strip())
+    order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    hours_label = "; ".join(f"{d}: {day_labels[d]}" for d in order if d in day_labels) or None
     rows = []
     for tr in main.css("table tr"):
         cells = [c for c in _all(tr, "::text") if c]
         if cells and re.match(r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)", cells[0]):
             rows.append(f"{cells[0]}: {' '.join(cells[1:])}")
     weekly_hours = take("weekly_hours", [
-        ("aria-label weekday list", hours_label),
+        ("aria-label per weekday", hours_label),
         ("hours table rows", "; ".join(rows) if rows else None),
     ])
 
@@ -157,7 +164,9 @@ def extract_place(html: str, final_url: str = "") -> Dict[str, Any]:
     # Identity from the URL the browser ended on — independent of markup.
     fid = feature_id_of(final_url)
     pins = PLACE_PIN.findall(final_url or "")
-    place_id_m = PLACE_ID.search(final_url or "") or PLACE_ID.search(html)
+    # Only the landed URL's own `!19sChIJ…`. The page body echoes the request URL, so a ChIJ
+    # found there can be the input's, not the place's (seen on the first live pages).
+    place_id_m = re.search(r"!19s(ChIJ[\w-]{20,})", final_url or "")
 
     return {
         "business_name": name,

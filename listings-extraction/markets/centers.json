@@ -1,0 +1,98 @@
+{
+  "albany": {
+    "center": [
+      44.632176,
+      -123.097011
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 721
+  },
+  "ashland": {
+    "center": [
+      42.198518,
+      -122.712445
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 676
+  },
+  "bend": {
+    "center": [
+      44.057118,
+      -121.306335
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 998
+  },
+  "corvallis": {
+    "center": [
+      44.567785,
+      -123.262777
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 537
+  },
+  "eugene": {
+    "center": [
+      44.053401,
+      -123.093328
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 977
+  },
+  "grants-pass": {
+    "center": [
+      42.439268,
+      -123.324425
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 728
+  },
+  "klamath-falls": {
+    "center": [
+      42.215454,
+      -121.765048
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 634
+  },
+  "portland": {
+    "center": [
+      45.520936,
+      -122.658382
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 1018
+  },
+  "roseburg": {
+    "center": [
+      43.217984,
+      -123.353191
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 701
+  },
+  "salem": {
+    "center": [
+      44.937199,
+      -123.030054
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 908
+  },
+  "springfield": {
+    "center": [
+      44.053314,
+      -123.009704
+    ],
+    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
+    "listing_pins_used": 490
+  },
+  "medford": {
+    "center": [
+      42.3265,
+      -122.8756
+    ],
+    "method": "master manifest",
+    "miles_from_listing_median": 0.47
+  }
+}

@@ -70,11 +70,11 @@ def test_place_panel_fields_and_their_sources():
     assert (r["phone"], r["phone_e164"]) == ("(541) 555-0123", "+15415550123")
     assert r["website"] == "https://daleyorganics.com/"
     assert r["plus_code"] == "GJVJ+7J Grants Pass, Oregon"
-    assert r["weekly_hours"].startswith("Monday, 8 AM to 5 PM")
+    assert r["weekly_hours"] == "Monday: 8 AM to 5 PM; Tuesday: 8 AM to 5 PM; Wednesday: Closed"
     assert r["claimed"] is False
     assert r["feature_id"] == "0x54c574367c852899:0x2759c1273f2ee03d" and r["cid"] == str(int("0x2759c1273f2ee03d", 16))
     assert (r["place_lat"], r["place_lng"]) == (42.5432168, -123.3884123)
-    assert r["place_id"] == "ChIJmSiFfDZ0xVQRPeAuPycSWSc"
+    assert r["place_id"] is None, "a ChIJ in the page body is not the place's own id"
     assert r["_sources"]["name"] == "h1.DUwDvf" and r["_sources"]["address"] == '[data-item-id="address"]'
 
 
@@ -224,15 +224,82 @@ def test_maps_urls_api_link_keeps_its_query_and_expects_the_place_id():
     assert t.name_hint == "Deepli Clean"
 
 
-def test_identity_by_place_id_when_there_is_no_feature_id():
-    t = place_target("https://www.google.com/maps/search/?api=1&query=Daley&query_place_id=ChIJmSiFfDZ0xVQRPeAuPycSWSc")
-    [row] = runner.extract_rows(t, (FIX / "place_panel_synthetic.html").read_text(), "", "place")
-    assert row["identity"] == "match"
-    t2 = place_target("https://www.google.com/maps/search/?api=1&query=Other&query_place_id=ChIJotherotherotherother00")
-    [row2] = runner.extract_rows(t2, (FIX / "place_panel_synthetic.html").read_text(), "", "place")
-    assert row2["identity"] == "mismatch"
+def test_place_id_decodes_to_the_feature_id_google_lands_on():
+    # Real pairs from the first live run (2026-09-24): input place ID -> landed feature ID.
+    from lx.targets import place_id_to_feature_id
+    assert place_id_to_feature_id("ChIJZ1Zzyzwg6GcRcn-fRTAHw6s") == "0x67e8203ccb735667:0xabc30730459f7f72"
+    assert place_id_to_feature_id("ChIJwb0sxytEhQURY7ocXSiWkGE") == "0x585442bc72cbdc1:0x619096285d1cba63"
+    assert place_id_to_feature_id("not-a-place-id") is None
+
+
+def test_identity_by_place_id_is_not_fooled_by_the_echoed_request_url():
+    t = place_target("https://www.google.com/maps/search/?api=1&query=Deepli%20Clean&query_place_id=ChIJZ1Zzyzwg6GcRcn-fRTAHw6s")
+    html = (FIX / "place_panel_synthetic.html").read_text() + "<a href='?query_place_id=ChIJZ1Zzyzwg6GcRcn-fRTAHw6s'></a>"
+    right = "https://www.google.com/maps/place/Deepli/data=!1s0x67e8203ccb735667:0xabc30730459f7f72"
+    wrong = "https://www.google.com/maps/place/Other/data=!1s0x54c574367c852899:0x2759c1273f2ee03d"
+    assert runner.extract_rows(t, html, right, "place")[0]["identity"] == "match"
+    assert runner.extract_rows(t, html, wrong, "place")[0]["identity"] == "mismatch", "the echoed ChIJ must not count"
 
 
 def test_p10_3_listings_queue_as_place_targets():
     ts = directory.from_directory(["portland__business-professional-services/deepli-clean", "portland__health-medical/north-tabor-dental"])
     assert [t.kind for t in ts] == ["place", "place"] and all(t.expect_place_id for t in ts)
+
+
+def test_search_that_opens_a_single_place_is_read_as_a_place():
+    t = load_targets(["Daley Organics Grants Pass Oregon"], lat=42.44, lng=-123.33)[0]
+    [row] = runner.extract_rows(t, (FIX / "place_panel_synthetic.html").read_text(), "", "list")
+    assert row["business_name"] == "Daley Organics" and row["_resolved_from"] == "search_to_place"
+
+
+# ── sweep ──────────────────────────────────────────────────────────────────────────────
+def test_queries_are_one_per_industry_and_follow_the_template():
+    from lx import sweep
+    q = sweep.load_queries()
+    assert set(q) == set(directory.industries())
+    assert q["automotive"]["term"] == "auto repair shop" and q["travel-hospitality"]["term"] == "hotel"
+
+
+def test_medford_market_is_the_master_manifest_unchanged():
+    import json as _j
+    from lx import sweep
+    master = Path("/mnt/c/Dev/standalone-archives-and-zips/ranks-above-replacement-20260913T085954Z-1-001/MEDFORD_49_GEO_PINS_MASTER_MANIFEST_V_0_01.json")
+    if not master.exists() or not (sweep.MARKETS / "medford.json").exists():
+        pytest.skip("master manifest or medford.json not present")
+    ours = _j.loads((sweep.MARKETS / "medford.json").read_text())["geo_pins"]
+    assert [(p["latitude"], p["longitude"]) for p in ours] == [(p["latitude"], p["longitude"]) for p in _j.loads(master.read_text())["geo_pins"]]
+
+
+@pytest.mark.skipif(not MEDFORD.exists(), reason="rar-linux archived page not present")
+def test_gate_export_reads_every_saved_pin_page(tmp_path, monkeypatch):
+    from lx import sweep
+    monkeypatch.setattr(sweep, "OUT", tmp_path)
+    pins = [{"point_id": "medford_or_bcrf49_r0.00_centroid", "latitude": 42.3265, "longitude": -122.8756, "radius_miles": 0.0, "bearing_label": "CENTER"}]
+    g = {"city_slug": "medford", "city": "Medford", "industry": "legal-services", "keyword_id": "Q-legal-services",
+         "phrase": "best attorney in Medford oregon", "centroid": {"latitude": 42.3265, "longitude": -122.8756}, "pins": pins}
+    page = tmp_path / "medford" / "artifacts_medford_or_legal-services" / "Q-legal-services" / pins[0]["point_id"] / "viewport.html"
+    page.parent.mkdir(parents=True)
+    page.write_text(MEDFORD.read_text(encoding="utf-8"), encoding="utf-8")
+    assert sweep.export_gate(g) == 20
+    rows = [json.loads(l) for l in (tmp_path / "rows.jsonl").read_text().splitlines()]
+    assert rows[0]["business_name"] == "OlsenDaines" and rows[0]["query"] == "best attorney in Medford oregon" and rows[0]["rank"] == 1
+
+
+def test_every_market_pin_sits_at_its_ring_radius_and_bearing():
+    """Independent inverse check: haversine distance and initial bearing from the centre
+    back to each pin, computed here — not by the generator that placed them."""
+    import math
+    from lx import sweep
+    for m in sweep.load_markets():
+        c = m["market"]["market_centroid"]
+        la1, lo1 = math.radians(c["latitude"]), math.radians(c["longitude"])
+        assert directory._in_oregon(c["latitude"], c["longitude"])
+        for p in m["geo_pins"]:
+            la2, lo2 = math.radians(p["latitude"]), math.radians(p["longitude"])
+            h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
+            d = 2 * 3958.7613 * math.asin(math.sqrt(h))
+            assert abs(d - p["radius_miles"]) < 0.03, (m["market"]["city_slug"], p["point_id"], d)
+            if p["radius_miles"]:
+                brg = (math.degrees(math.atan2(math.sin(lo2 - lo1) * math.cos(la2),
+                       math.cos(la1) * math.sin(la2) - math.sin(la1) * math.cos(la2) * math.cos(lo2 - lo1))) + 360) % 360
+                assert min(abs(brg - p["bearing_degrees"]), 360 - abs(brg - p["bearing_degrees"])) < 0.5, (p["point_id"], brg)

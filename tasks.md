@@ -253,3 +253,39 @@ Bugs (fix in `src/lib/schema.ts` and friends, re-run `npm run audit:jsonld`):
   time + timezone; Report `headline`, full `datePublished`, `about` as a Thing.
 - [ ] P12.8 `/city/` and `/services/` hubs get a CollectionPage; the research page
   `oregon-law-firm-ai-search-report-1` gets JSON-LD.
+
+## P13 — Live runs: P10.3 ratings, JSON-LD against the live site, 12-city BCRF-49 sweep (Mike, 2026-09-24 02:18)
+
+Mike: the audit must run against https://oregonsmbdirectory.com (or local code); the
+extractor exists to run on the P10.3 businesses; build a per-city 49-pin frame the Medford
+way, one query per industry per city, top 20 per pin.
+
+- [x] P13.1 Run `lx` on the 5 P10.3 listings (headed, first live run); check fields against
+  screenshots; fix place selectors if needed; report ratings for Mike to confirm.
+  Done: 5/5 extracted live, 0 challenges; identity match 4/4 (place-ID targets, by decoded
+  feature ID). Deepli Clean 5.0 (2) · Apex Business Marketing 5.0 (15) · North Tabor Dental
+  4.7 (31) · Capital Nomics no rating · Cascadia Putting Club 5.0 (7), a Maps listing exists
+  (service-area, no address). Fixed on the saved pages: weekly hours (one label per day),
+  place ID (the page echoes the request URL — identity now by decoded feature ID), a search
+  that opens a single place. **Numbers await Mike's confirmation before publishing.**
+  Evidence: listings-extraction/output/p10-3/ (results.csv, page.png per target).
+- [x] P13.2 `audit.mjs --site https://oregonsmbdirectory.com`: read the live sitemap, fetch
+  every page (polite concurrency), same rubric. Run it; diff against the dist/ run.
+  Done: `npm run audit:jsonld:live` — 10,531/10,531 sitemap URLs, 0 fetch failures, 206 s.
+  Every shared route has the same status as the dist/ run (0 differences). The 4 dist-only
+  pages are noindex by design (/404.html, /best-of/, /city/corvallis/real-estate/, a
+  research redirect stub); the rubric now exempts noindex pages (it had wrongly errored the
+  stub).
+- [x] P13.3 `listings-extraction/markets/`: one manifest per city in the Medford master
+  manifest's shape. Centre = the downtown commercial-core intersection (Medford's rule:
+  "Central Ave & Main St"), geocoded from OpenStreetMap (Overpass: the node two named
+  streets share) — no Google. Pins from rarlx `generate_bcrf49_grid`, verified against
+  Medford's master manifest first. **Changed:** Overpass stalled (504s); per Mike, centres are
+  the median of each city's own listing pins (Medford: master manifest; its median is 0.47 mi
+  from Central & Main). Validation: 24 tests incl. an independent haversine inverse check.
+- [x] P13.4 Queries: one per industry, "best {term} in {city} oregon", {term} = the most
+  common Google category among the directory's own listings in that industry (data, not
+  taste); documented in `markets/QUERIES.md`.
+- [ ] P13.5 Sweep runner: per city × query, the proven `execute_bcrf49_pipeline` with
+  `pins_override` + `keywords_override`; resumable; full-field export. ~7,056 pins at
+  ~16.5 s ≈ 32 h. Start it in the background after P13.1 finishes (one browser at a time).

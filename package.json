@@ -17,7 +17,8 @@
     "test:search": "node scripts/test-search.mjs",
     "audit:categories": "node scripts/fix-categories.mjs --dry",
     "audit:jsonld": "node scripts/jsonld-audit/audit.mjs",
-    "test:jsonld-rubric": "node scripts/jsonld-audit/audit.mjs --self-test"
+    "test:jsonld-rubric": "node scripts/jsonld-audit/audit.mjs --self-test",
+    "audit:jsonld:live": "node scripts/jsonld-audit/audit.mjs --site https://oregonsmbdirectory.com"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

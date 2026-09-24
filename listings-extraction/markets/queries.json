@@ -1,0 +1,250 @@
+{
+  "automotive": {
+    "industry_name": "Automotive",
+    "term": "auto repair shop",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Auto repair shop",
+      "listings": 360,
+      "share_pct": 38.8,
+      "cities_with_it": 12,
+      "industry_listings": 928,
+      "runner_up": {
+        "category": "Used car dealer",
+        "listings": 171,
+        "share_pct": 18.4
+      }
+    },
+    "examples": [
+      "best auto repair shop in Medford oregon",
+      "best auto repair shop in Portland oregon"
+    ]
+  },
+  "beauty-personal-care": {
+    "industry_name": "Beauty & Personal Care",
+    "term": "barber shop",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Barber shop",
+      "listings": 266,
+      "share_pct": 25.6,
+      "cities_with_it": 12,
+      "industry_listings": 1041,
+      "runner_up": {
+        "category": "Beauty salon",
+        "listings": 214,
+        "share_pct": 20.6
+      }
+    },
+    "examples": [
+      "best barber shop in Medford oregon",
+      "best barber shop in Portland oregon"
+    ]
+  },
+  "business-professional-services": {
+    "industry_name": "Business & Professional Services",
+    "term": "website designer",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Website designer",
+      "listings": 159,
+      "share_pct": 41.8,
+      "cities_with_it": 12,
+      "industry_listings": 380,
+      "runner_up": {
+        "category": "Marketing agency",
+        "listings": 94,
+        "share_pct": 24.7
+      }
+    },
+    "examples": [
+      "best website designer in Medford oregon",
+      "best website designer in Portland oregon"
+    ]
+  },
+  "construction-home-services": {
+    "industry_name": "Construction & Home Services",
+    "term": "plumber",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Plumber",
+      "listings": 293,
+      "share_pct": 14.6,
+      "cities_with_it": 12,
+      "industry_listings": 2000,
+      "runner_up": {
+        "category": "Roofing contractor",
+        "listings": 292,
+        "share_pct": 14.6
+      }
+    },
+    "examples": [
+      "best plumber in Medford oregon",
+      "best plumber in Portland oregon"
+    ]
+  },
+  "food-dining": {
+    "industry_name": "Food & Dining",
+    "term": "coffee shop",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Coffee shop",
+      "listings": 233,
+      "share_pct": 24.2,
+      "cities_with_it": 12,
+      "industry_listings": 963,
+      "runner_up": {
+        "category": "Restaurant",
+        "listings": 149,
+        "share_pct": 15.5
+      }
+    },
+    "examples": [
+      "best coffee shop in Medford oregon",
+      "best coffee shop in Portland oregon"
+    ]
+  },
+  "health-medical": {
+    "industry_name": "Health & Medical",
+    "term": "dentist",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Dentist",
+      "listings": 382,
+      "share_pct": 21.7,
+      "cities_with_it": 12,
+      "industry_listings": 1760,
+      "runner_up": {
+        "category": "Chiropractor",
+        "listings": 378,
+        "share_pct": 21.5
+      }
+    },
+    "examples": [
+      "best dentist in Medford oregon",
+      "best dentist in Portland oregon"
+    ]
+  },
+  "health-wellness": {
+    "industry_name": "Health & Wellness",
+    "term": "massage therapist",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Massage therapist",
+      "listings": 259,
+      "share_pct": 40.8,
+      "cities_with_it": 12,
+      "industry_listings": 635,
+      "runner_up": {
+        "category": "Cannabis store",
+        "listings": 257,
+        "share_pct": 40.5
+      }
+    },
+    "examples": [
+      "best massage therapist in Medford oregon",
+      "best massage therapist in Portland oregon"
+    ]
+  },
+  "legal-services": {
+    "industry_name": "Legal Services",
+    "term": "attorney",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Attorney",
+      "listings": 187,
+      "share_pct": 30.5,
+      "cities_with_it": 12,
+      "industry_listings": 613,
+      "runner_up": {
+        "category": "Law firm",
+        "listings": 110,
+        "share_pct": 17.9
+      }
+    },
+    "examples": [
+      "best attorney in Medford oregon",
+      "best attorney in Portland oregon"
+    ]
+  },
+  "real-estate": {
+    "industry_name": "Real Estate",
+    "term": "real estate agent",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Real estate agent",
+      "listings": 242,
+      "share_pct": 48.0,
+      "cities_with_it": 11,
+      "industry_listings": 504,
+      "runner_up": {
+        "category": "Real estate agency",
+        "listings": 216,
+        "share_pct": 42.9
+      }
+    },
+    "examples": [
+      "best real estate agent in Medford oregon",
+      "best real estate agent in Portland oregon"
+    ]
+  },
+  "retail-shopping": {
+    "industry_name": "Retail & Shopping",
+    "term": "furniture store",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Furniture store",
+      "listings": 125,
+      "share_pct": 47.7,
+      "cities_with_it": 12,
+      "industry_listings": 262,
+      "runner_up": {
+        "category": "Mattress store",
+        "listings": 71,
+        "share_pct": 27.1
+      }
+    },
+    "examples": [
+      "best furniture store in Medford oregon",
+      "best furniture store in Portland oregon"
+    ]
+  },
+  "sports-fitness": {
+    "industry_name": "Sports & Fitness",
+    "term": "gym",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Gym",
+      "listings": 164,
+      "share_pct": 50.8,
+      "cities_with_it": 12,
+      "industry_listings": 323,
+      "runner_up": {
+        "category": "Fitness center",
+        "listings": 39,
+        "share_pct": 12.1
+      }
+    },
+    "examples": [
+      "best gym in Medford oregon",
+      "best gym in Portland oregon"
+    ]
+  },
+  "travel-hospitality": {
+    "industry_name": "Travel & Hospitality",
+    "term": "hotel",
+    "template": "best {term} in {city} oregon",
+    "basis": {
+      "top_category": "Hotels",
+      "listings": 361,
+      "share_pct": 100.0,
+      "cities_with_it": 12,
+      "industry_listings": 361,
+      "runner_up": null
+    },
+    "examples": [
+      "best hotel in Medford oregon",
+      "best hotel in Portland oregon"
+    ]
+  }
+}

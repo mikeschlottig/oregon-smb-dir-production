@@ -67,6 +67,27 @@ def name_of(url: str) -> Optional[str]:
     return unquote_plus(m.group(1)) if m else None
 
 
+def place_id_to_feature_id(place_id: Optional[str]) -> Optional[str]:
+    """
+    A `ChIJ…` place ID is base64url protobuf: 0a 12 | 09 <fixed64 LE> | 11 <fixed64 LE>, and
+    the two fixed64 values are the halves of the feature ID `0x…:0x…`. Verified on the first
+    live pages (Deepli Clean: ChIJZ1Zzyzwg6GcRcn-fRTAHw6s → 0x67e8203ccb735667:0xabc30730459f7f72,
+    the feature ID the browser landed on). None for any other shape.
+    """
+    import base64
+    if not place_id or not place_id.startswith("ChIJ"):
+        return None
+    try:
+        raw = base64.urlsafe_b64decode(place_id + "=" * (-len(place_id) % 4))
+    except (ValueError, TypeError):
+        return None
+    if len(raw) < 20 or raw[0:3] != b"\x0a\x12\x09" or raw[11] != 0x11:
+        return None
+    hi = int.from_bytes(raw[3:11], "little")
+    lo = int.from_bytes(raw[12:20], "little")
+    return f"0x{hi:x}:0x{lo:x}"
+
+
 def api_place_id(url: str) -> Optional[str]:
     """`query_place_id` of a Maps URLs-API link (`/maps/search/?api=1&query=…&query_place_id=ChIJ…`)."""
     q = parse_qs(urlsplit(url or "").query)
@@ -98,7 +119,7 @@ def place_target(url: str, target_id: Optional[str] = None, **meta: Any) -> Targ
         lat=pin[0] if pin else meta.pop("lat", None),
         lng=pin[1] if pin else meta.pop("lng", None),
         name_hint=meta.pop("name_hint", None) or name_of(url) or api_name,
-        expect_feature_id=fid,
+        expect_feature_id=fid or place_id_to_feature_id(pid),
         expect_place_id=pid,
         meta={k: v for k, v in meta.items() if v is not None},
     )

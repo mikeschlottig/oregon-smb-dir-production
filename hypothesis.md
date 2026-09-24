@@ -367,3 +367,21 @@ rating, reviews, address, phone, website; the class-name fallbacks (DUwDvf, F7ni
 are the ones most likely to have drifted. Identity = match for all 4 URLs-API targets.
 **Offline proof so far:** 18 tests; mutation checks confirm the block-teardown and
 stale-selector tests fail when that code is removed.
+
+## H25 — result (first live run, 2026-09-24 02:2x) — CLOSED, mostly right
+
+Primary selectors all hit on live pages (name, rating, reviews, category, address, phone,
+website, plus code). Wrong in three places, all found on the saved pages and fixed by reparse
+(no second visit): weekly hours are one aria-label per day, not one list; the page body
+echoes the request URL, so a ChIJ in the page is not evidence of the place (the first
+identity check was circular); a unique search can open the place itself. Fix for identity:
+a ChIJ place ID base64-decodes to the feature ID — verified on 2 live pairs.
+**Rule:** an identity check must compare against something the input did not put there.
+
+## H26 — 12-city BCRF-49 sweep — OPEN
+
+**Prediction:** Medford gates run at ≈16.5 s/pin with 0 challenges (the proven market and
+pace). Dense queries (dentist, attorney, auto repair shop, coffee shop) fill 20/20 at every
+pin; thin ones in small markets (furniture store, website designer in Klamath Falls /
+Roseburg / Ashland) hit Google's end-of-list below 20 at the 4–8 mi rings. First gate
+done in ≈14 min.

@@ -185,12 +185,12 @@ Decisions recorded, not open questions:
 - [ ] P10.11 Best Of. **Deferred** (see decisions).
 
 ### Ship hygiene
-- [ ] P10.12 Push `master` to GitHub. Commits are local only.
+- [x] P10.12 Push `master` to GitHub. Done 2026-09-23 21:36, origin/master in sync.
 - [ ] P10.13 Owner emails for the 7 listings from the owner-listings handoff: draft,
   Mike approves, send.
 - [ ] P10.14 Trade directories (roofers, plumbers, chiropractors): forms and email. Not
   started.
-- [ ] P10.15 Every fix above ships one at a time: edit, build, check, deploy, curl our own
+- [x] P10.15 Every fix above ships one at a time: edit, build, check, deploy, curl our own
   site, commit with the Worker version.
 
 ### Research

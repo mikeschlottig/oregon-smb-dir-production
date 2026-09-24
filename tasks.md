@@ -101,3 +101,99 @@ assets-only, `./dist`.
       the two old URLs redirect 301
 - [x] P9.5 Daley Organics: verified, website `https://daleyorganics.com`, 4.6 from 10 reviews (Mike), banner — both pages live, Worker version `9abf79e7`
 - [ ] P9.6 Build, check pages, deploy, and curl live: badge, link, rating, H2s, redirects
+
+## P10 — Fix list (Mike, 2026-09-23 evening)
+
+Decisions recorded, not open questions:
+- **The listings index stays hand-wired.** `src/data/businesses.ts` gets no generator
+  until one is proven, and kept working, on a separate non-live site. The last generator
+  attempt broke the live site and hurt it with Google.
+- **Both report systems stay for now.** The `research` collection is live; `ReportReader` +
+  `researchReports` are unused. Mike hasn't decided which to keep, so delete neither.
+- **Best Of is deferred.** It comes after the fundamentals are fixed, the listings are up,
+  and edits are shown to ship without breaking anything.
+- **No agent uses a browser on Google** (memory `google-services-stealth-only`). Ratings
+  come from Mike.
+
+### Listings
+- [ ] P10.1 LeverageAI verified with website `https://leverageai.network`.
+  - A patch batch adds `verification` + `websiteValidation`.
+  - The dedicated page reads its badge and rating from the record, as Daley's does. It
+    hard-codes `verified: false` today.
+- [ ] P10.2 PDX Fingerprinting becomes one Portland listing, `pdx-fingerprinting`:
+  - Verified, website `https://pdxfingerprinting.com`.
+  - Both service addresses: Hillsboro and Lake Oswego.
+  - 4.9 stars, 344 reviews (Mike), on the Hillsboro feature ID `0x54950f18a1066bc7:0xd5daf738ddd7b67d`.
+  - H2 sections "Notary Services" and "Translation Services", with copy traced to
+    pdxfingerprinting.com/notary-services/ and /document-translation-service/.
+  - The two old URLs (`-hillsboro`, `-lake-oswego`) redirect 301 to the new one.
+  - Office phone `503-212-0678`. The `(971) 394-4150` number was never corroborated; the
+    site lists `971-394-4154`, for international clients only.
+- [ ] P10.3 Ratings for the other new listings, **numbers from Mike**: Deepli, Apex, North Tabor
+  Dental, Capital Nomics, Cascadia Putting Club. Each needs a real place `googleUrl` and a
+  rating-evidence supplement.
+  - Last session's Places figures, **not confirmed by Mike**: Apex 5.0/15, Deepli 5.0/2,
+    NTD 4.7/31.
+  - Capital Nomics has no rating. Cascadia has no Maps listing found.
+- [ ] P10.4 Real Maps embeds for every new listing.
+  - `parseLatLng` (`src/data/businesses.ts`) reads only `query=lat,lng`, so every
+    `/maps/place/…/@lat,lng` URL falls back to a name + address search embed.
+  - Fix: parse the `@lat,lng` and the `!3d…!4d…` coordinates too. Then check that every
+    new listing's embed is pinned to its own location.
+- [ ] P10.5 Daley Organics note wording and date. The provenance text reads like a log
+  ("Directory operator review…"), and the verification date prints as September 24 (UTC).
+  Rewrite the `method` and store `verifiedAt` with the Pacific offset.
+
+### Rating display, site-wide
+- [ ] P10.6 Remove the "observed <Mon YYYY>" wording from every business page:
+  - `src/pages/city/[citySlug]/[industrySlug]/[businessSlug].astro` lines ~89 (label),
+    ~157 ("observed through"), ~317 ("The source record showed … when observed"), and
+    ~438 ("Rating evidence is tied to provider record … observed").
+  - Replace them with **stars + review count with an asterisk**, e.g. `4.6 ★ (10 reviews)*`.
+  - Put **one footnote at the bottom of the listing**: `*as of M/D/YYYY`. The date is the
+    rating's observation date.
+  - Same treatment on the dedicated pages and the premium body (`PremiumListing.astro`).
+  - **Confirm with Mike:** Daley's reading is stored as 9/23 (Pacific), and Mike wrote
+    9/24. Ratings from the July import would read `*as of 7/26/2026`.
+- [ ] P10.7 Review the other machine-sounding "source-observed" phrasing (city-industry
+  taglines, services pages, page-count descriptions, editorial policy) and propose plain
+  wording. **Mike approves before any change.**
+
+### Footer
+- [ ] P10.8 `src/components/layout/Footer.tsx`:
+  - The "Industries" column shows 6 industries as plain text. The other 6 render under
+    "Resources", also plain text.
+  - Fix: all 12 industries under Industries, each linked to `/services/<industry>/`
+    (all 12 pages exist in `dist/services/`).
+  - "Resources" keeps only Blog, Research Reports, Best Of, Editorial, Accessibility,
+    Contact.
+  - Cities are already links (checked live, 12 anchors). Leave them.
+
+### Home page and content
+- [ ] P10.9 Home page blog teaser reads the real blog.
+  - Today `src/pages/index.astro` takes `blogPosts[0]` from `src/data/blog-posts.json`, a
+    separate legacy file, not `src/content/blog/`.
+  - Change it to the newest **2–3 posts** from the MDX collection, sorted by `date`.
+    **Never more than 3.**
+  - Show Mike what it looks like before shipping.
+- [ ] P10.10 Research index pagination and SEO.
+  - `src/pages/research/index.astro` renders all reports on one page.
+  - Change it to **max 12 per page**, with `/research/page/<n>/` pages, the same pattern
+    as `blog/page/[page].astro` and `src/lib/paginate.ts`.
+  - Each page gets a unique title and description, a self canonical, and page links in
+    the markup. It stays in the sitemap and passes `verify-site.mjs`.
+- [ ] P10.11 Best Of. **Deferred** (see decisions).
+
+### Ship hygiene
+- [ ] P10.12 Push `master` to GitHub. Commits are local only.
+- [ ] P10.13 Owner emails for the 7 listings from the owner-listings handoff: draft,
+  Mike approves, send.
+- [ ] P10.14 Trade directories (roofers, plumbers, chiropractors): forms and email. Not
+  started.
+- [ ] P10.15 Every fix above ships one at a time: edit, build, check, deploy, curl our own
+  site, commit with the Worker version.
+
+### Research
+- [ ] P10.16 Index `rar/` with codebase-intel, then write an analysis of how the scrapers
+  and extractors are composed (stealth rules as they appear in code). The proof set is
+  550K records over 8 days, with 0 bot flags.

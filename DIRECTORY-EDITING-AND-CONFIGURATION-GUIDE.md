@@ -310,6 +310,9 @@ Every item is required. A missing one fails the build or leaves dead links.
 4. **Shard wiring:** in `src/data/businesses.ts`, add one `import` line and one `map`
    entry per new shard, next to the existing ones. **Nothing generates this file.** It's
    edited by hand, and a missing entry makes that page render with zero listings.
+   **Mike's decision, 2026-09-23: it stays hand-wired.** Don't build a generator for it
+   unless one has been proven and kept working on a separate, non-live site. The last
+   attempt broke the live site and hurt it with Google.
 5. **Search dropdown:** `src/components/SearchBar.astro` has its **own hard-coded city
    list**. Add the city there too.
 6. **Build.** The pages `/city/<slug>/`, `/city/<slug>/<industry>/` and the services city
@@ -388,7 +391,8 @@ from the owner-listings handoff hasn't been built yet.
 - **Not used for these pages:** `src/data/content.ts` → `researchReports` (empty) and
   `src/components/ReportReader.tsx` (no page imports it). The same goes for
   `src/data/reports/southern-oregon-construction.ts`. Report pages come only from the
-  `research` collection.
+  `research` collection. **Don't delete either system.** Mike hasn't decided which one
+  to keep (2026-09-23).
 
 ### 6.3 Best Of lists
 

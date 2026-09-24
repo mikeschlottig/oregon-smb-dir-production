@@ -128,7 +128,8 @@ Run it:
 - **Build:** `bash scripts/build-bg.sh build`. Success prints `BUILD_EXIT=0`. It takes
   about 3 minutes.
 - **Deploy:** `bash scripts/deploy-bg.sh "<message>"`. Success prints `DEPLOY_EXIT=0`.
-- **Check rendered listings:** `bash scripts/check-listing-pages.sh <dist paths>`.
+- **Check rendered listings:** `bash scripts/check-listing-pages.sh <city>/<industry>/<slug> …`
+  (no `city/` prefix).
 - **How to wait:** run the build or deploy as one background command and wait for it to
   exit. Don't poll with sleep and grep. From a session that may end first, detach with
   `setsid nohup ... > <log> 2>&1 < /dev/null &`.

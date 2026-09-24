@@ -138,6 +138,21 @@ def cmd_sweep(args) -> int:
     return 0
 
 
+def cmd_dashboard(args) -> int:
+    from lx import dashboard
+    if args.watch:
+        dashboard.watch()
+    else:
+        print(dashboard.build())
+    return 0
+
+
+def cmd_status(args) -> int:
+    from lx import dashboard
+    print(dashboard.status_line())
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="lx", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -171,6 +186,12 @@ def main(argv=None) -> int:
     p.add_argument("--yes", action="store_true")
     p.add_argument("--headless", action="store_true")
     p.set_defaults(fn=cmd_sweep)
+
+    p = sub.add_parser("dashboard", help="rebuild output/sweep/dashboard.html (--watch: on every finished gate)")
+    p.add_argument("--watch", action="store_true")
+    p.set_defaults(fn=cmd_dashboard)
+    p = sub.add_parser("status", help="one-line sweep progress")
+    p.set_defaults(fn=cmd_status)
 
     args = ap.parse_args(argv)
     return args.fn(args)

@@ -127,3 +127,5 @@ def run_sweep(cities=None, industries=None, headless: bool = False, log=print) -
         with (OUT / "gates.jsonl").open("a", encoding="utf-8") as f:
             f.write(json.dumps(rec) + "\n")
         log(f"[sweep] {status}: {rows} rows in {rec['seconds']} s")
+        from lx import dashboard  # the dashboard changes only when a 49-pin gate finishes
+        dashboard.build()

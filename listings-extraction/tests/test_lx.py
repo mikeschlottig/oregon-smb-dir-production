@@ -303,3 +303,16 @@ def test_every_market_pin_sits_at_its_ring_radius_and_bearing():
                 brg = (math.degrees(math.atan2(math.sin(lo2 - lo1) * math.cos(la2),
                        math.cos(la1) * math.sin(la2) - math.sin(la1) * math.cos(la2) * math.cos(lo2 - lo1))) + 360) % 360
                 assert min(abs(brg - p["bearing_degrees"]), 360 - abs(brg - p["bearing_degrees"])) < 0.5, (p["point_id"], brg)
+
+
+def test_dashboard_shows_a_finished_gate_and_its_top3_leader(tmp_path, monkeypatch):
+    from lx import dashboard
+    monkeypatch.setattr(dashboard, "OUT", tmp_path)
+    monkeypatch.setattr(dashboard, "PAGE", tmp_path / "dashboard.html")
+    (tmp_path / "gates.jsonl").write_text(json.dumps({"city_slug": "medford", "industry": "automotive", "phrase": "best auto repair shop in Medford oregon",
+        "status": "complete", "rows": 980, "seconds": 810, "finished_at": "2026-09-24T10:00:00+00:00"}) + "\n")
+    (tmp_path / "rows.jsonl").write_text("".join(json.dumps({"city_slug": "medford", "industry": "automotive", "rank": 1, "business_name": "Top Shop"}) + "\n" for _ in range(49)))
+    page = dashboard.build().read_text()
+    assert "1 / 144" in page and "48,020" not in page and "2,401 / 7,056" not in page
+    assert "49 / 7,056" in page, "one gate = 49 pins"
+    assert "Top Shop (49)" in page and 'class="next"' in page

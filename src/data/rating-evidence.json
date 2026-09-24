@@ -13,6 +13,14 @@
       "observations": {
         "0x54c574367c852899:0x2759c1273f2ee03d": "4.6|10"
       }
+    },
+    {
+      "source": "google_business_profile",
+      "observedAt": "2026-09-23T19:00:00.000-07:00",
+      "reportedBy": "Mike Schlottig, directory operator, from the Google Business Profile (tasks.md P10.2, evening of 2026-09-23; time approximate)",
+      "observations": {
+        "0x54950f18a1066bc7:0xd5daf738ddd7b67d": "4.9|344"
+      }
     }
   ],
   "observations": {

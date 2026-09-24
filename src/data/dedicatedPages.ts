@@ -11,6 +11,7 @@
 export const dedicatedBusinessPages: ReadonlySet<string> = new Set([
   "grants-pass/business-professional-services/leverageai",
   "grants-pass/retail-shopping/daley-organics",
+  "portland/business-professional-services/pdx-fingerprinting",
 ]);
 
 export function hasDedicatedPage(

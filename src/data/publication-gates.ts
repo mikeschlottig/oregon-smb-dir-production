@@ -15,7 +15,9 @@ type RatingEvidence = {
   }[];
 };
 
-const evidence = ratingEvidence as RatingEvidence;
+// The JSON import is typed per literal key, so two supplement blocks with different
+// feature IDs form a union that no longer overlaps RatingEvidence; widen via unknown.
+const evidence = ratingEvidence as unknown as RatingEvidence;
 
 /** The newest observation for a provider record: a supplement wins over the base import. */
 const findObservation = (sourceRecordId: string) => {

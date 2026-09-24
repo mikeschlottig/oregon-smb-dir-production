@@ -120,7 +120,7 @@ Decisions recorded, not open questions:
   - A patch batch adds `verification` + `websiteValidation`.
   - The dedicated page reads its badge and rating from the record, as Daley's does. It
     hard-codes `verified: false` today.
-- [ ] P10.2 PDX Fingerprinting becomes one Portland listing, `pdx-fingerprinting`:
+- [x] P10.2 PDX Fingerprinting becomes one Portland listing, `pdx-fingerprinting`: Done: Worker 1a4695e3. Dedicated page (not premium — the handoff classed PDX verified standard); old records archived in `_archive/pdx-fingerprinting-split-records-*`; 301s in `public/_redirects`. Translation copy cites `/certified-document-translation-service/` because `/document-translation-service/` now redirects to the home page.
   - Verified, website `https://pdxfingerprinting.com`.
   - Both service addresses: Hillsboro and Lake Oswego.
   - 4.9 stars, 344 reviews (Mike), on the Hillsboro feature ID `0x54950f18a1066bc7:0xd5daf738ddd7b67d`.

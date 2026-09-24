@@ -25,6 +25,8 @@ from typing import Dict, Iterable, List, Optional
 from rarlx.bcrf49_linux import MarketConfig, execute_bcrf49_pipeline
 from rarlx.fields import extract_full_listings
 
+from lx.targets import feature_id_to_place_id
+
 ROOT = Path(__file__).resolve().parents[2]
 MARKETS = ROOT / "markets"
 OUT = ROOT / "output" / "sweep"
@@ -84,6 +86,8 @@ def export_gate(g: dict) -> int:
                 continue
             for r in extract_full_listings(page.read_text(encoding="utf-8"), max_rank=20):
                 r.pop("text_tokens", None)
+                if not r.get("place_id") and r.get("feature_id"):
+                    r["place_id"] = feature_id_to_place_id(r["feature_id"])
                 f.write(json.dumps({
                     "city_slug": g["city_slug"], "industry": g["industry"], "query": g["phrase"],
                     "point_id": pin["point_id"], "pin_lat": pin["latitude"], "pin_lng": pin["longitude"],

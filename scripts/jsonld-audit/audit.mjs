@@ -17,6 +17,8 @@ import { fileURLToPath } from "node:url";
 import Validator from "@adobe/structured-data-validator";
 import * as vocab from "./vocab.mjs";
 import { PAGE_TYPES, GOOGLE_RULES, SITE, SITE_RULES, bindVocab } from "./rubric.mjs";
+import { validateHtml, VALIDATOR } from "./schemaorg-validator.mjs";
+import { createHash } from "node:crypto";
 
 bindVocab(vocab);
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -69,38 +71,6 @@ const walk = (node, visit, trail = [], typeTrail = []) => {
   }
 };
 const fmtPath = (p) => p.reduce((s, x) => (typeof x === "number" ? `${s}[${x}]` : s ? `${s}.${x}` : x), "") || "(root)";
-
-const vocabularyLayer = (rootNode, rootIdx, out) => {
-  walk(rootNode, (node, ctx) => {
-    const where = `#${rootIdx} ${fmtPath(ctx.path)}`;
-    if (!ctx.types.length) return; // untyped values are reported by checkRange on their property
-    for (const t of ctx.types) {
-      if (!vocab.isType(t)) { out.push(issue("VOCAB_UNKNOWN_TYPE", "ERROR", where, `"${t}" is not a schema.org type`)); continue; }
-      const info = vocab.typeInfo(t);
-      if (info.supersededBy) out.push(issue("VOCAB_DEPRECATED_TYPE", "WARNING", where, `"${t}" is superseded by "${info.supersededBy}"`));
-      if (info.pending) out.push(issue("VOCAB_PENDING_TYPE", "INFO", where, `"${t}" is in schema.org's pending area`));
-    }
-    const known = ctx.types.filter(vocab.isType);
-    if (!known.length) return;
-    for (const [prop, value] of Object.entries(node)) {
-      if (prop.startsWith("@")) continue;
-      const p = vocab.propInfo(prop);
-      if (!p) {
-        // SearchAction's "query-input" is the Actions extension, not a vocabulary term.
-        if (!/-(input|output)$/.test(prop)) out.push(issue("VOCAB_UNKNOWN_PROPERTY", "ERROR", where, `"${prop}" is not a schema.org property`));
-        continue;
-      }
-      if (!known.some((t) => vocab.propertyAllowed(t, prop))) {
-        out.push(issue("VOCAB_PROPERTY_DOMAIN", "WARNING", where, `"${prop}" is not defined for ${known.join("+")}`));
-      }
-      if (p.supersededBy) out.push(issue("VOCAB_DEPRECATED_PROPERTY", "WARNING", where, `"${prop}" is superseded by "${p.supersededBy}"`));
-      for (const v of [].concat(value)) {
-        const bad = vocab.checkRange(prop, v);
-        if (bad) out.push(issue("VOCAB_RANGE", bad.severity, where, bad.message));
-      }
-    }
-  });
-};
 
 const googleLayer = (rootNode, rootIdx, page, out) => {
   walk(rootNode, (node, ctx) => {
@@ -191,6 +161,75 @@ const pageTypeLayer = (roots, page, pt, out) => {
   }
 };
 
+// ─── schema.org validity: the official validator (validator.schema.org), not our own ─────
+// The home-grown vocabulary layer this replaces was stricter than schema.org itself (it
+// rejected text where schema.org's data model accepts it). Pages are grouped by shape — the
+// recursive union of their JSON-LD keys and @types — and one representative per shape is
+// validated: same shape = same types and properties = same verdict. One request per second,
+// cached by shape in reports/schemaorg-validator-cache.json.
+// Shape = the set of key paths plus @type values across the page's JSON-LD. The validator
+// judges types and properties, so pages with the same set get the same verdict. 24 on this
+// site (2026-09-24). An earlier finer key over-split pages and, paced at 1 req/s, drew
+// HTTP 429/405 from validator.schema.org.
+const keyPaths = (v, acc = new Set(), pre = "") => {
+  if (Array.isArray(v)) { v.forEach((x) => keyPaths(x, acc, pre)); return acc; }
+  if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) {
+    acc.add(pre + k + (k === "@type" ? "=" + [].concat(x).join("+") : ""));
+    keyPaths(x, acc, pre + k + ".");
+  }
+  return acc;
+};
+const shapeKey = (roots) => createHash("sha1").update([...keyPaths(roots.map(({ node }) => node))].sort().join("|")).digest("hex").slice(0, 16);
+const CACHE_PATH = path.join(root, "reports", "schemaorg-validator-cache.json");
+let cache = null;
+const loadCache = () => {
+  if (cache) return cache;
+  try { cache = JSON.parse(readFileSync(CACHE_PATH, "utf8")); } catch { cache = {}; }
+  return cache;
+};
+const inflight = new Map();
+let queue = Promise.resolve();
+let validatorStopped = null;
+export const validatorStats = { shapes: 0, calls: 0, cached: 0 };
+const officialIssuesFor = (key, html, route) => {
+  const c = loadCache();
+  if (c[key]) { if (!inflight.has(key)) { inflight.set(key, Promise.resolve(c[key].issues)); validatorStats.shapes++; validatorStats.cached++; } return inflight.get(key); }
+  if (!inflight.has(key)) {
+    validatorStats.shapes++;
+    const p = (queue = queue.then(async () => {
+      if (validatorStopped) return [issue("SCHEMAORG_UNVERIFIED", "ERROR", "(validator.schema.org)", `not validated: ${validatorStopped}`)];
+      validatorStats.calls++;
+      let r;
+      try {
+        r = await validateHtml(html);
+      } catch (e) {
+        // Rate-limited or refused: stop calling for the rest of the run. Never retry into a 429.
+        validatorStopped = e.message;
+        return [issue("SCHEMAORG_UNVERIFIED", "ERROR", "(validator.schema.org)", `not validated: ${e.message}`)];
+      }
+      await new Promise((res) => setTimeout(res, 10000));
+      const errs = [];
+      const walk = (n) => { if (Array.isArray(n)) return n.forEach(walk); if (n && typeof n === "object") { if (Array.isArray(n.errors)) errs.push(...n.errors); Object.values(n).forEach(walk); } };
+      walk(r.tripleGroups); if (Array.isArray(r.errors)) errs.push(...r.errors);
+      const issues = [...new Map(errs.map((e) => [`${e.errorType}|${(e.args ?? []).join("|")}`, e])).values()].map((e) =>
+        issue("SCHEMAORG_VALIDATOR", e.isSevere ? "ERROR" : "WARNING", "(validator.schema.org)", `${e.errorType}: ${(e.args ?? []).join(" · ")}`));
+      if ((r.totalNumErrors ?? 0) + (r.totalNumWarnings ?? 0) > 0 && !issues.length) {
+        issues.push(issue("SCHEMAORG_VALIDATOR", "ERROR", "(validator.schema.org)", `${r.totalNumErrors} errors / ${r.totalNumWarnings} warnings reported but none itemised`));
+      }
+      c[key] = { issues, representative: route, numObjects: r.numObjects, checkedAt: new Date().toISOString(), validator: VALIDATOR };
+      await saveValidatorCache();
+      return issues;
+    }));
+    inflight.set(key, p);
+  }
+  return inflight.get(key);
+};
+export const saveValidatorCache = async () => {
+  if (!cache) return;
+  await mkdir(path.dirname(CACHE_PATH), { recursive: true });
+  await writeFile(CACHE_PATH, JSON.stringify(cache, null, 1));
+};
+
 export const auditHtml = async (html, route) => {
   const { roots, errors, canonical } = extract(html);
   const page = { route, canonical };
@@ -201,10 +240,8 @@ export const auditHtml = async (html, route) => {
   const pt = noindex ? { id: "noindex", required: [], noJsonLdExpected: true } : PAGE_TYPES.find((p) => p.match.test(route)) ?? null;
   const issues = errors.map((e) => issue("JSONLD_PARSE", "ERROR", "(block)", e));
   pageTypeLayer(roots, page, pt, issues);
-  roots.forEach(({ node }, i) => {
-    vocabularyLayer(node, i, issues);
-    googleLayer(node, i, page, issues);
-  });
+  roots.forEach(({ node }, i) => googleLayer(node, i, page, issues));
+  if (roots.length && !errors.length) issues.push(...(await officialIssuesFor(shapeKey(roots), html, route)));
   if (roots.length) await adobeLayer(roots, issues);
   siteLayer(roots, page, issues);
   const errorsN = issues.filter((i) => i.severity === "ERROR").length;
@@ -238,6 +275,7 @@ const selfTest = async () => {
       for (const i of res.issues) console.log(`       ${i.severity.padEnd(7)} ${i.rule} ${i.path}: ${i.message}`);
     }
   }
+  await saveValidatorCache();
   // Every rubric rule must be proven able to fire by some fixture.
   const unproven = GOOGLE_RULES.map((r) => r.id).filter((id) => !fired.has(id));
   if (unproven.length) { failed++; console.log(`FAIL rules never fired by any fixture: ${unproven.join(", ")}`); }
@@ -318,6 +356,9 @@ const run = async () => {
     const files = (await collect(dist)).filter((f) => !only || routeOf(dist, f).startsWith(only)).sort();
     for (const f of files) pages.push(await auditHtml(await readFile(f, "utf8"), routeOf(dist, f)));
   }
+
+  await saveValidatorCache();
+  console.log(`validator.schema.org: ${validatorStats.shapes} distinct JSON-LD shapes, ${validatorStats.calls} validated now, ${validatorStats.cached} from cache${validatorStopped ? ` — STOPPED: ${validatorStopped}; unvalidated shapes are ERROR (SCHEMAORG_UNVERIFIED); re-run later, the cache resumes` : ""}`);
 
   // Aggregate.
   const byType = new Map();

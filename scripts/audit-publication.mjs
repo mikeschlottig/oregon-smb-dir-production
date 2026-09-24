@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { featureIdOf } from "../src/lib/google-place-id.ts";
 
 const root = process.cwd();
 const businessDir = path.join(root, "src", "data", "businesses");
@@ -9,8 +10,7 @@ const evidence = JSON.parse(
   await readFile(path.join(root, "src", "data", "rating-evidence.json"), "utf8"),
 );
 
-const providerRecordId = (googleUrl) =>
-  googleUrl?.match(/0x[0-9a-f]+:0x[0-9a-f]+/gi)?.at(-1) ?? null;
+const providerRecordId = (googleUrl) => featureIdOf(googleUrl);
 
 const suspiciousTlds = new Set([
   "buzz",
@@ -23,8 +23,12 @@ const suspiciousTlds = new Set([
   "xyz",
 ]);
 
+// Only the shards the site loads: the ones wired into src/data/businesses.ts. The 17 legacy
+// files in the same folder are never imported; counting them made this audit disagree with
+// the site (review 20260924-032531: +57 phantom accepted ratings).
+const wiring = await readFile(path.join(root, "src", "data", "businesses.ts"), "utf8");
 const businessFiles = (await readdir(businessDir))
-  .filter((file) => file.endsWith(".json"))
+  .filter((file) => file.endsWith(".json") && wiring.includes(`"${file.slice(0, -5)}":`))
   .sort();
 
 const summary = {

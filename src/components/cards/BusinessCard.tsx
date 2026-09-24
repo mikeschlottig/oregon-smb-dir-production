@@ -1,4 +1,5 @@
 import { ExternalLink, MapPin, Star, BadgeCheck } from "lucide-react";
+import { placeLink } from "@/lib/google-place-id";
 import { getBusinessPathSlug, type Business } from "@/data/businesses";
 import { ratingAsOf } from "@/lib/rating-display";
 
@@ -120,7 +121,7 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
         )}
         {business.googleUrl && (
           <a
-            href={business.googleUrl}
+            href={placeLink(business.title, business.googleUrl) ?? business.googleUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 text-sm font-medium border rounded hover:opacity-80 transition-opacity"

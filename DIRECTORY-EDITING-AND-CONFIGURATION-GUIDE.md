@@ -2,8 +2,49 @@
 
 This guide says exactly where to make each kind of change and how to ship it. Every path
 here is relative to `/home/mikes/oregon-smb-directory`, and every one was checked against
-the code on 2026-09-23. If a path here stops matching the code, fix this file in the same
-commit.
+the code on 2026-09-23.
+
+**This guide is append-only from 2026-09-24.** Don't rewrite a section. When the code changes,
+add a dated entry to the **Update log** at the bottom: what changed, which files, which sections
+it supersedes. The newest entry wins where it conflicts with the text above it.
+
+---
+
+## Change protocol — every change, in this order
+
+Written 2026-09-24, after a session broke the rules below it had never read: it hand-patched
+shards, built with the wrong command, and hard-coded a place ID from a test fixture.
+
+1. **Read first.** This guide's section for the change, the newest `handoffs/` file, and
+   `docs/TAXONOMY.md` for any identifier you touch. You haven't read this file this session?
+   Stop and read it.
+2. **Branch.** Never commit to `master` directly: `git switch -c dev/<topic>`.
+3. **Plan and predict.** Add the task to `tasks.md`, and write the prediction in
+   `hypothesis.md` (what changes, and which counts move by how much).
+4. **Change data through its path, never by hand-edit or re-serialization:**
+   - **listing fields:** a batch in `requests/listings/<date>-<topic>.json`. Check it with
+     `node scripts/add-listings.mjs <batch> --dry`, then apply it without `--dry`.
+   - **ratings:** the batch above, plus a `supplements` block in `rating-evidence.json` with
+     `observedAt` and `reportedBy` (§2.4)
+   - **identifiers:** read from the record through `src/lib/google-place-id.ts`, never typed
+     by hand (`docs/TAXONOMY.md` Rule 0)
+5. **Check the diff:** `git diff --stat master`. A data change touches only the fields it
+   names. A shard with dozens of changed lines was re-serialized, so revert it.
+6. **Build:** `bash scripts/build-bg.sh build`, as one background command; wait for it to
+   exit. It runs the publication audit, the ID-literal check, `astro check`, the build, and
+   the site and search gates. Success prints `BUILD_EXIT=0`. Never `npm run build` directly.
+7. **Verify the change itself, not just the build:**
+   - `bash scripts/check-listing-pages.sh <city>/<industry>/<slug>`
+   - read the built page for the exact value you changed
+   - for structured data, `npm run audit:jsonld` and compare against the last report
+8. **Review.** A separate model (not the one that made the change) reviews the diff against
+   the task before merge. For site-wide changes, it also gets the before/after audit reports.
+9. **Merge and ship:**
+   - `git switch master && git merge --no-ff dev/<topic>`
+   - `bash scripts/deploy-bg.sh "<message>"`; success prints `DEPLOY_EXIT=0` and a Version ID
+   - curl our live URL for the changed value (§9)
+10. **Record:** `tasks.md` ticked with the evidence, `hypothesis.md` result, a commit
+    message with the Worker Version ID, and a `handoffs/` note at session end.
 
 ---
 
@@ -185,8 +226,9 @@ A rating shows only when **all three** hold (see `buildRatingObservation` in
 `publication-gates.ts`):
 
 1. The record has a numeric `rating` (0–5) and an integer `reviews`.
-2. The record's `googleUrl` contains a feature ID `0x…:0x…`. When the URL has several,
-   the last one counts.
+2. The record's `googleUrl` identifies the place: a `/maps/place/` URL with a feature ID
+   `0x…:0x…` (the last one counts), or a place-ID link (`query_place_id=ChIJ…`), which the
+   gate decodes to the same feature ID (`featureIdOf`, `src/lib/google-place-id.ts`).
 3. `src/data/rating-evidence.json` maps that feature ID to exactly `"<rating>|<reviews>"`,
    e.g. `"4.6|10"`. Write the number exactly as it is in the record: the record's `5` is
    `"5|16"`, not `"5.0|16"`.
@@ -217,8 +259,9 @@ A rating shows only when **all three** hold (see `buildRatingObservation` in
 - **Same business, other industries.** The evidence is keyed by feature ID, so one
   evidence entry serves every shard that lists the business. Each shard's record still
   needs its own `rating`/`reviews`, and a record with stale numbers is hidden.
-- **The business page.** It shows the header stats (Rating, Reviews), an
-  `aggregateRating` in the structured data, and the sentence "observed <Mon YYYY>".
+- **The business page.** It shows the header stats (Rating, Reviews) and the stars with
+  their "as of" note. **Never in the structured data:** the ratings are Google's, and Google's
+  policy forbids marking up ratings aggregated from another site (`CHECKLIST.md` C18).
 - **The city-industry page** (`/city/<city>/<industry>/`) re-sorts and re-ranks. The
   "N of them rate higher" sentences on business pages are computed from that same shard.
 - **The services pages** (`/services/<industry>/<category>/<city>/`) pick it up
@@ -277,18 +320,19 @@ way before verifying LeverageAI.
 - **Shared, keyed by feature ID:** rating evidence.
 - **Per URL:** premium profiles and dedicated pages.
 
-### 2.9 Maps link and embed (known limitation)
+### 2.9 Maps link and embed
 
-In `[businessSlug].astro`:
+In `[businessSlug].astro`, `BusinessCard.tsx` and the dedicated pages:
 
-- **"Open in Google Maps"** and **"Get Directions"** use `googleUrl`.
-- **The embedded map** uses coordinates only when `googleUrl` has `query=<lat>,<lng>`
-  (`parseLatLng` in `businesses.ts`). Otherwise it searches Google for "title + address".
-  A place URL like `/maps/place/…/@lat,lng…` isn't parsed, so the embed is a name
-  search, not the pinned place.
+- **"Open in Google Maps"** is `placeLink(title, googleUrl)`: Google's Maps URLs API link
+  with the place ID, which opens the business's listing. It falls back to `googleUrl` only
+  when no place ID can be derived.
+- **"Get Directions"** goes by name and street address. With no street address, it uses the
+  listing link.
+- **The embedded map** pins the place (`!3d!4d`) when it's inside Oregon (`parseLatLng`),
+  otherwise a name + address search.
 - **Premium `geo`** overrides both.
-
-A proper fix is a code change to `parseLatLng`. It hasn't been made yet.
+- Never link to a bare coordinate pin (the P10.4 regression, fixed 2026-09-24).
 
 ---
 
@@ -472,3 +516,21 @@ curl -s https://oregonsmbdirectory.com/city/<city>/<industry>/<slug>/ | grep -c 
 - **Then commit:** the batch, the shard diff, the evidence change, and the `tasks.md` /
   `hypothesis.md` result together, with the Worker Version ID in the message.
 - **Never curl or browse Google** to verify anything.
+
+---
+
+## Update log (append-only, newest last)
+
+### 2026-09-24 — Change protocol, identity, ratings out of structured data
+- **Added** "Change protocol" at the top of this guide (branch → batch → build script → verify →
+  second-model review → merge → deploy → record).
+- **Identifiers:** `docs/TAXONOMY.md`, `src/types/ids.ts`, `src/lib/google-place-id.ts`. The build runs
+  `scripts/check-id-literals.mjs`, which fails on any untraced place/feature ID literal.
+- **Maps links (supersedes §2.9 text of 2026-09-23):** "Open in Google Maps" = `placeLink()`, the
+  Maps URLs API link with the place ID. A record's `googleUrl` may be a place-ID link; the rating
+  gate decodes it (`featureIdOf`).
+- **Ratings (supersedes §2.4 "aggregateRating in the structured data"):** stars stay visible;
+  **no rating in JSON-LD anywhere**, enforced by `CHECKLIST.md` C18 in `scripts/verify-site.mjs`.
+- **Audit scope:** `scripts/audit-publication.mjs` reads only the shards wired in `src/data/businesses.ts`.
+- **Before/after proof:** `scripts/compare-builds.mjs` (live vs `dist/`, or `--baseline-dist`) diffs title,
+  H1, canonical, robots, breadcrumb, JSON-LD, links and visible stars on every page.

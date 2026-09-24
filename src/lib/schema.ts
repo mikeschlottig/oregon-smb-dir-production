@@ -2,7 +2,6 @@ import type { Business } from "@/data/businesses";
 import type { City } from "@/data/cities";
 import type { Industry } from "@/data/industries";
 import { publisher } from "@/data/publisher";
-import { hasPublishableRating } from "@/data/publication-gates";
 
 // --- Schema Interfaces (no any) ---
 interface PostalAddress {
@@ -12,13 +11,6 @@ interface PostalAddress {
   addressRegion: string;
   postalCode?: string;
   addressCountry: string;
-  [key: string]: unknown;
-}
-
-interface AggregateRating {
-  "@type": "AggregateRating";
-  ratingValue: number;
-  reviewCount: number;
   [key: string]: unknown;
 }
 
@@ -34,7 +26,7 @@ interface CollectionPageSchema {
     itemListElement: Array<{
       "@type": "ListItem";
       position: number;
-      item: Record<string, unknown>;
+      item: ListBusinessItem;
     }>;
   };
   [key: string]: unknown;
@@ -47,9 +39,25 @@ interface LocalBusinessSchema {
   address?: PostalAddress;
   url?: string;
   telephone?: string;
-  aggregateRating?: AggregateRating;
+  // No aggregateRating / review, by design: our ratings are Google Maps figures, and Google's
+  // review-snippet policy says "Don't aggregate reviews or ratings from other websites."
+  // The stars stay visible on the page. Enforced by verify-site.mjs C18.
+  aggregateRating?: never;
+  review?: never;
   description?: string;
   [key: string]: unknown;
+}
+
+/** A business inside an ItemList. Same rating ban as LocalBusinessSchema (verify-site.mjs C18). */
+interface ListBusinessItem {
+  "@type": "LocalBusiness";
+  name: string;
+  url: string;
+  address?: PostalAddress;
+  telephone?: string;
+  description?: string;
+  aggregateRating?: never;
+  review?: never;
 }
 
 interface BlogPostingSchema {
@@ -225,7 +233,7 @@ export function cityPageSchema(
 
 /**
  * Returns CollectionPage + ItemList schema for industry pages.
- * Only includes aggregateRating if both rating and review count exist.
+ * Emits no aggregateRating (third-party ratings; verify-site.mjs C18).
  * @param city - City object
  * @param industry - Industry object
  * @param businesses - Array of Business objects for this city+industry
@@ -255,7 +263,7 @@ export function industryPageSchema(
         "@type": "ItemList",
         numberOfItems: businesses.length,
         itemListElement: businesses.map((b, i) => {
-          const item: Record<string, unknown> = {
+          const item: ListBusinessItem = {
             "@type": "LocalBusiness",
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
@@ -264,13 +272,6 @@ export function industryPageSchema(
             item.address = postalAddress(b.address, city.name);
           }
           if (b.phone) item.telephone = b.phone;
-          if (hasPublishableRating(b)) {
-            item.aggregateRating = {
-              "@type": "AggregateRating",
-              ratingValue: b.rating,
-              reviewCount: b.reviews,
-            };
-          }
           if (b.category) item.description = b.category;
           return {
             "@type": "ListItem" as const,
@@ -320,14 +321,6 @@ export function businessSchema(
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
   schema.url = `${base}/city/${city.slug}/${industry.slug}/${businessPath}/`;
-
-  if (hasPublishableRating(business)) {
-    schema.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: business.rating,
-      reviewCount: business.reviews,
-    };
-  }
 
   if (business.category) schema.description = business.category;
 
@@ -414,7 +407,7 @@ export function reportSchema(
 
 /**
  * Returns CollectionPage + ItemList schema for service category pages.
- * Only includes aggregateRating if both rating and review count exist.
+ * Emits no aggregateRating (third-party ratings; verify-site.mjs C18).
  * @param city - City object
  * @param category - ServiceCategory object
  * @param industry - Industry object
@@ -442,7 +435,7 @@ export function servicePageSchema(
         "@type": "ItemList",
         numberOfItems: businesses.length,
         itemListElement: businesses.map((b, i) => {
-          const item: Record<string, unknown> = {
+          const item: ListBusinessItem = {
             "@type": "LocalBusiness",
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
@@ -451,13 +444,6 @@ export function servicePageSchema(
             item.address = postalAddress(b.address, city.name);
           }
           if (b.phone) item.telephone = b.phone;
-          if (hasPublishableRating(b)) {
-            item.aggregateRating = {
-              "@type": "AggregateRating",
-              ratingValue: b.rating,
-              reviewCount: b.reviews,
-            };
-          }
           if (b.category) item.description = b.category;
           return {
             "@type": "ListItem" as const,

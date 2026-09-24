@@ -21,6 +21,16 @@
       "observations": {
         "0x54950f18a1066bc7:0xd5daf738ddd7b67d": "4.9|344"
       }
+    },
+    {
+      "source": "google_business_profile",
+      "observedAt": "2026-09-24T02:19:34.000-07:00",
+      "reportedBy": "listings-extraction run p10-3 (Google Maps place pages, identity verified: each place ID decodes to the landed feature ID); numbers approved by Mike Schlottig, 2026-09-24 (tasks.md P13.1)",
+      "observations": {
+        "0x67e8203ccb735667:0xabc30730459f7f72": "5|2",
+        "0x585442bc72cbdc1:0x619096285d1cba63": "5|15",
+        "0x5495a0e0ff6c49ff:0xfdaee010900df06b": "4.7|31"
+      }
     }
   ],
   "observations": {

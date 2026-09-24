@@ -1,9 +1,23 @@
 # oregon-smb-directory — the Astro source for oregonsmbdirectory.com
 
-> **To change anything on the site, start with
-> [`DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md`](DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md).**
-> It covers listings, verification, ratings, cities, industries, service categories,
-> blog, reports, Best Of, config, and the new-listing checklist.
+## ⛔ STOP — read this before you touch anything in this directory
+
+This is the live source of **oregonsmbdirectory.com**. Every rule below exists because breaking
+it broke the site or cost hours.
+
+1. **Read [`DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md`](DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md)
+   first**, all of it, before any edit, build or data change. Start with its **Change protocol**.
+   This is not optional.
+2. **Never commit to `master`.** Work on `dev/<topic>` and follow the Change protocol: batch,
+   build script, verify, review by a second model, merge, deploy, record.
+3. **Identifiers:** read [`docs/TAXONOMY.md`](docs/TAXONOMY.md). Never type a place ID or a
+   feature ID by hand. The build fails on one.
+4. **Page rules:** [`CHECKLIST.md`](CHECKLIST.md) C01–C18 are the definition of a correct
+   page. Structured data must be 100% correct; 99/100 is a failure.
+5. **The guide is append-only once shipped.** Don't rewrite its sections. Add a dated entry
+   to its **Update log** (at the bottom) describing what changed and where.
+6. **Build and deploy only with** `bash scripts/build-bg.sh build` and `bash scripts/deploy-bg.sh`,
+   never `npm run build` or `wrangler deploy` directly.
 
 <!-- projectstd:begin id=facts v=1 -->
 | | |

@@ -129,7 +129,8 @@ Decisions recorded, not open questions:
   - The two old URLs (`-hillsboro`, `-lake-oswego`) redirect 301 to the new one.
   - Office phone `503-212-0678`. The `(971) 394-4150` number was never corroborated; the
     site lists `971-394-4154`, for international clients only.
-- [ ] P10.3 Ratings for the other new listings, **numbers from Mike**: Deepli, Apex, North Tabor
+- [x] P10.3 Ratings for the other new listings, **numbers from Mike**: Deepli, Apex, North Tabor
+  Done 2026-09-24 on dev/p10-3-ratings: Deepli 5.0 (2), Apex 5.0 (15), North Tabor Dental 4.7 (31) via batch 2026-09-24-p10-3-ratings (extracted live, approved by Mike). Capital Nomics: no Google rating. Cascadia: 5.0 (7) seen, but its page gave no place identity; needs one revisit after the sweep. Cold review: delegation/results/20260924-032531-review-p10-3-placeid.md (SHIP WITH FIXES; 3 findings fixed).
   Dental, Capital Nomics, Cascadia Putting Club. Each needs a real place `googleUrl` and a
   rating-evidence supplement.
   - Last session's Places figures, **not confirmed by Mike**: Apex 5.0/15, Deepli 5.0/2,
@@ -233,7 +234,7 @@ Pacific-Ocean placeholder Google gives service-area businesses with no public ad
 ## P12 — JSON-LD fixes found by the rubric (2026-09-24 run: 77 perfect / 604 warning / 9,854 error)
 
 Decisions for Mike (policy, not bugs):
-- [ ] P12.1 **Ratings in markup.** Google: "Don't aggregate reviews or ratings from other
+- [x] P12.1 **Ratings in markup.** Google: "Don't aggregate reviews or ratings from other
   websites." Our `aggregateRating` values are Google Maps figures (9,816 pages). Options:
   drop `aggregateRating` from JSON-LD and keep the visible stars, or keep it and accept no
   review snippet / manual-action risk. Also RATING_ON_LIST (947 list pages): Google says
@@ -289,3 +290,35 @@ way, one query per industry per city, top 20 per pin.
 - [ ] P13.5 Sweep runner: per city × query, the proven `execute_bcrf49_pipeline` with
   `pins_override` + `keywords_override`; resumable; full-field export. ~7,056 pins at
   ~16.5 s ≈ 32 h. Start it in the background after P13.1 finishes (one browser at a time).
+
+## P14 — Contact form, SEO + AI-search plan, content plan — on proven tools (Mike, 2026-09-24)
+
+Rule for this phase (memory `authority-before-code`): every check uses the authority's own
+tool or data. Nothing home-grown where a standard tool exists.
+
+### Contact form
+- [ ] P14.1 Status (2026-09-24, checked): the built site POSTs to
+  `https://contact.oregonsmbdirectory.com` (baked into `dist/_astro/ContactForm.*.js`); the
+  endpoint is up, validates (`{"ok":false,"error":"name required"}` on an empty POST) and
+  allows CORS from https://oregonsmbdirectory.com. `.env` names a different workers.dev URL
+  that the build does not use — reconcile. **Delivery is unproven:** one real test submission
+  (it sends Mike an email) needs Mike's go, then confirm arrival; locate the Worker source
+  and record where submissions go.
+
+### Validation stack — adopt, don't build
+- [x] P14.2 validator.schema.org as the schema.org authority in `scripts/jsonld-audit/`
+  (shape-deduplicated; negative control proven).
+- [ ] P14.3 Lighthouse (chrome-devtools MCP `lighthouse_audit`, our own site only) — SEO,
+  performance, accessibility, best practices: one representative URL per page type.
+- [ ] P14.4 Unlighthouse or RustySEO (P1.7) for a full-site crawl report; pick one after a
+  one-page smoke test of each.
+- [ ] P14.5 Reconcile the two page-type definitions: `scripts/jsonld-audit/rubric.mjs`
+  PAGE_TYPES vs `scripts/verify-site.mjs` — one source (the checklist), the other reads it.
+
+### SEO + AI-search plan and content plan
+- [ ] P14.6 Run the `astro-canonical-site` skill's audit against this repo (one content
+  contract → route, HTML, JSON-LD, machine API; AI-readable pages).
+- [ ] P14.7 Keyword/content gap with the `seo-gap-research` skill, inputs: the 12-city sweep
+  (`listings-extraction/output/sweep/rows.jsonl`) + Search Console exports from Mike.
+- [ ] P14.8 Write the plan (SEO + AI search) and the content calendar from P14.6/P14.7
+  evidence; each recommendation cites its source.

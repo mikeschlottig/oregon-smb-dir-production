@@ -88,6 +88,18 @@ def place_id_to_feature_id(place_id: Optional[str]) -> Optional[str]:
     return f"0x{hi:x}:0x{lo:x}"
 
 
+def feature_id_to_place_id(feature_id: Optional[str]) -> Optional[str]:
+    """The exact inverse of place_id_to_feature_id: `0x<hi>:0x<lo>` → `ChIJ…` (base64url of
+    0a 12 | 09 <hi fixed64 LE> | 11 <lo fixed64 LE>, unpadded). Round-trips on the live pairs."""
+    import base64
+    m = FEATURE_ID.fullmatch(feature_id or "")
+    if not m:
+        return None
+    hi, lo = int(m.group(1), 16), int(m.group(2), 16)
+    raw = b"\x0a\x12\x09" + hi.to_bytes(8, "little") + b"\x11" + lo.to_bytes(8, "little")
+    return base64.urlsafe_b64encode(raw).decode().rstrip("=")
+
+
 def api_place_id(url: str) -> Optional[str]:
     """`query_place_id` of a Maps URLs-API link (`/maps/search/?api=1&query=…&query_place_id=ChIJ…`)."""
     q = parse_qs(urlsplit(url or "").query)

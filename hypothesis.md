@@ -385,3 +385,41 @@ pace). Dense queries (dentist, attorney, auto repair shop, coffee shop) fill 20/
 pin; thin ones in small markets (furniture store, website designer in Klamath Falls /
 Roseburg / Ashland) hit Google's end-of-list below 20 at the 4–8 mi rings. First gate
 done in ≈14 min.
+
+## H27 — dev/p10-3-ratings changes only what it should — CLOSED, prediction right
+
+Change: place-ID Maps links site-wide; the rating gate reads place-ID links; P10.3 ratings for
+3 Portland listings (batch 2026-09-24-p10-3-ratings); ID-literal build check.
+**Prediction (live site = master baseline vs dev dist/, `scripts/compare-builds.mjs`):**
+- `maps_links` changes on every page that lists businesses (≈10,000): expected.
+- `jsonld` changes only under /city/portland/business-professional-services/,
+  /city/portland/health-medical/ and /services/…/portland/ (3 new aggregateRatings, list
+  re-ranking); `internal_links` may change on those same prefixes (re-sorted pagination and
+  "related" picks).
+- **0 pages** change `title`, `h1`, `canonical`, `robots` or `breadcrumb`. Anything outside
+  the prefixes above is a regression.
+**Result (compare-builds, 10,531 live pages vs dist/):** title, h1, canonical, robots,
+breadcrumb: **0 pages changed**. `jsonld`: 10 pages, all Portland (4 business-professional,
+3 health-medical listings/lists, 3 /services/…/portland/). `maps_links`: 10,367 pages (the
+place-ID link). `internal_links`: the Portland prefixes as expected; the tool first flagged
+1,597 more, **all** Cloudflare edge-injected `/cdn-cgi/content` links present only live — now
+excluded in the tool. Build: C01–C17 PASS, BUILD_EXIT=0.
+**Rule:** a live-vs-build diff must strip what the edge injects, or it cries wolf.
+
+## H28 — P12.1: no ratings in structured data, stars stay visible — CLOSED, prediction right
+
+Change: schema.ts emits no aggregateRating (listing, city-industry list, service list);
+LocalBusinessSchema types aggregateRating/review as `never`; verify-site C18 forbids any
+rating node or property. Proven able to fail: C18 = 63,508 on the P10.3 build.
+**Prediction:**
+- build: C01–C18 all PASS.
+- compare-builds (P10.3 dist → this dist): `jsonld` changes on every page that showed a
+  rating (≈9,900); **0 pages** change title, h1, canonical, robots, breadcrumb,
+  internal_links, maps_links, **stars** (visible ★ count identical on every page).
+- jsonld-audit: LB_RATING_THIRD_PARTY 9,816 → 0, RATING_ON_LIST 947 → 0; ERROR pages
+  9,853 → 596 (594 LB_REQUIRED_ADDRESS + 2 hub pages lacking CollectionPage).
+**Result:** build C01–C18 PASS, BUILD_EXIT=0. compare-builds (P10.3 dist → P12.1 dist, 10,534
+pages): `jsonld` changed on 9,819; **0 unexpected** — title, h1, canonical, robots,
+breadcrumb, internal_links, maps_links and visible ★ identical on every page. The ★ metric is
+live: 8,872 pages show stars before and after. jsonld-audit: LB_RATING_THIRD_PARTY 0,
+RATING_ON_LIST 0, ERROR pages 9,853 → 596 (594 LB_REQUIRED_ADDRESS + 2 hubs), as predicted.

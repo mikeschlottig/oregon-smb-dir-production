@@ -139,4 +139,8 @@ export const checkRange = (prop, value) => {
   return null;
 };
 
+/** Every property whose rangeIncludes has a class matching `pred` (by the vocabulary's own hierarchy). */
+export const propertiesWithRange = (pred) =>
+  [...props.entries()].filter(([, p]) => p.ranges.some((r) => classes.has(r) && pred(r))).map(([name]) => name).sort();
+
 export const vocabStats = () => ({ classes: classes.size, properties: props.size, members: members.size });

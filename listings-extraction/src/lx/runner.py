@@ -37,7 +37,7 @@ from rarlx.fields import extract_full_listings
 
 from lx.place_fields import extract_place, missing_core, page_kind as page_kind_of
 from lx.store import RunStore
-from lx.targets import Target, feature_id_of
+from lx.targets import Target, feature_id_of, feature_id_to_place_id
 from lx import visit as visits
 
 RECYCLE_EVERY = 7
@@ -74,6 +74,9 @@ def extract_rows(target: Target, html: str, final_url: str, page_kind: str) -> L
         rows = [extract_place(html, final_url)]
     for r in rows:
         r["identity"] = identity(target, r, html)
+        # Every place with a feature ID has a place ID: the ChIJ is its encoding.
+        if not r.get("place_id") and r.get("feature_id"):
+            r["place_id"] = feature_id_to_place_id(r["feature_id"])
         r["address_region"] = address_region(r.get("address"))
     return rows
 

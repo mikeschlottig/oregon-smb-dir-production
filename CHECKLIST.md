@@ -24,7 +24,8 @@ node scripts/verify-site.mjs --report-only --json reports/site-verify.json
 |---|---|---|---|
 | **C01** | `JSONLD_PARSE` | every `<script type="application/ld+json">` on every page parses as JSON | `verify-site.mjs` C01 = 0 |
 | **C11** | `FAQ_SHAPE` | every `FAQPage` has a non-empty `mainEntity`; every entry is a `Question` with a non-empty `name` and a non-empty `acceptedAnswer.text` | C11 = 0 |
-| **C14** | `SCHEMA_REQUIRED` | required fields present per `@type`: `LocalBusiness.name` (+ full `PostalAddress` when an address is emitted); `BlogPosting` headline/datePublished/author.name/publisher.name/publisher.logo.url/mainEntityOfPage; `Report` name+url; `CollectionPage`/`WebPage` name + a `url` equal to **this page's** URL; `Organization`/`WebSite` name+url; `numberOfItems` equals the actual list length; `ListItem.position` is 1..n in order; `aggregateRating.ratingValue` is 1–5 and `reviewCount` is a positive integer | C14 = 0 |
+| **C18** | `NO_THIRD_PARTY_RATING` | no `AggregateRating`, `Review` or `Rating` node and no `aggregateRating`/`review` property anywhere in any page's JSON-LD. The ratings are Google Maps figures; Google's review-snippet guidelines: "Don't aggregate reviews or ratings from other websites." Stars stay visible on the page | C18 = 0 |
+| **C14** | `SCHEMA_REQUIRED` | required fields present per `@type`: `LocalBusiness.name` (+ full `PostalAddress` when an address is emitted); `BlogPosting` headline/datePublished/author.name/publisher.name/publisher.logo.url/mainEntityOfPage; `Report` name+url; `CollectionPage`/`WebPage` name + a `url` equal to **this page's** URL; `Organization`/`WebSite` name+url; `numberOfItems` equals the actual list length; `ListItem.position` is 1..n in order; (no ratings in structured data: see C18) | C14 = 0 |
 
 **Escaping.** `JsonLd.astro` and `FaqSchema.astro` both escape `<`, `>` and `&` before
 `set:html`. Neither may be changed to emit raw `JSON.stringify` — one ampersand in a

@@ -1,4 +1,5 @@
 ---
+import { placeLink } from "@/lib/google-place-id";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import RelatedLinks from "@/components/RelatedLinks.astro";
@@ -61,8 +62,8 @@ const relatedLinks = getBusinessRelatedLinks({
   baseUrl: siteUrl,
 });
 
-// Open in Google Maps goes to the business's own Google listing (its record's googleUrl), not a pin.
-const mapsListing = "https://www.google.com/maps/place/Daley+Organics/@42.5432168,-123.3884123,17z/data=!3m1!4b1!4m6!3m5!1s0x54c574367c852899:0x2759c1273f2ee03d!8m2!3d42.5432168!4d-123.3884123!16s%2Fg%2F11dfpgb9cn";
+// Open in Google Maps: the official place-ID link, derived from the record's own googleUrl.
+const mapsListing = placeLink(record.title, record.googleUrl) ?? record.googleUrl ?? "";
 const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=Daley%20Organics%2C%208470%20Monument%20Dr%2C%20Grants%20Pass%2C%20OR%2097526";
 const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=15&output=embed";
 ---

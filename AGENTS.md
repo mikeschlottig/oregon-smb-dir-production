@@ -99,6 +99,9 @@ Run it:
 <!-- Yours. Project invariants, do-nots, and anything that cost time to learn.
      projectstd never edits below this line. -->
 
+- **Every change follows the Change protocol** at the top of
+  `DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md`: branch, batch, build script, verify, review, merge,
+  deploy, record. Identifiers: `docs/TAXONOMY.md` (never type an ID by hand).
 - Read before you write: the installed artifact is the contract, not the docs.
 - Archive, never delete. Entries go in `_archive/<name>-<YYYYMMDD-HHMMSS>/`, with a
   `README.md` explaining what was removed and how to restore it.

@@ -20,6 +20,7 @@ import { businessSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import { ratingAsOf, ratingLabel } from "@/lib/rating-display";
+import { placeLink } from "@/lib/google-place-id";
 import {
   ExternalLink,
   Globe,
@@ -67,7 +68,9 @@ const mapsSearch = `https://www.google.com/maps/search/?api=1&query=${encodeURIC
 )}`;
 // "Open in Google Maps" opens the business's own Google listing — the place URL the record
 // was collected from — never a bare coordinate pin (the P10.4 regression).
-const mapsListing = business.googleUrl ?? mapsSearch;
+// Google's Maps URLs API link to this place (query_place_id), which opens the listing and
+// carries no stale viewport or session tokens; the stored URL only when no place ID is known.
+const mapsListing = placeLink(business.title, business.googleUrl) ?? business.googleUrl ?? mapsSearch;
 // Directions by name + street address, which Google resolves to the listing. No street
 // address (a service-area business): its listing, which carries its own directions.
 // Coordinates only when there is no listing at all.

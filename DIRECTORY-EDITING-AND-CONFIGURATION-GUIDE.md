@@ -7,6 +7,44 @@ commit.
 
 ---
 
+## Change protocol — every change, in this order
+
+Written 2026-09-24, after a session broke the rules below it had never read: it hand-patched
+shards, built with the wrong command, and hard-coded a place ID from a test fixture.
+
+1. **Read first.** This guide's section for the change, the newest `handoffs/` file, and
+   `docs/TAXONOMY.md` for any identifier you touch. You haven't read this file this session?
+   Stop and read it.
+2. **Branch.** Never commit to `master` directly: `git switch -c dev/<topic>`.
+3. **Plan and predict.** Add the task to `tasks.md`, and write the prediction in
+   `hypothesis.md` (what changes, and which counts move by how much).
+4. **Change data through its path, never by hand-edit or re-serialization:**
+   - **listing fields:** a batch in `requests/listings/<date>-<topic>.json`. Check it with
+     `node scripts/add-listings.mjs <batch> --dry`, then apply it without `--dry`.
+   - **ratings:** the batch above, plus a `supplements` block in `rating-evidence.json` with
+     `observedAt` and `reportedBy` (§2.4)
+   - **identifiers:** read from the record through `src/lib/google-place-id.ts`, never typed
+     by hand (`docs/TAXONOMY.md` Rule 0)
+5. **Check the diff:** `git diff --stat master`. A data change touches only the fields it
+   names. A shard with dozens of changed lines was re-serialized, so revert it.
+6. **Build:** `bash scripts/build-bg.sh build`, as one background command; wait for it to
+   exit. It runs the publication audit, the ID-literal check, `astro check`, the build, and
+   the site and search gates. Success prints `BUILD_EXIT=0`. Never `npm run build` directly.
+7. **Verify the change itself, not just the build:**
+   - `bash scripts/check-listing-pages.sh <city>/<industry>/<slug>`
+   - read the built page for the exact value you changed
+   - for structured data, `npm run audit:jsonld` and compare against the last report
+8. **Review.** A separate model (not the one that made the change) reviews the diff against
+   the task before merge. For site-wide changes, it also gets the before/after audit reports.
+9. **Merge and ship:**
+   - `git switch master && git merge --no-ff dev/<topic>`
+   - `bash scripts/deploy-bg.sh "<message>"`; success prints `DEPLOY_EXIT=0` and a Version ID
+   - curl our live URL for the changed value (§9)
+10. **Record:** `tasks.md` ticked with the evidence, `hypothesis.md` result, a commit
+    message with the Worker Version ID, and a `handoffs/` note at session end.
+
+---
+
 ## 0. How the site works, in one diagram
 
 ```
@@ -185,8 +223,9 @@ A rating shows only when **all three** hold (see `buildRatingObservation` in
 `publication-gates.ts`):
 
 1. The record has a numeric `rating` (0–5) and an integer `reviews`.
-2. The record's `googleUrl` contains a feature ID `0x…:0x…`. When the URL has several,
-   the last one counts.
+2. The record's `googleUrl` identifies the place: a `/maps/place/` URL with a feature ID
+   `0x…:0x…` (the last one counts), or a place-ID link (`query_place_id=ChIJ…`), which the
+   gate decodes to the same feature ID (`featureIdOf`, `src/lib/google-place-id.ts`).
 3. `src/data/rating-evidence.json` maps that feature ID to exactly `"<rating>|<reviews>"`,
    e.g. `"4.6|10"`. Write the number exactly as it is in the record: the record's `5` is
    `"5|16"`, not `"5.0|16"`.
@@ -277,18 +316,19 @@ way before verifying LeverageAI.
 - **Shared, keyed by feature ID:** rating evidence.
 - **Per URL:** premium profiles and dedicated pages.
 
-### 2.9 Maps link and embed (known limitation)
+### 2.9 Maps link and embed
 
-In `[businessSlug].astro`:
+In `[businessSlug].astro`, `BusinessCard.tsx` and the dedicated pages:
 
-- **"Open in Google Maps"** and **"Get Directions"** use `googleUrl`.
-- **The embedded map** uses coordinates only when `googleUrl` has `query=<lat>,<lng>`
-  (`parseLatLng` in `businesses.ts`). Otherwise it searches Google for "title + address".
-  A place URL like `/maps/place/…/@lat,lng…` isn't parsed, so the embed is a name
-  search, not the pinned place.
+- **"Open in Google Maps"** is `placeLink(title, googleUrl)`: Google's Maps URLs API link
+  with the place ID, which opens the business's listing. It falls back to `googleUrl` only
+  when no place ID can be derived.
+- **"Get Directions"** goes by name and street address. With no street address, it uses the
+  listing link.
+- **The embedded map** pins the place (`!3d!4d`) when it's inside Oregon (`parseLatLng`),
+  otherwise a name + address search.
 - **Premium `geo`** overrides both.
-
-A proper fix is a code change to `parseLatLng`. It hasn't been made yet.
+- Never link to a bare coordinate pin (the P10.4 regression, fixed 2026-09-24).
 
 ---
 

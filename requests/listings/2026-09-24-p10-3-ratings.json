@@ -1,0 +1,10 @@
+{
+  "batch": "2026-09-24-p10-3-ratings",
+  "source": "tasks.md P10.3 / P13.1: ratings extracted live by listings-extraction (run p10-3, 2026-09-24 02:19 PDT), identity verified, numbers approved by Mike 2026-09-24. googleUrl stays the place-ID link; the rating gate decodes it to the feature ID (src/lib/google-place-id.ts). Capital Nomics has no Google rating; Cascadia Putting Club needs one revisit.",
+  "checkedAt": "2026-09-24T02:19:34-07:00",
+  "listings": [
+    { "mode": "patch", "shard": "portland__business-professional-services", "record": { "slug": "deepli-clean", "rating": 5, "reviews": 2 } },
+    { "mode": "patch", "shard": "portland__business-professional-services", "record": { "slug": "apex-business-marketing", "rating": 5, "reviews": 15 } },
+    { "mode": "patch", "shard": "portland__health-medical", "record": { "slug": "north-tabor-dental", "rating": 4.7, "reviews": 31 } }
+  ]
+}

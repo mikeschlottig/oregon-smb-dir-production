@@ -385,3 +385,16 @@ pace). Dense queries (dentist, attorney, auto repair shop, coffee shop) fill 20/
 pin; thin ones in small markets (furniture store, website designer in Klamath Falls /
 Roseburg / Ashland) hit Google's end-of-list below 20 at the 4–8 mi rings. First gate
 done in ≈14 min.
+
+## H27 — dev/p10-3-ratings changes only what it should — OPEN
+
+Change: place-ID Maps links site-wide; the rating gate reads place-ID links; P10.3 ratings for
+3 Portland listings (batch 2026-09-24-p10-3-ratings); ID-literal build check.
+**Prediction (live site = master baseline vs dev dist/, `scripts/compare-builds.mjs`):**
+- `maps_links` changes on every page that lists businesses (≈10,000): expected.
+- `jsonld` changes only under /city/portland/business-professional-services/,
+  /city/portland/health-medical/ and /services/…/portland/ (3 new aggregateRatings, list
+  re-ranking); `internal_links` may change on those same prefixes (re-sorted pagination and
+  "related" picks).
+- **0 pages** change `title`, `h1`, `canonical`, `robots` or `breadcrumb`. Anything outside
+  the prefixes above is a regression.

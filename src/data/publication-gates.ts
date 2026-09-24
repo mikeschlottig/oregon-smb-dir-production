@@ -1,6 +1,7 @@
 import ratingEvidence from "./rating-evidence.json";
 import type { Business, RatingObservation, WebsiteStatus } from "./businesses";
 import { oregonLocation } from "../lib/oregon-location";
+import { featureIdOf } from "../lib/google-place-id";
 
 type RatingEvidence = {
   schemaVersion: number;
@@ -56,11 +57,9 @@ const normalize = (value?: string | null): string =>
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 
-export const getProviderRecordId = (googleUrl?: string | null): string | null => {
-  if (!googleUrl) return null;
-  const matches = googleUrl.match(/0x[0-9a-f]+:0x[0-9a-f]+/gi);
-  return matches?.at(-1) ?? null;
-};
+// The record ID is the Google feature ID, read from a /maps/place/ URL or decoded from a
+// place-ID link (query_place_id=ChIJ…) — the same place either way (src/lib/google-place-id.ts).
+export const getProviderRecordId = (googleUrl?: string | null): string | null => featureIdOf(googleUrl);
 
 const buildRatingObservation = (business: Business): RatingObservation | null => {
   if (

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { featureIdOf } from "../src/lib/google-place-id.ts";
 
 const root = process.cwd();
 const businessDir = path.join(root, "src", "data", "businesses");
@@ -9,8 +10,7 @@ const evidence = JSON.parse(
   await readFile(path.join(root, "src", "data", "rating-evidence.json"), "utf8"),
 );
 
-const providerRecordId = (googleUrl) =>
-  googleUrl?.match(/0x[0-9a-f]+:0x[0-9a-f]+/gi)?.at(-1) ?? null;
+const providerRecordId = (googleUrl) => featureIdOf(googleUrl);
 
 const suspiciousTlds = new Set([
   "buzz",

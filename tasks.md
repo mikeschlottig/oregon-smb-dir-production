@@ -140,7 +140,7 @@ Decisions recorded, not open questions:
     `/maps/place/…/@lat,lng` URL falls back to a name + address search embed.
   - Fix: parse the `@lat,lng` and the `!3d…!4d…` coordinates too. Then check that every
     new listing's embed is pinned to its own location.
-- [ ] P10.5 Daley Organics note wording and date. The provenance text reads like a log
+- [x] P10.5 Daley Organics note wording and date. Done: Worker e34c32ff; verification dates now format in America/Los_Angeles. The provenance text reads like a log
   ("Directory operator review…"), and the verification date prints as September 24 (UTC).
   Rewrite the `method` and store `verifiedAt` with the Pacific offset.
 

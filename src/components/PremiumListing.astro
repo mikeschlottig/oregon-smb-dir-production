@@ -36,7 +36,7 @@ const dayRange = (days: string[]) =>
   days.length > 2 ? `${days[0]}–${days[days.length - 1]}` : days.join(" & ");
 
 const verifiedOn = business.verification
-  ? new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(
+  ? new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }).format(
       new Date(business.verification.verifiedAt),
     )
   : null;

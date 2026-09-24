@@ -160,7 +160,7 @@ Decisions recorded, not open questions:
   wording. **Mike approves before any change.**
 
 ### Footer
-- [ ] P10.8 `src/components/layout/Footer.tsx`:
+- [x] P10.8 `src/components/layout/Footer.tsx`: Done: Worker 10402d4a; live footer has 12 /services/ links, all 200.
   - The "Industries" column shows 6 industries as plain text. The other 6 render under
     "Resources", also plain text.
   - Fix: all 12 industries under Industries, each linked to `/services/<industry>/`

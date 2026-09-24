@@ -4,10 +4,6 @@ import { industries } from "@/data/industries";
 import { publisher } from "@/data/publisher";
 
 export const Footer = () => {
-  const half = Math.ceil(industries.length / 2);
-  const left = industries.slice(0, half);
-  const right = industries.slice(half);
-
   return (
     <footer className="bg-foreground text-background mt-20">
       <div className="container mx-auto px-4 py-16">
@@ -58,8 +54,12 @@ export const Footer = () => {
               Industries
             </h4>
             <ul className="space-y-2 text-sm opacity-80">
-              {left.map((i) => (
-                <li key={i.slug}>{i.name}</li>
+              {industries.map((i) => (
+                <li key={i.slug}>
+                  <a href={`/services/${i.slug}/`} className="hover:text-accent transition-colors">
+                    {i.name}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
@@ -69,10 +69,7 @@ export const Footer = () => {
               Resources
             </h4>
             <ul className="space-y-2 text-sm opacity-80">
-              {right.map((i) => (
-                <li key={i.slug}>{i.name}</li>
-              ))}
-              <li className="pt-2"><a href="/blog/" className="hover:text-accent transition-colors">Blog</a></li>
+              <li><a href="/blog/" className="hover:text-accent transition-colors">Blog</a></li>
               <li><a href="/research/" className="hover:text-accent transition-colors">Research Reports</a></li>
               <li><a href="/best-of/" className="hover:text-accent transition-colors">Best Of</a></li>
               <li><a href={publisher.editorialPolicyUrl} className="hover:text-accent transition-colors">Editorial &amp; Data Quality</a></li>

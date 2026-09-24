@@ -43,7 +43,9 @@ export const placeIdToFeatureId = (placeId?: string | null): FeatureId | null =>
 };
 
 export const featureIdToPlaceId = (featureId?: string | null): PlaceId | null => {
-  const m = featureId?.match(FEATURE_ID);
+  // parseFeatureId caps each half at 16 hex digits (64 bits); longer input would be silently
+  // truncated by writeU64LE into a wrong place ID (review 20260924-032531, finding 2).
+  const m = parseFeatureId(featureId)?.match(FEATURE_ID);
   if (!m) return null;
   const out = new Uint8Array(20);
   out.set([0x0a, 0x12, 0x09], 0);

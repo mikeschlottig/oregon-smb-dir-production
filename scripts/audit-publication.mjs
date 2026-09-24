@@ -23,8 +23,12 @@ const suspiciousTlds = new Set([
   "xyz",
 ]);
 
+// Only the shards the site loads: the ones wired into src/data/businesses.ts. The 17 legacy
+// files in the same folder are never imported; counting them made this audit disagree with
+// the site (review 20260924-032531: +57 phantom accepted ratings).
+const wiring = await readFile(path.join(root, "src", "data", "businesses.ts"), "utf8");
 const businessFiles = (await readdir(businessDir))
-  .filter((file) => file.endsWith(".json"))
+  .filter((file) => file.endsWith(".json") && wiring.includes(`"${file.slice(0, -5)}":`))
   .sort();
 
 const summary = {

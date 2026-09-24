@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Multnomah County",
     "market_centroid": {
-      "latitude": 45.520936,
-      "longitude": -122.658382,
-      "location_description": "Portland business centre (median of the directory's Portland listing pins)"
+      "latitude": 45.520247,
+      "longitude": -122.674194,
+      "location_description": "Downtown Portland (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 1018
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186579",
+      "display_name": "Portland, Multnomah County, Oregon, United States",
+      "miles_from_listing_median": 0.77,
+      "listing_pins_in_median": 1018
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "portland_or_bcrf49_r0.00_centroid",
-      "latitude": 45.520936,
-      "longitude": -122.658382,
+      "latitude": 45.520247,
+      "longitude": -122.674194,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520936,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520247,-122.674194,14z"
     },
     {
       "pin_number": 2,
       "point_id": "portland_or_bcrf49_r0.25_N",
-      "latitude": 45.524554,
-      "longitude": -122.658382,
+      "latitude": 45.523865,
+      "longitude": -122.674194,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.524554,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.523865,-122.674194,14z"
     },
     {
       "pin_number": 3,
       "point_id": "portland_or_bcrf49_r0.25_NE",
-      "latitude": 45.523494,
-      "longitude": -122.65473,
+      "latitude": 45.522805,
+      "longitude": -122.670542,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.523494,-122.654730,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.522805,-122.670542,14z"
     },
     {
       "pin_number": 4,
       "point_id": "portland_or_bcrf49_r0.25_E",
-      "latitude": 45.520936,
-      "longitude": -122.653218,
+      "latitude": 45.520247,
+      "longitude": -122.66903,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520936,-122.653218,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520247,-122.669030,14z"
     },
     {
       "pin_number": 5,
       "point_id": "portland_or_bcrf49_r0.25_SE",
-      "latitude": 45.518377,
-      "longitude": -122.654731,
+      "latitude": 45.517688,
+      "longitude": -122.670543,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.518377,-122.654731,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.517688,-122.670543,14z"
     },
     {
       "pin_number": 6,
       "point_id": "portland_or_bcrf49_r0.25_S",
-      "latitude": 45.517318,
-      "longitude": -122.658382,
+      "latitude": 45.516629,
+      "longitude": -122.674194,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.517318,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.516629,-122.674194,14z"
     },
     {
       "pin_number": 7,
       "point_id": "portland_or_bcrf49_r0.25_SW",
-      "latitude": 45.518377,
-      "longitude": -122.662033,
+      "latitude": 45.517688,
+      "longitude": -122.677845,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.518377,-122.662033,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.517688,-122.677845,14z"
     },
     {
       "pin_number": 8,
       "point_id": "portland_or_bcrf49_r0.25_W",
-      "latitude": 45.520936,
-      "longitude": -122.663546,
+      "latitude": 45.520247,
+      "longitude": -122.679358,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520936,-122.663546,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520247,-122.679358,14z"
     },
     {
       "pin_number": 9,
       "point_id": "portland_or_bcrf49_r0.25_NW",
-      "latitude": 45.523494,
-      "longitude": -122.662034,
+      "latitude": 45.522805,
+      "longitude": -122.677846,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.523494,-122.662034,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.522805,-122.677846,14z"
     },
     {
       "pin_number": 10,
       "point_id": "portland_or_bcrf49_r0.50_N",
-      "latitude": 45.528173,
-      "longitude": -122.658382,
+      "latitude": 45.527484,
+      "longitude": -122.674194,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.528173,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.527484,-122.674194,14z"
     },
     {
       "pin_number": 11,
       "point_id": "portland_or_bcrf49_r0.50_NE",
-      "latitude": 45.526053,
-      "longitude": -122.651078,
+      "latitude": 45.525364,
+      "longitude": -122.66689,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.526053,-122.651078,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.525364,-122.666890,14z"
     },
     {
       "pin_number": 12,
       "point_id": "portland_or_bcrf49_r0.50_E",
-      "latitude": 45.520936,
-      "longitude": -122.648054,
+      "latitude": 45.520247,
+      "longitude": -122.663866,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520936,-122.648054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520247,-122.663866,14z"
     },
     {
       "pin_number": 13,
       "point_id": "portland_or_bcrf49_r0.50_SE",
-      "latitude": 45.515819,
-      "longitude": -122.651079,
+      "latitude": 45.51513,
+      "longitude": -122.666891,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.515819,-122.651079,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.515130,-122.666891,14z"
     },
     {
       "pin_number": 14,
       "point_id": "portland_or_bcrf49_r0.50_S",
-      "latitude": 45.513699,
-      "longitude": -122.658382,
+      "latitude": 45.51301,
+      "longitude": -122.674194,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.513699,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.513010,-122.674194,14z"
     },
     {
       "pin_number": 15,
       "point_id": "portland_or_bcrf49_r0.50_SW",
-      "latitude": 45.515819,
-      "longitude": -122.665685,
+      "latitude": 45.51513,
+      "longitude": -122.681497,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.515819,-122.665685,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.515130,-122.681497,14z"
     },
     {
       "pin_number": 16,
       "point_id": "portland_or_bcrf49_r0.50_W",
-      "latitude": 45.520936,
-      "longitude": -122.66871,
+      "latitude": 45.520247,
+      "longitude": -122.684522,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520936,-122.668710,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520247,-122.684522,14z"
     },
     {
       "pin_number": 17,
       "point_id": "portland_or_bcrf49_r0.50_NW",
-      "latitude": 45.526053,
-      "longitude": -122.665686,
+      "latitude": 45.525364,
+      "longitude": -122.681498,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.526053,-122.665686,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.525364,-122.681498,14z"
     },
     {
       "pin_number": 18,
       "point_id": "portland_or_bcrf49_r1.00_N",
-      "latitude": 45.535409,
-      "longitude": -122.658382,
+      "latitude": 45.53472,
+      "longitude": -122.674194,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.535409,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.534720,-122.674194,14z"
     },
     {
       "pin_number": 19,
       "point_id": "portland_or_bcrf49_r1.00_NE",
-      "latitude": 45.531169,
-      "longitude": -122.643773,
+      "latitude": 45.53048,
+      "longitude": -122.659585,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.531169,-122.643773,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.530480,-122.659585,14z"
     },
     {
       "pin_number": 20,
       "point_id": "portland_or_bcrf49_r1.00_E",
-      "latitude": 45.520934,
-      "longitude": -122.637725,
+      "latitude": 45.520245,
+      "longitude": -122.653537,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520934,-122.637725,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520245,-122.653537,14z"
     },
     {
       "pin_number": 21,
       "point_id": "portland_or_bcrf49_r1.00_SE",
-      "latitude": 45.510701,
-      "longitude": -122.643778,
+      "latitude": 45.510012,
+      "longitude": -122.65959,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.510701,-122.643778,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.510012,-122.659590,14z"
     },
     {
       "pin_number": 22,
       "point_id": "portland_or_bcrf49_r1.00_S",
-      "latitude": 45.506463,
-      "longitude": -122.658382,
+      "latitude": 45.505774,
+      "longitude": -122.674194,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.506463,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.505774,-122.674194,14z"
     },
     {
       "pin_number": 23,
       "point_id": "portland_or_bcrf49_r1.00_SW",
-      "latitude": 45.510701,
-      "longitude": -122.672986,
+      "latitude": 45.510012,
+      "longitude": -122.688798,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.510701,-122.672986,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.510012,-122.688798,14z"
     },
     {
       "pin_number": 24,
       "point_id": "portland_or_bcrf49_r1.00_W",
-      "latitude": 45.520934,
-      "longitude": -122.679039,
+      "latitude": 45.520245,
+      "longitude": -122.694851,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520934,-122.679039,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520245,-122.694851,14z"
     },
     {
       "pin_number": 25,
       "point_id": "portland_or_bcrf49_r1.00_NW",
-      "latitude": 45.531169,
-      "longitude": -122.672991,
+      "latitude": 45.53048,
+      "longitude": -122.688803,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.531169,-122.672991,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.530480,-122.688803,14z"
     },
     {
       "pin_number": 26,
       "point_id": "portland_or_bcrf49_r2.00_N",
-      "latitude": 45.549882,
-      "longitude": -122.658382,
+      "latitude": 45.549193,
+      "longitude": -122.674194,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.549882,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.549193,-122.674194,14z"
     },
     {
       "pin_number": 27,
       "point_id": "portland_or_bcrf49_r2.00_NE",
-      "latitude": 45.5414,
-      "longitude": -122.629158,
+      "latitude": 45.540711,
+      "longitude": -122.644971,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.541400,-122.629158,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.540711,-122.644971,14z"
     },
     {
       "pin_number": 28,
       "point_id": "portland_or_bcrf49_r2.00_E",
-      "latitude": 45.520929,
-      "longitude": -122.617068,
+      "latitude": 45.52024,
+      "longitude": -122.632881,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520929,-122.617068,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520240,-122.632881,14z"
     },
     {
       "pin_number": 29,
       "point_id": "portland_or_bcrf49_r2.00_SE",
-      "latitude": 45.500464,
-      "longitude": -122.629179,
+      "latitude": 45.499775,
+      "longitude": -122.644992,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.500464,-122.629179,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.499775,-122.644992,14z"
     },
     {
       "pin_number": 30,
       "point_id": "portland_or_bcrf49_r2.00_S",
-      "latitude": 45.49199,
-      "longitude": -122.658382,
+      "latitude": 45.491301,
+      "longitude": -122.674194,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.491990,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.491301,-122.674194,14z"
     },
     {
       "pin_number": 31,
       "point_id": "portland_or_bcrf49_r2.00_SW",
-      "latitude": 45.500464,
-      "longitude": -122.687585,
+      "latitude": 45.499775,
+      "longitude": -122.703396,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.500464,-122.687585,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.499775,-122.703396,14z"
     },
     {
       "pin_number": 32,
       "point_id": "portland_or_bcrf49_r2.00_W",
-      "latitude": 45.520929,
-      "longitude": -122.699696,
+      "latitude": 45.52024,
+      "longitude": -122.715507,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520929,-122.699696,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520240,-122.715507,14z"
     },
     {
       "pin_number": 33,
       "point_id": "portland_or_bcrf49_r2.00_NW",
-      "latitude": 45.5414,
-      "longitude": -122.687606,
+      "latitude": 45.540711,
+      "longitude": -122.703417,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.541400,-122.687606,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.540711,-122.703417,14z"
     },
     {
       "pin_number": 34,
       "point_id": "portland_or_bcrf49_r4.00_N",
-      "latitude": 45.578829,
-      "longitude": -122.658382,
+      "latitude": 45.57814,
+      "longitude": -122.674194,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.578829,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.578140,-122.674194,14z"
     },
     {
       "pin_number": 35,
       "point_id": "portland_or_bcrf49_r4.00_NE",
-      "latitude": 45.561857,
-      "longitude": -122.599913,
+      "latitude": 45.561168,
+      "longitude": -122.615726,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.561857,-122.599913,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.561168,-122.615726,14z"
     },
     {
       "pin_number": 36,
       "point_id": "portland_or_bcrf49_r4.00_E",
-      "latitude": 45.520906,
-      "longitude": -122.575755,
+      "latitude": 45.520217,
+      "longitude": -122.591568,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520906,-122.575755,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520217,-122.591568,14z"
     },
     {
       "pin_number": 37,
       "point_id": "portland_or_bcrf49_r4.00_SE",
-      "latitude": 45.479985,
-      "longitude": -122.599998,
+      "latitude": 45.479296,
+      "longitude": -122.615811,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.479985,-122.599998,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.479296,-122.615811,14z"
     },
     {
       "pin_number": 38,
       "point_id": "portland_or_bcrf49_r4.00_S",
-      "latitude": 45.463043,
-      "longitude": -122.658382,
+      "latitude": 45.462354,
+      "longitude": -122.674194,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.463043,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.462354,-122.674194,14z"
     },
     {
       "pin_number": 39,
       "point_id": "portland_or_bcrf49_r4.00_SW",
-      "latitude": 45.479985,
-      "longitude": -122.716766,
+      "latitude": 45.479296,
+      "longitude": -122.732577,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.479985,-122.716766,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.479296,-122.732577,14z"
     },
     {
       "pin_number": 40,
       "point_id": "portland_or_bcrf49_r4.00_W",
-      "latitude": 45.520906,
-      "longitude": -122.741009,
+      "latitude": 45.520217,
+      "longitude": -122.75682,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520906,-122.741009,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520217,-122.756820,14z"
     },
     {
       "pin_number": 41,
       "point_id": "portland_or_bcrf49_r4.00_NW",
-      "latitude": 45.561857,
-      "longitude": -122.716851,
+      "latitude": 45.561168,
+      "longitude": -122.732662,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.561857,-122.716851,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.561168,-122.732662,14z"
     },
     {
       "pin_number": 42,
       "point_id": "portland_or_bcrf49_r8.00_N",
-      "latitude": 45.636721,
-      "longitude": -122.658382,
+      "latitude": 45.636032,
+      "longitude": -122.674194,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.636721,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.636032,-122.674194,14z"
     },
     {
       "pin_number": 43,
       "point_id": "portland_or_bcrf49_r8.00_NE",
-      "latitude": 45.602749,
-      "longitude": -122.541359,
+      "latitude": 45.60206,
+      "longitude": -122.557173,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.602749,-122.541359,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.602060,-122.557173,14z"
     },
     {
       "pin_number": 44,
       "point_id": "portland_or_bcrf49_r8.00_E",
-      "latitude": 45.520817,
-      "longitude": -122.493128,
+      "latitude": 45.520128,
+      "longitude": -122.508942,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520817,-122.493128,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520128,-122.508942,14z"
     },
     {
       "pin_number": 45,
       "point_id": "portland_or_bcrf49_r8.00_SE",
-      "latitude": 45.439004,
-      "longitude": -122.541699,
+      "latitude": 45.438315,
+      "longitude": -122.557513,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.439004,-122.541699,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.438315,-122.557513,14z"
     },
     {
       "pin_number": 46,
       "point_id": "portland_or_bcrf49_r8.00_S",
-      "latitude": 45.405151,
-      "longitude": -122.658382,
+      "latitude": 45.404462,
+      "longitude": -122.674194,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.405151,-122.658382,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.404462,-122.674194,14z"
     },
     {
       "pin_number": 47,
       "point_id": "portland_or_bcrf49_r8.00_SW",
-      "latitude": 45.439004,
-      "longitude": -122.775065,
+      "latitude": 45.438315,
+      "longitude": -122.790875,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.439004,-122.775065,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.438315,-122.790875,14z"
     },
     {
       "pin_number": 48,
       "point_id": "portland_or_bcrf49_r8.00_W",
-      "latitude": 45.520817,
-      "longitude": -122.823636,
+      "latitude": 45.520128,
+      "longitude": -122.839446,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520817,-122.823636,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.520128,-122.839446,14z"
     },
     {
       "pin_number": 49,
       "point_id": "portland_or_bcrf49_r8.00_NW",
-      "latitude": 45.602749,
-      "longitude": -122.775405,
+      "latitude": 45.60206,
+      "longitude": -122.791215,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.602749,-122.775405,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.602060,-122.791215,14z"
     }
   ]
 }

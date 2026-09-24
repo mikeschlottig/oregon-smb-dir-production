@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Klamath County",
     "market_centroid": {
-      "latitude": 42.215454,
-      "longitude": -121.765048,
-      "location_description": "Klamath Falls business centre (median of the directory's Klamath Falls listing pins)"
+      "latitude": 42.224867,
+      "longitude": -121.78167,
+      "location_description": "Downtown Klamath Falls (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 634
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186599",
+      "display_name": "Klamath Falls, Klamath County, Oregon, United States",
+      "miles_from_listing_median": 1.07,
+      "listing_pins_in_median": 634
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "klamathfalls_or_bcrf49_r0.00_centroid",
-      "latitude": 42.215454,
-      "longitude": -121.765048,
+      "latitude": 42.224867,
+      "longitude": -121.78167,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215454,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224867,-121.781670,14z"
     },
     {
       "pin_number": 2,
       "point_id": "klamathfalls_or_bcrf49_r0.25_N",
-      "latitude": 42.219072,
-      "longitude": -121.765048,
+      "latitude": 42.228485,
+      "longitude": -121.78167,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.219072,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.228485,-121.781670,14z"
     },
     {
       "pin_number": 3,
       "point_id": "klamathfalls_or_bcrf49_r0.25_NE",
-      "latitude": 42.218012,
-      "longitude": -121.761593,
+      "latitude": 42.227425,
+      "longitude": -121.778215,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.218012,-121.761593,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.227425,-121.778215,14z"
     },
     {
       "pin_number": 4,
       "point_id": "klamathfalls_or_bcrf49_r0.25_E",
-      "latitude": 42.215454,
-      "longitude": -121.760163,
+      "latitude": 42.224867,
+      "longitude": -121.776784,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215454,-121.760163,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224867,-121.776784,14z"
     },
     {
       "pin_number": 5,
       "point_id": "klamathfalls_or_bcrf49_r0.25_SE",
-      "latitude": 42.212895,
-      "longitude": -121.761594,
+      "latitude": 42.222308,
+      "longitude": -121.778215,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.212895,-121.761594,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.222308,-121.778215,14z"
     },
     {
       "pin_number": 6,
       "point_id": "klamathfalls_or_bcrf49_r0.25_S",
-      "latitude": 42.211836,
-      "longitude": -121.765048,
+      "latitude": 42.221249,
+      "longitude": -121.78167,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.211836,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.221249,-121.781670,14z"
     },
     {
       "pin_number": 7,
       "point_id": "klamathfalls_or_bcrf49_r0.25_SW",
-      "latitude": 42.212895,
-      "longitude": -121.768502,
+      "latitude": 42.222308,
+      "longitude": -121.785125,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.212895,-121.768502,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.222308,-121.785125,14z"
     },
     {
       "pin_number": 8,
       "point_id": "klamathfalls_or_bcrf49_r0.25_W",
-      "latitude": 42.215454,
-      "longitude": -121.769933,
+      "latitude": 42.224867,
+      "longitude": -121.786556,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215454,-121.769933,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224867,-121.786556,14z"
     },
     {
       "pin_number": 9,
       "point_id": "klamathfalls_or_bcrf49_r0.25_NW",
-      "latitude": 42.218012,
-      "longitude": -121.768503,
+      "latitude": 42.227425,
+      "longitude": -121.785125,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.218012,-121.768503,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.227425,-121.785125,14z"
     },
     {
       "pin_number": 10,
       "point_id": "klamathfalls_or_bcrf49_r0.50_N",
-      "latitude": 42.222691,
-      "longitude": -121.765048,
+      "latitude": 42.232104,
+      "longitude": -121.78167,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.222691,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.232104,-121.781670,14z"
     },
     {
       "pin_number": 11,
       "point_id": "klamathfalls_or_bcrf49_r0.50_NE",
-      "latitude": 42.220571,
-      "longitude": -121.758138,
+      "latitude": 42.229984,
+      "longitude": -121.774759,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.220571,-121.758138,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.229984,-121.774759,14z"
     },
     {
       "pin_number": 12,
       "point_id": "klamathfalls_or_bcrf49_r0.50_E",
-      "latitude": 42.215454,
-      "longitude": -121.755277,
+      "latitude": 42.224867,
+      "longitude": -121.771898,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215454,-121.755277,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224867,-121.771898,14z"
     },
     {
       "pin_number": 13,
       "point_id": "klamathfalls_or_bcrf49_r0.50_SE",
-      "latitude": 42.210337,
-      "longitude": -121.758139,
+      "latitude": 42.21975,
+      "longitude": -121.77476,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.210337,-121.758139,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.219750,-121.774760,14z"
     },
     {
       "pin_number": 14,
       "point_id": "klamathfalls_or_bcrf49_r0.50_S",
-      "latitude": 42.208217,
-      "longitude": -121.765048,
+      "latitude": 42.21763,
+      "longitude": -121.78167,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.208217,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.217630,-121.781670,14z"
     },
     {
       "pin_number": 15,
       "point_id": "klamathfalls_or_bcrf49_r0.50_SW",
-      "latitude": 42.210337,
-      "longitude": -121.771957,
+      "latitude": 42.21975,
+      "longitude": -121.78858,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.210337,-121.771957,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.219750,-121.788580,14z"
     },
     {
       "pin_number": 16,
       "point_id": "klamathfalls_or_bcrf49_r0.50_W",
-      "latitude": 42.215454,
-      "longitude": -121.774819,
+      "latitude": 42.224867,
+      "longitude": -121.791442,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215454,-121.774819,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224867,-121.791442,14z"
     },
     {
       "pin_number": 17,
       "point_id": "klamathfalls_or_bcrf49_r0.50_NW",
-      "latitude": 42.220571,
-      "longitude": -121.771958,
+      "latitude": 42.229984,
+      "longitude": -121.788581,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.220571,-121.771958,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.229984,-121.788581,14z"
     },
     {
       "pin_number": 18,
       "point_id": "klamathfalls_or_bcrf49_r1.00_N",
-      "latitude": 42.229927,
-      "longitude": -121.765048,
+      "latitude": 42.23934,
+      "longitude": -121.78167,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.229927,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.239340,-121.781670,14z"
     },
     {
       "pin_number": 19,
       "point_id": "klamathfalls_or_bcrf49_r1.00_NE",
-      "latitude": 42.225687,
-      "longitude": -121.751228,
+      "latitude": 42.2351,
+      "longitude": -121.767848,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.225687,-121.751228,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.235100,-121.767848,14z"
     },
     {
       "pin_number": 20,
       "point_id": "klamathfalls_or_bcrf49_r1.00_E",
-      "latitude": 42.215452,
-      "longitude": -121.745506,
+      "latitude": 42.224865,
+      "longitude": -121.762125,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215452,-121.745506,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224865,-121.762125,14z"
     },
     {
       "pin_number": 21,
       "point_id": "klamathfalls_or_bcrf49_r1.00_SE",
-      "latitude": 42.205219,
-      "longitude": -121.751232,
+      "latitude": 42.214632,
+      "longitude": -121.767852,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.205219,-121.751232,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.214632,-121.767852,14z"
     },
     {
       "pin_number": 22,
       "point_id": "klamathfalls_or_bcrf49_r1.00_S",
-      "latitude": 42.200981,
-      "longitude": -121.765048,
+      "latitude": 42.210394,
+      "longitude": -121.78167,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.200981,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.210394,-121.781670,14z"
     },
     {
       "pin_number": 23,
       "point_id": "klamathfalls_or_bcrf49_r1.00_SW",
-      "latitude": 42.205219,
-      "longitude": -121.778864,
+      "latitude": 42.214632,
+      "longitude": -121.795488,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.205219,-121.778864,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.214632,-121.795488,14z"
     },
     {
       "pin_number": 24,
       "point_id": "klamathfalls_or_bcrf49_r1.00_W",
-      "latitude": 42.215452,
-      "longitude": -121.78459,
+      "latitude": 42.224865,
+      "longitude": -121.801215,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215452,-121.784590,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224865,-121.801215,14z"
     },
     {
       "pin_number": 25,
       "point_id": "klamathfalls_or_bcrf49_r1.00_NW",
-      "latitude": 42.225687,
-      "longitude": -121.778868,
+      "latitude": 42.2351,
+      "longitude": -121.795492,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.225687,-121.778868,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.235100,-121.795492,14z"
     },
     {
       "pin_number": 26,
       "point_id": "klamathfalls_or_bcrf49_r2.00_N",
-      "latitude": 42.2444,
-      "longitude": -121.765048,
+      "latitude": 42.253813,
+      "longitude": -121.78167,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.244400,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.253813,-121.781670,14z"
     },
     {
       "pin_number": 27,
       "point_id": "klamathfalls_or_bcrf49_r2.00_NE",
-      "latitude": 42.235919,
-      "longitude": -121.737403,
+      "latitude": 42.245332,
+      "longitude": -121.754021,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.235919,-121.737403,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.245332,-121.754021,14z"
     },
     {
       "pin_number": 28,
       "point_id": "klamathfalls_or_bcrf49_r2.00_E",
-      "latitude": 42.215447,
-      "longitude": -121.725964,
+      "latitude": 42.22486,
+      "longitude": -121.74258,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215447,-121.725964,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224860,-121.742580,14z"
     },
     {
       "pin_number": 29,
       "point_id": "klamathfalls_or_bcrf49_r2.00_SE",
-      "latitude": 42.194983,
-      "longitude": -121.737421,
+      "latitude": 42.204396,
+      "longitude": -121.754038,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.194983,-121.737421,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.204396,-121.754038,14z"
     },
     {
       "pin_number": 30,
       "point_id": "klamathfalls_or_bcrf49_r2.00_S",
-      "latitude": 42.186508,
-      "longitude": -121.765048,
+      "latitude": 42.195921,
+      "longitude": -121.78167,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.186508,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.195921,-121.781670,14z"
     },
     {
       "pin_number": 31,
       "point_id": "klamathfalls_or_bcrf49_r2.00_SW",
-      "latitude": 42.194983,
-      "longitude": -121.792675,
+      "latitude": 42.204396,
+      "longitude": -121.809302,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.194983,-121.792675,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.204396,-121.809302,14z"
     },
     {
       "pin_number": 32,
       "point_id": "klamathfalls_or_bcrf49_r2.00_W",
-      "latitude": 42.215447,
-      "longitude": -121.804132,
+      "latitude": 42.22486,
+      "longitude": -121.82076,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215447,-121.804132,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224860,-121.820760,14z"
     },
     {
       "pin_number": 33,
       "point_id": "klamathfalls_or_bcrf49_r2.00_NW",
-      "latitude": 42.235919,
-      "longitude": -121.792693,
+      "latitude": 42.245332,
+      "longitude": -121.809319,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.235919,-121.792693,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.245332,-121.809319,14z"
     },
     {
       "pin_number": 34,
       "point_id": "klamathfalls_or_bcrf49_r4.00_N",
-      "latitude": 42.273347,
-      "longitude": -121.765048,
+      "latitude": 42.28276,
+      "longitude": -121.78167,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.273347,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.282760,-121.781670,14z"
     },
     {
       "pin_number": 35,
       "point_id": "klamathfalls_or_bcrf49_r4.00_NE",
-      "latitude": 42.256377,
-      "longitude": -121.709739,
+      "latitude": 42.26579,
+      "longitude": -121.726353,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.256377,-121.709739,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.265790,-121.726353,14z"
     },
     {
       "pin_number": 36,
       "point_id": "klamathfalls_or_bcrf49_r4.00_E",
-      "latitude": 42.215427,
-      "longitude": -121.686881,
+      "latitude": 42.22484,
+      "longitude": -121.703491,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215427,-121.686881,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224840,-121.703491,14z"
     },
     {
       "pin_number": 37,
       "point_id": "klamathfalls_or_bcrf49_r4.00_SE",
-      "latitude": 42.174504,
-      "longitude": -121.709811,
+      "latitude": 42.183917,
+      "longitude": -121.726425,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.174504,-121.709811,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.183917,-121.726425,14z"
     },
     {
       "pin_number": 38,
       "point_id": "klamathfalls_or_bcrf49_r4.00_S",
-      "latitude": 42.157561,
-      "longitude": -121.765048,
+      "latitude": 42.166974,
+      "longitude": -121.78167,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.157561,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.166974,-121.781670,14z"
     },
     {
       "pin_number": 39,
       "point_id": "klamathfalls_or_bcrf49_r4.00_SW",
-      "latitude": 42.174504,
-      "longitude": -121.820285,
+      "latitude": 42.183917,
+      "longitude": -121.836915,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.174504,-121.820285,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.183917,-121.836915,14z"
     },
     {
       "pin_number": 40,
       "point_id": "klamathfalls_or_bcrf49_r4.00_W",
-      "latitude": 42.215427,
-      "longitude": -121.843215,
+      "latitude": 42.22484,
+      "longitude": -121.859849,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215427,-121.843215,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224840,-121.859849,14z"
     },
     {
       "pin_number": 41,
       "point_id": "klamathfalls_or_bcrf49_r4.00_NW",
-      "latitude": 42.256377,
-      "longitude": -121.820357,
+      "latitude": 42.26579,
+      "longitude": -121.836987,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.256377,-121.820357,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.265790,-121.836987,14z"
     },
     {
       "pin_number": 42,
       "point_id": "klamathfalls_or_bcrf49_r8.00_N",
-      "latitude": 42.331239,
-      "longitude": -121.765048,
+      "latitude": 42.340652,
+      "longitude": -121.78167,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.331239,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.340652,-121.781670,14z"
     },
     {
       "pin_number": 43,
       "point_id": "klamathfalls_or_bcrf49_r8.00_NE",
-      "latitude": 42.297273,
-      "longitude": -121.654359,
+      "latitude": 42.306686,
+      "longitude": -121.670964,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.297273,-121.654359,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.306686,-121.670964,14z"
     },
     {
       "pin_number": 44,
       "point_id": "klamathfalls_or_bcrf49_r8.00_E",
-      "latitude": 42.215348,
-      "longitude": -121.608713,
+      "latitude": 42.224761,
+      "longitude": -121.625312,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215348,-121.608713,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224761,-121.625312,14z"
     },
     {
       "pin_number": 45,
       "point_id": "klamathfalls_or_bcrf49_r8.00_SE",
-      "latitude": 42.133528,
-      "longitude": -121.654646,
+      "latitude": 42.142941,
+      "longitude": -121.671251,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.133528,-121.654646,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.142941,-121.671251,14z"
     },
     {
       "pin_number": 46,
       "point_id": "klamathfalls_or_bcrf49_r8.00_S",
-      "latitude": 42.099669,
-      "longitude": -121.765048,
+      "latitude": 42.109082,
+      "longitude": -121.78167,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.099669,-121.765048,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.109082,-121.781670,14z"
     },
     {
       "pin_number": 47,
       "point_id": "klamathfalls_or_bcrf49_r8.00_SW",
-      "latitude": 42.133528,
-      "longitude": -121.87545,
+      "latitude": 42.142941,
+      "longitude": -121.892089,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.133528,-121.875450,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.142941,-121.892089,14z"
     },
     {
       "pin_number": 48,
       "point_id": "klamathfalls_or_bcrf49_r8.00_W",
-      "latitude": 42.215348,
-      "longitude": -121.921383,
+      "latitude": 42.224761,
+      "longitude": -121.938028,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.215348,-121.921383,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.224761,-121.938028,14z"
     },
     {
       "pin_number": 49,
       "point_id": "klamathfalls_or_bcrf49_r8.00_NW",
-      "latitude": 42.297273,
-      "longitude": -121.875737,
+      "latitude": 42.306686,
+      "longitude": -121.892376,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.297273,-121.875737,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.306686,-121.892376,14z"
     }
   ]
 }

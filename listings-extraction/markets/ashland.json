@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Jackson County",
     "market_centroid": {
-      "latitude": 42.198518,
-      "longitude": -122.712445,
-      "location_description": "Ashland business centre (median of the directory's Ashland listing pins)"
+      "latitude": 42.197249,
+      "longitude": -122.7154,
+      "location_description": "Downtown Ashland (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 676
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186688",
+      "display_name": "Ashland, Jackson County, Oregon, United States",
+      "miles_from_listing_median": 0.17,
+      "listing_pins_in_median": 676
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "ashland_or_bcrf49_r0.00_centroid",
-      "latitude": 42.198518,
-      "longitude": -122.712445,
+      "latitude": 42.197249,
+      "longitude": -122.7154,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198518,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197249,-122.715400,14z"
     },
     {
       "pin_number": 2,
       "point_id": "ashland_or_bcrf49_r0.25_N",
-      "latitude": 42.202136,
-      "longitude": -122.712445,
+      "latitude": 42.200867,
+      "longitude": -122.7154,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.202136,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.200867,-122.715400,14z"
     },
     {
       "pin_number": 3,
       "point_id": "ashland_or_bcrf49_r0.25_NE",
-      "latitude": 42.201076,
-      "longitude": -122.708991,
+      "latitude": 42.199807,
+      "longitude": -122.711946,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.201076,-122.708991,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.199807,-122.711946,14z"
     },
     {
       "pin_number": 4,
       "point_id": "ashland_or_bcrf49_r0.25_E",
-      "latitude": 42.198518,
-      "longitude": -122.707561,
+      "latitude": 42.197249,
+      "longitude": -122.710516,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198518,-122.707561,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197249,-122.710516,14z"
     },
     {
       "pin_number": 5,
       "point_id": "ashland_or_bcrf49_r0.25_SE",
-      "latitude": 42.195959,
-      "longitude": -122.708992,
+      "latitude": 42.19469,
+      "longitude": -122.711947,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.195959,-122.708992,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.194690,-122.711947,14z"
     },
     {
       "pin_number": 6,
       "point_id": "ashland_or_bcrf49_r0.25_S",
-      "latitude": 42.1949,
-      "longitude": -122.712445,
+      "latitude": 42.193631,
+      "longitude": -122.7154,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.194900,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.193631,-122.715400,14z"
     },
     {
       "pin_number": 7,
       "point_id": "ashland_or_bcrf49_r0.25_SW",
-      "latitude": 42.195959,
-      "longitude": -122.715898,
+      "latitude": 42.19469,
+      "longitude": -122.718853,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.195959,-122.715898,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.194690,-122.718853,14z"
     },
     {
       "pin_number": 8,
       "point_id": "ashland_or_bcrf49_r0.25_W",
-      "latitude": 42.198518,
-      "longitude": -122.717329,
+      "latitude": 42.197249,
+      "longitude": -122.720284,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198518,-122.717329,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197249,-122.720284,14z"
     },
     {
       "pin_number": 9,
       "point_id": "ashland_or_bcrf49_r0.25_NW",
-      "latitude": 42.201076,
-      "longitude": -122.715899,
+      "latitude": 42.199807,
+      "longitude": -122.718854,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.201076,-122.715899,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.199807,-122.718854,14z"
     },
     {
       "pin_number": 10,
       "point_id": "ashland_or_bcrf49_r0.50_N",
-      "latitude": 42.205755,
-      "longitude": -122.712445,
+      "latitude": 42.204486,
+      "longitude": -122.7154,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.205755,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.204486,-122.715400,14z"
     },
     {
       "pin_number": 11,
       "point_id": "ashland_or_bcrf49_r0.50_NE",
-      "latitude": 42.203635,
-      "longitude": -122.705537,
+      "latitude": 42.202366,
+      "longitude": -122.708492,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.203635,-122.705537,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.202366,-122.708492,14z"
     },
     {
       "pin_number": 12,
       "point_id": "ashland_or_bcrf49_r0.50_E",
-      "latitude": 42.198518,
-      "longitude": -122.702677,
+      "latitude": 42.197249,
+      "longitude": -122.705632,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198518,-122.702677,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197249,-122.705632,14z"
     },
     {
       "pin_number": 13,
       "point_id": "ashland_or_bcrf49_r0.50_SE",
-      "latitude": 42.193401,
-      "longitude": -122.705538,
+      "latitude": 42.192132,
+      "longitude": -122.708493,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.193401,-122.705538,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.192132,-122.708493,14z"
     },
     {
       "pin_number": 14,
       "point_id": "ashland_or_bcrf49_r0.50_S",
-      "latitude": 42.191281,
-      "longitude": -122.712445,
+      "latitude": 42.190012,
+      "longitude": -122.7154,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.191281,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.190012,-122.715400,14z"
     },
     {
       "pin_number": 15,
       "point_id": "ashland_or_bcrf49_r0.50_SW",
-      "latitude": 42.193401,
-      "longitude": -122.719352,
+      "latitude": 42.192132,
+      "longitude": -122.722307,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.193401,-122.719352,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.192132,-122.722307,14z"
     },
     {
       "pin_number": 16,
       "point_id": "ashland_or_bcrf49_r0.50_W",
-      "latitude": 42.198518,
-      "longitude": -122.722213,
+      "latitude": 42.197249,
+      "longitude": -122.725168,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198518,-122.722213,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197249,-122.725168,14z"
     },
     {
       "pin_number": 17,
       "point_id": "ashland_or_bcrf49_r0.50_NW",
-      "latitude": 42.203635,
-      "longitude": -122.719353,
+      "latitude": 42.202366,
+      "longitude": -122.722308,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.203635,-122.719353,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.202366,-122.722308,14z"
     },
     {
       "pin_number": 18,
       "point_id": "ashland_or_bcrf49_r1.00_N",
-      "latitude": 42.212991,
-      "longitude": -122.712445,
+      "latitude": 42.211722,
+      "longitude": -122.7154,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.212991,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.211722,-122.715400,14z"
     },
     {
       "pin_number": 19,
       "point_id": "ashland_or_bcrf49_r1.00_NE",
-      "latitude": 42.208751,
-      "longitude": -122.698628,
+      "latitude": 42.207482,
+      "longitude": -122.701584,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.208751,-122.698628,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.207482,-122.701584,14z"
     },
     {
       "pin_number": 20,
       "point_id": "ashland_or_bcrf49_r1.00_E",
-      "latitude": 42.198516,
-      "longitude": -122.692908,
+      "latitude": 42.197247,
+      "longitude": -122.695864,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198516,-122.692908,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197247,-122.695864,14z"
     },
     {
       "pin_number": 21,
       "point_id": "ashland_or_bcrf49_r1.00_SE",
-      "latitude": 42.188283,
-      "longitude": -122.698633,
+      "latitude": 42.187014,
+      "longitude": -122.701588,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.188283,-122.698633,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.187014,-122.701588,14z"
     },
     {
       "pin_number": 22,
       "point_id": "ashland_or_bcrf49_r1.00_S",
-      "latitude": 42.184045,
-      "longitude": -122.712445,
+      "latitude": 42.182776,
+      "longitude": -122.7154,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.184045,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.182776,-122.715400,14z"
     },
     {
       "pin_number": 23,
       "point_id": "ashland_or_bcrf49_r1.00_SW",
-      "latitude": 42.188283,
-      "longitude": -122.726257,
+      "latitude": 42.187014,
+      "longitude": -122.729212,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.188283,-122.726257,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.187014,-122.729212,14z"
     },
     {
       "pin_number": 24,
       "point_id": "ashland_or_bcrf49_r1.00_W",
-      "latitude": 42.198516,
-      "longitude": -122.731982,
+      "latitude": 42.197247,
+      "longitude": -122.734936,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198516,-122.731982,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197247,-122.734936,14z"
     },
     {
       "pin_number": 25,
       "point_id": "ashland_or_bcrf49_r1.00_NW",
-      "latitude": 42.208751,
-      "longitude": -122.726262,
+      "latitude": 42.207482,
+      "longitude": -122.729216,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.208751,-122.726262,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.207482,-122.729216,14z"
     },
     {
       "pin_number": 26,
       "point_id": "ashland_or_bcrf49_r2.00_N",
-      "latitude": 42.227464,
-      "longitude": -122.712445,
+      "latitude": 42.226195,
+      "longitude": -122.7154,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.227464,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.226195,-122.715400,14z"
     },
     {
       "pin_number": 27,
       "point_id": "ashland_or_bcrf49_r2.00_NE",
-      "latitude": 42.218983,
-      "longitude": -122.684807,
+      "latitude": 42.217714,
+      "longitude": -122.687763,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.218983,-122.684807,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.217714,-122.687763,14z"
     },
     {
       "pin_number": 28,
       "point_id": "ashland_or_bcrf49_r2.00_E",
-      "latitude": 42.198511,
-      "longitude": -122.673372,
+      "latitude": 42.197242,
+      "longitude": -122.676328,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198511,-122.673372,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197242,-122.676328,14z"
     },
     {
       "pin_number": 29,
       "point_id": "ashland_or_bcrf49_r2.00_SE",
-      "latitude": 42.178047,
-      "longitude": -122.684825,
+      "latitude": 42.176778,
+      "longitude": -122.687781,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.178047,-122.684825,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.176778,-122.687781,14z"
     },
     {
       "pin_number": 30,
       "point_id": "ashland_or_bcrf49_r2.00_S",
-      "latitude": 42.169572,
-      "longitude": -122.712445,
+      "latitude": 42.168303,
+      "longitude": -122.7154,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.169572,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.168303,-122.715400,14z"
     },
     {
       "pin_number": 31,
       "point_id": "ashland_or_bcrf49_r2.00_SW",
-      "latitude": 42.178047,
-      "longitude": -122.740065,
+      "latitude": 42.176778,
+      "longitude": -122.743019,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.178047,-122.740065,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.176778,-122.743019,14z"
     },
     {
       "pin_number": 32,
       "point_id": "ashland_or_bcrf49_r2.00_W",
-      "latitude": 42.198511,
-      "longitude": -122.751518,
+      "latitude": 42.197242,
+      "longitude": -122.754472,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198511,-122.751518,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197242,-122.754472,14z"
     },
     {
       "pin_number": 33,
       "point_id": "ashland_or_bcrf49_r2.00_NW",
-      "latitude": 42.218983,
-      "longitude": -122.740083,
+      "latitude": 42.217714,
+      "longitude": -122.743037,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.218983,-122.740083,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.217714,-122.743037,14z"
     },
     {
       "pin_number": 34,
       "point_id": "ashland_or_bcrf49_r4.00_N",
-      "latitude": 42.256411,
-      "longitude": -122.712445,
+      "latitude": 42.255142,
+      "longitude": -122.7154,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.256411,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.255142,-122.715400,14z"
     },
     {
       "pin_number": 35,
       "point_id": "ashland_or_bcrf49_r4.00_NE",
-      "latitude": 42.239441,
-      "longitude": -122.657151,
+      "latitude": 42.238172,
+      "longitude": -122.660107,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.239441,-122.657151,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.238172,-122.660107,14z"
     },
     {
       "pin_number": 36,
       "point_id": "ashland_or_bcrf49_r4.00_E",
-      "latitude": 42.198491,
-      "longitude": -122.634299,
+      "latitude": 42.197222,
+      "longitude": -122.637255,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198491,-122.634299,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197222,-122.637255,14z"
     },
     {
       "pin_number": 37,
       "point_id": "ashland_or_bcrf49_r4.00_SE",
-      "latitude": 42.157568,
-      "longitude": -122.657223,
+      "latitude": 42.156299,
+      "longitude": -122.660179,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.157568,-122.657223,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.156299,-122.660179,14z"
     },
     {
       "pin_number": 38,
       "point_id": "ashland_or_bcrf49_r4.00_S",
-      "latitude": 42.140625,
-      "longitude": -122.712445,
+      "latitude": 42.139356,
+      "longitude": -122.7154,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.140625,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.139356,-122.715400,14z"
     },
     {
       "pin_number": 39,
       "point_id": "ashland_or_bcrf49_r4.00_SW",
-      "latitude": 42.157568,
-      "longitude": -122.767667,
+      "latitude": 42.156299,
+      "longitude": -122.770621,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.157568,-122.767667,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.156299,-122.770621,14z"
     },
     {
       "pin_number": 40,
       "point_id": "ashland_or_bcrf49_r4.00_W",
-      "latitude": 42.198491,
-      "longitude": -122.790591,
+      "latitude": 42.197222,
+      "longitude": -122.793545,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198491,-122.790591,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197222,-122.793545,14z"
     },
     {
       "pin_number": 41,
       "point_id": "ashland_or_bcrf49_r4.00_NW",
-      "latitude": 42.239441,
-      "longitude": -122.767739,
+      "latitude": 42.238172,
+      "longitude": -122.770693,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.239441,-122.767739,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.238172,-122.770693,14z"
     },
     {
       "pin_number": 42,
       "point_id": "ashland_or_bcrf49_r8.00_N",
-      "latitude": 42.314303,
-      "longitude": -122.712445,
+      "latitude": 42.313034,
+      "longitude": -122.7154,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.314303,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.313034,-122.715400,14z"
     },
     {
       "pin_number": 43,
       "point_id": "ashland_or_bcrf49_r8.00_NE",
-      "latitude": 42.280337,
-      "longitude": -122.601786,
+      "latitude": 42.279068,
+      "longitude": -122.604743,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.280337,-122.601786,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.279068,-122.604743,14z"
     },
     {
       "pin_number": 44,
       "point_id": "ashland_or_bcrf49_r8.00_E",
-      "latitude": 42.198412,
-      "longitude": -122.556152,
+      "latitude": 42.197143,
+      "longitude": -122.55911,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198412,-122.556152,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197143,-122.559110,14z"
     },
     {
       "pin_number": 45,
       "point_id": "ashland_or_bcrf49_r8.00_SE",
-      "latitude": 42.116593,
-      "longitude": -122.602072,
+      "latitude": 42.115324,
+      "longitude": -122.605029,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.116593,-122.602072,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.115324,-122.605029,14z"
     },
     {
       "pin_number": 46,
       "point_id": "ashland_or_bcrf49_r8.00_S",
-      "latitude": 42.082733,
-      "longitude": -122.712445,
+      "latitude": 42.081464,
+      "longitude": -122.7154,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.082733,-122.712445,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.081464,-122.715400,14z"
     },
     {
       "pin_number": 47,
       "point_id": "ashland_or_bcrf49_r8.00_SW",
-      "latitude": 42.116593,
-      "longitude": -122.822818,
+      "latitude": 42.115324,
+      "longitude": -122.825771,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.116593,-122.822818,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.115324,-122.825771,14z"
     },
     {
       "pin_number": 48,
       "point_id": "ashland_or_bcrf49_r8.00_W",
-      "latitude": 42.198412,
-      "longitude": -122.868738,
+      "latitude": 42.197143,
+      "longitude": -122.87169,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.198412,-122.868738,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.197143,-122.871690,14z"
     },
     {
       "pin_number": 49,
       "point_id": "ashland_or_bcrf49_r8.00_NW",
-      "latitude": 42.280337,
-      "longitude": -122.823104,
+      "latitude": 42.279068,
+      "longitude": -122.826057,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.280337,-122.823104,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.279068,-122.826057,14z"
     }
   ]
 }

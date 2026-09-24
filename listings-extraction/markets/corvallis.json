@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Benton County",
     "market_centroid": {
-      "latitude": 44.567785,
-      "longitude": -123.262777,
-      "location_description": "Corvallis business centre (median of the directory's Corvallis listing pins)"
+      "latitude": 44.564566,
+      "longitude": -123.262044,
+      "location_description": "Downtown Corvallis (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 537
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186476",
+      "display_name": "Corvallis, Benton County, Oregon, United States",
+      "miles_from_listing_median": 0.23,
+      "listing_pins_in_median": 537
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "corvallis_or_bcrf49_r0.00_centroid",
-      "latitude": 44.567785,
-      "longitude": -123.262777,
+      "latitude": 44.564566,
+      "longitude": -123.262044,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567785,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564566,-123.262044,14z"
     },
     {
       "pin_number": 2,
       "point_id": "corvallis_or_bcrf49_r0.25_N",
-      "latitude": 44.571403,
-      "longitude": -123.262777,
+      "latitude": 44.568184,
+      "longitude": -123.262044,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.571403,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.568184,-123.262044,14z"
     },
     {
       "pin_number": 3,
       "point_id": "corvallis_or_bcrf49_r0.25_NE",
-      "latitude": 44.570343,
-      "longitude": -123.259186,
+      "latitude": 44.567124,
+      "longitude": -123.258453,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.570343,-123.259186,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567124,-123.258453,14z"
     },
     {
       "pin_number": 4,
       "point_id": "corvallis_or_bcrf49_r0.25_E",
-      "latitude": 44.567785,
-      "longitude": -123.257698,
+      "latitude": 44.564566,
+      "longitude": -123.256965,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567785,-123.257698,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564566,-123.256965,14z"
     },
     {
       "pin_number": 5,
       "point_id": "corvallis_or_bcrf49_r0.25_SE",
-      "latitude": 44.565226,
-      "longitude": -123.259186,
+      "latitude": 44.562007,
+      "longitude": -123.258453,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.565226,-123.259186,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.562007,-123.258453,14z"
     },
     {
       "pin_number": 6,
       "point_id": "corvallis_or_bcrf49_r0.25_S",
-      "latitude": 44.564167,
-      "longitude": -123.262777,
+      "latitude": 44.560948,
+      "longitude": -123.262044,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564167,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.560948,-123.262044,14z"
     },
     {
       "pin_number": 7,
       "point_id": "corvallis_or_bcrf49_r0.25_SW",
-      "latitude": 44.565226,
-      "longitude": -123.266368,
+      "latitude": 44.562007,
+      "longitude": -123.265635,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.565226,-123.266368,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.562007,-123.265635,14z"
     },
     {
       "pin_number": 8,
       "point_id": "corvallis_or_bcrf49_r0.25_W",
-      "latitude": 44.567785,
-      "longitude": -123.267856,
+      "latitude": 44.564566,
+      "longitude": -123.267123,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567785,-123.267856,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564566,-123.267123,14z"
     },
     {
       "pin_number": 9,
       "point_id": "corvallis_or_bcrf49_r0.25_NW",
-      "latitude": 44.570343,
-      "longitude": -123.266368,
+      "latitude": 44.567124,
+      "longitude": -123.265635,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.570343,-123.266368,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567124,-123.265635,14z"
     },
     {
       "pin_number": 10,
       "point_id": "corvallis_or_bcrf49_r0.50_N",
-      "latitude": 44.575022,
-      "longitude": -123.262777,
+      "latitude": 44.571803,
+      "longitude": -123.262044,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.575022,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.571803,-123.262044,14z"
     },
     {
       "pin_number": 11,
       "point_id": "corvallis_or_bcrf49_r0.50_NE",
-      "latitude": 44.572902,
-      "longitude": -123.255594,
+      "latitude": 44.569683,
+      "longitude": -123.254861,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.572902,-123.255594,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.569683,-123.254861,14z"
     },
     {
       "pin_number": 12,
       "point_id": "corvallis_or_bcrf49_r0.50_E",
-      "latitude": 44.567785,
-      "longitude": -123.252619,
+      "latitude": 44.564566,
+      "longitude": -123.251887,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567785,-123.252619,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564566,-123.251887,14z"
     },
     {
       "pin_number": 13,
       "point_id": "corvallis_or_bcrf49_r0.50_SE",
-      "latitude": 44.562668,
-      "longitude": -123.255595,
+      "latitude": 44.559449,
+      "longitude": -123.254862,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.562668,-123.255595,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.559449,-123.254862,14z"
     },
     {
       "pin_number": 14,
       "point_id": "corvallis_or_bcrf49_r0.50_S",
-      "latitude": 44.560548,
-      "longitude": -123.262777,
+      "latitude": 44.557329,
+      "longitude": -123.262044,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.560548,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.557329,-123.262044,14z"
     },
     {
       "pin_number": 15,
       "point_id": "corvallis_or_bcrf49_r0.50_SW",
-      "latitude": 44.562668,
-      "longitude": -123.269959,
+      "latitude": 44.559449,
+      "longitude": -123.269226,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.562668,-123.269959,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.559449,-123.269226,14z"
     },
     {
       "pin_number": 16,
       "point_id": "corvallis_or_bcrf49_r0.50_W",
-      "latitude": 44.567785,
-      "longitude": -123.272935,
+      "latitude": 44.564566,
+      "longitude": -123.272201,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567785,-123.272935,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564566,-123.272201,14z"
     },
     {
       "pin_number": 17,
       "point_id": "corvallis_or_bcrf49_r0.50_NW",
-      "latitude": 44.572902,
-      "longitude": -123.26996,
+      "latitude": 44.569683,
+      "longitude": -123.269227,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.572902,-123.269960,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.569683,-123.269227,14z"
     },
     {
       "pin_number": 18,
       "point_id": "corvallis_or_bcrf49_r1.00_N",
-      "latitude": 44.582258,
-      "longitude": -123.262777,
+      "latitude": 44.579039,
+      "longitude": -123.262044,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.582258,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.579039,-123.262044,14z"
     },
     {
       "pin_number": 19,
       "point_id": "corvallis_or_bcrf49_r1.00_NE",
-      "latitude": 44.578018,
-      "longitude": -123.248409,
+      "latitude": 44.574799,
+      "longitude": -123.247677,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.578018,-123.248409,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.574799,-123.247677,14z"
     },
     {
       "pin_number": 20,
       "point_id": "corvallis_or_bcrf49_r1.00_E",
-      "latitude": 44.567783,
-      "longitude": -123.242462,
+      "latitude": 44.564564,
+      "longitude": -123.24173,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567783,-123.242462,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564564,-123.241730,14z"
     },
     {
       "pin_number": 21,
       "point_id": "corvallis_or_bcrf49_r1.00_SE",
-      "latitude": 44.55755,
-      "longitude": -123.248414,
+      "latitude": 44.554331,
+      "longitude": -123.247682,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.557550,-123.248414,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.554331,-123.247682,14z"
     },
     {
       "pin_number": 22,
       "point_id": "corvallis_or_bcrf49_r1.00_S",
-      "latitude": 44.553312,
-      "longitude": -123.262777,
+      "latitude": 44.550093,
+      "longitude": -123.262044,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.553312,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.550093,-123.262044,14z"
     },
     {
       "pin_number": 23,
       "point_id": "corvallis_or_bcrf49_r1.00_SW",
-      "latitude": 44.55755,
-      "longitude": -123.27714,
+      "latitude": 44.554331,
+      "longitude": -123.276406,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.557550,-123.277140,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.554331,-123.276406,14z"
     },
     {
       "pin_number": 24,
       "point_id": "corvallis_or_bcrf49_r1.00_W",
-      "latitude": 44.567783,
-      "longitude": -123.283092,
+      "latitude": 44.564564,
+      "longitude": -123.282358,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567783,-123.283092,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564564,-123.282358,14z"
     },
     {
       "pin_number": 25,
       "point_id": "corvallis_or_bcrf49_r1.00_NW",
-      "latitude": 44.578018,
-      "longitude": -123.277145,
+      "latitude": 44.574799,
+      "longitude": -123.276411,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.578018,-123.277145,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.574799,-123.276411,14z"
     },
     {
       "pin_number": 26,
       "point_id": "corvallis_or_bcrf49_r2.00_N",
-      "latitude": 44.596731,
-      "longitude": -123.262777,
+      "latitude": 44.593512,
+      "longitude": -123.262044,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.596731,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.593512,-123.262044,14z"
     },
     {
       "pin_number": 27,
       "point_id": "corvallis_or_bcrf49_r2.00_NE",
-      "latitude": 44.58825,
-      "longitude": -123.234036,
+      "latitude": 44.585031,
+      "longitude": -123.233305,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.588250,-123.234036,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.585031,-123.233305,14z"
     },
     {
       "pin_number": 28,
       "point_id": "corvallis_or_bcrf49_r2.00_E",
-      "latitude": 44.567778,
-      "longitude": -123.222146,
+      "latitude": 44.564559,
+      "longitude": -123.221415,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567778,-123.222146,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564559,-123.221415,14z"
     },
     {
       "pin_number": 29,
       "point_id": "corvallis_or_bcrf49_r2.00_SE",
-      "latitude": 44.547313,
-      "longitude": -123.234057,
+      "latitude": 44.544094,
+      "longitude": -123.233325,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.547313,-123.234057,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.544094,-123.233325,14z"
     },
     {
       "pin_number": 30,
       "point_id": "corvallis_or_bcrf49_r2.00_S",
-      "latitude": 44.538839,
-      "longitude": -123.262777,
+      "latitude": 44.53562,
+      "longitude": -123.262044,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.538839,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.535620,-123.262044,14z"
     },
     {
       "pin_number": 31,
       "point_id": "corvallis_or_bcrf49_r2.00_SW",
-      "latitude": 44.547313,
-      "longitude": -123.291497,
+      "latitude": 44.544094,
+      "longitude": -123.290763,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.547313,-123.291497,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.544094,-123.290763,14z"
     },
     {
       "pin_number": 32,
       "point_id": "corvallis_or_bcrf49_r2.00_W",
-      "latitude": 44.567778,
-      "longitude": -123.303408,
+      "latitude": 44.564559,
+      "longitude": -123.302673,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567778,-123.303408,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564559,-123.302673,14z"
     },
     {
       "pin_number": 33,
       "point_id": "corvallis_or_bcrf49_r2.00_NW",
-      "latitude": 44.58825,
-      "longitude": -123.291518,
+      "latitude": 44.585031,
+      "longitude": -123.290783,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.588250,-123.291518,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.585031,-123.290783,14z"
     },
     {
       "pin_number": 34,
       "point_id": "corvallis_or_bcrf49_r4.00_N",
-      "latitude": 44.625678,
-      "longitude": -123.262777,
+      "latitude": 44.622459,
+      "longitude": -123.262044,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.625678,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.622459,-123.262044,14z"
     },
     {
       "pin_number": 35,
       "point_id": "corvallis_or_bcrf49_r4.00_NE",
-      "latitude": 44.608707,
-      "longitude": -123.205276,
+      "latitude": 44.605488,
+      "longitude": -123.204546,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.608707,-123.205276,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.605488,-123.204546,14z"
     },
     {
       "pin_number": 36,
       "point_id": "corvallis_or_bcrf49_r4.00_E",
-      "latitude": 44.567756,
-      "longitude": -123.181515,
+      "latitude": 44.564537,
+      "longitude": -123.180787,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567756,-123.181515,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564537,-123.180787,14z"
     },
     {
       "pin_number": 37,
       "point_id": "corvallis_or_bcrf49_r4.00_SE",
-      "latitude": 44.526834,
-      "longitude": -123.205357,
+      "latitude": 44.523615,
+      "longitude": -123.204627,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.526834,-123.205357,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.523615,-123.204627,14z"
     },
     {
       "pin_number": 38,
       "point_id": "corvallis_or_bcrf49_r4.00_S",
-      "latitude": 44.509892,
-      "longitude": -123.262777,
+      "latitude": 44.506673,
+      "longitude": -123.262044,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.509892,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.506673,-123.262044,14z"
     },
     {
       "pin_number": 39,
       "point_id": "corvallis_or_bcrf49_r4.00_SW",
-      "latitude": 44.526834,
-      "longitude": -123.320197,
+      "latitude": 44.523615,
+      "longitude": -123.319461,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.526834,-123.320197,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.523615,-123.319461,14z"
     },
     {
       "pin_number": 40,
       "point_id": "corvallis_or_bcrf49_r4.00_W",
-      "latitude": 44.567756,
-      "longitude": -123.344039,
+      "latitude": 44.564537,
+      "longitude": -123.343301,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567756,-123.344039,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564537,-123.343301,14z"
     },
     {
       "pin_number": 41,
       "point_id": "corvallis_or_bcrf49_r4.00_NW",
-      "latitude": 44.608707,
-      "longitude": -123.320278,
+      "latitude": 44.605488,
+      "longitude": -123.319542,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.608707,-123.320278,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.605488,-123.319542,14z"
     },
     {
       "pin_number": 42,
       "point_id": "corvallis_or_bcrf49_r8.00_N",
-      "latitude": 44.68357,
-      "longitude": -123.262777,
+      "latitude": 44.680351,
+      "longitude": -123.262044,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.683570,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.680351,-123.262044,14z"
     },
     {
       "pin_number": 43,
       "point_id": "corvallis_or_bcrf49_r8.00_NE",
-      "latitude": 44.6496,
-      "longitude": -123.147693,
+      "latitude": 44.646381,
+      "longitude": -123.146967,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.649600,-123.147693,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.646381,-123.146967,14z"
     },
     {
       "pin_number": 44,
       "point_id": "corvallis_or_bcrf49_r8.00_E",
-      "latitude": 44.56767,
-      "longitude": -123.100253,
+      "latitude": 44.564451,
+      "longitude": -123.099529,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567670,-123.100253,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564451,-123.099529,14z"
     },
     {
       "pin_number": 45,
       "point_id": "corvallis_or_bcrf49_r8.00_SE",
-      "latitude": 44.485855,
-      "longitude": -123.148017,
+      "latitude": 44.482636,
+      "longitude": -123.14729,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.485855,-123.148017,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.482636,-123.147290,14z"
     },
     {
       "pin_number": 46,
       "point_id": "corvallis_or_bcrf49_r8.00_S",
-      "latitude": 44.452,
-      "longitude": -123.262777,
+      "latitude": 44.448781,
+      "longitude": -123.262044,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.452000,-123.262777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.448781,-123.262044,14z"
     },
     {
       "pin_number": 47,
       "point_id": "corvallis_or_bcrf49_r8.00_SW",
-      "latitude": 44.485855,
-      "longitude": -123.377537,
+      "latitude": 44.482636,
+      "longitude": -123.376798,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.485855,-123.377537,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.482636,-123.376798,14z"
     },
     {
       "pin_number": 48,
       "point_id": "corvallis_or_bcrf49_r8.00_W",
-      "latitude": 44.56767,
-      "longitude": -123.425301,
+      "latitude": 44.564451,
+      "longitude": -123.424559,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.567670,-123.425301,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.564451,-123.424559,14z"
     },
     {
       "pin_number": 49,
       "point_id": "corvallis_or_bcrf49_r8.00_NW",
-      "latitude": 44.6496,
-      "longitude": -123.377861,
+      "latitude": 44.646381,
+      "longitude": -123.377121,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.649600,-123.377861,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.646381,-123.377121,14z"
     }
   ]
 }

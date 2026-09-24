@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Josephine County",
     "market_centroid": {
-      "latitude": 42.439268,
-      "longitude": -123.324425,
-      "location_description": "Grants Pass business centre (median of the directory's Grants Pass listing pins)"
+      "latitude": 42.439371,
+      "longitude": -123.327249,
+      "location_description": "Downtown Grants Pass (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 728
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/15478376",
+      "display_name": "Grants Pass, Josephine County, Oregon, United States",
+      "miles_from_listing_median": 0.14,
+      "listing_pins_in_median": 728
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "grantspass_or_bcrf49_r0.00_centroid",
-      "latitude": 42.439268,
-      "longitude": -123.324425,
+      "latitude": 42.439371,
+      "longitude": -123.327249,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439268,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439371,-123.327249,14z"
     },
     {
       "pin_number": 2,
       "point_id": "grantspass_or_bcrf49_r0.25_N",
-      "latitude": 42.442886,
-      "longitude": -123.324425,
+      "latitude": 42.442989,
+      "longitude": -123.327249,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.442886,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.442989,-123.327249,14z"
     },
     {
       "pin_number": 3,
       "point_id": "grantspass_or_bcrf49_r0.25_NE",
-      "latitude": 42.441826,
-      "longitude": -123.320958,
+      "latitude": 42.441929,
+      "longitude": -123.323782,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.441826,-123.320958,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.441929,-123.323782,14z"
     },
     {
       "pin_number": 4,
       "point_id": "grantspass_or_bcrf49_r0.25_E",
-      "latitude": 42.439268,
-      "longitude": -123.319522,
+      "latitude": 42.439371,
+      "longitude": -123.322346,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439268,-123.319522,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439371,-123.322346,14z"
     },
     {
       "pin_number": 5,
       "point_id": "grantspass_or_bcrf49_r0.25_SE",
-      "latitude": 42.436709,
-      "longitude": -123.320958,
+      "latitude": 42.436812,
+      "longitude": -123.323782,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.436709,-123.320958,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.436812,-123.323782,14z"
     },
     {
       "pin_number": 6,
       "point_id": "grantspass_or_bcrf49_r0.25_S",
-      "latitude": 42.43565,
-      "longitude": -123.324425,
+      "latitude": 42.435753,
+      "longitude": -123.327249,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.435650,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.435753,-123.327249,14z"
     },
     {
       "pin_number": 7,
       "point_id": "grantspass_or_bcrf49_r0.25_SW",
-      "latitude": 42.436709,
-      "longitude": -123.327892,
+      "latitude": 42.436812,
+      "longitude": -123.330716,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.436709,-123.327892,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.436812,-123.330716,14z"
     },
     {
       "pin_number": 8,
       "point_id": "grantspass_or_bcrf49_r0.25_W",
-      "latitude": 42.439268,
-      "longitude": -123.329328,
+      "latitude": 42.439371,
+      "longitude": -123.332152,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439268,-123.329328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439371,-123.332152,14z"
     },
     {
       "pin_number": 9,
       "point_id": "grantspass_or_bcrf49_r0.25_NW",
-      "latitude": 42.441826,
-      "longitude": -123.327892,
+      "latitude": 42.441929,
+      "longitude": -123.330716,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.441826,-123.327892,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.441929,-123.330716,14z"
     },
     {
       "pin_number": 10,
       "point_id": "grantspass_or_bcrf49_r0.50_N",
-      "latitude": 42.446505,
-      "longitude": -123.324425,
+      "latitude": 42.446608,
+      "longitude": -123.327249,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.446505,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.446608,-123.327249,14z"
     },
     {
       "pin_number": 11,
       "point_id": "grantspass_or_bcrf49_r0.50_NE",
-      "latitude": 42.444385,
-      "longitude": -123.317491,
+      "latitude": 42.444488,
+      "longitude": -123.320315,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.444385,-123.317491,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.444488,-123.320315,14z"
     },
     {
       "pin_number": 12,
       "point_id": "grantspass_or_bcrf49_r0.50_E",
-      "latitude": 42.439268,
-      "longitude": -123.314619,
+      "latitude": 42.439371,
+      "longitude": -123.317443,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439268,-123.314619,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439371,-123.317443,14z"
     },
     {
       "pin_number": 13,
       "point_id": "grantspass_or_bcrf49_r0.50_SE",
-      "latitude": 42.434151,
-      "longitude": -123.317492,
+      "latitude": 42.434254,
+      "longitude": -123.320316,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.434151,-123.317492,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.434254,-123.320316,14z"
     },
     {
       "pin_number": 14,
       "point_id": "grantspass_or_bcrf49_r0.50_S",
-      "latitude": 42.432031,
-      "longitude": -123.324425,
+      "latitude": 42.432134,
+      "longitude": -123.327249,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.432031,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.432134,-123.327249,14z"
     },
     {
       "pin_number": 15,
       "point_id": "grantspass_or_bcrf49_r0.50_SW",
-      "latitude": 42.434151,
-      "longitude": -123.331358,
+      "latitude": 42.434254,
+      "longitude": -123.334182,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.434151,-123.331358,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.434254,-123.334182,14z"
     },
     {
       "pin_number": 16,
       "point_id": "grantspass_or_bcrf49_r0.50_W",
-      "latitude": 42.439268,
-      "longitude": -123.334231,
+      "latitude": 42.439371,
+      "longitude": -123.337055,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439268,-123.334231,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439371,-123.337055,14z"
     },
     {
       "pin_number": 17,
       "point_id": "grantspass_or_bcrf49_r0.50_NW",
-      "latitude": 42.444385,
-      "longitude": -123.331359,
+      "latitude": 42.444488,
+      "longitude": -123.334183,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.444385,-123.331359,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.444488,-123.334183,14z"
     },
     {
       "pin_number": 18,
       "point_id": "grantspass_or_bcrf49_r1.00_N",
-      "latitude": 42.453741,
-      "longitude": -123.324425,
+      "latitude": 42.453844,
+      "longitude": -123.327249,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.453741,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.453844,-123.327249,14z"
     },
     {
       "pin_number": 19,
       "point_id": "grantspass_or_bcrf49_r1.00_NE",
-      "latitude": 42.449501,
-      "longitude": -123.310555,
+      "latitude": 42.449604,
+      "longitude": -123.313379,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.449501,-123.310555,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.449604,-123.313379,14z"
     },
     {
       "pin_number": 20,
       "point_id": "grantspass_or_bcrf49_r1.00_E",
-      "latitude": 42.439266,
-      "longitude": -123.304813,
+      "latitude": 42.439369,
+      "longitude": -123.307637,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439266,-123.304813,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439369,-123.307637,14z"
     },
     {
       "pin_number": 21,
       "point_id": "grantspass_or_bcrf49_r1.00_SE",
-      "latitude": 42.429033,
-      "longitude": -123.31056,
+      "latitude": 42.429136,
+      "longitude": -123.313384,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.429033,-123.310560,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.429136,-123.313384,14z"
     },
     {
       "pin_number": 22,
       "point_id": "grantspass_or_bcrf49_r1.00_S",
-      "latitude": 42.424795,
-      "longitude": -123.324425,
+      "latitude": 42.424898,
+      "longitude": -123.327249,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.424795,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.424898,-123.327249,14z"
     },
     {
       "pin_number": 23,
       "point_id": "grantspass_or_bcrf49_r1.00_SW",
-      "latitude": 42.429033,
-      "longitude": -123.33829,
+      "latitude": 42.429136,
+      "longitude": -123.341114,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.429033,-123.338290,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.429136,-123.341114,14z"
     },
     {
       "pin_number": 24,
       "point_id": "grantspass_or_bcrf49_r1.00_W",
-      "latitude": 42.439266,
-      "longitude": -123.344037,
+      "latitude": 42.439369,
+      "longitude": -123.346861,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439266,-123.344037,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439369,-123.346861,14z"
     },
     {
       "pin_number": 25,
       "point_id": "grantspass_or_bcrf49_r1.00_NW",
-      "latitude": 42.449501,
-      "longitude": -123.338295,
+      "latitude": 42.449604,
+      "longitude": -123.341119,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.449501,-123.338295,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.449604,-123.341119,14z"
     },
     {
       "pin_number": 26,
       "point_id": "grantspass_or_bcrf49_r2.00_N",
-      "latitude": 42.468214,
-      "longitude": -123.324425,
+      "latitude": 42.468317,
+      "longitude": -123.327249,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.468214,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.468317,-123.327249,14z"
     },
     {
       "pin_number": 27,
       "point_id": "grantspass_or_bcrf49_r2.00_NE",
-      "latitude": 42.459733,
-      "longitude": -123.296681,
+      "latitude": 42.459836,
+      "longitude": -123.299505,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.459733,-123.296681,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.459836,-123.299505,14z"
     },
     {
       "pin_number": 28,
       "point_id": "grantspass_or_bcrf49_r2.00_E",
-      "latitude": 42.439261,
-      "longitude": -123.285202,
+      "latitude": 42.439364,
+      "longitude": -123.288026,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439261,-123.285202,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439364,-123.288026,14z"
     },
     {
       "pin_number": 29,
       "point_id": "grantspass_or_bcrf49_r2.00_SE",
-      "latitude": 42.418797,
-      "longitude": -123.296699,
+      "latitude": 42.4189,
+      "longitude": -123.299523,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.418797,-123.296699,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.418900,-123.299523,14z"
     },
     {
       "pin_number": 30,
       "point_id": "grantspass_or_bcrf49_r2.00_S",
-      "latitude": 42.410322,
-      "longitude": -123.324425,
+      "latitude": 42.410425,
+      "longitude": -123.327249,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.410322,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.410425,-123.327249,14z"
     },
     {
       "pin_number": 31,
       "point_id": "grantspass_or_bcrf49_r2.00_SW",
-      "latitude": 42.418797,
-      "longitude": -123.352151,
+      "latitude": 42.4189,
+      "longitude": -123.354975,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.418797,-123.352151,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.418900,-123.354975,14z"
     },
     {
       "pin_number": 32,
       "point_id": "grantspass_or_bcrf49_r2.00_W",
-      "latitude": 42.439261,
-      "longitude": -123.363648,
+      "latitude": 42.439364,
+      "longitude": -123.366472,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439261,-123.363648,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439364,-123.366472,14z"
     },
     {
       "pin_number": 33,
       "point_id": "grantspass_or_bcrf49_r2.00_NW",
-      "latitude": 42.459733,
-      "longitude": -123.352169,
+      "latitude": 42.459836,
+      "longitude": -123.354993,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.459733,-123.352169,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.459836,-123.354993,14z"
     },
     {
       "pin_number": 34,
       "point_id": "grantspass_or_bcrf49_r4.00_N",
-      "latitude": 42.497161,
-      "longitude": -123.324425,
+      "latitude": 42.497264,
+      "longitude": -123.327249,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.497161,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.497264,-123.327249,14z"
     },
     {
       "pin_number": 35,
       "point_id": "grantspass_or_bcrf49_r4.00_NE",
-      "latitude": 42.480191,
-      "longitude": -123.268919,
+      "latitude": 42.480294,
+      "longitude": -123.271743,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.480191,-123.268919,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.480294,-123.271743,14z"
     },
     {
       "pin_number": 36,
       "point_id": "grantspass_or_bcrf49_r4.00_E",
-      "latitude": 42.439241,
-      "longitude": -123.245979,
+      "latitude": 42.439344,
+      "longitude": -123.248803,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439241,-123.245979,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439344,-123.248803,14z"
     },
     {
       "pin_number": 37,
       "point_id": "grantspass_or_bcrf49_r4.00_SE",
-      "latitude": 42.398318,
-      "longitude": -123.268991,
+      "latitude": 42.398421,
+      "longitude": -123.271815,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.398318,-123.268991,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.398421,-123.271815,14z"
     },
     {
       "pin_number": 38,
       "point_id": "grantspass_or_bcrf49_r4.00_S",
-      "latitude": 42.381375,
-      "longitude": -123.324425,
+      "latitude": 42.381478,
+      "longitude": -123.327249,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.381375,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.381478,-123.327249,14z"
     },
     {
       "pin_number": 39,
       "point_id": "grantspass_or_bcrf49_r4.00_SW",
-      "latitude": 42.398318,
-      "longitude": -123.379859,
+      "latitude": 42.398421,
+      "longitude": -123.382683,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.398318,-123.379859,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.398421,-123.382683,14z"
     },
     {
       "pin_number": 40,
       "point_id": "grantspass_or_bcrf49_r4.00_W",
-      "latitude": 42.439241,
-      "longitude": -123.402871,
+      "latitude": 42.439344,
+      "longitude": -123.405695,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439241,-123.402871,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439344,-123.405695,14z"
     },
     {
       "pin_number": 41,
       "point_id": "grantspass_or_bcrf49_r4.00_NW",
-      "latitude": 42.480191,
-      "longitude": -123.379931,
+      "latitude": 42.480294,
+      "longitude": -123.382755,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.480191,-123.379931,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.480294,-123.382755,14z"
     },
     {
       "pin_number": 42,
       "point_id": "grantspass_or_bcrf49_r8.00_N",
-      "latitude": 42.555053,
-      "longitude": -123.324425,
+      "latitude": 42.555156,
+      "longitude": -123.327249,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.555053,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.555156,-123.327249,14z"
     },
     {
       "pin_number": 43,
       "point_id": "grantspass_or_bcrf49_r8.00_NE",
-      "latitude": 42.521087,
-      "longitude": -123.21334,
+      "latitude": 42.52119,
+      "longitude": -123.216164,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.521087,-123.213340,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.521190,-123.216164,14z"
     },
     {
       "pin_number": 44,
       "point_id": "grantspass_or_bcrf49_r8.00_E",
-      "latitude": 42.439161,
-      "longitude": -123.167533,
+      "latitude": 42.439264,
+      "longitude": -123.170357,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439161,-123.167533,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439264,-123.170357,14z"
     },
     {
       "pin_number": 45,
       "point_id": "grantspass_or_bcrf49_r8.00_SE",
-      "latitude": 42.357342,
-      "longitude": -123.21363,
+      "latitude": 42.357445,
+      "longitude": -123.216454,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.357342,-123.213630,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.357445,-123.216454,14z"
     },
     {
       "pin_number": 46,
       "point_id": "grantspass_or_bcrf49_r8.00_S",
-      "latitude": 42.323483,
-      "longitude": -123.324425,
+      "latitude": 42.323586,
+      "longitude": -123.327249,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.323483,-123.324425,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.323586,-123.327249,14z"
     },
     {
       "pin_number": 47,
       "point_id": "grantspass_or_bcrf49_r8.00_SW",
-      "latitude": 42.357342,
-      "longitude": -123.43522,
+      "latitude": 42.357445,
+      "longitude": -123.438044,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.357342,-123.435220,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.357445,-123.438044,14z"
     },
     {
       "pin_number": 48,
       "point_id": "grantspass_or_bcrf49_r8.00_W",
-      "latitude": 42.439161,
-      "longitude": -123.481317,
+      "latitude": 42.439264,
+      "longitude": -123.484141,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439161,-123.481317,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.439264,-123.484141,14z"
     },
     {
       "pin_number": 49,
       "point_id": "grantspass_or_bcrf49_r8.00_NW",
-      "latitude": 42.521087,
-      "longitude": -123.43551,
+      "latitude": 42.52119,
+      "longitude": -123.438334,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.521087,-123.435510,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@42.521190,-123.438334,14z"
     }
   ]
 }

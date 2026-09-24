@@ -2,12 +2,14 @@
 Builds one BCRF-49 market manifest per directory city, in the shape of Medford's master
 manifest (MEDFORD_49_GEO_PINS_MASTER_MANIFEST_V_0_01.json). No network.
 
-Centre — the median of the city's own listings' Google place pins (lx.directory.centroids):
-only records whose street address says OR and whose `!3d!4d` pin is inside Oregon. BCRF is a
-Business-Centred Relative Frame; this is where the city's businesses actually sit.
-Medford keeps its master manifest unchanged (the proven frame). A first attempt geocoded
-downtown intersections through OpenStreetMap Overpass; the public instances stalled for
-minutes per city, and it was dropped (Mike, 2026-09-24). See WORKFLOW.md.
+Centre — the city's downtown point, as OpenStreetMap's geocoder (Nominatim) returns it for
+"<city>, Oregon": the label point OSM places on the city's centre. Same logic as Medford's
+hand-picked "Downtown Commercial Core (Central Ave & Main St)" — and checked against it:
+Nominatim's Medford is 0.19 mi from the master centroid. One request per city, 1.1 s apart
+(Nominatim fair use), and the answers are saved to markets/centers.json, so the sweep never
+depends on the network. Guard: a centre more than 3 mi from the median of the city's own
+listing pins is a wrong match, and the build stops. Medford keeps its master manifest.
+Earlier attempts and why they were replaced: WORKFLOW.md.
 
 Pins — rarlx.generate_bcrf49_grid, the generator that reproduces Medford's master manifest
 to within 0.00035° (≈0.03 mi at the 8-mile ring).
@@ -22,7 +24,21 @@ from pathlib import Path
 
 from rarlx.bcrf49_linux import MarketConfig, generate_bcrf49_grid
 
+import time
+import urllib.parse
+import urllib.request
+
 from lx import directory
+
+NOMINATIM = "https://nominatim.openstreetmap.org/search"
+UA = "oregonsmbdirectory-market-builder/1.0 (+https://oregonsmbdirectory.com/)"
+
+
+def geocode_city(name: str) -> dict:
+    q = urllib.parse.urlencode({"city": name, "state": "Oregon", "country": "USA", "format": "jsonv2", "limit": 1})
+    with urllib.request.urlopen(urllib.request.Request(f"{NOMINATIM}?{q}", headers={"User-Agent": UA}), timeout=20) as r:
+        hit = json.load(r)[0]
+    return {"lat": round(float(hit["lat"]), 6), "lng": round(float(hit["lon"]), 6), "osm": f"{hit['osm_type']}/{hit['osm_id']}", "display_name": hit["display_name"]}
 
 HERE = Path(__file__).resolve().parent
 MEDFORD_MASTER = Path(
@@ -50,7 +66,7 @@ def manifest(slug, name, county, center, pins, evidence) -> dict:
         "market": {
             "city": name, "city_slug": slug, "state": "Oregon", "county": f"{county} County",
             "market_centroid": {"latitude": center[0], "longitude": center[1],
-                                "location_description": f"{name} business centre (median of the directory's {name} listing pins)"},
+                                "location_description": f"Downtown {name} (OpenStreetMap city centre)"},
             "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
             "total_geo_pins": 49,
             "radii_progression_miles": [0.0, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
@@ -76,13 +92,19 @@ def main() -> None:
     for slug, name in sorted(directory.cities().items()):
         if slug == "medford":
             continue
-        center = medians[slug]
+        g = geocode_city(name)
+        time.sleep(1.1)
+        center = (g["lat"], g["lng"])
+        gap = round(miles(center, medians[slug]), 2)
+        if gap > 3.0:
+            raise SystemExit(f"{slug}: Nominatim centre {center} is {gap} mi from the city's listing median — wrong match? {g}")
         pins = generate_bcrf49_grid(MarketConfig(name, "OR", "Oregon", center[0], center[1], county=f"{COUNTIES[slug]} County"))
-        evidence = {"method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-                    "listing_pins_used": counts[slug]}
+        evidence = {"method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+                    "osm_object": g["osm"], "display_name": g["display_name"],
+                    "miles_from_listing_median": gap, "listing_pins_in_median": counts[slug]}
         (HERE / f"{slug}.json").write_text(json.dumps(manifest(slug, name, COUNTIES[slug], center, pins, evidence), indent=2) + "\n")
         centers[slug] = {"center": center, **evidence}
-        print(f"{slug:14} {center[0]:.6f},{center[1]:.6f}  from {counts[slug]} listing pins")
+        print(f"{slug:14} {center[0]:.6f},{center[1]:.6f}  {g['osm']:18} {gap:4.2f} mi from listing median")
 
     m = json.loads(MEDFORD_MASTER.read_text())
     m["market"]["city_slug"] = "medford"

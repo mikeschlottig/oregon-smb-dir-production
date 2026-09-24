@@ -20,21 +20,27 @@ A **gate** is one city × one query × 49 pins. 12 cities × 12 queries = 144 ga
 
 ## Decisions and why
 
-### Centre point: the median of the city's own listing pins
-- **Method:** only records with an Oregon street address and a Google `!3d!4d` place pin
-  inside Oregon count, which gives 490–1,018 pins per city. They're Google's own coordinates
-  for real businesses. BCRF is a *Business-Centred* frame, and the median is where the city's
-  businesses actually sit. It's robust to outliers (unlike a mean), deterministic, offline,
-  and rebuilt from data we own.
-- **Checked against the one human-chosen centre:** Medford's listing median lands 0.47 mi
-  from "Central Ave & Main St" (the master manifest). On the only city with a human answer,
-  the method agrees to within half a mile.
+### Centre point: OpenStreetMap's city centre (Nominatim), saved once
+- **Rule, taken from Medford.** Medford's centroid is its downtown core, "Central Ave & Main
+  St" (42.3265, -122.8756), a single hand-picked point, 4 decimals, looked up once and saved.
+  That worked because it was one lookup, from one trusted source.
+- **Same logic, done by code.** For each city, Nominatim is asked for "<city>, Oregon". It
+  returns the label point OSM places at the city's centre. That's one request per city,
+  1.1 s apart, and the results are saved in the manifests and `centers.json`, so the sweep
+  never touches a geocoder.
+- **Checked against Medford:** Nominatim's Medford is 0.19 mi from the master centroid.
+- **Guard:** a centre more than 3 mi from the median of that city's own listing pins stops
+  the build as a probable wrong match. The actual gaps are 0.14–1.07 mi.
 - **Medford** keeps its master manifest unchanged.
-- **Tried first:** geocoding each downtown main-street intersection through OpenStreetMap
-  Overpass. The public instances returned HTTP 504 and stalled for minutes per city. Mike:
-  "overpass is not a requirement … use the code that works." If downtown cores are wanted
-  later, geocode the 11 intersections once and pin them in `build_markets.py`; the pins
-  regenerate from there.
+
+**What went wrong on the way (kept so it isn't repeated):**
+1. **Overpass** street-intersection matching: a heavy regex query on a busy public server.
+   It returned 504s and stalled for minutes per city, and I built the whole script before
+   trying one request.
+2. **The listing-pin median:** fine as a business centre and 0.47 mi off Medford's, but
+   further than Nominatim, and not the downtown rule.
+3. The fix was the one-request smoke test that should have come first: Nominatim on Medford
+   against the known answer.
 
 ### Pins: rarlx `generate_bcrf49_grid`
 - **Frame:** radii 0 / 0.25 / 0.5 / 1 / 2 / 4 / 8 mi × 8 compass bearings, plus the centre,

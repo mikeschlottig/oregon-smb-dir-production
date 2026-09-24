@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Marion County",
     "market_centroid": {
-      "latitude": 44.937199,
-      "longitude": -123.030054,
-      "location_description": "Salem business centre (median of the directory's Salem listing pins)"
+      "latitude": 44.939157,
+      "longitude": -123.033121,
+      "location_description": "Downtown Salem (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 908
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186479",
+      "display_name": "Salem, Marion County, Oregon, United States",
+      "miles_from_listing_median": 0.2,
+      "listing_pins_in_median": 908
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "salem_or_bcrf49_r0.00_centroid",
-      "latitude": 44.937199,
-      "longitude": -123.030054,
+      "latitude": 44.939157,
+      "longitude": -123.033121,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937199,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939157,-123.033121,14z"
     },
     {
       "pin_number": 2,
       "point_id": "salem_or_bcrf49_r0.25_N",
-      "latitude": 44.940817,
-      "longitude": -123.030054,
+      "latitude": 44.942775,
+      "longitude": -123.033121,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.940817,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.942775,-123.033121,14z"
     },
     {
       "pin_number": 3,
       "point_id": "salem_or_bcrf49_r0.25_NE",
-      "latitude": 44.939757,
-      "longitude": -123.02644,
+      "latitude": 44.941715,
+      "longitude": -123.029506,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939757,-123.026440,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.941715,-123.029506,14z"
     },
     {
       "pin_number": 4,
       "point_id": "salem_or_bcrf49_r0.25_E",
-      "latitude": 44.937199,
-      "longitude": -123.024943,
+      "latitude": 44.939157,
+      "longitude": -123.028009,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937199,-123.024943,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939157,-123.028009,14z"
     },
     {
       "pin_number": 5,
       "point_id": "salem_or_bcrf49_r0.25_SE",
-      "latitude": 44.93464,
-      "longitude": -123.02644,
+      "latitude": 44.936598,
+      "longitude": -123.029507,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.934640,-123.026440,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.936598,-123.029507,14z"
     },
     {
       "pin_number": 6,
       "point_id": "salem_or_bcrf49_r0.25_S",
-      "latitude": 44.933581,
-      "longitude": -123.030054,
+      "latitude": 44.935539,
+      "longitude": -123.033121,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.933581,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.935539,-123.033121,14z"
     },
     {
       "pin_number": 7,
       "point_id": "salem_or_bcrf49_r0.25_SW",
-      "latitude": 44.93464,
-      "longitude": -123.033668,
+      "latitude": 44.936598,
+      "longitude": -123.036735,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.934640,-123.033668,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.936598,-123.036735,14z"
     },
     {
       "pin_number": 8,
       "point_id": "salem_or_bcrf49_r0.25_W",
-      "latitude": 44.937199,
-      "longitude": -123.035165,
+      "latitude": 44.939157,
+      "longitude": -123.038233,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937199,-123.035165,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939157,-123.038233,14z"
     },
     {
       "pin_number": 9,
       "point_id": "salem_or_bcrf49_r0.25_NW",
-      "latitude": 44.939757,
-      "longitude": -123.033668,
+      "latitude": 44.941715,
+      "longitude": -123.036736,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939757,-123.033668,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.941715,-123.036736,14z"
     },
     {
       "pin_number": 10,
       "point_id": "salem_or_bcrf49_r0.50_N",
-      "latitude": 44.944436,
-      "longitude": -123.030054,
+      "latitude": 44.946394,
+      "longitude": -123.033121,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.944436,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.946394,-123.033121,14z"
     },
     {
       "pin_number": 11,
       "point_id": "salem_or_bcrf49_r0.50_NE",
-      "latitude": 44.942316,
-      "longitude": -123.022825,
+      "latitude": 44.944274,
+      "longitude": -123.025891,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.942316,-123.022825,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.944274,-123.025891,14z"
     },
     {
       "pin_number": 12,
       "point_id": "salem_or_bcrf49_r0.50_E",
-      "latitude": 44.937199,
-      "longitude": -123.019831,
+      "latitude": 44.939157,
+      "longitude": -123.022898,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937199,-123.019831,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939157,-123.022898,14z"
     },
     {
       "pin_number": 13,
       "point_id": "salem_or_bcrf49_r0.50_SE",
-      "latitude": 44.932082,
-      "longitude": -123.022826,
+      "latitude": 44.93404,
+      "longitude": -123.025893,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.932082,-123.022826,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.934040,-123.025893,14z"
     },
     {
       "pin_number": 14,
       "point_id": "salem_or_bcrf49_r0.50_S",
-      "latitude": 44.929962,
-      "longitude": -123.030054,
+      "latitude": 44.93192,
+      "longitude": -123.033121,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.929962,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.931920,-123.033121,14z"
     },
     {
       "pin_number": 15,
       "point_id": "salem_or_bcrf49_r0.50_SW",
-      "latitude": 44.932082,
-      "longitude": -123.037282,
+      "latitude": 44.93404,
+      "longitude": -123.040349,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.932082,-123.037282,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.934040,-123.040349,14z"
     },
     {
       "pin_number": 16,
       "point_id": "salem_or_bcrf49_r0.50_W",
-      "latitude": 44.937199,
-      "longitude": -123.040277,
+      "latitude": 44.939157,
+      "longitude": -123.043344,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937199,-123.040277,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939157,-123.043344,14z"
     },
     {
       "pin_number": 17,
       "point_id": "salem_or_bcrf49_r0.50_NW",
-      "latitude": 44.942316,
-      "longitude": -123.037283,
+      "latitude": 44.944274,
+      "longitude": -123.040351,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.942316,-123.037283,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.944274,-123.040351,14z"
     },
     {
       "pin_number": 18,
       "point_id": "salem_or_bcrf49_r1.00_N",
-      "latitude": 44.951672,
-      "longitude": -123.030054,
+      "latitude": 44.95363,
+      "longitude": -123.033121,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.951672,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.953630,-123.033121,14z"
     },
     {
       "pin_number": 19,
       "point_id": "salem_or_bcrf49_r1.00_NE",
-      "latitude": 44.947432,
-      "longitude": -123.015594,
+      "latitude": 44.94939,
+      "longitude": -123.018661,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.947432,-123.015594,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.949390,-123.018661,14z"
     },
     {
       "pin_number": 20,
       "point_id": "salem_or_bcrf49_r1.00_E",
-      "latitude": 44.937197,
-      "longitude": -123.009608,
+      "latitude": 44.939155,
+      "longitude": -123.012675,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937197,-123.009608,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939155,-123.012675,14z"
     },
     {
       "pin_number": 21,
       "point_id": "salem_or_bcrf49_r1.00_SE",
-      "latitude": 44.926964,
-      "longitude": -123.015599,
+      "latitude": 44.928922,
+      "longitude": -123.018666,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.926964,-123.015599,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.928922,-123.018666,14z"
     },
     {
       "pin_number": 22,
       "point_id": "salem_or_bcrf49_r1.00_S",
-      "latitude": 44.922726,
-      "longitude": -123.030054,
+      "latitude": 44.924684,
+      "longitude": -123.033121,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.922726,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.924684,-123.033121,14z"
     },
     {
       "pin_number": 23,
       "point_id": "salem_or_bcrf49_r1.00_SW",
-      "latitude": 44.926964,
-      "longitude": -123.044509,
+      "latitude": 44.928922,
+      "longitude": -123.047576,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.926964,-123.044509,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.928922,-123.047576,14z"
     },
     {
       "pin_number": 24,
       "point_id": "salem_or_bcrf49_r1.00_W",
-      "latitude": 44.937197,
-      "longitude": -123.0505,
+      "latitude": 44.939155,
+      "longitude": -123.053567,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937197,-123.050500,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939155,-123.053567,14z"
     },
     {
       "pin_number": 25,
       "point_id": "salem_or_bcrf49_r1.00_NW",
-      "latitude": 44.947432,
-      "longitude": -123.044514,
+      "latitude": 44.94939,
+      "longitude": -123.047581,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.947432,-123.044514,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.949390,-123.047581,14z"
     },
     {
       "pin_number": 26,
       "point_id": "salem_or_bcrf49_r2.00_N",
-      "latitude": 44.966145,
-      "longitude": -123.030054,
+      "latitude": 44.968103,
+      "longitude": -123.033121,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.966145,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.968103,-123.033121,14z"
     },
     {
       "pin_number": 27,
       "point_id": "salem_or_bcrf49_r2.00_NE",
-      "latitude": 44.957663,
-      "longitude": -123.001129,
+      "latitude": 44.959621,
+      "longitude": -123.004195,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.957663,-123.001129,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.959621,-123.004195,14z"
     },
     {
       "pin_number": 28,
       "point_id": "salem_or_bcrf49_r2.00_E",
-      "latitude": 44.937192,
-      "longitude": -122.989163,
+      "latitude": 44.93915,
+      "longitude": -122.992228,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937192,-122.989163,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939150,-122.992228,14z"
     },
     {
       "pin_number": 29,
       "point_id": "salem_or_bcrf49_r2.00_SE",
-      "latitude": 44.916727,
-      "longitude": -123.00115,
+      "latitude": 44.918685,
+      "longitude": -123.004216,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.916727,-123.001150,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.918685,-123.004216,14z"
     },
     {
       "pin_number": 30,
       "point_id": "salem_or_bcrf49_r2.00_S",
-      "latitude": 44.908253,
-      "longitude": -123.030054,
+      "latitude": 44.910211,
+      "longitude": -123.033121,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.908253,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.910211,-123.033121,14z"
     },
     {
       "pin_number": 31,
       "point_id": "salem_or_bcrf49_r2.00_SW",
-      "latitude": 44.916727,
-      "longitude": -123.058958,
+      "latitude": 44.918685,
+      "longitude": -123.062026,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.916727,-123.058958,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.918685,-123.062026,14z"
     },
     {
       "pin_number": 32,
       "point_id": "salem_or_bcrf49_r2.00_W",
-      "latitude": 44.937192,
-      "longitude": -123.070945,
+      "latitude": 44.93915,
+      "longitude": -123.074014,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937192,-123.070945,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939150,-123.074014,14z"
     },
     {
       "pin_number": 33,
       "point_id": "salem_or_bcrf49_r2.00_NW",
-      "latitude": 44.957663,
-      "longitude": -123.058979,
+      "latitude": 44.959621,
+      "longitude": -123.062047,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.957663,-123.058979,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.959621,-123.062047,14z"
     },
     {
       "pin_number": 34,
       "point_id": "salem_or_bcrf49_r4.00_N",
-      "latitude": 44.995092,
-      "longitude": -123.030054,
+      "latitude": 44.99705,
+      "longitude": -123.033121,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.995092,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.997050,-123.033121,14z"
     },
     {
       "pin_number": 35,
       "point_id": "salem_or_bcrf49_r4.00_NE",
-      "latitude": 44.978121,
-      "longitude": -122.972183,
+      "latitude": 44.980079,
+      "longitude": -122.975248,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.978121,-122.972183,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.980079,-122.975248,14z"
     },
     {
       "pin_number": 36,
       "point_id": "salem_or_bcrf49_r4.00_E",
-      "latitude": 44.93717,
-      "longitude": -122.948271,
+      "latitude": 44.939128,
+      "longitude": -122.951335,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937170,-122.948271,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939128,-122.951335,14z"
     },
     {
       "pin_number": 37,
       "point_id": "salem_or_bcrf49_r4.00_SE",
-      "latitude": 44.896248,
-      "longitude": -122.972266,
+      "latitude": 44.898206,
+      "longitude": -122.975331,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.896248,-122.972266,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.898206,-122.975331,14z"
     },
     {
       "pin_number": 38,
       "point_id": "salem_or_bcrf49_r4.00_S",
-      "latitude": 44.879306,
-      "longitude": -123.030054,
+      "latitude": 44.881264,
+      "longitude": -123.033121,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.879306,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.881264,-123.033121,14z"
     },
     {
       "pin_number": 39,
       "point_id": "salem_or_bcrf49_r4.00_SW",
-      "latitude": 44.896248,
-      "longitude": -123.087842,
+      "latitude": 44.898206,
+      "longitude": -123.090911,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.896248,-123.087842,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.898206,-123.090911,14z"
     },
     {
       "pin_number": 40,
       "point_id": "salem_or_bcrf49_r4.00_W",
-      "latitude": 44.93717,
-      "longitude": -123.111837,
+      "latitude": 44.939128,
+      "longitude": -123.114907,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937170,-123.111837,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939128,-123.114907,14z"
     },
     {
       "pin_number": 41,
       "point_id": "salem_or_bcrf49_r4.00_NW",
-      "latitude": 44.978121,
-      "longitude": -123.087925,
+      "latitude": 44.980079,
+      "longitude": -123.090994,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.978121,-123.087925,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.980079,-123.090994,14z"
     },
     {
       "pin_number": 42,
       "point_id": "salem_or_bcrf49_r8.00_N",
-      "latitude": 45.052984,
-      "longitude": -123.030054,
+      "latitude": 45.054942,
+      "longitude": -123.033121,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.052984,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.054942,-123.033121,14z"
     },
     {
       "pin_number": 43,
       "point_id": "salem_or_bcrf49_r8.00_NE",
-      "latitude": 45.019013,
-      "longitude": -122.91423,
+      "latitude": 45.020971,
+      "longitude": -122.917293,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.019013,-122.914230,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.020971,-122.917293,14z"
     },
     {
       "pin_number": 44,
       "point_id": "salem_or_bcrf49_r8.00_E",
-      "latitude": 44.937082,
-      "longitude": -122.866488,
+      "latitude": 44.93904,
+      "longitude": -122.86955,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937082,-122.866488,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939040,-122.869550,14z"
     },
     {
       "pin_number": 45,
       "point_id": "salem_or_bcrf49_r8.00_SE",
-      "latitude": 44.855268,
-      "longitude": -122.91456,
+      "latitude": 44.857226,
+      "longitude": -122.917623,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.855268,-122.914560,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.857226,-122.917623,14z"
     },
     {
       "pin_number": 46,
       "point_id": "salem_or_bcrf49_r8.00_S",
-      "latitude": 44.821414,
-      "longitude": -123.030054,
+      "latitude": 44.823372,
+      "longitude": -123.033121,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.821414,-123.030054,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.823372,-123.033121,14z"
     },
     {
       "pin_number": 47,
       "point_id": "salem_or_bcrf49_r8.00_SW",
-      "latitude": 44.855268,
-      "longitude": -123.145548,
+      "latitude": 44.857226,
+      "longitude": -123.148619,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.855268,-123.145548,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.857226,-123.148619,14z"
     },
     {
       "pin_number": 48,
       "point_id": "salem_or_bcrf49_r8.00_W",
-      "latitude": 44.937082,
-      "longitude": -123.19362,
+      "latitude": 44.93904,
+      "longitude": -123.196692,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.937082,-123.193620,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.939040,-123.196692,14z"
     },
     {
       "pin_number": 49,
       "point_id": "salem_or_bcrf49_r8.00_NW",
-      "latitude": 45.019013,
-      "longitude": -123.145878,
+      "latitude": 45.020971,
+      "longitude": -123.148949,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.019013,-123.145878,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@45.020971,-123.148949,14z"
     }
   ]
 }

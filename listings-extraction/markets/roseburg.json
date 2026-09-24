@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Douglas County",
     "market_centroid": {
-      "latitude": 43.217984,
-      "longitude": -123.353191,
-      "location_description": "Roseburg business centre (median of the directory's Roseburg listing pins)"
+      "latitude": 43.216505,
+      "longitude": -123.341738,
+      "location_description": "Downtown Roseburg (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 701
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186345",
+      "display_name": "Roseburg, Douglas County, Oregon, United States",
+      "miles_from_listing_median": 0.59,
+      "listing_pins_in_median": 701
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "roseburg_or_bcrf49_r0.00_centroid",
-      "latitude": 43.217984,
-      "longitude": -123.353191,
+      "latitude": 43.216505,
+      "longitude": -123.341738,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217984,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216505,-123.341738,14z"
     },
     {
       "pin_number": 2,
       "point_id": "roseburg_or_bcrf49_r0.25_N",
-      "latitude": 43.221602,
-      "longitude": -123.353191,
+      "latitude": 43.220123,
+      "longitude": -123.341738,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.221602,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.220123,-123.341738,14z"
     },
     {
       "pin_number": 3,
       "point_id": "roseburg_or_bcrf49_r0.25_NE",
-      "latitude": 43.220542,
-      "longitude": -123.34968,
+      "latitude": 43.219063,
+      "longitude": -123.338227,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.220542,-123.349680,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.219063,-123.338227,14z"
     },
     {
       "pin_number": 4,
       "point_id": "roseburg_or_bcrf49_r0.25_E",
-      "latitude": 43.217984,
-      "longitude": -123.348226,
+      "latitude": 43.216505,
+      "longitude": -123.336773,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217984,-123.348226,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216505,-123.336773,14z"
     },
     {
       "pin_number": 5,
       "point_id": "roseburg_or_bcrf49_r0.25_SE",
-      "latitude": 43.215425,
-      "longitude": -123.34968,
+      "latitude": 43.213946,
+      "longitude": -123.338227,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.215425,-123.349680,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.213946,-123.338227,14z"
     },
     {
       "pin_number": 6,
       "point_id": "roseburg_or_bcrf49_r0.25_S",
-      "latitude": 43.214366,
-      "longitude": -123.353191,
+      "latitude": 43.212887,
+      "longitude": -123.341738,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.214366,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.212887,-123.341738,14z"
     },
     {
       "pin_number": 7,
       "point_id": "roseburg_or_bcrf49_r0.25_SW",
-      "latitude": 43.215425,
-      "longitude": -123.356702,
+      "latitude": 43.213946,
+      "longitude": -123.345249,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.215425,-123.356702,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.213946,-123.345249,14z"
     },
     {
       "pin_number": 8,
       "point_id": "roseburg_or_bcrf49_r0.25_W",
-      "latitude": 43.217984,
-      "longitude": -123.358156,
+      "latitude": 43.216505,
+      "longitude": -123.346703,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217984,-123.358156,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216505,-123.346703,14z"
     },
     {
       "pin_number": 9,
       "point_id": "roseburg_or_bcrf49_r0.25_NW",
-      "latitude": 43.220542,
-      "longitude": -123.356702,
+      "latitude": 43.219063,
+      "longitude": -123.345249,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.220542,-123.356702,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.219063,-123.345249,14z"
     },
     {
       "pin_number": 10,
       "point_id": "roseburg_or_bcrf49_r0.50_N",
-      "latitude": 43.225221,
-      "longitude": -123.353191,
+      "latitude": 43.223742,
+      "longitude": -123.341738,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.225221,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.223742,-123.341738,14z"
     },
     {
       "pin_number": 11,
       "point_id": "roseburg_or_bcrf49_r0.50_NE",
-      "latitude": 43.223101,
-      "longitude": -123.346169,
+      "latitude": 43.221622,
+      "longitude": -123.334716,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.223101,-123.346169,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.221622,-123.334716,14z"
     },
     {
       "pin_number": 12,
       "point_id": "roseburg_or_bcrf49_r0.50_E",
-      "latitude": 43.217984,
-      "longitude": -123.343261,
+      "latitude": 43.216505,
+      "longitude": -123.331808,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217984,-123.343261,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216505,-123.331808,14z"
     },
     {
       "pin_number": 13,
       "point_id": "roseburg_or_bcrf49_r0.50_SE",
-      "latitude": 43.212867,
-      "longitude": -123.34617,
+      "latitude": 43.211388,
+      "longitude": -123.334717,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.212867,-123.346170,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.211388,-123.334717,14z"
     },
     {
       "pin_number": 14,
       "point_id": "roseburg_or_bcrf49_r0.50_S",
-      "latitude": 43.210747,
-      "longitude": -123.353191,
+      "latitude": 43.209268,
+      "longitude": -123.341738,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.210747,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.209268,-123.341738,14z"
     },
     {
       "pin_number": 15,
       "point_id": "roseburg_or_bcrf49_r0.50_SW",
-      "latitude": 43.212867,
-      "longitude": -123.360212,
+      "latitude": 43.211388,
+      "longitude": -123.348759,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.212867,-123.360212,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.211388,-123.348759,14z"
     },
     {
       "pin_number": 16,
       "point_id": "roseburg_or_bcrf49_r0.50_W",
-      "latitude": 43.217984,
-      "longitude": -123.363121,
+      "latitude": 43.216505,
+      "longitude": -123.351668,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217984,-123.363121,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216505,-123.351668,14z"
     },
     {
       "pin_number": 17,
       "point_id": "roseburg_or_bcrf49_r0.50_NW",
-      "latitude": 43.223101,
-      "longitude": -123.360213,
+      "latitude": 43.221622,
+      "longitude": -123.34876,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.223101,-123.360213,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.221622,-123.348760,14z"
     },
     {
       "pin_number": 18,
       "point_id": "roseburg_or_bcrf49_r1.00_N",
-      "latitude": 43.232457,
-      "longitude": -123.353191,
+      "latitude": 43.230978,
+      "longitude": -123.341738,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.232457,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.230978,-123.341738,14z"
     },
     {
       "pin_number": 19,
       "point_id": "roseburg_or_bcrf49_r1.00_NE",
-      "latitude": 43.228217,
-      "longitude": -123.339145,
+      "latitude": 43.226738,
+      "longitude": -123.327693,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.228217,-123.339145,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.226738,-123.327693,14z"
     },
     {
       "pin_number": 20,
       "point_id": "roseburg_or_bcrf49_r1.00_E",
-      "latitude": 43.217982,
-      "longitude": -123.333331,
+      "latitude": 43.216503,
+      "longitude": -123.321878,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217982,-123.333331,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216503,-123.321878,14z"
     },
     {
       "pin_number": 21,
       "point_id": "roseburg_or_bcrf49_r1.00_SE",
-      "latitude": 43.207749,
-      "longitude": -123.33915,
+      "latitude": 43.20627,
+      "longitude": -123.327697,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.207749,-123.339150,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.206270,-123.327697,14z"
     },
     {
       "pin_number": 22,
       "point_id": "roseburg_or_bcrf49_r1.00_S",
-      "latitude": 43.203511,
-      "longitude": -123.353191,
+      "latitude": 43.202032,
+      "longitude": -123.341738,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.203511,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.202032,-123.341738,14z"
     },
     {
       "pin_number": 23,
       "point_id": "roseburg_or_bcrf49_r1.00_SW",
-      "latitude": 43.207749,
-      "longitude": -123.367232,
+      "latitude": 43.20627,
+      "longitude": -123.355779,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.207749,-123.367232,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.206270,-123.355779,14z"
     },
     {
       "pin_number": 24,
       "point_id": "roseburg_or_bcrf49_r1.00_W",
-      "latitude": 43.217982,
-      "longitude": -123.373051,
+      "latitude": 43.216503,
+      "longitude": -123.361598,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217982,-123.373051,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216503,-123.361598,14z"
     },
     {
       "pin_number": 25,
       "point_id": "roseburg_or_bcrf49_r1.00_NW",
-      "latitude": 43.228217,
-      "longitude": -123.367237,
+      "latitude": 43.226738,
+      "longitude": -123.355783,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.228217,-123.367237,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.226738,-123.355783,14z"
     },
     {
       "pin_number": 26,
       "point_id": "roseburg_or_bcrf49_r2.00_N",
-      "latitude": 43.24693,
-      "longitude": -123.353191,
+      "latitude": 43.245451,
+      "longitude": -123.341738,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.246930,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.245451,-123.341738,14z"
     },
     {
       "pin_number": 27,
       "point_id": "roseburg_or_bcrf49_r2.00_NE",
-      "latitude": 43.238449,
-      "longitude": -123.325095,
+      "latitude": 43.23697,
+      "longitude": -123.313643,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.238449,-123.325095,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.236970,-123.313643,14z"
     },
     {
       "pin_number": 28,
       "point_id": "roseburg_or_bcrf49_r2.00_E",
-      "latitude": 43.217977,
-      "longitude": -123.313471,
+      "latitude": 43.216498,
+      "longitude": -123.302019,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217977,-123.313471,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216498,-123.302019,14z"
     },
     {
       "pin_number": 29,
       "point_id": "roseburg_or_bcrf49_r2.00_SE",
-      "latitude": 43.197512,
-      "longitude": -123.325114,
+      "latitude": 43.196033,
+      "longitude": -123.313662,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.197512,-123.325114,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.196033,-123.313662,14z"
     },
     {
       "pin_number": 30,
       "point_id": "roseburg_or_bcrf49_r2.00_S",
-      "latitude": 43.189038,
-      "longitude": -123.353191,
+      "latitude": 43.187559,
+      "longitude": -123.341738,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.189038,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.187559,-123.341738,14z"
     },
     {
       "pin_number": 31,
       "point_id": "roseburg_or_bcrf49_r2.00_SW",
-      "latitude": 43.197512,
-      "longitude": -123.381268,
+      "latitude": 43.196033,
+      "longitude": -123.369814,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.197512,-123.381268,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.196033,-123.369814,14z"
     },
     {
       "pin_number": 32,
       "point_id": "roseburg_or_bcrf49_r2.00_W",
-      "latitude": 43.217977,
-      "longitude": -123.392911,
+      "latitude": 43.216498,
+      "longitude": -123.381457,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217977,-123.392911,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216498,-123.381457,14z"
     },
     {
       "pin_number": 33,
       "point_id": "roseburg_or_bcrf49_r2.00_NW",
-      "latitude": 43.238449,
-      "longitude": -123.381287,
+      "latitude": 43.23697,
+      "longitude": -123.369833,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.238449,-123.381287,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.236970,-123.369833,14z"
     },
     {
       "pin_number": 34,
       "point_id": "roseburg_or_bcrf49_r4.00_N",
-      "latitude": 43.275877,
-      "longitude": -123.353191,
+      "latitude": 43.274398,
+      "longitude": -123.341738,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.275877,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.274398,-123.341738,14z"
     },
     {
       "pin_number": 35,
       "point_id": "roseburg_or_bcrf49_r4.00_NE",
-      "latitude": 43.258907,
-      "longitude": -123.29698,
+      "latitude": 43.257428,
+      "longitude": -123.285529,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.258907,-123.296980,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.257428,-123.285529,14z"
     },
     {
       "pin_number": 36,
       "point_id": "roseburg_or_bcrf49_r4.00_E",
-      "latitude": 43.217957,
-      "longitude": -123.27375,
+      "latitude": 43.216478,
+      "longitude": -123.262299,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217957,-123.273750,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216478,-123.262299,14z"
     },
     {
       "pin_number": 37,
       "point_id": "roseburg_or_bcrf49_r4.00_SE",
-      "latitude": 43.177034,
-      "longitude": -123.297056,
+      "latitude": 43.175555,
+      "longitude": -123.285604,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.177034,-123.297056,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.175555,-123.285604,14z"
     },
     {
       "pin_number": 38,
       "point_id": "roseburg_or_bcrf49_r4.00_S",
-      "latitude": 43.160091,
-      "longitude": -123.353191,
+      "latitude": 43.158612,
+      "longitude": -123.341738,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.160091,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.158612,-123.341738,14z"
     },
     {
       "pin_number": 39,
       "point_id": "roseburg_or_bcrf49_r4.00_SW",
-      "latitude": 43.177034,
-      "longitude": -123.409326,
+      "latitude": 43.175555,
+      "longitude": -123.397872,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.177034,-123.409326,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.175555,-123.397872,14z"
     },
     {
       "pin_number": 40,
       "point_id": "roseburg_or_bcrf49_r4.00_W",
-      "latitude": 43.217957,
-      "longitude": -123.432632,
+      "latitude": 43.216478,
+      "longitude": -123.421177,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217957,-123.432632,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216478,-123.421177,14z"
     },
     {
       "pin_number": 41,
       "point_id": "roseburg_or_bcrf49_r4.00_NW",
-      "latitude": 43.258907,
-      "longitude": -123.409402,
+      "latitude": 43.257428,
+      "longitude": -123.397947,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.258907,-123.409402,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.257428,-123.397947,14z"
     },
     {
       "pin_number": 42,
       "point_id": "roseburg_or_bcrf49_r8.00_N",
-      "latitude": 43.333769,
-      "longitude": -123.353191,
+      "latitude": 43.33229,
+      "longitude": -123.341738,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.333769,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.332290,-123.341738,14z"
     },
     {
       "pin_number": 43,
       "point_id": "roseburg_or_bcrf49_r8.00_NE",
-      "latitude": 43.299801,
-      "longitude": -123.240694,
+      "latitude": 43.298322,
+      "longitude": -123.229244,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.299801,-123.240694,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.298322,-123.229244,14z"
     },
     {
       "pin_number": 44,
       "point_id": "roseburg_or_bcrf49_r8.00_E",
-      "latitude": 43.217874,
-      "longitude": -123.19431,
+      "latitude": 43.216395,
+      "longitude": -123.182861,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217874,-123.194310,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216395,-123.182861,14z"
     },
     {
       "pin_number": 45,
       "point_id": "roseburg_or_bcrf49_r8.00_SE",
-      "latitude": 43.136057,
-      "longitude": -123.240996,
+      "latitude": 43.134578,
+      "longitude": -123.229545,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.136057,-123.240996,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.134578,-123.229545,14z"
     },
     {
       "pin_number": 46,
       "point_id": "roseburg_or_bcrf49_r8.00_S",
-      "latitude": 43.102199,
-      "longitude": -123.353191,
+      "latitude": 43.10072,
+      "longitude": -123.341738,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.102199,-123.353191,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.100720,-123.341738,14z"
     },
     {
       "pin_number": 47,
       "point_id": "roseburg_or_bcrf49_r8.00_SW",
-      "latitude": 43.136057,
-      "longitude": -123.465386,
+      "latitude": 43.134578,
+      "longitude": -123.453931,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.136057,-123.465386,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.134578,-123.453931,14z"
     },
     {
       "pin_number": 48,
       "point_id": "roseburg_or_bcrf49_r8.00_W",
-      "latitude": 43.217874,
-      "longitude": -123.512072,
+      "latitude": 43.216395,
+      "longitude": -123.500615,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.217874,-123.512072,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.216395,-123.500615,14z"
     },
     {
       "pin_number": 49,
       "point_id": "roseburg_or_bcrf49_r8.00_NW",
-      "latitude": 43.299801,
-      "longitude": -123.465688,
+      "latitude": 43.298322,
+      "longitude": -123.454232,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.299801,-123.465688,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.298322,-123.454232,14z"
     }
   ]
 }

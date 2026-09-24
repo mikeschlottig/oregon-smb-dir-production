@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Lane County",
     "market_centroid": {
-      "latitude": 44.053401,
-      "longitude": -123.093328,
-      "location_description": "Eugene business centre (median of the directory's Eugene listing pins)"
+      "latitude": 44.050505,
+      "longitude": -123.095051,
+      "location_description": "Downtown Eugene (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 977
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186706",
+      "display_name": "Eugene, Lane County, Oregon, United States",
+      "miles_from_listing_median": 0.22,
+      "listing_pins_in_median": 977
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "eugene_or_bcrf49_r0.00_centroid",
-      "latitude": 44.053401,
-      "longitude": -123.093328,
+      "latitude": 44.050505,
+      "longitude": -123.095051,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053401,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050505,-123.095051,14z"
     },
     {
       "pin_number": 2,
       "point_id": "eugene_or_bcrf49_r0.25_N",
-      "latitude": 44.057019,
-      "longitude": -123.093328,
+      "latitude": 44.054123,
+      "longitude": -123.095051,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057019,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.054123,-123.095051,14z"
     },
     {
       "pin_number": 3,
       "point_id": "eugene_or_bcrf49_r0.25_NE",
-      "latitude": 44.055959,
-      "longitude": -123.089768,
+      "latitude": 44.053063,
+      "longitude": -123.091491,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055959,-123.089768,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053063,-123.091491,14z"
     },
     {
       "pin_number": 4,
       "point_id": "eugene_or_bcrf49_r0.25_E",
-      "latitude": 44.053401,
-      "longitude": -123.088293,
+      "latitude": 44.050505,
+      "longitude": -123.090017,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053401,-123.088293,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050505,-123.090017,14z"
     },
     {
       "pin_number": 5,
       "point_id": "eugene_or_bcrf49_r0.25_SE",
-      "latitude": 44.050842,
-      "longitude": -123.089768,
+      "latitude": 44.047946,
+      "longitude": -123.091491,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050842,-123.089768,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.047946,-123.091491,14z"
     },
     {
       "pin_number": 6,
       "point_id": "eugene_or_bcrf49_r0.25_S",
-      "latitude": 44.049783,
-      "longitude": -123.093328,
+      "latitude": 44.046887,
+      "longitude": -123.095051,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.049783,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046887,-123.095051,14z"
     },
     {
       "pin_number": 7,
       "point_id": "eugene_or_bcrf49_r0.25_SW",
-      "latitude": 44.050842,
-      "longitude": -123.096888,
+      "latitude": 44.047946,
+      "longitude": -123.098611,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050842,-123.096888,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.047946,-123.098611,14z"
     },
     {
       "pin_number": 8,
       "point_id": "eugene_or_bcrf49_r0.25_W",
-      "latitude": 44.053401,
-      "longitude": -123.098363,
+      "latitude": 44.050505,
+      "longitude": -123.100085,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053401,-123.098363,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050505,-123.100085,14z"
     },
     {
       "pin_number": 9,
       "point_id": "eugene_or_bcrf49_r0.25_NW",
-      "latitude": 44.055959,
-      "longitude": -123.096888,
+      "latitude": 44.053063,
+      "longitude": -123.098611,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055959,-123.096888,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053063,-123.098611,14z"
     },
     {
       "pin_number": 10,
       "point_id": "eugene_or_bcrf49_r0.50_N",
-      "latitude": 44.060638,
-      "longitude": -123.093328,
+      "latitude": 44.057742,
+      "longitude": -123.095051,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060638,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057742,-123.095051,14z"
     },
     {
       "pin_number": 11,
       "point_id": "eugene_or_bcrf49_r0.50_NE",
-      "latitude": 44.058518,
-      "longitude": -123.086207,
+      "latitude": 44.055622,
+      "longitude": -123.087931,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058518,-123.086207,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055622,-123.087931,14z"
     },
     {
       "pin_number": 12,
       "point_id": "eugene_or_bcrf49_r0.50_E",
-      "latitude": 44.053401,
-      "longitude": -123.083259,
+      "latitude": 44.050505,
+      "longitude": -123.084982,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053401,-123.083259,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050505,-123.084982,14z"
     },
     {
       "pin_number": 13,
       "point_id": "eugene_or_bcrf49_r0.50_SE",
-      "latitude": 44.048284,
-      "longitude": -123.086209,
+      "latitude": 44.045388,
+      "longitude": -123.087932,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048284,-123.086209,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.045388,-123.087932,14z"
     },
     {
       "pin_number": 14,
       "point_id": "eugene_or_bcrf49_r0.50_S",
-      "latitude": 44.046164,
-      "longitude": -123.093328,
+      "latitude": 44.043268,
+      "longitude": -123.095051,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046164,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043268,-123.095051,14z"
     },
     {
       "pin_number": 15,
       "point_id": "eugene_or_bcrf49_r0.50_SW",
-      "latitude": 44.048284,
-      "longitude": -123.100447,
+      "latitude": 44.045388,
+      "longitude": -123.10217,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048284,-123.100447,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.045388,-123.102170,14z"
     },
     {
       "pin_number": 16,
       "point_id": "eugene_or_bcrf49_r0.50_W",
-      "latitude": 44.053401,
-      "longitude": -123.103397,
+      "latitude": 44.050505,
+      "longitude": -123.10512,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053401,-123.103397,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050505,-123.105120,14z"
     },
     {
       "pin_number": 17,
       "point_id": "eugene_or_bcrf49_r0.50_NW",
-      "latitude": 44.058518,
-      "longitude": -123.100449,
+      "latitude": 44.055622,
+      "longitude": -123.102171,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058518,-123.100449,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055622,-123.102171,14z"
     },
     {
       "pin_number": 18,
       "point_id": "eugene_or_bcrf49_r1.00_N",
-      "latitude": 44.067874,
-      "longitude": -123.093328,
+      "latitude": 44.064978,
+      "longitude": -123.095051,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.067874,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.064978,-123.095051,14z"
     },
     {
       "pin_number": 19,
       "point_id": "eugene_or_bcrf49_r1.00_NE",
-      "latitude": 44.063634,
-      "longitude": -123.079086,
+      "latitude": 44.060738,
+      "longitude": -123.080809,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063634,-123.079086,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060738,-123.080809,14z"
     },
     {
       "pin_number": 20,
       "point_id": "eugene_or_bcrf49_r1.00_E",
-      "latitude": 44.053399,
-      "longitude": -123.07319,
+      "latitude": 44.050503,
+      "longitude": -123.074914,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053399,-123.073190,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050503,-123.074914,14z"
     },
     {
       "pin_number": 21,
       "point_id": "eugene_or_bcrf49_r1.00_SE",
-      "latitude": 44.043166,
-      "longitude": -123.079091,
+      "latitude": 44.04027,
+      "longitude": -123.080814,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043166,-123.079091,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.040270,-123.080814,14z"
     },
     {
       "pin_number": 22,
       "point_id": "eugene_or_bcrf49_r1.00_S",
-      "latitude": 44.038928,
-      "longitude": -123.093328,
+      "latitude": 44.036032,
+      "longitude": -123.095051,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.038928,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.036032,-123.095051,14z"
     },
     {
       "pin_number": 23,
       "point_id": "eugene_or_bcrf49_r1.00_SW",
-      "latitude": 44.043166,
-      "longitude": -123.107565,
+      "latitude": 44.04027,
+      "longitude": -123.109288,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043166,-123.107565,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.040270,-123.109288,14z"
     },
     {
       "pin_number": 24,
       "point_id": "eugene_or_bcrf49_r1.00_W",
-      "latitude": 44.053399,
-      "longitude": -123.113466,
+      "latitude": 44.050503,
+      "longitude": -123.115188,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053399,-123.113466,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050503,-123.115188,14z"
     },
     {
       "pin_number": 25,
       "point_id": "eugene_or_bcrf49_r1.00_NW",
-      "latitude": 44.063634,
-      "longitude": -123.10757,
+      "latitude": 44.060738,
+      "longitude": -123.109293,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063634,-123.107570,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060738,-123.109293,14z"
     },
     {
       "pin_number": 26,
       "point_id": "eugene_or_bcrf49_r2.00_N",
-      "latitude": 44.082347,
-      "longitude": -123.093328,
+      "latitude": 44.079451,
+      "longitude": -123.095051,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.082347,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.079451,-123.095051,14z"
     },
     {
       "pin_number": 27,
       "point_id": "eugene_or_bcrf49_r2.00_NE",
-      "latitude": 44.073866,
-      "longitude": -123.064838,
+      "latitude": 44.07097,
+      "longitude": -123.066563,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.073866,-123.064838,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.070970,-123.066563,14z"
     },
     {
       "pin_number": 28,
       "point_id": "eugene_or_bcrf49_r2.00_E",
-      "latitude": 44.053394,
-      "longitude": -123.053052,
+      "latitude": 44.050498,
+      "longitude": -123.054777,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053394,-123.053052,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050498,-123.054777,14z"
     },
     {
       "pin_number": 29,
       "point_id": "eugene_or_bcrf49_r2.00_SE",
-      "latitude": 44.032929,
-      "longitude": -123.064858,
+      "latitude": 44.030033,
+      "longitude": -123.066583,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.032929,-123.064858,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.030033,-123.066583,14z"
     },
     {
       "pin_number": 30,
       "point_id": "eugene_or_bcrf49_r2.00_S",
-      "latitude": 44.024455,
-      "longitude": -123.093328,
+      "latitude": 44.021559,
+      "longitude": -123.095051,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.024455,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.021559,-123.095051,14z"
     },
     {
       "pin_number": 31,
       "point_id": "eugene_or_bcrf49_r2.00_SW",
-      "latitude": 44.032929,
-      "longitude": -123.121798,
+      "latitude": 44.030033,
+      "longitude": -123.123519,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.032929,-123.121798,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.030033,-123.123519,14z"
     },
     {
       "pin_number": 32,
       "point_id": "eugene_or_bcrf49_r2.00_W",
-      "latitude": 44.053394,
-      "longitude": -123.133604,
+      "latitude": 44.050498,
+      "longitude": -123.135325,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053394,-123.133604,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050498,-123.135325,14z"
     },
     {
       "pin_number": 33,
       "point_id": "eugene_or_bcrf49_r2.00_NW",
-      "latitude": 44.073866,
-      "longitude": -123.121818,
+      "latitude": 44.07097,
+      "longitude": -123.123539,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.073866,-123.121818,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.070970,-123.123539,14z"
     },
     {
       "pin_number": 34,
       "point_id": "eugene_or_bcrf49_r4.00_N",
-      "latitude": 44.111294,
-      "longitude": -123.093328,
+      "latitude": 44.108398,
+      "longitude": -123.095051,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.111294,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.108398,-123.095051,14z"
     },
     {
       "pin_number": 35,
       "point_id": "eugene_or_bcrf49_r4.00_NE",
-      "latitude": 44.094323,
-      "longitude": -123.036329,
+      "latitude": 44.091427,
+      "longitude": -123.038055,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.094323,-123.036329,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.091427,-123.038055,14z"
     },
     {
       "pin_number": 36,
       "point_id": "eugene_or_bcrf49_r4.00_E",
-      "latitude": 44.053373,
-      "longitude": -123.012775,
+      "latitude": 44.050477,
+      "longitude": -123.014502,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053373,-123.012775,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050477,-123.014502,14z"
     },
     {
       "pin_number": 37,
       "point_id": "eugene_or_bcrf49_r4.00_SE",
-      "latitude": 44.012451,
-      "longitude": -123.036408,
+      "latitude": 44.009555,
+      "longitude": -123.038134,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.012451,-123.036408,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.009555,-123.038134,14z"
     },
     {
       "pin_number": 38,
       "point_id": "eugene_or_bcrf49_r4.00_S",
-      "latitude": 43.995508,
-      "longitude": -123.093328,
+      "latitude": 43.992612,
+      "longitude": -123.095051,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.995508,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.992612,-123.095051,14z"
     },
     {
       "pin_number": 39,
       "point_id": "eugene_or_bcrf49_r4.00_SW",
-      "latitude": 44.012451,
-      "longitude": -123.150248,
+      "latitude": 44.009555,
+      "longitude": -123.151968,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.012451,-123.150248,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.009555,-123.151968,14z"
     },
     {
       "pin_number": 40,
       "point_id": "eugene_or_bcrf49_r4.00_W",
-      "latitude": 44.053373,
-      "longitude": -123.173881,
+      "latitude": 44.050477,
+      "longitude": -123.1756,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053373,-123.173881,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050477,-123.175600,14z"
     },
     {
       "pin_number": 41,
       "point_id": "eugene_or_bcrf49_r4.00_NW",
-      "latitude": 44.094323,
-      "longitude": -123.150327,
+      "latitude": 44.091427,
+      "longitude": -123.152047,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.094323,-123.150327,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.091427,-123.152047,14z"
     },
     {
       "pin_number": 42,
       "point_id": "eugene_or_bcrf49_r8.00_N",
-      "latitude": 44.169186,
-      "longitude": -123.093328,
+      "latitude": 44.16629,
+      "longitude": -123.095051,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.169186,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.166290,-123.095051,14z"
     },
     {
       "pin_number": 43,
       "point_id": "eugene_or_bcrf49_r8.00_NE",
-      "latitude": 44.135217,
-      "longitude": -122.979251,
+      "latitude": 44.132321,
+      "longitude": -122.98098,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.135217,-122.979251,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.132321,-122.980980,14z"
     },
     {
       "pin_number": 44,
       "point_id": "eugene_or_bcrf49_r8.00_E",
-      "latitude": 44.053288,
-      "longitude": -122.932223,
+      "latitude": 44.050392,
+      "longitude": -122.933954,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053288,-122.932223,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050392,-122.933954,14z"
     },
     {
       "pin_number": 45,
       "point_id": "eugene_or_bcrf49_r8.00_SE",
-      "latitude": 43.971472,
-      "longitude": -122.979566,
+      "latitude": 43.968576,
+      "longitude": -122.981295,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.971472,-122.979566,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.968576,-122.981295,14z"
     },
     {
       "pin_number": 46,
       "point_id": "eugene_or_bcrf49_r8.00_S",
-      "latitude": 43.937616,
-      "longitude": -123.093328,
+      "latitude": 43.93472,
+      "longitude": -123.095051,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.937616,-123.093328,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.934720,-123.095051,14z"
     },
     {
       "pin_number": 47,
       "point_id": "eugene_or_bcrf49_r8.00_SW",
-      "latitude": 43.971472,
-      "longitude": -123.20709,
+      "latitude": 43.968576,
+      "longitude": -123.208807,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.971472,-123.207090,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.968576,-123.208807,14z"
     },
     {
       "pin_number": 48,
       "point_id": "eugene_or_bcrf49_r8.00_W",
-      "latitude": 44.053288,
-      "longitude": -123.254433,
+      "latitude": 44.050392,
+      "longitude": -123.256148,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053288,-123.254433,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050392,-123.256148,14z"
     },
     {
       "pin_number": 49,
       "point_id": "eugene_or_bcrf49_r8.00_NW",
-      "latitude": 44.135217,
-      "longitude": -123.207405,
+      "latitude": 44.132321,
+      "longitude": -123.209122,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.135217,-123.207405,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.132321,-123.209122,14z"
     }
   ]
 }

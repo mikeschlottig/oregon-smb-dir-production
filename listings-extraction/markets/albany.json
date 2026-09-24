@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Linn County",
     "market_centroid": {
-      "latitude": 44.632176,
-      "longitude": -123.097011,
-      "location_description": "Albany business centre (median of the directory's Albany listing pins)"
+      "latitude": 44.636507,
+      "longitude": -123.105932,
+      "location_description": "Downtown Albany (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 721
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186475",
+      "display_name": "Albany, Linn County, Oregon, United States",
+      "miles_from_listing_median": 0.53,
+      "listing_pins_in_median": 721
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "albany_or_bcrf49_r0.00_centroid",
-      "latitude": 44.632176,
-      "longitude": -123.097011,
+      "latitude": 44.636507,
+      "longitude": -123.105932,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632176,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636507,-123.105932,14z"
     },
     {
       "pin_number": 2,
       "point_id": "albany_or_bcrf49_r0.25_N",
-      "latitude": 44.635794,
-      "longitude": -123.097011,
+      "latitude": 44.640125,
+      "longitude": -123.105932,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.635794,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.640125,-123.105932,14z"
     },
     {
       "pin_number": 3,
       "point_id": "albany_or_bcrf49_r0.25_NE",
-      "latitude": 44.634734,
-      "longitude": -123.093416,
+      "latitude": 44.639065,
+      "longitude": -123.102336,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.634734,-123.093416,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.639065,-123.102336,14z"
     },
     {
       "pin_number": 4,
       "point_id": "albany_or_bcrf49_r0.25_E",
-      "latitude": 44.632176,
-      "longitude": -123.091927,
+      "latitude": 44.636507,
+      "longitude": -123.100847,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632176,-123.091927,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636507,-123.100847,14z"
     },
     {
       "pin_number": 5,
       "point_id": "albany_or_bcrf49_r0.25_SE",
-      "latitude": 44.629617,
-      "longitude": -123.093416,
+      "latitude": 44.633948,
+      "longitude": -123.102337,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.629617,-123.093416,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.633948,-123.102337,14z"
     },
     {
       "pin_number": 6,
       "point_id": "albany_or_bcrf49_r0.25_S",
-      "latitude": 44.628558,
-      "longitude": -123.097011,
+      "latitude": 44.632889,
+      "longitude": -123.105932,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.628558,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632889,-123.105932,14z"
     },
     {
       "pin_number": 7,
       "point_id": "albany_or_bcrf49_r0.25_SW",
-      "latitude": 44.629617,
-      "longitude": -123.100606,
+      "latitude": 44.633948,
+      "longitude": -123.109527,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.629617,-123.100606,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.633948,-123.109527,14z"
     },
     {
       "pin_number": 8,
       "point_id": "albany_or_bcrf49_r0.25_W",
-      "latitude": 44.632176,
-      "longitude": -123.102095,
+      "latitude": 44.636507,
+      "longitude": -123.111017,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632176,-123.102095,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636507,-123.111017,14z"
     },
     {
       "pin_number": 9,
       "point_id": "albany_or_bcrf49_r0.25_NW",
-      "latitude": 44.634734,
-      "longitude": -123.100606,
+      "latitude": 44.639065,
+      "longitude": -123.109528,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.634734,-123.100606,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.639065,-123.109528,14z"
     },
     {
       "pin_number": 10,
       "point_id": "albany_or_bcrf49_r0.50_N",
-      "latitude": 44.639413,
-      "longitude": -123.097011,
+      "latitude": 44.643744,
+      "longitude": -123.105932,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.639413,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.643744,-123.105932,14z"
     },
     {
       "pin_number": 11,
       "point_id": "albany_or_bcrf49_r0.50_NE",
-      "latitude": 44.637293,
-      "longitude": -123.08982,
+      "latitude": 44.641624,
+      "longitude": -123.09874,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.637293,-123.089820,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.641624,-123.098740,14z"
     },
     {
       "pin_number": 12,
       "point_id": "albany_or_bcrf49_r0.50_E",
-      "latitude": 44.632176,
-      "longitude": -123.086842,
+      "latitude": 44.636507,
+      "longitude": -123.095762,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632176,-123.086842,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636507,-123.095762,14z"
     },
     {
       "pin_number": 13,
       "point_id": "albany_or_bcrf49_r0.50_SE",
-      "latitude": 44.627059,
-      "longitude": -123.089821,
+      "latitude": 44.63139,
+      "longitude": -123.098742,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.627059,-123.089821,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.631390,-123.098742,14z"
     },
     {
       "pin_number": 14,
       "point_id": "albany_or_bcrf49_r0.50_S",
-      "latitude": 44.624939,
-      "longitude": -123.097011,
+      "latitude": 44.62927,
+      "longitude": -123.105932,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.624939,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.629270,-123.105932,14z"
     },
     {
       "pin_number": 15,
       "point_id": "albany_or_bcrf49_r0.50_SW",
-      "latitude": 44.627059,
-      "longitude": -123.104201,
+      "latitude": 44.63139,
+      "longitude": -123.113122,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.627059,-123.104201,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.631390,-123.113122,14z"
     },
     {
       "pin_number": 16,
       "point_id": "albany_or_bcrf49_r0.50_W",
-      "latitude": 44.632176,
-      "longitude": -123.10718,
+      "latitude": 44.636507,
+      "longitude": -123.116102,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632176,-123.107180,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636507,-123.116102,14z"
     },
     {
       "pin_number": 17,
       "point_id": "albany_or_bcrf49_r0.50_NW",
-      "latitude": 44.637293,
-      "longitude": -123.104202,
+      "latitude": 44.641624,
+      "longitude": -123.113124,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.637293,-123.104202,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.641624,-123.113124,14z"
     },
     {
       "pin_number": 18,
       "point_id": "albany_or_bcrf49_r1.00_N",
-      "latitude": 44.646649,
-      "longitude": -123.097011,
+      "latitude": 44.65098,
+      "longitude": -123.105932,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.646649,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.650980,-123.105932,14z"
     },
     {
       "pin_number": 19,
       "point_id": "albany_or_bcrf49_r1.00_NE",
-      "latitude": 44.642409,
-      "longitude": -123.082627,
+      "latitude": 44.64674,
+      "longitude": -123.091547,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.642409,-123.082627,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.646740,-123.091547,14z"
     },
     {
       "pin_number": 20,
       "point_id": "albany_or_bcrf49_r1.00_E",
-      "latitude": 44.632174,
-      "longitude": -123.076673,
+      "latitude": 44.636505,
+      "longitude": -123.085592,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632174,-123.076673,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636505,-123.085592,14z"
     },
     {
       "pin_number": 21,
       "point_id": "albany_or_bcrf49_r1.00_SE",
-      "latitude": 44.621941,
-      "longitude": -123.082632,
+      "latitude": 44.626272,
+      "longitude": -123.091552,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.621941,-123.082632,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.626272,-123.091552,14z"
     },
     {
       "pin_number": 22,
       "point_id": "albany_or_bcrf49_r1.00_S",
-      "latitude": 44.617703,
-      "longitude": -123.097011,
+      "latitude": 44.622034,
+      "longitude": -123.105932,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.617703,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.622034,-123.105932,14z"
     },
     {
       "pin_number": 23,
       "point_id": "albany_or_bcrf49_r1.00_SW",
-      "latitude": 44.621941,
-      "longitude": -123.11139,
+      "latitude": 44.626272,
+      "longitude": -123.120312,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.621941,-123.111390,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.626272,-123.120312,14z"
     },
     {
       "pin_number": 24,
       "point_id": "albany_or_bcrf49_r1.00_W",
-      "latitude": 44.632174,
-      "longitude": -123.117349,
+      "latitude": 44.636505,
+      "longitude": -123.126272,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632174,-123.117349,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636505,-123.126272,14z"
     },
     {
       "pin_number": 25,
       "point_id": "albany_or_bcrf49_r1.00_NW",
-      "latitude": 44.642409,
-      "longitude": -123.111395,
+      "latitude": 44.64674,
+      "longitude": -123.120317,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.642409,-123.111395,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.646740,-123.120317,14z"
     },
     {
       "pin_number": 26,
       "point_id": "albany_or_bcrf49_r2.00_N",
-      "latitude": 44.661122,
-      "longitude": -123.097011,
+      "latitude": 44.665453,
+      "longitude": -123.105932,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.661122,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.665453,-123.105932,14z"
     },
     {
       "pin_number": 27,
       "point_id": "albany_or_bcrf49_r2.00_NE",
-      "latitude": 44.652641,
-      "longitude": -123.068239,
+      "latitude": 44.656972,
+      "longitude": -123.077157,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.652641,-123.068239,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.656972,-123.077157,14z"
     },
     {
       "pin_number": 28,
       "point_id": "albany_or_bcrf49_r2.00_E",
-      "latitude": 44.632169,
-      "longitude": -123.056335,
+      "latitude": 44.6365,
+      "longitude": -123.065253,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632169,-123.056335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636500,-123.065253,14z"
     },
     {
       "pin_number": 29,
       "point_id": "albany_or_bcrf49_r2.00_SE",
-      "latitude": 44.611704,
-      "longitude": -123.068259,
+      "latitude": 44.616035,
+      "longitude": -123.077178,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.611704,-123.068259,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.616035,-123.077178,14z"
     },
     {
       "pin_number": 30,
       "point_id": "albany_or_bcrf49_r2.00_S",
-      "latitude": 44.60323,
-      "longitude": -123.097011,
+      "latitude": 44.607561,
+      "longitude": -123.105932,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.603230,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.607561,-123.105932,14z"
     },
     {
       "pin_number": 31,
       "point_id": "albany_or_bcrf49_r2.00_SW",
-      "latitude": 44.611704,
-      "longitude": -123.125763,
+      "latitude": 44.616035,
+      "longitude": -123.134686,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.611704,-123.125763,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.616035,-123.134686,14z"
     },
     {
       "pin_number": 32,
       "point_id": "albany_or_bcrf49_r2.00_W",
-      "latitude": 44.632169,
-      "longitude": -123.137687,
+      "latitude": 44.6365,
+      "longitude": -123.146611,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632169,-123.137687,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636500,-123.146611,14z"
     },
     {
       "pin_number": 33,
       "point_id": "albany_or_bcrf49_r2.00_NW",
-      "latitude": 44.652641,
-      "longitude": -123.125783,
+      "latitude": 44.656972,
+      "longitude": -123.134707,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.652641,-123.125783,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.656972,-123.134707,14z"
     },
     {
       "pin_number": 34,
       "point_id": "albany_or_bcrf49_r4.00_N",
-      "latitude": 44.690069,
-      "longitude": -123.097011,
+      "latitude": 44.6944,
+      "longitude": -123.105932,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.690069,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.694400,-123.105932,14z"
     },
     {
       "pin_number": 35,
       "point_id": "albany_or_bcrf49_r4.00_NE",
-      "latitude": 44.673098,
-      "longitude": -123.039446,
+      "latitude": 44.677429,
+      "longitude": -123.048363,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.673098,-123.039446,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.677429,-123.048363,14z"
     },
     {
       "pin_number": 36,
       "point_id": "albany_or_bcrf49_r4.00_E",
-      "latitude": 44.632147,
-      "longitude": -123.015659,
+      "latitude": 44.636478,
+      "longitude": -123.024574,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632147,-123.015659,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636478,-123.024574,14z"
     },
     {
       "pin_number": 37,
       "point_id": "albany_or_bcrf49_r4.00_SE",
-      "latitude": 44.591225,
-      "longitude": -123.039527,
+      "latitude": 44.595556,
+      "longitude": -123.048444,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.591225,-123.039527,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.595556,-123.048444,14z"
     },
     {
       "pin_number": 38,
       "point_id": "albany_or_bcrf49_r4.00_S",
-      "latitude": 44.574283,
-      "longitude": -123.097011,
+      "latitude": 44.578614,
+      "longitude": -123.105932,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.574283,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.578614,-123.105932,14z"
     },
     {
       "pin_number": 39,
       "point_id": "albany_or_bcrf49_r4.00_SW",
-      "latitude": 44.591225,
-      "longitude": -123.154495,
+      "latitude": 44.595556,
+      "longitude": -123.16342,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.591225,-123.154495,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.595556,-123.163420,14z"
     },
     {
       "pin_number": 40,
       "point_id": "albany_or_bcrf49_r4.00_W",
-      "latitude": 44.632147,
-      "longitude": -123.178363,
+      "latitude": 44.636478,
+      "longitude": -123.18729,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632147,-123.178363,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636478,-123.187290,14z"
     },
     {
       "pin_number": 41,
       "point_id": "albany_or_bcrf49_r4.00_NW",
-      "latitude": 44.673098,
-      "longitude": -123.154576,
+      "latitude": 44.677429,
+      "longitude": -123.163501,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.673098,-123.154576,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.677429,-123.163501,14z"
     },
     {
       "pin_number": 42,
       "point_id": "albany_or_bcrf49_r8.00_N",
-      "latitude": 44.747961,
-      "longitude": -123.097011,
+      "latitude": 44.752292,
+      "longitude": -123.105932,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.747961,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.752292,-123.105932,14z"
     },
     {
       "pin_number": 43,
       "point_id": "albany_or_bcrf49_r8.00_NE",
-      "latitude": 44.713991,
-      "longitude": -122.981799,
+      "latitude": 44.718322,
+      "longitude": -122.990712,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.713991,-122.981799,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.718322,-122.990712,14z"
     },
     {
       "pin_number": 44,
       "point_id": "albany_or_bcrf49_r8.00_E",
-      "latitude": 44.632061,
-      "longitude": -122.934307,
+      "latitude": 44.636391,
+      "longitude": -122.943216,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632061,-122.934307,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636391,-122.943216,14z"
     },
     {
       "pin_number": 45,
       "point_id": "albany_or_bcrf49_r8.00_SE",
-      "latitude": 44.550246,
-      "longitude": -122.982124,
+      "latitude": 44.554577,
+      "longitude": -122.991036,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.550246,-122.982124,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.554577,-122.991036,14z"
     },
     {
       "pin_number": 46,
       "point_id": "albany_or_bcrf49_r8.00_S",
-      "latitude": 44.516391,
-      "longitude": -123.097011,
+      "latitude": 44.520722,
+      "longitude": -123.105932,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.516391,-123.097011,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.520722,-123.105932,14z"
     },
     {
       "pin_number": 47,
       "point_id": "albany_or_bcrf49_r8.00_SW",
-      "latitude": 44.550246,
-      "longitude": -123.211898,
+      "latitude": 44.554577,
+      "longitude": -123.220828,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.550246,-123.211898,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.554577,-123.220828,14z"
     },
     {
       "pin_number": 48,
       "point_id": "albany_or_bcrf49_r8.00_W",
-      "latitude": 44.632061,
-      "longitude": -123.259715,
+      "latitude": 44.636391,
+      "longitude": -123.268648,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.632061,-123.259715,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.636391,-123.268648,14z"
     },
     {
       "pin_number": 49,
       "point_id": "albany_or_bcrf49_r8.00_NW",
-      "latitude": 44.713991,
-      "longitude": -123.212223,
+      "latitude": 44.718322,
+      "longitude": -123.221152,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.713991,-123.212223,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.718322,-123.221152,14z"
     }
   ]
 }

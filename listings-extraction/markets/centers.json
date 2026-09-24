@@ -1,91 +1,124 @@
 {
   "albany": {
     "center": [
-      44.632176,
-      -123.097011
+      44.636507,
+      -123.105932
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 721
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186475",
+    "display_name": "Albany, Linn County, Oregon, United States",
+    "miles_from_listing_median": 0.53,
+    "listing_pins_in_median": 721
   },
   "ashland": {
     "center": [
-      42.198518,
-      -122.712445
+      42.197249,
+      -122.7154
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 676
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186688",
+    "display_name": "Ashland, Jackson County, Oregon, United States",
+    "miles_from_listing_median": 0.17,
+    "listing_pins_in_median": 676
   },
   "bend": {
     "center": [
-      44.057118,
-      -121.306335
+      44.058173,
+      -121.31531
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 998
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186761",
+    "display_name": "Bend, Deschutes County, Oregon, United States",
+    "miles_from_listing_median": 0.45,
+    "listing_pins_in_median": 998
   },
   "corvallis": {
     "center": [
-      44.567785,
-      -123.262777
+      44.564566,
+      -123.262044
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 537
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186476",
+    "display_name": "Corvallis, Benton County, Oregon, United States",
+    "miles_from_listing_median": 0.23,
+    "listing_pins_in_median": 537
   },
   "eugene": {
     "center": [
-      44.053401,
-      -123.093328
+      44.050505,
+      -123.095051
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 977
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186706",
+    "display_name": "Eugene, Lane County, Oregon, United States",
+    "miles_from_listing_median": 0.22,
+    "listing_pins_in_median": 977
   },
   "grants-pass": {
     "center": [
-      42.439268,
-      -123.324425
+      42.439371,
+      -123.327249
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 728
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/15478376",
+    "display_name": "Grants Pass, Josephine County, Oregon, United States",
+    "miles_from_listing_median": 0.14,
+    "listing_pins_in_median": 728
   },
   "klamath-falls": {
     "center": [
-      42.215454,
-      -121.765048
+      42.224867,
+      -121.78167
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 634
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186599",
+    "display_name": "Klamath Falls, Klamath County, Oregon, United States",
+    "miles_from_listing_median": 1.07,
+    "listing_pins_in_median": 634
   },
   "portland": {
     "center": [
-      45.520936,
-      -122.658382
+      45.520247,
+      -122.674194
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 1018
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186579",
+    "display_name": "Portland, Multnomah County, Oregon, United States",
+    "miles_from_listing_median": 0.77,
+    "listing_pins_in_median": 1018
   },
   "roseburg": {
     "center": [
-      43.217984,
-      -123.353191
+      43.216505,
+      -123.341738
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 701
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186345",
+    "display_name": "Roseburg, Douglas County, Oregon, United States",
+    "miles_from_listing_median": 0.59,
+    "listing_pins_in_median": 701
   },
   "salem": {
     "center": [
-      44.937199,
-      -123.030054
+      44.939157,
+      -123.033121
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 908
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186479",
+    "display_name": "Salem, Marion County, Oregon, United States",
+    "miles_from_listing_median": 0.2,
+    "listing_pins_in_median": 908
   },
   "springfield": {
     "center": [
-      44.053314,
-      -123.009704
+      44.046236,
+      -123.022029
     ],
-    "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-    "listing_pins_used": 490
+    "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+    "osm_object": "relation/186721",
+    "display_name": "Springfield, Lane County, Oregon, United States",
+    "miles_from_listing_median": 0.78,
+    "listing_pins_in_median": 490
   },
   "medford": {
     "center": [

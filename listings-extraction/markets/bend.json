@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Deschutes County",
     "market_centroid": {
-      "latitude": 44.057118,
-      "longitude": -121.306335,
-      "location_description": "Bend business centre (median of the directory's Bend listing pins)"
+      "latitude": 44.058173,
+      "longitude": -121.31531,
+      "location_description": "Downtown Bend (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 998
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186761",
+      "display_name": "Bend, Deschutes County, Oregon, United States",
+      "miles_from_listing_median": 0.45,
+      "listing_pins_in_median": 998
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "bend_or_bcrf49_r0.00_centroid",
-      "latitude": 44.057118,
-      "longitude": -121.306335,
+      "latitude": 44.058173,
+      "longitude": -121.31531,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057118,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058173,-121.315310,14z"
     },
     {
       "pin_number": 2,
       "point_id": "bend_or_bcrf49_r0.25_N",
-      "latitude": 44.060736,
-      "longitude": -121.306335,
+      "latitude": 44.061791,
+      "longitude": -121.31531,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060736,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.061791,-121.315310,14z"
     },
     {
       "pin_number": 3,
       "point_id": "bend_or_bcrf49_r0.25_NE",
-      "latitude": 44.059676,
-      "longitude": -121.302775,
+      "latitude": 44.060731,
+      "longitude": -121.31175,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.059676,-121.302775,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060731,-121.311750,14z"
     },
     {
       "pin_number": 4,
       "point_id": "bend_or_bcrf49_r0.25_E",
-      "latitude": 44.057118,
-      "longitude": -121.3013,
+      "latitude": 44.058173,
+      "longitude": -121.310275,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057118,-121.301300,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058173,-121.310275,14z"
     },
     {
       "pin_number": 5,
       "point_id": "bend_or_bcrf49_r0.25_SE",
-      "latitude": 44.054559,
-      "longitude": -121.302775,
+      "latitude": 44.055614,
+      "longitude": -121.31175,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.054559,-121.302775,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055614,-121.311750,14z"
     },
     {
       "pin_number": 6,
       "point_id": "bend_or_bcrf49_r0.25_S",
-      "latitude": 44.0535,
-      "longitude": -121.306335,
+      "latitude": 44.054555,
+      "longitude": -121.31531,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053500,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.054555,-121.315310,14z"
     },
     {
       "pin_number": 7,
       "point_id": "bend_or_bcrf49_r0.25_SW",
-      "latitude": 44.054559,
-      "longitude": -121.309895,
+      "latitude": 44.055614,
+      "longitude": -121.31887,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.054559,-121.309895,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055614,-121.318870,14z"
     },
     {
       "pin_number": 8,
       "point_id": "bend_or_bcrf49_r0.25_W",
-      "latitude": 44.057118,
-      "longitude": -121.31137,
+      "latitude": 44.058173,
+      "longitude": -121.320345,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057118,-121.311370,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058173,-121.320345,14z"
     },
     {
       "pin_number": 9,
       "point_id": "bend_or_bcrf49_r0.25_NW",
-      "latitude": 44.059676,
-      "longitude": -121.309895,
+      "latitude": 44.060731,
+      "longitude": -121.31887,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.059676,-121.309895,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060731,-121.318870,14z"
     },
     {
       "pin_number": 10,
       "point_id": "bend_or_bcrf49_r0.50_N",
-      "latitude": 44.064355,
-      "longitude": -121.306335,
+      "latitude": 44.06541,
+      "longitude": -121.31531,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.064355,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.065410,-121.315310,14z"
     },
     {
       "pin_number": 11,
       "point_id": "bend_or_bcrf49_r0.50_NE",
-      "latitude": 44.062235,
-      "longitude": -121.299214,
+      "latitude": 44.06329,
+      "longitude": -121.308189,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.062235,-121.299214,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063290,-121.308189,14z"
     },
     {
       "pin_number": 12,
       "point_id": "bend_or_bcrf49_r0.50_E",
-      "latitude": 44.057118,
-      "longitude": -121.296265,
+      "latitude": 44.058173,
+      "longitude": -121.30524,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057118,-121.296265,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058173,-121.305240,14z"
     },
     {
       "pin_number": 13,
       "point_id": "bend_or_bcrf49_r0.50_SE",
-      "latitude": 44.052001,
-      "longitude": -121.299215,
+      "latitude": 44.053056,
+      "longitude": -121.30819,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.052001,-121.299215,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053056,-121.308190,14z"
     },
     {
       "pin_number": 14,
       "point_id": "bend_or_bcrf49_r0.50_S",
-      "latitude": 44.049881,
-      "longitude": -121.306335,
+      "latitude": 44.050936,
+      "longitude": -121.31531,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.049881,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050936,-121.315310,14z"
     },
     {
       "pin_number": 15,
       "point_id": "bend_or_bcrf49_r0.50_SW",
-      "latitude": 44.052001,
-      "longitude": -121.313455,
+      "latitude": 44.053056,
+      "longitude": -121.32243,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.052001,-121.313455,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053056,-121.322430,14z"
     },
     {
       "pin_number": 16,
       "point_id": "bend_or_bcrf49_r0.50_W",
-      "latitude": 44.057118,
-      "longitude": -121.316405,
+      "latitude": 44.058173,
+      "longitude": -121.32538,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057118,-121.316405,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058173,-121.325380,14z"
     },
     {
       "pin_number": 17,
       "point_id": "bend_or_bcrf49_r0.50_NW",
-      "latitude": 44.062235,
-      "longitude": -121.313456,
+      "latitude": 44.06329,
+      "longitude": -121.322431,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.062235,-121.313456,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063290,-121.322431,14z"
     },
     {
       "pin_number": 18,
       "point_id": "bend_or_bcrf49_r1.00_N",
-      "latitude": 44.071591,
-      "longitude": -121.306335,
+      "latitude": 44.072646,
+      "longitude": -121.31531,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.071591,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.072646,-121.315310,14z"
     },
     {
       "pin_number": 19,
       "point_id": "bend_or_bcrf49_r1.00_NE",
-      "latitude": 44.067351,
-      "longitude": -121.292092,
+      "latitude": 44.068406,
+      "longitude": -121.301067,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.067351,-121.292092,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.068406,-121.301067,14z"
     },
     {
       "pin_number": 20,
       "point_id": "bend_or_bcrf49_r1.00_E",
-      "latitude": 44.057116,
-      "longitude": -121.286196,
+      "latitude": 44.058171,
+      "longitude": -121.29517,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057116,-121.286196,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058171,-121.295170,14z"
     },
     {
       "pin_number": 21,
       "point_id": "bend_or_bcrf49_r1.00_SE",
-      "latitude": 44.046883,
-      "longitude": -121.292097,
+      "latitude": 44.047938,
+      "longitude": -121.301071,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046883,-121.292097,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.047938,-121.301071,14z"
     },
     {
       "pin_number": 22,
       "point_id": "bend_or_bcrf49_r1.00_S",
-      "latitude": 44.042645,
-      "longitude": -121.306335,
+      "latitude": 44.0437,
+      "longitude": -121.31531,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.042645,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043700,-121.315310,14z"
     },
     {
       "pin_number": 23,
       "point_id": "bend_or_bcrf49_r1.00_SW",
-      "latitude": 44.046883,
-      "longitude": -121.320573,
+      "latitude": 44.047938,
+      "longitude": -121.329549,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046883,-121.320573,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.047938,-121.329549,14z"
     },
     {
       "pin_number": 24,
       "point_id": "bend_or_bcrf49_r1.00_W",
-      "latitude": 44.057116,
-      "longitude": -121.326474,
+      "latitude": 44.058171,
+      "longitude": -121.33545,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057116,-121.326474,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058171,-121.335450,14z"
     },
     {
       "pin_number": 25,
       "point_id": "bend_or_bcrf49_r1.00_NW",
-      "latitude": 44.067351,
-      "longitude": -121.320578,
+      "latitude": 44.068406,
+      "longitude": -121.329553,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.067351,-121.320578,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.068406,-121.329553,14z"
     },
     {
       "pin_number": 26,
       "point_id": "bend_or_bcrf49_r2.00_N",
-      "latitude": 44.086064,
-      "longitude": -121.306335,
+      "latitude": 44.087119,
+      "longitude": -121.31531,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.086064,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.087119,-121.315310,14z"
     },
     {
       "pin_number": 27,
       "point_id": "bend_or_bcrf49_r2.00_NE",
-      "latitude": 44.077583,
-      "longitude": -121.277844,
+      "latitude": 44.078638,
+      "longitude": -121.286818,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.077583,-121.277844,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.078638,-121.286818,14z"
     },
     {
       "pin_number": 28,
       "point_id": "bend_or_bcrf49_r2.00_E",
-      "latitude": 44.057111,
-      "longitude": -121.266056,
+      "latitude": 44.058166,
+      "longitude": -121.27503,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057111,-121.266056,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058166,-121.275030,14z"
     },
     {
       "pin_number": 29,
       "point_id": "bend_or_bcrf49_r2.00_SE",
-      "latitude": 44.036646,
-      "longitude": -121.277863,
+      "latitude": 44.037701,
+      "longitude": -121.286838,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.036646,-121.277863,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.037701,-121.286838,14z"
     },
     {
       "pin_number": 30,
       "point_id": "bend_or_bcrf49_r2.00_S",
-      "latitude": 44.028172,
-      "longitude": -121.306335,
+      "latitude": 44.029227,
+      "longitude": -121.31531,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.028172,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.029227,-121.315310,14z"
     },
     {
       "pin_number": 31,
       "point_id": "bend_or_bcrf49_r2.00_SW",
-      "latitude": 44.036646,
-      "longitude": -121.334807,
+      "latitude": 44.037701,
+      "longitude": -121.343782,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.036646,-121.334807,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.037701,-121.343782,14z"
     },
     {
       "pin_number": 32,
       "point_id": "bend_or_bcrf49_r2.00_W",
-      "latitude": 44.057111,
-      "longitude": -121.346614,
+      "latitude": 44.058166,
+      "longitude": -121.35559,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057111,-121.346614,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058166,-121.355590,14z"
     },
     {
       "pin_number": 33,
       "point_id": "bend_or_bcrf49_r2.00_NW",
-      "latitude": 44.077583,
-      "longitude": -121.334826,
+      "latitude": 44.078638,
+      "longitude": -121.343802,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.077583,-121.334826,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.078638,-121.343802,14z"
     },
     {
       "pin_number": 34,
       "point_id": "bend_or_bcrf49_r4.00_N",
-      "latitude": 44.115011,
-      "longitude": -121.306335,
+      "latitude": 44.116066,
+      "longitude": -121.31531,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.115011,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.116066,-121.315310,14z"
     },
     {
       "pin_number": 35,
       "point_id": "bend_or_bcrf49_r4.00_NE",
-      "latitude": 44.09804,
-      "longitude": -121.249333,
+      "latitude": 44.099095,
+      "longitude": -121.258307,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.098040,-121.249333,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.099095,-121.258307,14z"
     },
     {
       "pin_number": 36,
       "point_id": "bend_or_bcrf49_r4.00_E",
-      "latitude": 44.05709,
-      "longitude": -121.225777,
+      "latitude": 44.058145,
+      "longitude": -121.234751,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057090,-121.225777,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058145,-121.234751,14z"
     },
     {
       "pin_number": 37,
       "point_id": "bend_or_bcrf49_r4.00_SE",
-      "latitude": 44.016168,
-      "longitude": -121.249411,
+      "latitude": 44.017223,
+      "longitude": -121.258385,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.016168,-121.249411,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.017223,-121.258385,14z"
     },
     {
       "pin_number": 38,
       "point_id": "bend_or_bcrf49_r4.00_S",
-      "latitude": 43.999225,
-      "longitude": -121.306335,
+      "latitude": 44.00028,
+      "longitude": -121.31531,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.999225,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.000280,-121.315310,14z"
     },
     {
       "pin_number": 39,
       "point_id": "bend_or_bcrf49_r4.00_SW",
-      "latitude": 44.016168,
-      "longitude": -121.363259,
+      "latitude": 44.017223,
+      "longitude": -121.372235,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.016168,-121.363259,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.017223,-121.372235,14z"
     },
     {
       "pin_number": 40,
       "point_id": "bend_or_bcrf49_r4.00_W",
-      "latitude": 44.05709,
-      "longitude": -121.386893,
+      "latitude": 44.058145,
+      "longitude": -121.395869,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057090,-121.386893,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058145,-121.395869,14z"
     },
     {
       "pin_number": 41,
       "point_id": "bend_or_bcrf49_r4.00_NW",
-      "latitude": 44.09804,
-      "longitude": -121.363337,
+      "latitude": 44.099095,
+      "longitude": -121.372313,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.098040,-121.363337,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.099095,-121.372313,14z"
     },
     {
       "pin_number": 42,
       "point_id": "bend_or_bcrf49_r8.00_N",
-      "latitude": 44.172903,
-      "longitude": -121.306335,
+      "latitude": 44.173958,
+      "longitude": -121.31531,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.172903,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.173958,-121.315310,14z"
     },
     {
       "pin_number": 43,
       "point_id": "bend_or_bcrf49_r8.00_NE",
-      "latitude": 44.138934,
-      "longitude": -121.192251,
+      "latitude": 44.139989,
+      "longitude": -121.201224,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.138934,-121.192251,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.139989,-121.201224,14z"
     },
     {
       "pin_number": 44,
       "point_id": "bend_or_bcrf49_r8.00_E",
-      "latitude": 44.057005,
-      "longitude": -121.14522,
+      "latitude": 44.05806,
+      "longitude": -121.154192,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057005,-121.145220,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058060,-121.154192,14z"
     },
     {
       "pin_number": 45,
       "point_id": "bend_or_bcrf49_r8.00_SE",
-      "latitude": 43.975189,
-      "longitude": -121.192566,
+      "latitude": 43.976244,
+      "longitude": -121.201539,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.975189,-121.192566,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.976244,-121.201539,14z"
     },
     {
       "pin_number": 46,
       "point_id": "bend_or_bcrf49_r8.00_S",
-      "latitude": 43.941333,
-      "longitude": -121.306335,
+      "latitude": 43.942388,
+      "longitude": -121.31531,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.941333,-121.306335,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.942388,-121.315310,14z"
     },
     {
       "pin_number": 47,
       "point_id": "bend_or_bcrf49_r8.00_SW",
-      "latitude": 43.975189,
-      "longitude": -121.420104,
+      "latitude": 43.976244,
+      "longitude": -121.429081,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.975189,-121.420104,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.976244,-121.429081,14z"
     },
     {
       "pin_number": 48,
       "point_id": "bend_or_bcrf49_r8.00_W",
-      "latitude": 44.057005,
-      "longitude": -121.46745,
+      "latitude": 44.05806,
+      "longitude": -121.476428,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.057005,-121.467450,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058060,-121.476428,14z"
     },
     {
       "pin_number": 49,
       "point_id": "bend_or_bcrf49_r8.00_NW",
-      "latitude": 44.138934,
-      "longitude": -121.420419,
+      "latitude": 44.139989,
+      "longitude": -121.429396,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.138934,-121.420419,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.139989,-121.429396,14z"
     }
   ]
 }

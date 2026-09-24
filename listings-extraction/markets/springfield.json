@@ -8,9 +8,9 @@
     "state": "Oregon",
     "county": "Lane County",
     "market_centroid": {
-      "latitude": 44.053314,
-      "longitude": -123.009704,
-      "location_description": "Springfield business centre (median of the directory's Springfield listing pins)"
+      "latitude": 44.046236,
+      "longitude": -123.022029,
+      "location_description": "Downtown Springfield (OpenStreetMap city centre)"
     },
     "geometry_framework": "BCRF-49 (Logarithmic Radial Polar Frame)",
     "total_geo_pins": 49,
@@ -34,549 +34,552 @@
       "NW (315\u00b0)"
     ],
     "centroid_evidence": {
-      "method": "median of the city's Oregon-address listing pins (!3d!4d), lx.directory.centroids",
-      "listing_pins_used": 490
+      "method": "OpenStreetMap Nominatim city centre for '<city>, Oregon' (the city's downtown label point)",
+      "osm_object": "relation/186721",
+      "display_name": "Springfield, Lane County, Oregon, United States",
+      "miles_from_listing_median": 0.78,
+      "listing_pins_in_median": 490
     }
   },
   "geo_pins": [
     {
       "pin_number": 1,
       "point_id": "springfield_or_bcrf49_r0.00_centroid",
-      "latitude": 44.053314,
-      "longitude": -123.009704,
+      "latitude": 44.046236,
+      "longitude": -123.022029,
       "radius_miles": 0.0,
       "bearing_label": "CENTER",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053314,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046236,-123.022029,14z"
     },
     {
       "pin_number": 2,
       "point_id": "springfield_or_bcrf49_r0.25_N",
-      "latitude": 44.056932,
-      "longitude": -123.009704,
+      "latitude": 44.049854,
+      "longitude": -123.022029,
       "radius_miles": 0.25,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.056932,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.049854,-123.022029,14z"
     },
     {
       "pin_number": 3,
       "point_id": "springfield_or_bcrf49_r0.25_NE",
-      "latitude": 44.055872,
-      "longitude": -123.006144,
+      "latitude": 44.048794,
+      "longitude": -123.018469,
       "radius_miles": 0.25,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055872,-123.006144,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048794,-123.018469,14z"
     },
     {
       "pin_number": 4,
       "point_id": "springfield_or_bcrf49_r0.25_E",
-      "latitude": 44.053314,
-      "longitude": -123.004669,
+      "latitude": 44.046236,
+      "longitude": -123.016995,
       "radius_miles": 0.25,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053314,-123.004669,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046236,-123.016995,14z"
     },
     {
       "pin_number": 5,
       "point_id": "springfield_or_bcrf49_r0.25_SE",
-      "latitude": 44.050755,
-      "longitude": -123.006144,
+      "latitude": 44.043677,
+      "longitude": -123.01847,
       "radius_miles": 0.25,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050755,-123.006144,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043677,-123.018470,14z"
     },
     {
       "pin_number": 6,
       "point_id": "springfield_or_bcrf49_r0.25_S",
-      "latitude": 44.049696,
-      "longitude": -123.009704,
+      "latitude": 44.042618,
+      "longitude": -123.022029,
       "radius_miles": 0.25,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.049696,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.042618,-123.022029,14z"
     },
     {
       "pin_number": 7,
       "point_id": "springfield_or_bcrf49_r0.25_SW",
-      "latitude": 44.050755,
-      "longitude": -123.013264,
+      "latitude": 44.043677,
+      "longitude": -123.025588,
       "radius_miles": 0.25,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.050755,-123.013264,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043677,-123.025588,14z"
     },
     {
       "pin_number": 8,
       "point_id": "springfield_or_bcrf49_r0.25_W",
-      "latitude": 44.053314,
-      "longitude": -123.014739,
+      "latitude": 44.046236,
+      "longitude": -123.027063,
       "radius_miles": 0.25,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053314,-123.014739,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046236,-123.027063,14z"
     },
     {
       "pin_number": 9,
       "point_id": "springfield_or_bcrf49_r0.25_NW",
-      "latitude": 44.055872,
-      "longitude": -123.013264,
+      "latitude": 44.048794,
+      "longitude": -123.025589,
       "radius_miles": 0.25,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.055872,-123.013264,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048794,-123.025589,14z"
     },
     {
       "pin_number": 10,
       "point_id": "springfield_or_bcrf49_r0.50_N",
-      "latitude": 44.060551,
-      "longitude": -123.009704,
+      "latitude": 44.053473,
+      "longitude": -123.022029,
       "radius_miles": 0.5,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060551,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053473,-123.022029,14z"
     },
     {
       "pin_number": 11,
       "point_id": "springfield_or_bcrf49_r0.50_NE",
-      "latitude": 44.058431,
-      "longitude": -123.002583,
+      "latitude": 44.051353,
+      "longitude": -123.014909,
       "radius_miles": 0.5,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058431,-123.002583,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.051353,-123.014909,14z"
     },
     {
       "pin_number": 12,
       "point_id": "springfield_or_bcrf49_r0.50_E",
-      "latitude": 44.053314,
-      "longitude": -122.999635,
+      "latitude": 44.046236,
+      "longitude": -123.011961,
       "radius_miles": 0.5,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053314,-122.999635,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046236,-123.011961,14z"
     },
     {
       "pin_number": 13,
       "point_id": "springfield_or_bcrf49_r0.50_SE",
-      "latitude": 44.048197,
-      "longitude": -123.002585,
+      "latitude": 44.041119,
+      "longitude": -123.014911,
       "radius_miles": 0.5,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048197,-123.002585,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.041119,-123.014911,14z"
     },
     {
       "pin_number": 14,
       "point_id": "springfield_or_bcrf49_r0.50_S",
-      "latitude": 44.046077,
-      "longitude": -123.009704,
+      "latitude": 44.038999,
+      "longitude": -123.022029,
       "radius_miles": 0.5,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046077,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.038999,-123.022029,14z"
     },
     {
       "pin_number": 15,
       "point_id": "springfield_or_bcrf49_r0.50_SW",
-      "latitude": 44.048197,
-      "longitude": -123.016823,
+      "latitude": 44.041119,
+      "longitude": -123.029147,
       "radius_miles": 0.5,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.048197,-123.016823,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.041119,-123.029147,14z"
     },
     {
       "pin_number": 16,
       "point_id": "springfield_or_bcrf49_r0.50_W",
-      "latitude": 44.053314,
-      "longitude": -123.019773,
+      "latitude": 44.046236,
+      "longitude": -123.032097,
       "radius_miles": 0.5,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053314,-123.019773,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046236,-123.032097,14z"
     },
     {
       "pin_number": 17,
       "point_id": "springfield_or_bcrf49_r0.50_NW",
-      "latitude": 44.058431,
-      "longitude": -123.016825,
+      "latitude": 44.051353,
+      "longitude": -123.029149,
       "radius_miles": 0.5,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.058431,-123.016825,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.051353,-123.029149,14z"
     },
     {
       "pin_number": 18,
       "point_id": "springfield_or_bcrf49_r1.00_N",
-      "latitude": 44.067787,
-      "longitude": -123.009704,
+      "latitude": 44.060709,
+      "longitude": -123.022029,
       "radius_miles": 1.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.067787,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.060709,-123.022029,14z"
     },
     {
       "pin_number": 19,
       "point_id": "springfield_or_bcrf49_r1.00_NE",
-      "latitude": 44.063547,
-      "longitude": -122.995462,
+      "latitude": 44.056469,
+      "longitude": -123.007788,
       "radius_miles": 1.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063547,-122.995462,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.056469,-123.007788,14z"
     },
     {
       "pin_number": 20,
       "point_id": "springfield_or_bcrf49_r1.00_E",
-      "latitude": 44.053312,
-      "longitude": -122.989566,
+      "latitude": 44.046234,
+      "longitude": -123.001893,
       "radius_miles": 1.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053312,-122.989566,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046234,-123.001893,14z"
     },
     {
       "pin_number": 21,
       "point_id": "springfield_or_bcrf49_r1.00_SE",
-      "latitude": 44.043079,
-      "longitude": -122.995467,
+      "latitude": 44.036001,
+      "longitude": -123.007793,
       "radius_miles": 1.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043079,-122.995467,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.036001,-123.007793,14z"
     },
     {
       "pin_number": 22,
       "point_id": "springfield_or_bcrf49_r1.00_S",
-      "latitude": 44.038841,
-      "longitude": -123.009704,
+      "latitude": 44.031763,
+      "longitude": -123.022029,
       "radius_miles": 1.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.038841,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.031763,-123.022029,14z"
     },
     {
       "pin_number": 23,
       "point_id": "springfield_or_bcrf49_r1.00_SW",
-      "latitude": 44.043079,
-      "longitude": -123.023941,
+      "latitude": 44.036001,
+      "longitude": -123.036265,
       "radius_miles": 1.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.043079,-123.023941,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.036001,-123.036265,14z"
     },
     {
       "pin_number": 24,
       "point_id": "springfield_or_bcrf49_r1.00_W",
-      "latitude": 44.053312,
-      "longitude": -123.029842,
+      "latitude": 44.046234,
+      "longitude": -123.042165,
       "radius_miles": 1.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053312,-123.029842,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046234,-123.042165,14z"
     },
     {
       "pin_number": 25,
       "point_id": "springfield_or_bcrf49_r1.00_NW",
-      "latitude": 44.063547,
-      "longitude": -123.023946,
+      "latitude": 44.056469,
+      "longitude": -123.03627,
       "radius_miles": 1.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.063547,-123.023946,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.056469,-123.036270,14z"
     },
     {
       "pin_number": 26,
       "point_id": "springfield_or_bcrf49_r2.00_N",
-      "latitude": 44.08226,
-      "longitude": -123.009704,
+      "latitude": 44.075182,
+      "longitude": -123.022029,
       "radius_miles": 2.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.082260,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.075182,-123.022029,14z"
     },
     {
       "pin_number": 27,
       "point_id": "springfield_or_bcrf49_r2.00_NE",
-      "latitude": 44.073779,
-      "longitude": -122.981214,
+      "latitude": 44.066701,
+      "longitude": -122.993543,
       "radius_miles": 2.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.073779,-122.981214,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.066701,-122.993543,14z"
     },
     {
       "pin_number": 28,
       "point_id": "springfield_or_bcrf49_r2.00_E",
-      "latitude": 44.053307,
-      "longitude": -122.969428,
+      "latitude": 44.046229,
+      "longitude": -122.981757,
       "radius_miles": 2.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053307,-122.969428,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046229,-122.981757,14z"
     },
     {
       "pin_number": 29,
       "point_id": "springfield_or_bcrf49_r2.00_SE",
-      "latitude": 44.032842,
-      "longitude": -122.981234,
+      "latitude": 44.025764,
+      "longitude": -122.993563,
       "radius_miles": 2.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.032842,-122.981234,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.025764,-122.993563,14z"
     },
     {
       "pin_number": 30,
       "point_id": "springfield_or_bcrf49_r2.00_S",
-      "latitude": 44.024368,
-      "longitude": -123.009704,
+      "latitude": 44.01729,
+      "longitude": -123.022029,
       "radius_miles": 2.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.024368,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.017290,-123.022029,14z"
     },
     {
       "pin_number": 31,
       "point_id": "springfield_or_bcrf49_r2.00_SW",
-      "latitude": 44.032842,
-      "longitude": -123.038174,
+      "latitude": 44.025764,
+      "longitude": -123.050495,
       "radius_miles": 2.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.032842,-123.038174,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.025764,-123.050495,14z"
     },
     {
       "pin_number": 32,
       "point_id": "springfield_or_bcrf49_r2.00_W",
-      "latitude": 44.053307,
-      "longitude": -123.04998,
+      "latitude": 44.046229,
+      "longitude": -123.062301,
       "radius_miles": 2.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053307,-123.049980,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046229,-123.062301,14z"
     },
     {
       "pin_number": 33,
       "point_id": "springfield_or_bcrf49_r2.00_NW",
-      "latitude": 44.073779,
-      "longitude": -123.038194,
+      "latitude": 44.066701,
+      "longitude": -123.050515,
       "radius_miles": 2.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.073779,-123.038194,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.066701,-123.050515,14z"
     },
     {
       "pin_number": 34,
       "point_id": "springfield_or_bcrf49_r4.00_N",
-      "latitude": 44.111207,
-      "longitude": -123.009704,
+      "latitude": 44.104129,
+      "longitude": -123.022029,
       "radius_miles": 4.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.111207,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.104129,-123.022029,14z"
     },
     {
       "pin_number": 35,
       "point_id": "springfield_or_bcrf49_r4.00_NE",
-      "latitude": 44.094236,
-      "longitude": -122.952705,
+      "latitude": 44.087158,
+      "longitude": -122.965037,
       "radius_miles": 4.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.094236,-122.952705,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.087158,-122.965037,14z"
     },
     {
       "pin_number": 36,
       "point_id": "springfield_or_bcrf49_r4.00_E",
-      "latitude": 44.053286,
-      "longitude": -122.929151,
+      "latitude": 44.046208,
+      "longitude": -122.941486,
       "radius_miles": 4.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053286,-122.929151,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046208,-122.941486,14z"
     },
     {
       "pin_number": 37,
       "point_id": "springfield_or_bcrf49_r4.00_SE",
-      "latitude": 44.012364,
-      "longitude": -122.952784,
+      "latitude": 44.005286,
+      "longitude": -122.965116,
       "radius_miles": 4.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.012364,-122.952784,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.005286,-122.965116,14z"
     },
     {
       "pin_number": 38,
       "point_id": "springfield_or_bcrf49_r4.00_S",
-      "latitude": 43.995421,
-      "longitude": -123.009704,
+      "latitude": 43.988343,
+      "longitude": -123.022029,
       "radius_miles": 4.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.995421,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.988343,-123.022029,14z"
     },
     {
       "pin_number": 39,
       "point_id": "springfield_or_bcrf49_r4.00_SW",
-      "latitude": 44.012364,
-      "longitude": -123.066624,
+      "latitude": 44.005286,
+      "longitude": -123.078942,
       "radius_miles": 4.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.012364,-123.066624,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.005286,-123.078942,14z"
     },
     {
       "pin_number": 40,
       "point_id": "springfield_or_bcrf49_r4.00_W",
-      "latitude": 44.053286,
-      "longitude": -123.090257,
+      "latitude": 44.046208,
+      "longitude": -123.102572,
       "radius_miles": 4.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053286,-123.090257,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046208,-123.102572,14z"
     },
     {
       "pin_number": 41,
       "point_id": "springfield_or_bcrf49_r4.00_NW",
-      "latitude": 44.094236,
-      "longitude": -123.066703,
+      "latitude": 44.087158,
+      "longitude": -123.079021,
       "radius_miles": 4.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.094236,-123.066703,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.087158,-123.079021,14z"
     },
     {
       "pin_number": 42,
       "point_id": "springfield_or_bcrf49_r8.00_N",
-      "latitude": 44.169099,
-      "longitude": -123.009704,
+      "latitude": 44.162021,
+      "longitude": -123.022029,
       "radius_miles": 8.0,
       "bearing_label": "N",
       "bearing_degrees": 0.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.169099,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.162021,-123.022029,14z"
     },
     {
       "pin_number": 43,
       "point_id": "springfield_or_bcrf49_r8.00_NE",
-      "latitude": 44.13513,
-      "longitude": -122.895628,
+      "latitude": 44.128052,
+      "longitude": -122.907966,
       "radius_miles": 8.0,
       "bearing_label": "NE",
       "bearing_degrees": 45.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.135130,-122.895628,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.128052,-122.907966,14z"
     },
     {
       "pin_number": 44,
       "point_id": "springfield_or_bcrf49_r8.00_E",
-      "latitude": 44.053201,
-      "longitude": -122.848599,
+      "latitude": 44.046123,
+      "longitude": -122.860943,
       "radius_miles": 8.0,
       "bearing_label": "E",
       "bearing_degrees": 90.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053201,-122.848599,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046123,-122.860943,14z"
     },
     {
       "pin_number": 45,
       "point_id": "springfield_or_bcrf49_r8.00_SE",
-      "latitude": 43.971385,
-      "longitude": -122.895943,
+      "latitude": 43.964307,
+      "longitude": -122.908281,
       "radius_miles": 8.0,
       "bearing_label": "SE",
       "bearing_degrees": 135.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.971385,-122.895943,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.964307,-122.908281,14z"
     },
     {
       "pin_number": 46,
       "point_id": "springfield_or_bcrf49_r8.00_S",
-      "latitude": 43.937529,
-      "longitude": -123.009704,
+      "latitude": 43.930451,
+      "longitude": -123.022029,
       "radius_miles": 8.0,
       "bearing_label": "S",
       "bearing_degrees": 180.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.937529,-123.009704,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.930451,-123.022029,14z"
     },
     {
       "pin_number": 47,
       "point_id": "springfield_or_bcrf49_r8.00_SW",
-      "latitude": 43.971385,
-      "longitude": -123.123465,
+      "latitude": 43.964307,
+      "longitude": -123.135777,
       "radius_miles": 8.0,
       "bearing_label": "SW",
       "bearing_degrees": 225.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.971385,-123.123465,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@43.964307,-123.135777,14z"
     },
     {
       "pin_number": 48,
       "point_id": "springfield_or_bcrf49_r8.00_W",
-      "latitude": 44.053201,
-      "longitude": -123.170809,
+      "latitude": 44.046123,
+      "longitude": -123.183115,
       "radius_miles": 8.0,
       "bearing_label": "W",
       "bearing_degrees": 270.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.053201,-123.170809,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.046123,-123.183115,14z"
     },
     {
       "pin_number": 49,
       "point_id": "springfield_or_bcrf49_r8.00_NW",
-      "latitude": 44.13513,
-      "longitude": -123.12378,
+      "latitude": 44.128052,
+      "longitude": -123.136092,
       "radius_miles": 8.0,
       "bearing_label": "NW",
       "bearing_degrees": 315.0,
       "viewport_zoom": 14,
-      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.135130,-123.123780,14z"
+      "target_maps_url_template": "https://www.google.com/maps/search/{encoded_query}/@44.128052,-123.136092,14z"
     }
   ]
 }

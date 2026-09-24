@@ -61,7 +61,9 @@ const relatedLinks = getBusinessRelatedLinks({
   baseUrl: siteUrl,
 });
 
-const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=42.5432168,-123.3884123";
+// Open in Google Maps goes to the business's own Google listing (its record's googleUrl), not a pin.
+const mapsListing = "https://www.google.com/maps/place/Daley+Organics/@42.5432168,-123.3884123,17z/data=!3m1!4b1!4m6!3m5!1s0x54c574367c852899:0x2759c1273f2ee03d!8m2!3d42.5432168!4d-123.3884123!16s%2Fg%2F11dfpgb9cn";
+const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=Daley%20Organics%2C%208470%20Monument%20Dr%2C%20Grants%20Pass%2C%20OR%2097526";
 const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=15&output=embed";
 ---
 
@@ -99,7 +101,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=
             8470 Monument Dr, Grants Pass, OR 97526
           </p>
           <a
-            href={mapsDirections}
+            href={mapsListing}
             target="_blank"
             rel="noreferrer"
             class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"

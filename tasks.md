@@ -197,3 +197,35 @@ Decisions recorded, not open questions:
 - [x] P10.16 Index `rar/` with codebase-intel, then write an analysis of how the scrapers
   and extractors are composed (stealth rules as they appear in code). The proof set is
   550K records over 8 days, with 0 bot flags. Done: `docs/RAR-SCRAPER-COMPOSITION-ANALYSIS.md`; index at `codebase-intel-toolkit/indexes/rar/`.
+
+## P11 — Maps listing links, out-of-state gate, JSON-LD rubric, listings extractor (Mike, 2026-09-24)
+
+Root cause (verified): P10.4 (`d40a6fb`) made `parseLatLng` match 9,780 listings, and
+`[businessSlug].astro:64-70` prefers coordinates over `googleUrl`, so the "Directions"
+link became `maps/dir/?destination=lat,lng` — a bare pin — instead of the Google listing.
+9,765 of 10,167 records carry a real `/maps/place/` URL.
+P10.4's "116 out of state" set is mostly wrong: the pin `46.423669,-129.942709` is a
+Pacific-Ocean placeholder Google gives service-area businesses with no public address.
+
+### Maps + Oregon gate (ship first)
+- [x] P11.1 `src/lib/oregon-location.ts`: one pure rule. Block when the street address
+  names another state; or when there is no address AND the pin is on land outside Oregon
+  AND the phone area code is not 503/971/541/458. Everything else publishes.
+- [x] P11.2 Wire it into `prepareBusinessesForPublication`; blocked listings do not render.
+- [x] P11.3 Listing pages link to `googleUrl` (the place listing) whenever it exists;
+  coordinates only when there is no googleUrl. Same check on the hand-written pages.
+- [x] P11.4 `scripts/audit-oregon-location.mjs` imports the same `.ts` rule; writes
+  `reports/out-of-state-<date>.csv`, marks same-name Oregon records (multi-location), and
+  a chain queue for the extractor. 301 every blocked URL to its city/industry page.
+- [ ] P11.5 Build, count in `dist/`: zero `maps/dir/?api=1&destination=` where googleUrl
+  exists; blocked slugs absent. Deploy, curl live, commit.
+
+### JSON-LD rubric
+- [ ] P11.6 `scripts/jsonld-audit/`: per-type rubric (schema.org + Google rich-result
+  required/recommended), every page in `dist/` validated; report flags missing,
+  misconfigured, and lists fully valid pages.
+
+### Listings extractor
+- [ ] P11.7 `listings-extraction/`: stealth Maps extractor for one URL or a queue, built
+  from the patterns in `docs/RAR-SCRAPER-COMPOSITION-ANALYSIS.md`. No edits to `rar/`.
+  Not run against Google without Mike's go.

@@ -62,12 +62,23 @@ const premium = getPremiumListing(
 const banner = getListingBanner(city.slug, business.slug);
 
 const coords = premium?.geo ?? parseLatLng(business.googleUrl);
-const mapsDirections = coords
-  ? `https://www.google.com/maps/dir/?api=1&destination=${coords.lat},${coords.lng}`
+const mapsSearch = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  `${business.title} ${business.address ?? city.name}`,
+)}`;
+// "Open in Google Maps" opens the business's own Google listing — the place URL the record
+// was collected from — never a bare coordinate pin (the P10.4 regression).
+const mapsListing = business.googleUrl ?? mapsSearch;
+// Directions by name + street address, which Google resolves to the listing. No street
+// address (a service-area business): its listing, which carries its own directions.
+// Coordinates only when there is no listing at all.
+const mapsDirections = business.address
+  ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+      `${business.title}, ${business.address}`,
+    )}`
   : business.googleUrl ??
-    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      `${business.title} ${business.address ?? city.name}`,
-    )}`;
+    (coords
+      ? `https://www.google.com/maps/dir/?api=1&destination=${coords.lat},${coords.lng}`
+      : mapsSearch);
 
 const embedSrc = coords
   ? `https://www.google.com/maps?q=${coords.lat},${coords.lng}&hl=en&z=15&output=embed`
@@ -277,6 +288,7 @@ const relatedLinks = getBusinessRelatedLinks({
       city={city}
       industry={industry}
       premium={premium}
+      mapsListing={mapsListing}
       mapsDirections={mapsDirections}
       embedSrc={embedSrc}
       related={related}
@@ -301,7 +313,7 @@ const relatedLinks = getBusinessRelatedLinks({
             {business.address ?? `${city.name}, OR`}
           </p>
           <a
-            href={mapsDirections}
+            href={mapsListing}
             target="_blank"
             rel="noreferrer"
             class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"

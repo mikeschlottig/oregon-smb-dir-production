@@ -320,3 +320,20 @@ Range, pin in Portland). List: `reports/maps-pins-outside-oregon-2026-09-23.csv`
 **Result:** wrong. 25 reports → 12/12/1; page 3 had 40 words and failed C13 THIN.
 Spreading evenly over the fewest pages under the cap (9/8/8) passed with 0 failures.
 **Rule:** a per-page maximum is a cap, not a fill target — balance the pages.
+
+## H23 — Oregon location gate replaces the bounding-box pin gate — CLOSED, prediction right, then tightened
+
+**Prediction (written before code):** rule A (street address names another state) blocks
+31 records; rule B (no address + pin on land outside Oregon + non-Oregon or missing area
+code) blocks ~14; total ~45, down from P10.4's 116. The 13 ocean-placeholder pins
+(`46.423669,-129.942709`) with no address stay published. After the link fix, `dist/`
+has zero `maps/dir/?api=1&destination=` links on listings that carry a `googleUrl`.
+**Result:** first run 31 + 14 = 45, exactly as predicted (and as the independent Polars
+profile). Reading the 45 rows showed 6 of the 14 had **no phone** — one signal, not two
+(e.g. "Corvallis Plumbing Company, LLC" with a Wyoming pin). Rule tightened: a pin-only
+case publishes as `pin-away-uncorroborated` and goes on the extractor queue. Final:
+39 blocked (31 address + 8 pin-and-phone), 6 unresolved, 37 unique URLs 301'd.
+Link check in `dist/`: 0 coordinate `maps/dir` links (any `&` encoding; the positive
+control — name+address `maps/dir` — matched 8,777 pages, so the zero is real).
+**Rule:** a placeholder value (ocean pin) looks like evidence; a block needs two
+independent signals, and a missing signal is not a second signal.

@@ -1,5 +1,6 @@
 import ratingEvidence from "./rating-evidence.json";
 import type { Business, RatingObservation, WebsiteStatus } from "./businesses";
+import { oregonLocation } from "../lib/oregon-location";
 
 type RatingEvidence = {
   schemaVersion: number;
@@ -162,9 +163,13 @@ const duplicateKeys = (businesses: Business[]): Set<string> => {
 export const prepareBusinessesForPublication = (
   businesses: Business[],
 ): Business[] => {
-  const blockedKeys = duplicateKeys(businesses);
+  // A same-name business in another state is not this listing. Blocked URLs 301 to their
+  // city/industry page (scripts/audit-oregon-location.mjs --redirects). Filtered before the
+  // duplicate check so an out-of-state twin cannot knock out the Oregon record.
+  const inOregon = businesses.filter((business) => oregonLocation(business).publish);
+  const blockedKeys = duplicateKeys(inOregon);
 
-  return businesses
+  return inOregon
     .filter((business) => {
       const slugKey = `slug:${normalize(business.slug || business.title)}`;
       const identityKey = `identity:${[

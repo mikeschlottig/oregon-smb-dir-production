@@ -57,7 +57,9 @@ const relatedLinks = getBusinessRelatedLinks({
   baseUrl: siteUrl,
 });
 
-const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=42.5536,-123.3884";
+// The Maps button goes to the record's own Google place (googleUrl), not a bare pin.
+const mapsListing = "https://www.google.com/maps/place/744+NW+Bellevue+Pl,+Grants+Pass,+OR+97526/@42.5536,-123.3884,17z/";
+const mapsDirections = "https://www.google.com/maps/dir/?api=1&destination=744%20NW%20Bellevue%20Place%2C%20Grants%20Pass%2C%20OR%2097526";
 const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&output=embed";
 ---
 
@@ -94,7 +96,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&out
             744 NW Bellevue Place, Grants Pass, OR 97526
           </p>
           <a
-            href={mapsDirections}
+            href={mapsListing}
             target="_blank"
             rel="noreferrer"
             class="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"

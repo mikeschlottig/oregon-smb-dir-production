@@ -2165,11 +2165,11 @@
     "address": "5553 NE Glisan St #200, Portland, OR 97213",
     "phone": "(503) 331-1322",
     "email": "northtabordental@gmail.com",
-    "rating": null,
-    "reviews": null,
+    "rating": 4.7,
+    "reviews": 31,
     "category": "Dentist",
     "website": "https://northtabordental.com/",
-    "googleUrl": "https://www.google.com/maps/search/?api=1&query=North%20Tabor%20Dental&query_place_id=ChIJ_0ls_-CglVQRa_ANkBDgrv0",
+    "googleUrl": "https://www.google.com/maps/place/North+Tabor+Dental/@45.5267308,-122.6065191,17z/data=!3m1!4b1!4m6!3m5!1s0x5495a0e0ff6c49ff:0xfdaee010900df06b!8m2!3d45.5267308!4d-122.6065191!16s%2Fg%2F11tfyqvdh6",
     "verification": {
       "status": "contact_details_checked",
       "scope": [

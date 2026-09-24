@@ -1,5 +1,10 @@
 # oregon-smb-directory — the Astro source for oregonsmbdirectory.com
 
+> **To change anything on the site, start with
+> [`DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md`](DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md).**
+> It covers listings, verification, ratings, cities, industries, service categories,
+> blog, reports, Best Of, config, and the new-listing checklist.
+
 <!-- projectstd:begin id=facts v=1 -->
 | | |
 |---|---|

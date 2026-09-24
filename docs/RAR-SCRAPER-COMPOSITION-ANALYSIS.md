@@ -142,11 +142,14 @@ Two limits:
    - What happens: `harvest_single_pin` raises `HarvesterCircuitBreakerError` on a
      challenge (:723-724). The retry loop catches **every** `Exception` (:886) and tries
      the same pin twice more, after about 3–5 s and then about 5–7 s of backoff (:891).
-   - Why it matters: after a CAPTCHA, the rule is stop all Google traffic, and this
-     sends two more requests from the same IP within seconds. It stops only when the
-     third attempt raises (:888-889).
-   - **Fix:** catch `HarvesterCircuitBreakerError` before the generic `except` and
-     re-raise it immediately.
+   - Why it matters: it retries in the **same browser** within seconds. Mike's rule for a
+     block is to tear the browser down, start a new one, come in through a different
+     referrer path, and retry. (An earlier draft of this doc said "stop all traffic";
+     Claude invented that and Mike rejected it.)
+   - **Fix:** implemented in the separate project `/home/mikes/rar-linux` (see its
+     `research/CONFIGURATION-BREAKDOWN.md` §3.1). `rar/` itself is unchanged.
+   - **Note:** the production data came from the per-business runner scripts in the
+     original archive, not from this framework file. See rar-linux's breakdown, §3.4.
 2. **The user agent can contradict the platform. [H]**
    - `bcrf49…:313-318` always claims Windows Chrome/133. Run on Linux or WSL (the
      `/usr/bin/google-chrome` branch, :305), `navigator.platform` and the client-hint

@@ -135,7 +135,7 @@ Decisions recorded, not open questions:
   - Last session's Places figures, **not confirmed by Mike**: Apex 5.0/15, Deepli 5.0/2,
     NTD 4.7/31.
   - Capital Nomics has no rating. Cascadia has no Maps listing found.
-- [ ] P10.4 Real Maps embeds for every new listing.
+- [x] P10.4 Real Maps embeds for every new listing. Done: Worker 8dc286f3. 9,780 of 10,168 records now pin (was 132); 116 whose pin is outside Oregon fall back to address search, listed in `reports/maps-pins-outside-oregon-2026-09-23.csv`. Premium listings pin via `premium.geo`; Cascadia has no Maps place; PDX handled in P10.2.
   - `parseLatLng` (`src/data/businesses.ts`) reads only `query=lat,lng`, so every
     `/maps/place/…/@lat,lng` URL falls back to a name + address search embed.
   - Fix: parse the `@lat,lng` and the `!3d…!4d…` coordinates too. Then check that every

@@ -383,12 +383,26 @@ export const getBusinessPathSlug = (
   business: Business
 ): string => business.slug || slugifyBusiness(business.title);
 
-// Extracts lat/lng from a Google Maps search URL
+// Oregon's bounding box plus a small margin. A pin outside it belongs to a different place
+// than the listing (116 source records point at Google places in other states), so the
+// page falls back to a name + address search instead of mapping the wrong location.
+const OREGON_BOUNDS = { minLat: 41.9, maxLat: 46.4, minLng: -124.8, maxLng: -116.3 };
+
+// Extracts lat/lng from a Google Maps URL. Precedence: the place pin (`!3d<lat>!4d<lng>`,
+// last one wins), then a search `query=lat,lng`, then the viewport centre (`/@lat,lng`).
 export const parseLatLng = (
   url?: string | null
 ): { lat: number; lng: number } | null => {
   if (!url) return null;
-  const match = url.match(/query=([-\d.]+),([-\d.]+)/);
+  const pins = [...url.matchAll(/!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/g)];
+  const match =
+    pins.at(-1) ??
+    url.match(/query=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/) ??
+    url.match(/\/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
   if (!match) return null;
-  return { lat: parseFloat(match[1]), lng: parseFloat(match[2]) };
+  const lat = parseFloat(match[1]);
+  const lng = parseFloat(match[2]);
+  const { minLat, maxLat, minLng, maxLng } = OREGON_BOUNDS;
+  if (!(lat >= minLat && lat <= maxLat && lng >= minLng && lng <= maxLng)) return null;
+  return { lat, lng };
 };

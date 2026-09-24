@@ -1,5 +1,6 @@
 import { ExternalLink, MapPin, Star, BadgeCheck } from "lucide-react";
 import { getBusinessPathSlug, type Business } from "@/data/businesses";
+import { ratingAsOf } from "@/lib/rating-display";
 
 type Props = {
   business: Business;
@@ -64,12 +65,12 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
           </div>
           {typeof business.reviews === "number" && (
             <span className="font-mono text-sm" style={{ color: 'var(--c-sage)' }}>
-              ({business.reviews.toLocaleString()} reviews)
+              ({business.reviews.toLocaleString()} reviews){business.ratingObservation ? "*" : ""}
             </span>
           )}
           {business.ratingObservation && (
             <span className="text-xs" style={{ color: 'var(--c-sage)' }}>
-              observed {new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(business.ratingObservation.observedAt))}
+              {ratingAsOf(business.ratingObservation.observedAt)}
             </span>
           )}
         </div>

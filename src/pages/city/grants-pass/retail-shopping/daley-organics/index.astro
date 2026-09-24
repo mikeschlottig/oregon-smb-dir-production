@@ -5,6 +5,7 @@ import RelatedLinks from "@/components/RelatedLinks.astro";
 import { businessSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
+import { ratingAsOf } from "@/lib/rating-display";
 import { getBusinesses } from "@/data/businesses";
 import { getListingBanner } from "@/data/listingBanners";
 import { cities } from "@/data/cities";
@@ -32,6 +33,7 @@ const crumbs = trail([
 const record = businesses.find(b => b.slug === "daley-organics")!;
 const isVerified = record.verification != null;
 const hasRating = typeof record.rating === "number" && typeof record.reviews === "number";
+const ratingFootnote = hasRating && record.ratingObservation ? ratingAsOf(record.ratingObservation.observedAt) : null;
 const banner = getListingBanner("grants-pass", "daley-organics");
 
 const schemas = [
@@ -70,8 +72,8 @@ const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=
     title="Daley Organics"
     tagline="Premium organic soil, compost, and fertilizer blended on Monument Drive — fueling Rogue Valley gardens and farms for over a decade."
     stats={[
-      { value: hasRating ? record.rating!.toFixed(1) : "N/A", label: "Rating" },
-      { value: hasRating ? record.reviews!.toLocaleString() : "N/A", label: "Reviews" },
+      { value: hasRating ? `${record.rating!.toFixed(1)} ★${ratingFootnote ? "*" : ""}` : "N/A", label: "Rating" },
+      { value: hasRating ? `${record.reviews!.toLocaleString()}${ratingFootnote ? "*" : ""}` : "N/A", label: "Reviews" },
       { value: isVerified ? "Verified" : "Editorial", label: "Record status" },
     ]}
     badge={isVerified ? (record.websiteStatus === "confirmed" ? "Verified · confirmed website" : "Verified") : "Editorial profile"}
@@ -277,6 +279,12 @@ const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=
       )}
     </aside>
   </section>
+
+  {ratingFootnote && (
+    <section class="container mx-auto px-4 pb-8">
+      <p class="text-xs text-muted-foreground">{ratingFootnote}</p>
+    </section>
+  )}
 
   <!-- Related Links -->
   <RelatedLinks links={relatedLinks} heading="Related" />

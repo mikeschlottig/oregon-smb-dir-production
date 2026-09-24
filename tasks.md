@@ -145,7 +145,7 @@ Decisions recorded, not open questions:
   Rewrite the `method` and store `verifiedAt` with the Pacific offset.
 
 ### Rating display, site-wide
-- [ ] P10.6 Remove the "observed <Mon YYYY>" wording from every business page:
+- [x] P10.6 Remove the "observed <Mon YYYY>" wording from every business page: Done: Worker 75c42294; 0 pages in dist match "observed <Mon YYYY>". Daley reads `*as of 9/23/2026` (Pacific) — Mike to confirm vs 9/24.
   - `src/pages/city/[citySlug]/[industrySlug]/[businessSlug].astro` lines ~89 (label),
     ~157 ("observed through"), ~317 ("The source record showed … when observed"), and
     ~438 ("Rating evidence is tied to provider record … observed").

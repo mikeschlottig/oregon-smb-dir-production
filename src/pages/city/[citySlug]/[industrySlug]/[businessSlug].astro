@@ -19,6 +19,7 @@ import { qualifyBusinessForService } from "@/data/serviceSelectionPolicies";
 import { businessSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
+import { ratingAsOf, ratingLabel } from "@/lib/rating-display";
 import {
   ExternalLink,
   Globe,
@@ -84,11 +85,12 @@ const description = premium?.seo.description ?? `${business.title} is a ${
 } serving ${city.name}, Oregon. ${industry.description}.`;
 
 const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
-const observationDate = business.ratingObservation
-  ? new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(
-      new Date(business.ratingObservation.observedAt),
-    )
-  : null;
+// One footnote at the bottom of the listing dates the rating; every rating shown on the
+// page carries the matching asterisk (src/lib/rating-display.ts).
+const ratingFootnote =
+  typeof business.rating === "number" && business.ratingObservation
+    ? ratingAsOf(business.ratingObservation.observedAt)
+    : null;
 // Statuses that mean the directory itself checked the record. Anything else (disputed,
 // closed, a pending claim) keeps its literal status so it is never dressed up as verified.
 const verifiedStatuses = new Set([
@@ -122,8 +124,8 @@ const stats = premium && !hasRating
       { value: String(premium.services.length), label: "Services listed" },
     ]
   : [
-      { value: hasRating ? business.rating!.toFixed(1) : "N/A", label: "Rating" },
-      { value: typeof business.reviews === "number" ? business.reviews.toLocaleString() : "N/A", label: "Reviews" },
+      { value: hasRating ? `${business.rating!.toFixed(1)} ★${ratingFootnote ? "*" : ""}` : "N/A", label: "Rating" },
+      { value: typeof business.reviews === "number" ? `${business.reviews.toLocaleString()}${ratingFootnote ? "*" : ""}` : "N/A", label: "Reviews" },
       { value: verificationLabel, label: "Record status" },
     ];
 
@@ -154,7 +156,7 @@ const peerContext = [
       ? `It is the only ${city.name} record in this industry filed under ${business.category.toLowerCase()}.`
       : "",
   typeof business.rating === "number" && ratedPeers.length > 1
-    ? `${ratedPeers.length} of the ${peers.length} carry a rating that clears the publication gate; ${betterRated} of them rate higher than this one${observationDate ? `, measured against source records observed through ${observationDate}` : ""}.`
+    ? `${ratedPeers.length} of the ${peers.length} carry a rating that clears the publication gate; ${betterRated} of them rate higher than this one.`
     : `Ratings are published only where the value, review count, observation date and record identity agree with the source evidence.`,
   isVerified
     ? `${business.verification!.ownerParticipated ? "The business requested this listing, and the" : "The"} directory checked its ${business.websiteStatus === "confirmed" ? "website and " : ""}contact details on ${new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }).format(new Date(business.verification!.verifiedAt))}; confirm hours and pricing with the business directly.`
@@ -313,9 +315,7 @@ const relatedLinks = getBusinessRelatedLinks({
         <h2 class="font-serif text-2xl font-bold mb-3">About {business.title}</h2>
         <p class="text-muted-foreground leading-relaxed">
           {business.title} is listed as a {business.category?.toLowerCase() ?? industry.name.toLowerCase()} serving the {city.name} area. {industry.description}. {typeof business.rating === "number"
-            ? typeof business.reviews === "number"
-              ? `The source record showed a ${business.rating.toFixed(1)}-star rating across ${business.reviews.toLocaleString()} reviews${observationDate ? ` when observed in ${observationDate}` : ""}.`
-              : `The source record showed a ${business.rating.toFixed(1)}-star rating.`
+            ? `Rated ${ratingLabel(business.rating, business.reviews)}.`
             : "Contact them directly for service details, availability, and quotes."}
         </p>
       </div>
@@ -434,9 +434,6 @@ const relatedLinks = getBusinessRelatedLinks({
           {isVerified
             ? `Verified listing. ${business.verification!.method}`
             : "This is a source-observed directory record, not an owner-confirmed profile unless a specific verification event appears above."}
-          {business.ratingObservation && (
-            <> Rating evidence is tied to provider record <code>{business.ratingObservation.sourceRecordId}</code> and was observed {observationDate}.</>
-          )}
         </p>
         <a href="/contact/?topic=listing-correction" class="inline-flex mt-3 text-accent hover:underline">
           Request a correction
@@ -499,6 +496,12 @@ const relatedLinks = getBusinessRelatedLinks({
     </p>
   </section>
   </Fragment>
+  )}
+
+  {ratingFootnote && (
+    <section class="container mx-auto px-4 pb-8">
+      <p class="text-xs text-muted-foreground">{ratingFootnote}</p>
+    </section>
   )}
 
   <!-- Related Links (automatic internal linking) -->

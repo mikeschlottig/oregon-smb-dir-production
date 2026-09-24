@@ -194,6 +194,6 @@ Decisions recorded, not open questions:
   site, commit with the Worker version.
 
 ### Research
-- [ ] P10.16 Index `rar/` with codebase-intel, then write an analysis of how the scrapers
+- [x] P10.16 Index `rar/` with codebase-intel, then write an analysis of how the scrapers
   and extractors are composed (stealth rules as they appear in code). The proof set is
-  550K records over 8 days, with 0 bot flags.
+  550K records over 8 days, with 0 bot flags. Done: `docs/RAR-SCRAPER-COMPOSITION-ANALYSIS.md`; index at `codebase-intel-toolkit/indexes/rar/`.

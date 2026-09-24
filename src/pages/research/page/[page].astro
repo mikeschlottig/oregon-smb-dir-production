@@ -1,0 +1,54 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import Pagination from "@/components/Pagination.astro";
+import ResearchGrid from "@/components/ResearchGrid.astro";
+import { getResearchPages, researchPageMeta } from "@/lib/research-pages";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+
+export async function getStaticPaths() {
+  const { reports, totalPages, pages } = await getResearchPages();
+  // Page 1 is /research/ itself; only pages 2..N get a /page/N/ route.
+  return pages.slice(1).map((p) => ({
+    params: { page: String(p.page) },
+    props: { currentPage: p.page, totalPages, total: reports.length, start: p.start, end: p.end, items: p.items },
+  }));
+}
+
+const { currentPage, totalPages, total, start, end, items } = Astro.props;
+const { title, description } = researchPageMeta(currentPage, totalPages, start, end, total);
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([
+    { name: "Research", path: "/research/" },
+    { name: `Page ${currentPage}` },
+]);
+
+const schemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: title,
+    url: `${siteUrl}/research/page/${currentPage}/`,
+    description,
+  },
+  breadcrumbListSchema(crumbs, siteUrl),
+];
+---
+<SiteLayout title={title} description={description} schemas={schemas}>
+  <section class="bg-primary text-primary-foreground pt-32 pb-14 px-4">
+    <div class="container mx-auto max-w-4xl text-center">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} tone="inverse" class="mb-6" />
+      <p class="text-gold text-sm uppercase tracking-widest mb-3">Research Library · Page {currentPage} of {totalPages}</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">
+        Deep Dives Across <span class="italic text-gold">Oregon</span>
+      </h1>
+      <p class="text-primary-foreground/80 max-w-2xl mx-auto">Reports {start + 1}–{end} of {total}.</p>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <ResearchGrid reports={items} />
+    <Pagination baseUrl="/research/" currentPage={currentPage} totalPages={totalPages} />
+  </section>
+</SiteLayout>

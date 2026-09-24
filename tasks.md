@@ -176,7 +176,7 @@ Decisions recorded, not open questions:
   - Change it to the newest **2–3 posts** from the MDX collection, sorted by `date`.
     **Never more than 3.**
   - Show Mike what it looks like before shipping.
-- [ ] P10.10 Research index pagination and SEO.
+- [x] P10.10 Research index pagination and SEO. Done: Worker 1bc184c1. 25 reports spread 9/8/8 (filling to 12 left a 1-card page that failed C13 THIN at 40 words); unique titles/descriptions, self canonicals, rel prev/next links, pages 2–3 in sitemap.
   - `src/pages/research/index.astro` renders all reports on one page.
   - Change it to **max 12 per page**, with `/research/page/<n>/` pages, the same pattern
     as `blog/page/[page].astro` and `src/lib/paginate.ts`.

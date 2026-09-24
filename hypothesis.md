@@ -273,3 +273,27 @@ URL of the page carrying it — so this class cannot recur silently.
 2. Render clear location, industry, and type badges (`[Medford]`, `[Construction]`, `[Business]`) on every search result item.
 3. Detect city names in user queries to automatically prioritize or filter results matching the targeted city.
 
+
+## H20 — Owner-verified listings render without badge or link because the evidence objects are missing — **OPEN**
+
+**Prediction:** LeverageAI and Daley Organics carry only the legacy `verified: true`, which
+`sanitizeBusiness` drops. They have no `verification.evidenceIds` and no confirmed
+`websiteValidation`, so the gate strips the badge and the website. Adding both objects
+through a patch batch will make "Verified" and the website link appear on the dynamic
+pages. The two dedicated pages will stay unbadged until they read the record, because they
+hard-code `verified: false`.
+
+**Baseline (live, 2026-09-23):** "Verified" count is 0 on all five Daley and LeverageAI
+URLs. Daley's construction page and both category indexes carry no website link.
+
+**Result for Daley Organics (2026-09-23):** held. After the patch batch
+`requests/listings/2026-09-23-daley-organics.json`, the dated rating supplement, and
+record-driven stats on the dedicated page, live curl on Worker version `9abf79e7` shows:
+
+| page | Verified | site links | banner | ratingValue 4.6 | count 10 |
+|---|---|---|---|---|---|
+| construction page | 3 | 2 | 1 | 1 | 1 |
+| retail page | 2 | 2 | 1 | 1 | 1 |
+
+The dedicated page stayed "Editorial profile" until it read the record, as predicted.
+LeverageAI and PDX are not done yet.

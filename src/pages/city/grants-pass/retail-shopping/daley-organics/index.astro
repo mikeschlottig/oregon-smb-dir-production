@@ -6,6 +6,7 @@ import { businessSchema } from "@/lib/schema";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import { getBusinesses } from "@/data/businesses";
+import { getListingBanner } from "@/data/listingBanners";
 import { cities } from "@/data/cities";
 import { industries } from "@/data/industries";
 import { ExternalLink, Globe, MapPin, Phone, Star, ArrowLeft, Building2 } from "lucide-react";
@@ -26,18 +27,26 @@ const crumbs = trail([
   { name: "Daley Organics" },
 ]);
 
+// Rating, verification and website come from the gated listing record, so this page
+// shows exactly what the publication gates allow and cannot drift from the data.
+const record = businesses.find(b => b.slug === "daley-organics")!;
+const isVerified = record.verification != null;
+const hasRating = typeof record.rating === "number" && typeof record.reviews === "number";
+const banner = getListingBanner("grants-pass", "daley-organics");
+
 const schemas = [
   businessSchema({
     title: "Daley Organics",
     address: "8470 Monument Dr, Grants Pass, OR 97526",
     phone: "(541) 441-0510",
-    website: "https://daleyorganics.com",
-    rating: null,
-    reviews: null,
+    website: record.website,
+    websiteStatus: record.websiteStatus,
+    rating: record.rating,
+    reviews: record.reviews,
+    ratingObservation: record.ratingObservation,
+    verification: record.verification,
     category: "Organic Garden Supply",
     slug: "daley-organics",
-    claimed: false,
-    verified: false,
   }, city, industry, siteUrl),
   breadcrumbListSchema(crumbs, siteUrl),
 ];
@@ -61,11 +70,12 @@ const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=
     title="Daley Organics"
     tagline="Premium organic soil, compost, and fertilizer blended on Monument Drive — fueling Rogue Valley gardens and farms for over a decade."
     stats={[
-      { value: "Grants Pass", label: "Location" },
-      { value: "Editorial", label: "Profile type" },
-      { value: "2013", label: "Est." }
+      { value: hasRating ? record.rating!.toFixed(1) : "N/A", label: "Rating" },
+      { value: hasRating ? record.reviews!.toLocaleString() : "N/A", label: "Reviews" },
+      { value: isVerified ? "Verified" : "Editorial", label: "Record status" },
     ]}
-    badge="Editorial profile"
+    badge={isVerified ? (record.websiteStatus === "confirmed" ? "Verified · confirmed website" : "Verified") : "Editorial profile"}
+    image={banner}
   />
 
   <section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">

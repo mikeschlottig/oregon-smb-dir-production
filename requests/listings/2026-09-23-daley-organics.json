@@ -1,0 +1,91 @@
+{
+  "batch": "2026-09-23-daley-organics",
+  "source": "Mike Schlottig in chat, 2026-09-23: verify, link https://daleyorganics.com, 4.6 stars / 10 reviews, banner image",
+  "checkedAt": "2026-09-24T01:16:00Z",
+  "listings": [
+    {
+      "mode": "patch",
+      "tier": "verified",
+      "shard": "grants-pass__construction-home-services",
+      "record": {
+        "slug": "daley-organics",
+        "website": "https://daleyorganics.com",
+        "rating": 4.6,
+        "reviews": 10,
+        "verification": {
+          "status": "directory_reviewed",
+          "scope": [
+            "business_name",
+            "address",
+            "phone",
+            "website",
+            "rating"
+          ],
+          "method": "Directory operator review on 2026-09-23: name, address, and phone match the Google Business Profile; the website resolves and its title and phone match the listing; rating and review count supplied by the operator from the profile.",
+          "verifiedAt": "2026-09-24T01:16:00Z",
+          "ownerParticipated": false,
+          "evidenceIds": [
+            "operator:mike@leverageai.network@2026-09-23",
+            "gbp:0x54c574367c852899:0x2759c1273f2ee03d@2026-09-23",
+            "web:daleyorganics.com@2026-09-23",
+            "file:reports/maps-evidence/2026-09-23_daley-organics.png"
+          ]
+        },
+        "websiteValidation": {
+          "url": "https://daleyorganics.com",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-24T01:01:00Z",
+          "confirmationSources": [
+            "operator_confirmed",
+            "site_title_match",
+            "site_phone_match"
+          ],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "mode": "patch",
+      "tier": "verified",
+      "shard": "grants-pass__retail-shopping",
+      "record": {
+        "slug": "daley-organics",
+        "website": "https://daleyorganics.com",
+        "rating": 4.6,
+        "reviews": 10,
+        "verification": {
+          "status": "directory_reviewed",
+          "scope": [
+            "business_name",
+            "address",
+            "phone",
+            "website",
+            "rating"
+          ],
+          "method": "Directory operator review on 2026-09-23: name, address, and phone match the Google Business Profile; the website resolves and its title and phone match the listing; rating and review count supplied by the operator from the profile.",
+          "verifiedAt": "2026-09-24T01:16:00Z",
+          "ownerParticipated": false,
+          "evidenceIds": [
+            "operator:mike@leverageai.network@2026-09-23",
+            "gbp:0x54c574367c852899:0x2759c1273f2ee03d@2026-09-23",
+            "web:daleyorganics.com@2026-09-23",
+            "file:reports/maps-evidence/2026-09-23_daley-organics.png"
+          ]
+        },
+        "websiteValidation": {
+          "url": "https://daleyorganics.com",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-09-24T01:01:00Z",
+          "confirmationSources": [
+            "operator_confirmed",
+            "site_title_match",
+            "site_phone_match"
+          ],
+          "riskFlags": []
+        }
+      }
+    }
+  ]
+}

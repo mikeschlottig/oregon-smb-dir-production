@@ -12,6 +12,7 @@ import {
 
 import { hasDedicatedPage } from "@/data/dedicatedPages";
 import { getPremiumListing } from "@/data/premiumListings";
+import { getListingBanner } from "@/data/listingBanners";
 import PremiumListing from "@/components/PremiumListing.astro";
 import { serviceCategories } from "@/data/serviceCategories";
 import { qualifyBusinessForService } from "@/data/serviceSelectionPolicies";
@@ -56,6 +57,8 @@ const premium = getPremiumListing(
   industry.slug,
   getBusinessPathSlug(city.slug, industry.slug, business),
 );
+
+const banner = getListingBanner(city.slug, business.slug);
 
 const coords = premium?.geo ?? parseLatLng(business.googleUrl);
 const mapsDirections = coords
@@ -263,6 +266,7 @@ const relatedLinks = getBusinessRelatedLinks({
     tagline={premium?.banner.statement ?? `${business.category || industry.name} in ${city.name}, Oregon`}
     stats={stats}
     badge={badge}
+    image={banner}
   />
 
   {premium ? (

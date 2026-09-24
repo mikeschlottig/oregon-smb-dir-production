@@ -55,7 +55,11 @@ for (const file of businessFiles) {
 
     if (typeof business.rating === "number" && typeof business.reviews === "number") {
       const recordId = providerRecordId(business.googleUrl);
-      const expected = recordId ? evidence.observations[recordId] : null;
+      // Same lookup as publication-gates.ts: newest supplement first, then the base import.
+      const expected = recordId
+        ? ([...(evidence.supplements ?? [])].reverse().find((s) => s.observations[recordId])
+            ?.observations[recordId] ?? evidence.observations[recordId])
+        : null;
       if (expected === `${business.rating}|${business.reviews}`) {
         summary.ratingsAccepted += 1;
       } else {

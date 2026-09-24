@@ -6,9 +6,26 @@ type RatingEvidence = {
   source: RatingObservation["source"];
   observedAt: string;
   observations: Record<string, string>;
+  /** Later observations, each carrying its own date so a new rating is never backdated. */
+  supplements?: {
+    source: RatingObservation["source"];
+    observedAt: string;
+    reportedBy: string;
+    observations: Record<string, string>;
+  }[];
 };
 
 const evidence = ratingEvidence as RatingEvidence;
+
+/** The newest observation for a provider record: a supplement wins over the base import. */
+const findObservation = (sourceRecordId: string) => {
+  for (const supplement of [...(evidence.supplements ?? [])].reverse()) {
+    const value = supplement.observations[sourceRecordId];
+    if (value) return { value, source: supplement.source, observedAt: supplement.observedAt };
+  }
+  const value = evidence.observations[sourceRecordId];
+  return value ? { value, source: evidence.source, observedAt: evidence.observedAt } : null;
+};
 
 const suspiciousTlds = new Set([
   "buzz",
@@ -57,12 +74,12 @@ const buildRatingObservation = (business: Business): RatingObservation | null =>
   const sourceRecordId = getProviderRecordId(business.googleUrl);
   if (!sourceRecordId) return null;
 
-  const expected = evidence.observations[sourceRecordId];
-  if (expected !== `${business.rating}|${business.reviews}`) return null;
+  const observed = findObservation(sourceRecordId);
+  if (observed?.value !== `${business.rating}|${business.reviews}`) return null;
 
   return {
-    source: evidence.source,
-    observedAt: evidence.observedAt,
+    source: observed.source,
+    observedAt: observed.observedAt,
     sourceRecordId,
     ratingValue: business.rating,
     reviewCount: business.reviews,

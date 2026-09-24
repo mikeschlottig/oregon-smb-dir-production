@@ -17,9 +17,11 @@ interface Props {
   stats: StatItem[];
   badge?: string;
   county?: string;
+  /** Owner-supplied banner shown beside the title (src/data/listingBanners.ts). */
+  image?: { src: string; alt: string; width: number; height: number };
 }
 
-const { breadcrumb, eyebrow, title, tagline, stats, badge, county } = Astro.props;
+const { breadcrumb, eyebrow, title, tagline, stats, badge, county, image } = Astro.props;
 ---
 
 <section class="relative" style={`background-color: var(--c-pine);`}>
@@ -42,6 +44,8 @@ const { breadcrumb, eyebrow, title, tagline, stats, badge, county } = Astro.prop
       </ol>
     </nav>
 
+    <div class={image ? "grid gap-10 md:grid-cols-2 md:items-center" : ""}>
+    <div>
     <!-- Eyebrow with optional badge -->
     <div class="flex items-center gap-3 mb-3">
       <p class="eyebrow text-sm uppercase tracking-widest" style={`color: var(--c-copper);`}>
@@ -76,6 +80,20 @@ const { breadcrumb, eyebrow, title, tagline, stats, badge, county } = Astro.prop
           </span>
         </div>
       ))}
+    </div>
+    </div>
+
+    {image && (
+      <img
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        loading="eager"
+        decoding="async"
+        class="w-full h-auto rounded-xl shadow-lg"
+      />
+    )}
     </div>
   </div>
 </section>

@@ -88,3 +88,16 @@ assets-only, `./dist`.
 - [ ] P8.1 `npm run build` + `verify-site.mjs` green
 - [ ] P8.2 `wrangler deploy`
 - [ ] P8.3 Post-deploy verification against the live origin, same checks
+
+## P9 — Owner listing fixes (2026-09-23, Mike's request)
+
+- [ ] P9.1 LeverageAI + Daley Organics (both shards): verification event and confirmed
+      websiteValidation, so the gate publishes the badge and website link
+- [ ] P9.2 Dedicated pages (leverageai, retail daley-organics) read badge and rating from
+      the sanitized record instead of hard-coding `verified: false`
+- [x] P9.3 Rating evidence gets dated supplements; gate and audit read them
+- [ ] P9.4 PDX Fingerprinting: one Portland record `pdx-fingerprinting` with both locations,
+      4.9/344 on the Hillsboro feature ID, and Notary and Translation H2 sections;
+      the two old URLs redirect 301
+- [x] P9.5 Daley Organics: verified, website `https://daleyorganics.com`, 4.6 from 10 reviews (Mike), banner — both pages live, Worker version `9abf79e7`
+- [ ] P9.6 Build, check pages, deploy, and curl live: badge, link, rating, H2s, redirects

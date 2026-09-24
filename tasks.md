@@ -170,7 +170,7 @@ Decisions recorded, not open questions:
   - Cities are already links (checked live, 12 anchors). Leave them.
 
 ### Home page and content
-- [ ] P10.9 Home page blog teaser reads the real blog.
+- [x] P10.9 Home page blog teaser reads the real blog. Done: Worker 05041665 — shipped on Mike's "ship it" without the preview step; review https://oregonsmbdirectory.com/#cities (Newsroom). All 55 posts share date 2026-04-13, so "newest" is a tie and the three shown are the same three that head /blog/ (Albany, Ashland, Aurora). Real dates in frontmatter would fix the order.
   - Today `src/pages/index.astro` takes `blogPosts[0]` from `src/data/blog-posts.json`, a
     separate legacy file, not `src/content/blog/`.
   - Change it to the newest **2–3 posts** from the MDX collection, sorted by `date`.

@@ -297,3 +297,26 @@ record-driven stats on the dedicated page, live curl on Worker version `9abf79e7
 
 The dedicated page stayed "Editorial profile" until it read the record, as predicted.
 LeverageAI and PDX are not done yet.
+
+**Result for LeverageAI and PDX (2026-09-23 evening):** held. LeverageAI patch batch +
+record-driven dedicated page: live badge "Verified · confirmed website" (Worker `5fa0b6f2`).
+PDX merged to one record with a dedicated page (Worker `1a4695e3`). **H20 closed.**
+
+## H21 — Most map embeds fall back to a name search because the pin parser reads one URL shape — **CLOSED, held with a surprise**
+
+**Prediction:** `parseLatLng` reads only `query=lat,lng`, so almost every listing uses a
+name + address search embed. Reading `!3d/!4d` and `/@lat,lng` will pin most of them.
+
+**Result:** 132 → 9,896 of 10,168 records parse. **Surprise:** 116 of the new pins lie
+outside Oregon (Kansas, Nevada, British Columbia…) — Google places that are not the listed
+business. Those are gated back to the address search by an Oregon bounding box, leaving
+9,780 pinned (derived twice: 9,896 − 9,780 = 116 = 115 place pins + 1 query/viewport).
+The `!3d` pin beat the `/@` viewport where both exist (Xcelent: viewport at 9z in the Coast
+Range, pin in Portland). List: `reports/maps-pins-outside-oregon-2026-09-23.csv`.
+
+## H22 — Research pagination at 12 per page — **CLOSED, prediction wrong once**
+
+**Prediction:** 12 per page with no tail-folding passes the build.
+**Result:** wrong. 25 reports → 12/12/1; page 3 had 40 words and failed C13 THIN.
+Spreading evenly over the fewest pages under the cap (9/8/8) passed with 0 failures.
+**Rule:** a per-page maximum is a cap, not a fill target — balance the pages.

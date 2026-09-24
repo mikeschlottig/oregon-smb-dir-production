@@ -26,7 +26,7 @@ interface CollectionPageSchema {
     itemListElement: Array<{
       "@type": "ListItem";
       position: number;
-      item: Record<string, unknown>;
+      item: ListBusinessItem;
     }>;
   };
   [key: string]: unknown;
@@ -46,6 +46,18 @@ interface LocalBusinessSchema {
   review?: never;
   description?: string;
   [key: string]: unknown;
+}
+
+/** A business inside an ItemList. Same rating ban as LocalBusinessSchema (verify-site.mjs C18). */
+interface ListBusinessItem {
+  "@type": "LocalBusiness";
+  name: string;
+  url: string;
+  address?: PostalAddress;
+  telephone?: string;
+  description?: string;
+  aggregateRating?: never;
+  review?: never;
 }
 
 interface BlogPostingSchema {
@@ -251,7 +263,7 @@ export function industryPageSchema(
         "@type": "ItemList",
         numberOfItems: businesses.length,
         itemListElement: businesses.map((b, i) => {
-          const item: Record<string, unknown> = {
+          const item: ListBusinessItem = {
             "@type": "LocalBusiness",
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
@@ -423,7 +435,7 @@ export function servicePageSchema(
         "@type": "ItemList",
         numberOfItems: businesses.length,
         itemListElement: businesses.map((b, i) => {
-          const item: Record<string, unknown> = {
+          const item: ListBusinessItem = {
             "@type": "LocalBusiness",
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,

@@ -61,6 +61,20 @@ const cases = [
     pick: () => findPage((p) => p.includes(join("city", "albany", "automotive")) && /"@type":\s*"LocalBusiness"/.test(readFileSync(p, "utf8"))),
     corrupt: (html) => html.replace(/"@type":\s*"LocalBusiness",/, '"@type": "LocalBusiness", "aggregateRating": {"@type": "AggregateRating", "ratingValue": 4.5, "reviewCount": 3},'),
   },
+  // The two bypasses review 20260924-033900 found in the first C18: an array @type, and a
+  // rating typed with a full schema.org IRI inside an untyped wrapper object.
+  {
+    check: "C18",
+    what: "an array-typed LocalBusiness carrying a review",
+    pick: () => findPage((p) => p.includes(join("city", "albany", "automotive")) && /"@type":\s*"LocalBusiness"/.test(readFileSync(p, "utf8"))),
+    corrupt: (html) => html.replace(/"@type":\s*"LocalBusiness",/, '"@type": ["LocalBusiness", "AutoRepair"], "review": {"author": "x"},'),
+  },
+  {
+    check: "C18",
+    what: "a full-IRI AggregateRating inside an untyped object",
+    pick: () => findPage((p) => p.includes(join("city", "albany", "automotive")) && /"@type":\s*"LocalBusiness"/.test(readFileSync(p, "utf8"))),
+    corrupt: (html) => html.replace(/"@type":\s*"LocalBusiness",/, '"@type": "LocalBusiness", "additionalProperty": {"x": {"@type": "https://schema.org/AggregateRating", "ratingValue": 4}},'),
+  },
   {
     check: "C08",
     what: "a visible breadcrumb label that disagrees with the JSON-LD",

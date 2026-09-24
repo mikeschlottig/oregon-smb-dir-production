@@ -2,8 +2,11 @@
 
 This guide says exactly where to make each kind of change and how to ship it. Every path
 here is relative to `/home/mikes/oregon-smb-directory`, and every one was checked against
-the code on 2026-09-23. If a path here stops matching the code, fix this file in the same
-commit.
+the code on 2026-09-23.
+
+**This guide is append-only from 2026-09-24.** Don't rewrite a section. When the code changes,
+add a dated entry to the **Update log** at the bottom: what changed, which files, which sections
+it supersedes. The newest entry wins where it conflicts with the text above it.
 
 ---
 
@@ -513,3 +516,21 @@ curl -s https://oregonsmbdirectory.com/city/<city>/<industry>/<slug>/ | grep -c 
 - **Then commit:** the batch, the shard diff, the evidence change, and the `tasks.md` /
   `hypothesis.md` result together, with the Worker Version ID in the message.
 - **Never curl or browse Google** to verify anything.
+
+---
+
+## Update log (append-only, newest last)
+
+### 2026-09-24 — Change protocol, identity, ratings out of structured data
+- **Added** "Change protocol" at the top of this guide (branch → batch → build script → verify →
+  second-model review → merge → deploy → record).
+- **Identifiers:** `docs/TAXONOMY.md`, `src/types/ids.ts`, `src/lib/google-place-id.ts`. The build runs
+  `scripts/check-id-literals.mjs`, which fails on any untraced place/feature ID literal.
+- **Maps links (supersedes §2.9 text of 2026-09-23):** "Open in Google Maps" = `placeLink()`, the
+  Maps URLs API link with the place ID. A record's `googleUrl` may be a place-ID link; the rating
+  gate decodes it (`featureIdOf`).
+- **Ratings (supersedes §2.4 "aggregateRating in the structured data"):** stars stay visible;
+  **no rating in JSON-LD anywhere**, enforced by `CHECKLIST.md` C18 in `scripts/verify-site.mjs`.
+- **Audit scope:** `scripts/audit-publication.mjs` reads only the shards wired in `src/data/businesses.ts`.
+- **Before/after proof:** `scripts/compare-builds.mjs` (live vs `dist/`, or `--baseline-dist`) diffs title,
+  H1, canonical, robots, breadcrumb, JSON-LD, links and visible stars on every page.

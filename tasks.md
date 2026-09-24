@@ -290,3 +290,35 @@ way, one query per industry per city, top 20 per pin.
 - [ ] P13.5 Sweep runner: per city × query, the proven `execute_bcrf49_pipeline` with
   `pins_override` + `keywords_override`; resumable; full-field export. ~7,056 pins at
   ~16.5 s ≈ 32 h. Start it in the background after P13.1 finishes (one browser at a time).
+
+## P14 — Contact form, SEO + AI-search plan, content plan — on proven tools (Mike, 2026-09-24)
+
+Rule for this phase (memory `authority-before-code`): every check uses the authority's own
+tool or data. Nothing home-grown where a standard tool exists.
+
+### Contact form
+- [ ] P14.1 Status (2026-09-24, checked): the built site POSTs to
+  `https://contact.oregonsmbdirectory.com` (baked into `dist/_astro/ContactForm.*.js`); the
+  endpoint is up, validates (`{"ok":false,"error":"name required"}` on an empty POST) and
+  allows CORS from https://oregonsmbdirectory.com. `.env` names a different workers.dev URL
+  that the build does not use — reconcile. **Delivery is unproven:** one real test submission
+  (it sends Mike an email) needs Mike's go, then confirm arrival; locate the Worker source
+  and record where submissions go.
+
+### Validation stack — adopt, don't build
+- [x] P14.2 validator.schema.org as the schema.org authority in `scripts/jsonld-audit/`
+  (shape-deduplicated; negative control proven).
+- [ ] P14.3 Lighthouse (chrome-devtools MCP `lighthouse_audit`, our own site only) — SEO,
+  performance, accessibility, best practices: one representative URL per page type.
+- [ ] P14.4 Unlighthouse or RustySEO (P1.7) for a full-site crawl report; pick one after a
+  one-page smoke test of each.
+- [ ] P14.5 Reconcile the two page-type definitions: `scripts/jsonld-audit/rubric.mjs`
+  PAGE_TYPES vs `scripts/verify-site.mjs` — one source (the checklist), the other reads it.
+
+### SEO + AI-search plan and content plan
+- [ ] P14.6 Run the `astro-canonical-site` skill's audit against this repo (one content
+  contract → route, HTML, JSON-LD, machine API; AI-readable pages).
+- [ ] P14.7 Keyword/content gap with the `seo-gap-research` skill, inputs: the 12-city sweep
+  (`listings-extraction/output/sweep/rows.jsonl`) + Search Console exports from Mike.
+- [ ] P14.8 Write the plan (SEO + AI search) and the content calendar from P14.6/P14.7
+  evidence; each recommendation cites its source.

@@ -116,7 +116,7 @@ Decisions recorded, not open questions:
   come from Mike.
 
 ### Listings
-- [ ] P10.1 LeverageAI verified with website `https://leverageai.network`.
+- [x] P10.1 LeverageAI verified with website `https://leverageai.network`. Done: Worker 5fa0b6f2.
   - A patch batch adds `verification` + `websiteValidation`.
   - The dedicated page reads its badge and rating from the record, as Daley's does. It
     hard-codes `verified: false` today.

@@ -11,7 +11,35 @@
     "website": "https://leverageai.network",
     "googleUrl": "https://www.google.com/maps/place/744+NW+Bellevue+Pl,+Grants+Pass,+OR+97526/@42.5536,-123.3884,17z/",
     "claimed": true,
-    "verified": true
+    "verified": true,
+    "verification": {
+      "status": "directory_reviewed",
+      "scope": [
+        "business_name",
+        "address",
+        "phone",
+        "website"
+      ],
+      "method": "Name, address, phone and website confirmed by the business owner on September 23, 2026. The website's title and phone number match this listing.",
+      "verifiedAt": "2026-09-23T20:56:00-07:00",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "operator:mike@leverageai.network@2026-09-23",
+        "web:leverageai.network@2026-09-23"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://leverageai.network",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-09-23T20:56:00-07:00",
+      "confirmationSources": [
+        "operator_confirmed",
+        "site_title_match",
+        "site_phone_match"
+      ],
+      "riskFlags": []
+    }
   },
   {
     "slug": "wrap-it-up-graphics",

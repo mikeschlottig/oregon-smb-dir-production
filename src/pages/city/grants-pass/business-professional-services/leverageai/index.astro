@@ -26,19 +26,25 @@ const crumbs = trail([
   { name: "Leverage AI" },
 ]);
 
+// Rating, verification and website come from the gated listing record, so this page
+// shows exactly what the publication gates allow and cannot drift from the data.
+const record = businesses.find(b => b.slug === "leverageai")!;
+const isVerified = record.verification != null;
+
 const schemas = [
   businessSchema({
     title: "Leverage AI",
     address: "744 NW Bellevue Place, Grants Pass, OR 97526",
     phone: "(541) 450-2082",
     email: "mike@leverageai.network",
-    website: "https://leverageai.network",
-    rating: null,
-    reviews: null,
+    website: record.website,
+    websiteStatus: record.websiteStatus,
+    rating: record.rating,
+    reviews: record.reviews,
+    ratingObservation: record.ratingObservation,
+    verification: record.verification,
     category: "AI Search & Digital Strategy",
     slug: "leverageai",
-    claimed: false,
-    verified: false,
   }, city, industry, siteUrl),
   breadcrumbListSchema(crumbs, siteUrl),
 ];
@@ -63,10 +69,10 @@ const embedSrc = "https://www.google.com/maps?q=42.5536,-123.3884&hl=en&z=15&out
     tagline="Local demand systems for Oregon service businesses — connecting visibility, website trust, lead capture, and response speed into one measurable growth engine."
     stats={[
       { value: "Grants Pass", label: "Location" },
-      { value: "Publisher", label: "Profile type" },
+      { value: isVerified ? "Verified" : "Publisher", label: "Record status" },
       { value: "2024", label: "Est." }
     ]}
-    badge="Publisher profile"
+    badge={isVerified ? (record.websiteStatus === "confirmed" ? "Verified · confirmed website" : "Verified") : "Publisher profile"}
   />
 
   <section class="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">

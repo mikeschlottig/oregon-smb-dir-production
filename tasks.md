@@ -226,9 +226,9 @@ Pacific-Ocean placeholder Google gives service-area businesses with no public ad
   misconfigured, and lists fully valid pages. Done: `npm run audit:jsonld`, `npm run test:jsonld-rubric` (11 fixtures, 18 Google rules proven).
 
 ### Listings extractor
-- [ ] P11.7 `listings-extraction/`: stealth Maps extractor for one URL or a queue, built
+- [x] P11.7 `listings-extraction/`: stealth Maps extractor for one URL or a queue, built
   from the patterns in `docs/RAR-SCRAPER-COMPOSITION-ANALYSIS.md`. No edits to `rar/`.
-  Not run against Google without Mike's go.
+  Not run against Google without Mike's go. Done (offline): `listings-extraction/`, 18 tests; first live run protocol in its README.
 
 ## P12 — JSON-LD fixes found by the rubric (2026-09-24 run: 77 perfect / 604 warning / 9,854 error)
 

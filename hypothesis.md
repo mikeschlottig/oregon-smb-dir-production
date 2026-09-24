@@ -358,3 +358,12 @@ Self-test first: it caught my own false positive (ListItem.item as a URL string 
 documented form) before the full run.
 **Rule:** a rubric ships with fixtures that prove each rule can fire and a named exemplar
 that must pass — the first run of this one was wrong in the rubric, not the site.
+
+## H25 — listings-extraction place-page selectors — OPEN (needs Mike's go for a live run)
+
+**Prediction:** on the first live place page, the semantic selectors (`data-item-id`
+address / authority / phone:tel: / oloc, "N stars" / "N reviews" aria-labels) fill name,
+rating, reviews, address, phone, website; the class-name fallbacks (DUwDvf, F7nice, DkEaL)
+are the ones most likely to have drifted. Identity = match for all 4 URLs-API targets.
+**Offline proof so far:** 18 tests; mutation checks confirm the block-teardown and
+stale-selector tests fail when that code is removed.

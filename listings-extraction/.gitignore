@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# Run output: saved pages, screenshots, SQLite, exports. Evidence stays local.
+output/

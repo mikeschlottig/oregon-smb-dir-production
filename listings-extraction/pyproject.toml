@@ -1,0 +1,32 @@
+[project]
+name = "listings-extraction"
+version = "0.1.0"
+description = "Stealth Google Maps extraction for one place URL or a queue: every field a place page or result card exposes."
+readme = "README.md"
+authors = [{ name = "Mike", email = "mikeschlottig44@gmail.com" }]
+requires-python = ">=3.12"
+# The stealth stack is rar-linux's, imported rather than copied, so there is one proven
+# implementation: real Chrome through Patchright, block teardown + entry-path rotation,
+# host-consistent UA, WSL GPU WebGL, the humanized scroll, and the card extractor.
+# Pins match rar-linux and the original 550K-record archive.
+dependencies = [
+    "rarlx",
+    "patchright==1.62.3",
+    "scrapling==0.4.15",
+]
+
+[project.scripts]
+lx = "lx.cli:main"
+
+[tool.uv.sources]
+rarlx = { path = "../../rar-linux", editable = true }
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "lx"
+
+[dependency-groups]
+dev = ["pytest>=9.1.1"]

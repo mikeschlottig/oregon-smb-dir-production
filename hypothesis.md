@@ -337,3 +337,24 @@ Link check in `dist/`: 0 coordinate `maps/dir` links (any `&` encoding; the posi
 control — name+address `maps/dir` — matched 8,777 pages, so the zero is real).
 **Rule:** a placeholder value (ocean pin) looks like evidence; a block needs two
 independent signals, and a missing signal is not a second signal.
+
+## H24 — JSON-LD rubric over dist/ — CLOSED, prediction wrong on the perfect count
+
+**Prediction (before the first full run):** almost no page is PERFECT. Every listing with a
+displayed rating errors on LB_RATING_THIRD_PARTY (Google: "Don't aggregate reviews or
+ratings from other websites"); every city-industry / service list page errors on
+RATING_ON_LIST; ~9,400 listings warn LB_MOST_SPECIFIC_TYPE and SITE_TELEPHONE_FORMAT.
+PERFECT ≤ 30 pages, mostly CollectionPage indexes (blog, research). The one research page
+with no JSON-LD errors on PAGE_NO_JSONLD. /city/ and /services/ hubs error on
+PAGE_REQUIRED_TYPE (BreadcrumbList only).
+**Result (12 s, 10,535 pages):** PERFECT 77 · WARNING 604 · ERROR 9,854. Wrong on PERFECT
+(≤30 predicted): the 12 city, 12 industry and 33 service pages list businesses *without*
+ratings, so they pass; 3 listings (the premium profiles: subtype, geo, hours, no scraped
+rating) are PERFECT — the exemplar exists in production. Right on the rest:
+LB_RATING_THIRD_PARTY 9,816 pages, RATING_ON_LIST 947, LB_MOST_SPECIFIC_TYPE 9,423,
+SITE_TELEPHONE_FORMAT 10,069 (source phones like "(541) 7307759"), hubs /city/ and
+/services/ lack a CollectionPage, one research page has no JSON-LD.
+Self-test first: it caught my own false positive (ListItem.item as a URL string is Google's
+documented form) before the full run.
+**Rule:** a rubric ships with fixtures that prove each rule can fire and a named exemplar
+that must pass — the first run of this one was wrong in the rubric, not the site.

@@ -217,15 +217,39 @@ Pacific-Ocean placeholder Google gives service-area businesses with no public ad
 - [x] P11.4 `scripts/audit-oregon-location.mjs` imports the same `.ts` rule; writes
   `reports/out-of-state-<date>.csv`, marks same-name Oregon records (multi-location), and
   a chain queue for the extractor. 301 every blocked URL to its city/industry page.
-- [ ] P11.5 Build, count in `dist/`: zero `maps/dir/?api=1&destination=` where googleUrl
-  exists; blocked slugs absent. Deploy, curl live, commit.
+- [x] P11.5 Build, count in `dist/`: zero `maps/dir/?api=1&destination=` where googleUrl
+  exists; blocked slugs absent. Deploy, curl live, commit. Done: Worker `7b8a2a36`, commit `82ff9e0`; live 301s + place links curled.
 
 ### JSON-LD rubric
-- [ ] P11.6 `scripts/jsonld-audit/`: per-type rubric (schema.org + Google rich-result
+- [x] P11.6 `scripts/jsonld-audit/`: per-type rubric (schema.org + Google rich-result
   required/recommended), every page in `dist/` validated; report flags missing,
-  misconfigured, and lists fully valid pages.
+  misconfigured, and lists fully valid pages. Done: `npm run audit:jsonld`, `npm run test:jsonld-rubric` (11 fixtures, 18 Google rules proven).
 
 ### Listings extractor
 - [ ] P11.7 `listings-extraction/`: stealth Maps extractor for one URL or a queue, built
   from the patterns in `docs/RAR-SCRAPER-COMPOSITION-ANALYSIS.md`. No edits to `rar/`.
   Not run against Google without Mike's go.
+
+## P12 — JSON-LD fixes found by the rubric (2026-09-24 run: 77 perfect / 604 warning / 9,854 error)
+
+Decisions for Mike (policy, not bugs):
+- [ ] P12.1 **Ratings in markup.** Google: "Don't aggregate reviews or ratings from other
+  websites." Our `aggregateRating` values are Google Maps figures (9,816 pages). Options:
+  drop `aggregateRating` from JSON-LD and keep the visible stars, or keep it and accept no
+  review snippet / manual-action risk. Also RATING_ON_LIST (947 list pages): Google says
+  "not about a category or a list of items" — drop ratings from ItemList entries either way.
+- [ ] P12.2 **Service-area businesses (594 listings, no street address).** Google requires
+  `address` for LocalBusiness. Emit city/region/postal-only PostalAddress + `areaServed`, or
+  emit no LocalBusiness for them.
+
+Bugs (fix in `src/lib/schema.ts` and friends, re-run `npm run audit:jsonld`):
+- [ ] P12.3 Normalize `telephone` to a dialable form (10,069 pages; source "(541) 7307759").
+- [ ] P12.4 Map category → most specific LocalBusiness subtype (9,423 generic).
+- [ ] P12.5 Emit `geo` from the place pin (`placePin` in `src/lib/oregon-location.ts`,
+  in-Oregon only) — 9,422 missing.
+- [ ] P12.6 Home: Organization `@id` → `https://oregonsmbdirectory.com/#organization`;
+  WebSite `url` with trailing slash; logo a real logo, not the OG card.
+- [ ] P12.7 Blog/Report: `author.name` = name only + `author.url`; `image`; ISO dates with
+  time + timezone; Report `headline`, full `datePublished`, `about` as a Thing.
+- [ ] P12.8 `/city/` and `/services/` hubs get a CollectionPage; the research page
+  `oregon-law-firm-ai-search-report-1` gets JSON-LD.

@@ -243,7 +243,7 @@ def test_identity_by_place_id_is_not_fooled_by_the_echoed_request_url():
 
 def test_p10_3_listings_queue_as_place_targets():
     ts = directory.from_directory(["portland__business-professional-services/deepli-clean", "portland__health-medical/north-tabor-dental"])
-    assert [t.kind for t in ts] == ["place", "place"] and all(t.expect_place_id for t in ts)
+    assert [t.kind for t in ts] == ["place", "place"] and all(t.expect_feature_id for t in ts), "every place target has an identity to check"
 
 
 def test_search_that_opens_a_single_place_is_read_as_a_place():
@@ -316,3 +316,19 @@ def test_dashboard_shows_a_finished_gate_and_its_top3_leader(tmp_path, monkeypat
     assert "1 / 144" in page and "48,020" not in page and "2,401 / 7,056" not in page
     assert "49 / 7,056" in page, "one gate = 49 pins"
     assert "Top Shop (49)" in page and 'class="next"' in page
+
+
+def test_feature_id_and_place_id_round_trip_on_live_pairs():
+    from lx.targets import feature_id_to_place_id, place_id_to_feature_id
+    for pid, fid in [("ChIJZ1Zzyzwg6GcRcn-fRTAHw6s", "0x67e8203ccb735667:0xabc30730459f7f72"),
+                     ("ChIJwb0sxytEhQURY7ocXSiWkGE", "0x585442bc72cbdc1:0x619096285d1cba63"),
+                     ("ChIJ_0ls_-CglVQRa_ANkBDgrv0", "0x5495a0e0ff6c49ff:0xfdaee010900df06b"),
+                     ("ChIJ53IVEGzIuFQR9dhzn9OFpGY", "0x54b8c86c101572e7:0x66a485d39f73d8f5")]:
+        assert feature_id_to_place_id(fid) == pid and place_id_to_feature_id(pid) == fid
+
+
+@pytest.mark.skipif(not MEDFORD.exists(), reason="rar-linux archived page not present")
+def test_every_card_with_a_feature_id_gets_a_place_id():
+    t = load_targets(["best attorney in Medford oregon"], lat=42.3265, lng=-122.8756)[0]
+    rows = runner.extract_rows(t, MEDFORD.read_text(encoding="utf-8"), "", "list")
+    assert rows and all(r["place_id"] and r["place_id"].startswith("ChIJ") for r in rows if r["feature_id"])

@@ -5,6 +5,7 @@
 // (verify-site.mjs). This answers "what else moved?".
 //
 //   node scripts/compare-builds.mjs [--site https://oregonsmbdirectory.com] [--dist dist]
+//        [--baseline-dist <dir>]   compare two local builds instead of live vs dist
 //        [--expect maps-links] [--expect jsonld:<route-prefix>] …
 // Exit 1 if any page differs in a field not named by --expect. Report:
 //   reports/compare-builds-<date>.json
@@ -17,6 +18,7 @@ const opt = (n, d) => (args.includes(n) ? args[args.indexOf(n) + 1] : d);
 const expects = args.flatMap((a, i) => (a === "--expect" ? [args[i + 1]] : []));
 const site = opt("--site", "https://oregonsmbdirectory.com");
 const dist = path.resolve(opt("--dist", "dist"));
+const baselineDist = opt("--baseline-dist", null) && path.resolve(opt("--baseline-dist"));
 const UA = "oregonsmbdirectory-compare-builds/1.0";
 
 const strip = (s) => s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&#x27;/g, "'").replace(/\s+/g, " ").trim();
@@ -41,6 +43,8 @@ const facts = (html) => {
     // /cdn-cgi/ links are injected by Cloudflare at the edge, fresh per request; they are never
     // in dist/ and are not ours (first run 2026-09-24: all 1,597 "unexpected" diffs were these).
     internal_links: [...new Set(hrefs.filter((h) => (h.startsWith("/") || h.startsWith(site)) && !h.includes("/cdn-cgi/")))].sort(),
+    // Visible star glyphs in the page body (outside <script>): the on-page rating display.
+    stars: (html.replace(/<script[\s\S]*?<\/script>/gi, "").match(/★/g) ?? []).length,
     maps_links: [...new Set(hrefs.filter((h) => /google\.[a-z.]+\/maps/.test(h)))].sort(),
     other_external: [...new Set(hrefs.filter((h) => /^https?:/.test(h) && !h.startsWith(site) && !/google\.[a-z.]+\/maps/.test(h)))].sort(),
   };
@@ -54,7 +58,15 @@ const sitemap = async () => {
   return [...new Set(out)];
 };
 
-const urls = await sitemap();
+const fileFor = (root, route) => path.join(root, route, route.endsWith("/") ? "index.html" : "");
+const urls = baselineDist
+  ? (await (async () => { const { readdir } = await import("node:fs/promises"); const out = [];
+      const walk = async (d) => { for (const e of await readdir(d, { withFileTypes: true })) {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) { if (!["pagefind", "_astro"].includes(e.name)) await walk(p); }
+        else if (e.name === "index.html") out.push(site + "/" + path.relative(baselineDist, path.dirname(p)).split(path.sep).join("/") + (path.dirname(p) === baselineDist ? "" : "/")); } };
+      await walk(baselineDist); return out.map((u) => u.replace(/([^:])\/\/+/g, "$1/")); })())
+  : await sitemap();
 const results = { same: 0, differs: [], missing_in_dist: [], fetch_failed: [] };
 const byField = {};
 let next = 0;
@@ -66,9 +78,12 @@ const worker = async () => {
     try { await access(file); } catch { results.missing_in_dist.push(route); continue; }
     let live;
     try {
-      const r = await fetch(u, { headers: { "user-agent": UA }, redirect: "manual" });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      live = facts(await r.text());
+      if (baselineDist) live = facts(await readFile(fileFor(baselineDist, route), "utf8"));
+      else {
+        const r = await fetch(u, { headers: { "user-agent": UA }, redirect: "manual" });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        live = facts(await r.text());
+      }
     } catch (e) { results.fetch_failed.push(`${route} ${e.message}`); continue; }
     const local = facts(await readFile(file, "utf8"));
     const changed = Object.keys(live).filter((k) => JSON.stringify(live[k]) !== JSON.stringify(local[k]));

@@ -233,7 +233,7 @@ Pacific-Ocean placeholder Google gives service-area businesses with no public ad
 ## P12 — JSON-LD fixes found by the rubric (2026-09-24 run: 77 perfect / 604 warning / 9,854 error)
 
 Decisions for Mike (policy, not bugs):
-- [ ] P12.1 **Ratings in markup.** Google: "Don't aggregate reviews or ratings from other
+- [x] P12.1 **Ratings in markup.** Google: "Don't aggregate reviews or ratings from other
   websites." Our `aggregateRating` values are Google Maps figures (9,816 pages). Options:
   drop `aggregateRating` from JSON-LD and keep the visible stars, or keep it and accept no
   review snippet / manual-action risk. Also RATING_ON_LIST (947 list pages): Google says

@@ -28,6 +28,9 @@
  *   C15 TRAILING_SLASH      internal links use the canonical trailing-slash form
  *   C16 SITEMAP             sitemap lists only resolvable, indexable URLs
  *   C17 EXEMPTION_SCOPE     only approved paths may declare themselves exempt
+ *   C18 NO_THIRD_PARTY_RATING no AggregateRating / Review / aggregateRating / review in any JSON-LD:
+ *                            the ratings are Google Maps figures, and Google's review-snippet
+ *                            policy: "Don't aggregate reviews or ratings from other websites."
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
@@ -448,6 +451,9 @@ for (const file of files) {
   for (const { node: s, depth } of typedNodes) {
     const t = s["@type"];
     const where = depth === 0 ? t : `nested ${t}`;
+    for (const prop of ["aggregateRating", "review", "reviews"]) {
+      if (s[prop] !== undefined) fail("C18", file, `${where}.${prop} is present; third-party ratings may not appear in structured data`);
+    }
     const need = (cond, what) => {
       if (!cond) fail("C14", file, `${where} is missing ${what}`);
     };
@@ -477,12 +483,8 @@ for (const file of files) {
       if (typeof s.streetAddress === "string" && /,\s*[A-Z]{2}\s+\d{5}(-\d{4})?$/.test(s.streetAddress.trim())) {
         fail("C14", file, `${where}.streetAddress still contains locality/region/postal code`, s.streetAddress);
       }
-    } else if (t === "AggregateRating") {
-      const v = Number(s.ratingValue);
-      const c = Number(s.reviewCount);
-      if (!(v >= 1 && v <= 5)) fail("C14", file, `${where}.ratingValue out of range`, s.ratingValue);
-      if (!(Number.isInteger(c) && c >= 1)) fail("C14", file, `${where}.reviewCount is not a positive integer`, s.reviewCount);
-      if (!s.itemReviewed && depth === 0) fail("C14", file, "root AggregateRating has no itemReviewed");
+    } else if (t === "AggregateRating" || t === "Review" || t === "Rating") {
+      fail("C18", file, `${where} is marked up; third-party ratings may not appear in structured data`);
     } else if (t === "BlogPosting") {
       need(typeof s.headline === "string" && s.headline.trim(), "headline");
       need(typeof s.datePublished === "string" && s.datePublished.trim(), "datePublished");
@@ -636,7 +638,7 @@ const LABEL = {
   C04: "BREADCRUMB_POSITION", C05: "BREADCRUMB_HOME", C06: "BREADCRUMB_TERMINAL",
   C07: "BREADCRUMB_URLS", C08: "BREADCRUMB_MATCH", C09: "CANONICAL", C10: "LINKS",
   C11: "FAQ_SHAPE", C12: "FAQ_UNIQUE", C13: "THIN", C14: "SCHEMA_REQUIRED",
-  C15: "TRAILING_SLASH", C16: "SITEMAP", C17: "EXEMPTION_SCOPE",
+  C15: "TRAILING_SLASH", C16: "SITEMAP", C17: "EXEMPTION_SCOPE", C18: "NO_THIRD_PARTY_RATING",
 };
 for (const id of Object.keys(LABEL)) {
   const n = byCheck[id] ?? 0;

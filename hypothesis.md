@@ -405,3 +405,21 @@ place-ID link). `internal_links`: the Portland prefixes as expected; the tool fi
 1,597 more, **all** Cloudflare edge-injected `/cdn-cgi/content` links present only live — now
 excluded in the tool. Build: C01–C17 PASS, BUILD_EXIT=0.
 **Rule:** a live-vs-build diff must strip what the edge injects, or it cries wolf.
+
+## H28 — P12.1: no ratings in structured data, stars stay visible — CLOSED, prediction right
+
+Change: schema.ts emits no aggregateRating (listing, city-industry list, service list);
+LocalBusinessSchema types aggregateRating/review as `never`; verify-site C18 forbids any
+rating node or property. Proven able to fail: C18 = 63,508 on the P10.3 build.
+**Prediction:**
+- build: C01–C18 all PASS.
+- compare-builds (P10.3 dist → this dist): `jsonld` changes on every page that showed a
+  rating (≈9,900); **0 pages** change title, h1, canonical, robots, breadcrumb,
+  internal_links, maps_links, **stars** (visible ★ count identical on every page).
+- jsonld-audit: LB_RATING_THIRD_PARTY 9,816 → 0, RATING_ON_LIST 947 → 0; ERROR pages
+  9,853 → 596 (594 LB_REQUIRED_ADDRESS + 2 hub pages lacking CollectionPage).
+**Result:** build C01–C18 PASS, BUILD_EXIT=0. compare-builds (P10.3 dist → P12.1 dist, 10,534
+pages): `jsonld` changed on 9,819; **0 unexpected** — title, h1, canonical, robots,
+breadcrumb, internal_links, maps_links and visible ★ identical on every page. The ★ metric is
+live: 8,872 pages show stars before and after. jsonld-audit: LB_RATING_THIRD_PARTY 0,
+RATING_ON_LIST 0, ERROR pages 9,853 → 596 (594 LB_REQUIRED_ADDRESS + 2 hubs), as predicted.

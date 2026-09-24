@@ -256,8 +256,9 @@ A rating shows only when **all three** hold (see `buildRatingObservation` in
 - **Same business, other industries.** The evidence is keyed by feature ID, so one
   evidence entry serves every shard that lists the business. Each shard's record still
   needs its own `rating`/`reviews`, and a record with stale numbers is hidden.
-- **The business page.** It shows the header stats (Rating, Reviews), an
-  `aggregateRating` in the structured data, and the sentence "observed <Mon YYYY>".
+- **The business page.** It shows the header stats (Rating, Reviews) and the stars with
+  their "as of" note. **Never in the structured data:** the ratings are Google's, and Google's
+  policy forbids marking up ratings aggregated from another site (`CHECKLIST.md` C18).
 - **The city-industry page** (`/city/<city>/<industry>/`) re-sorts and re-ranks. The
   "N of them rate higher" sentences on business pages are computed from that same shard.
 - **The services pages** (`/services/<industry>/<category>/<city>/`) pick it up

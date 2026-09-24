@@ -38,7 +38,9 @@ const facts = (html) => {
     robots: html.match(/<meta[^>]*name=["']robots["'][^>]*content=["']([^"']+)/i)?.[1] ?? null,
     breadcrumb: crumbs,
     jsonld: jsonld.sort(),
-    internal_links: [...new Set(hrefs.filter((h) => h.startsWith("/") || h.startsWith(site)))].sort(),
+    // /cdn-cgi/ links are injected by Cloudflare at the edge, fresh per request; they are never
+    // in dist/ and are not ours (first run 2026-09-24: all 1,597 "unexpected" diffs were these).
+    internal_links: [...new Set(hrefs.filter((h) => (h.startsWith("/") || h.startsWith(site)) && !h.includes("/cdn-cgi/")))].sort(),
     maps_links: [...new Set(hrefs.filter((h) => /google\.[a-z.]+\/maps/.test(h)))].sort(),
     other_external: [...new Set(hrefs.filter((h) => /^https?:/.test(h) && !h.startsWith(site) && !/google\.[a-z.]+\/maps/.test(h)))].sort(),
   };

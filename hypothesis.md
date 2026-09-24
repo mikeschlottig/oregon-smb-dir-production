@@ -386,7 +386,7 @@ pin; thin ones in small markets (furniture store, website designer in Klamath Fa
 Roseburg / Ashland) hit Google's end-of-list below 20 at the 4–8 mi rings. First gate
 done in ≈14 min.
 
-## H27 — dev/p10-3-ratings changes only what it should — OPEN
+## H27 — dev/p10-3-ratings changes only what it should — CLOSED, prediction right
 
 Change: place-ID Maps links site-wide; the rating gate reads place-ID links; P10.3 ratings for
 3 Portland listings (batch 2026-09-24-p10-3-ratings); ID-literal build check.
@@ -398,3 +398,10 @@ Change: place-ID Maps links site-wide; the rating gate reads place-ID links; P10
   "related" picks).
 - **0 pages** change `title`, `h1`, `canonical`, `robots` or `breadcrumb`. Anything outside
   the prefixes above is a regression.
+**Result (compare-builds, 10,531 live pages vs dist/):** title, h1, canonical, robots,
+breadcrumb: **0 pages changed**. `jsonld`: 10 pages, all Portland (4 business-professional,
+3 health-medical listings/lists, 3 /services/…/portland/). `maps_links`: 10,367 pages (the
+place-ID link). `internal_links`: the Portland prefixes as expected; the tool first flagged
+1,597 more, **all** Cloudflare edge-injected `/cdn-cgi/content` links present only live — now
+excluded in the tool. Build: C01–C17 PASS, BUILD_EXIT=0.
+**Rule:** a live-vs-build diff must strip what the edge injects, or it cries wolf.

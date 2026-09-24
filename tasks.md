@@ -129,7 +129,8 @@ Decisions recorded, not open questions:
   - The two old URLs (`-hillsboro`, `-lake-oswego`) redirect 301 to the new one.
   - Office phone `503-212-0678`. The `(971) 394-4150` number was never corroborated; the
     site lists `971-394-4154`, for international clients only.
-- [ ] P10.3 Ratings for the other new listings, **numbers from Mike**: Deepli, Apex, North Tabor
+- [x] P10.3 Ratings for the other new listings, **numbers from Mike**: Deepli, Apex, North Tabor
+  Done 2026-09-24 on dev/p10-3-ratings: Deepli 5.0 (2), Apex 5.0 (15), North Tabor Dental 4.7 (31) via batch 2026-09-24-p10-3-ratings (extracted live, approved by Mike). Capital Nomics: no Google rating. Cascadia: 5.0 (7) seen, but its page gave no place identity; needs one revisit after the sweep. Cold review: delegation/results/20260924-032531-review-p10-3-placeid.md (SHIP WITH FIXES; 3 findings fixed).
   Dental, Capital Nomics, Cascadia Putting Club. Each needs a real place `googleUrl` and a
   rating-evidence supplement.
   - Last session's Places figures, **not confirmed by Mike**: Apex 5.0/15, Deepli 5.0/2,

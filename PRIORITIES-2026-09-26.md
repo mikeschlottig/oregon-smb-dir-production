@@ -36,8 +36,8 @@ guessing.
 - Status on 2026-09-26 00:37: the Google Maps geo-grid ranking sweep
   (`listings-extraction/`, log `listings-extraction/output/sweep.log`) was running again, detached, from
   Corvallis. It had finished 51 of 144 search batches ("gates": one city × one industry query, 49 map
-  points each), with 0 blocks. It collects rankings, not the review/rating fields above. Decide whether its
-  output feeds the new D1 dataset.
+  points each), with 0 blocks. **Decided (Mike, 01:02): the sweep is rankings-only on purpose (faster), and
+  its output feeds the RAR geo-point grid project (§7), not the directory's review/rating data.**
 
 Live site: `oregonsmbdirectory.com` (Worker `oregonsmbdirectory-site`).
 
@@ -105,8 +105,9 @@ domain.
 
 ### Open
 
-- The name as Mike wrote it is "rar-grid". Related folders on disk: `/home/mikes/rar-linux` and
-  `/home/mikes/serp-grid`. Confirm which one is meant, and the enhancements wanted.
+- Mike calls it the "rar geo point grid project". It is fed by the rankings-only geo-grid sweep in
+  `oregon-smb-directory/listings-extraction/`. Related folders on disk: `/home/mikes/rar-linux`
+  and `/home/mikes/serp-grid`. Confirm which one is the project, and the enhancements wanted.
 
 ---
 
@@ -123,6 +124,11 @@ domain.
 ## Also
 
 "There are other things as well, but this is plenty to keep us busy." Nothing else is listed yet.
+
+### Idea to discuss (Mike, thinking out loud, 01:02)
+
+A page on each directory site advertising Mike's **local SEO competitive-intelligence app** and what it can
+do. Not decided. Talk it through before building anything.
 
 ---
 

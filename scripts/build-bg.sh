@@ -8,5 +8,5 @@ export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh"
 nvm use --delete-prefix v22.22.2 --silent
 echo "node $(node -v) · npm run $script · $(date -Is)"
-npm run "$script"
+npm run "$script" || { rc=$?; echo "BUILD_EXIT=$rc $(date -Is)"; exit $rc; }
 echo "BUILD_EXIT=0 $(date -Is)"

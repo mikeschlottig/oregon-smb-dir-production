@@ -67,7 +67,7 @@ def status_line() -> str:
     secs = [g["seconds"] for g in done if g.get("seconds")]
     left = len(plan) - len(done)
     eta_h = left * (sum(secs) / len(secs)) / 3600 if secs else left * 49 * 16.5 / 3600
-    alive = os.system("pgrep -f 'lx[.]cli sweep' >/dev/null 2>&1") == 0
+    alive = os.system("pgrep -f '(lx[.]cli|bin/lx) sweep' >/dev/null 2>&1") == 0
     last = max(latest.values(), key=lambda g: g["finished_at"]) if latest else None
     return (f"sweep {'RUNNING' if alive else 'STOPPED'} | gates {len(done)}/{len(plan)} complete, {len(incomplete)} incomplete | "
             f"{rows} rows | blocks {_blocks()} | ~{eta_h:.1f} h left"

@@ -5,6 +5,7 @@ import { MarqueeBanner } from "@/components/sections/MarqueeBanner";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { CityCard } from "@/components/cards/CityCard";
+import { cityCardImages } from "@/lib/city-card-images";
 import SearchBar from "@/components/SearchBar.astro";
 import { cities } from "@/data/cities";
 import { getCollection } from "astro:content";
@@ -36,6 +37,7 @@ const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const schemas = [
   ...websiteSchema(siteUrl),
 ];
+const cardImages = await cityCardImages();
 ---
 <SiteLayout title={title} description={description} schemas={schemas}>
   <Hero />
@@ -67,7 +69,7 @@ const schemas = [
       </p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {cities.map((c) => <CityCard city={c} />)}
+      {cities.map((c) => <CityCard city={c} image={cardImages[c.slug]} />)}
     </div>
   </section>
 

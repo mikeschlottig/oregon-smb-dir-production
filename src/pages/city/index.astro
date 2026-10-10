@@ -3,6 +3,7 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import { CityCard } from "@/components/cards/CityCard";
+import { cityCardImages } from "@/lib/city-card-images";
 import { cities } from "@/data/cities";
 import { getBusinesses } from "@/data/businesses";
 import { industries } from "@/data/industries";
@@ -30,6 +31,7 @@ const crumbs = trail([
 const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
+const cardImages = await cityCardImages();
 ---
 
 <SiteLayout title={title} description={description} schemas={schemas}>
@@ -64,7 +66,7 @@ const schemas = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {cityStats.map(({ city, industriesCount, totalListings }) => (
         <div class="relative">
-          <CityCard city={city} />
+          <CityCard city={city} image={cardImages[city.slug]} />
           <div class="absolute top-3 right-3 bg-card/90 backdrop-blur-sm rounded-lg px-3 py-1.5 text-xs font-medium shadow-soft" style="color: var(--c-pine);">
             {totalListings} listings
           </div>

@@ -1,0 +1,107 @@
+---
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { publisher } from "@/data/publisher";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+
+const updated = "October 10, 2026";
+const title = `Privacy Policy — ${publisher.name}`;
+const description = "What Oregon SMB Directory collects, how it is used, cookieless analytics, and your choices.";
+
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
+const crumbs = trail([{ name: "Privacy Policy" }]);
+const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
+---
+
+<SiteLayout title={title} description={description} schemas={schemas} pageKind="utility">
+  <header class="bg-muted pt-32 pb-12 px-4 border-b border-border">
+    <div class="container mx-auto max-w-3xl">
+      <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-4" />
+      <p class="text-accent text-sm uppercase tracking-widest mb-3">Privacy · Last updated {updated}</p>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Privacy Policy</h1>
+      <p class="text-muted-foreground text-lg">
+        {publisher.name} is operated by {publisher.legalOperator} in {publisher.locationLabel}. This policy
+        explains what we collect through this website, why, and the choices available to you.
+      </p>
+    </div>
+  </header>
+
+  <main class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
+    <h2>Information you provide</h2>
+    <p>
+      When you use the contact form, you provide your name and email address and, optionally, a subject,
+      business name, city, industry and your message. The form also records which page you sent it from.
+      This information is delivered to us by email so we can respond, handle listing claims and
+      corrections, and keep a record of the request. Please do not send sensitive personal, financial or
+      health information through the form.
+    </p>
+
+    <h2>Business listings</h2>
+    <p>
+      The directory publishes information about Oregon businesses, such as business names, addresses,
+      phone numbers, websites, hours, categories and public ratings. Some listings may include an owner's
+      name where it is part of the business's public identity. To correct, claim or remove a listing, use
+      the <a href={publisher.correctionUrl}>listing correction form</a> or email
+      <a href={`mailto:${publisher.supportEmail}`}>{publisher.supportEmail}</a>.
+    </p>
+
+    <h2>Information collected automatically</h2>
+    <p>
+      Our hosting and security provider processes standard technical information such as IP address,
+      browser type, requested pages, timestamps and security events. It is used to deliver the site,
+      diagnose errors, prevent abuse and keep the site secure.
+    </p>
+
+    <h2>Analytics</h2>
+    <p>
+      We use PostHog, a privacy-focused analytics service, to understand which pages are useful and how
+      quickly the site loads. It records page views, clicks on links and buttons, and page-speed
+      measurements.
+    </p>
+    <p>
+      It runs in a cookieless mode: it does not set cookies or store identifiers in your browser, and it
+      does not build a profile of you. To count visits without cookies, it computes a one-way hash from
+      your IP address, browser user agent, our site name and a random value that changes every day and
+      is then deleted, so visits cannot be linked across days or tied back to you. It never records what
+      you type into forms. Requests pass through our own server before reaching PostHog, which acts on our
+      behalf.
+    </p>
+
+    <h2>Cookies</h2>
+    <p>
+      This site does not set cookies for analytics, advertising or tracking, and it does not use
+      advertising pixels or session recording, so there is no cookie banner. If that changes, we will
+      ask for your consent first and update this page.
+    </p>
+
+    <h2>Do Not Track and Global Privacy Control</h2>
+    <p>
+      If your browser sends a Global Privacy Control or Do Not Track signal, the analytics script does not
+      load at all during your visit. Basic technical processing needed to deliver and secure the site,
+      described above, still applies.
+    </p>
+
+    <h2>Sharing and retention</h2>
+    <p>
+      We do not sell personal information. Information may be processed by service providers that support
+      hosting, security, email delivery and analytics, only as needed to operate the site. We keep
+      contact-form information only as long as reasonably needed to respond, maintain business records,
+      keep the site secure or meet legal obligations.
+    </p>
+
+    <h2>Your choices and requests</h2>
+    <p>
+      You may ask what personal information we hold about you, or ask us to correct or delete it, by
+      emailing <a href={`mailto:${publisher.supportEmail}?subject=Privacy%20request`}>{publisher.supportEmail}</a>
+      or calling <a href={`tel:${publisher.supportPhone}`}>{publisher.supportPhoneDisplay}</a>. We may need to
+      verify the request, and may keep information where required for security, recordkeeping or legal
+      reasons.
+    </p>
+
+    <h2>Children</h2>
+    <p>This website is intended for adults and businesses and is not directed to children under 13.</p>
+
+    <h2>Changes</h2>
+    <p>Material changes will be posted on this page with a new "last updated" date.</p>
+  </main>
+</SiteLayout>

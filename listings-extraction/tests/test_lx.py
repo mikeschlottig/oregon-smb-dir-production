@@ -332,3 +332,67 @@ def test_every_card_with_a_feature_id_gets_a_place_id():
     t = load_targets(["best attorney in Medford oregon"], lat=42.3265, lng=-122.8756)[0]
     rows = runner.extract_rows(t, MEDFORD.read_text(encoding="utf-8"), "", "list")
     assert rows and all(r["place_id"] and r["place_id"].startswith("ChIJ") for r in rows if r["feature_id"])
+
+
+# ── kwsweep (multi-keyword sweep, 2026-10-12) ─────────────────────────────────────────────
+def test_keyword_sets_are_15_to_20_per_industry_and_k01_is_the_sweep_phrase():
+    from lx import kwsweep, sweep
+    sets, q = kwsweep.load_sets(), sweep.load_queries()
+    assert set(sets) == set(q)
+    for ind, s in sets.items():
+        kws = s["keywords"]
+        assert 15 <= len(kws) <= 20, ind
+        assert len({k["id"] for k in kws}) == len(kws) and len({k["template"].lower() for k in kws}) == len(kws), ind
+        assert kws[0]["same_as_sweep"] and kws[0]["template"] == q[ind]["template"].format(term=q[ind]["term"], city="{city}"), ind
+        assert sum(bool(k.get("same_as_sweep")) for k in kws) == 1, ind
+
+
+def test_kwsweep_plan_skips_the_sweep_phrase_and_runs_medford_then_grants_pass_first():
+    from lx import kwsweep
+    gates = kwsweep.plan()
+    sets = kwsweep.load_sets()
+    assert len(gates) == 12 * sum(len(s["keywords"]) - 1 for s in sets.values())
+    assert not any(g["keyword_id"] == "K01" for g in gates)
+    order = list(dict.fromkeys(g["city_slug"] for g in gates))
+    assert order[:2] == ["medford", "grants-pass"] and order[2:] == sorted(order[2:])
+    assert all("{city}" not in g["phrase"] and len(g["pins"]) == 49 for g in gates)
+
+
+def test_kwsweep_export_rows_carry_the_keyword_id(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    pins = [{"point_id": "medford_or_bcrf49_r0.00_centroid", "latitude": 42.3265, "longitude": -122.8756, "radius_miles": 0.0, "bearing_label": "CENTER"}]
+    g = {"city_slug": "medford", "city": "Medford", "industry": "legal-services", "keyword_id": "K02",
+         "phrase": "lawyer near me", "centroid": {"latitude": 42.3265, "longitude": -122.8756}, "pins": pins}
+    page = tmp_path / "medford" / "artifacts_medford_or_legal-services" / "K02" / pins[0]["point_id"] / "viewport.html"
+    page.parent.mkdir(parents=True)
+    page.write_text(MEDFORD.read_text(encoding="utf-8"), encoding="utf-8")
+    assert kwsweep.export_gate(g) == 20
+    rows = [json.loads(l) for l in (tmp_path / "rows.jsonl").read_text().splitlines()]
+    assert rows[0]["keyword_id"] == "K02" and rows[0]["query"] == "lawyer near me" and rows[0]["rank"] == 1
+
+
+def test_kwsweep_stop_file_and_budgets_stop_before_touching_google(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    called = []
+    async def fake_pipeline(**kw):
+        called.append(kw["keywords_override"][0]["keyword_id"])
+    monkeypatch.setattr(kwsweep, "execute_bcrf49_pipeline", fake_pipeline)
+    monkeypatch.setattr(kwsweep, "export_gate", lambda g: 0)
+    (tmp_path / "STOP").write_text("")
+    assert kwsweep.run(cities=["medford"], log=lambda *a: None) == 0 and called == []
+    (tmp_path / "STOP").unlink()
+    assert kwsweep.run(cities=["medford"], max_gates=2, log=lambda *a: None) == 2 and called == ["K02", "K03"]
+    assert kwsweep.run(cities=["medford"], max_hours=0, log=lambda *a: None) == 0
+    # finished gates are skipped on the next run
+    assert kwsweep.run(cities=["medford"], max_gates=1, log=lambda *a: None) == 1 and called[-1] == "K04"
+
+
+def test_kwsweep_refuses_a_second_concurrent_run(tmp_path, monkeypatch):
+    import fcntl
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    held = (tmp_path / ".lock").open("w")
+    fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    assert kwsweep.run(cities=["medford"], max_gates=1, log=lambda *a: None) == 0

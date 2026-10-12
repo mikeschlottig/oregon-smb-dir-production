@@ -6,6 +6,7 @@ lx — Google Maps listing extraction for one place URL or a queue.
   lx reparse --run NAME                 re-extract every saved page; no browser
   lx export  --run NAME                 write results.csv / results.json from the run
   lx queue  directory SEL… -o FILE      queue from the directory's googleUrls
+  lx kwsweep [--max-hours H] --headless --yes   multi-keyword sweep (keywords/keyword-sets.json); --status
   lx queue  sweep -o FILE [--template T] [--cities …] [--industries …]
                                         one search per city × industry at the city centroid
 
@@ -122,6 +123,26 @@ def cmd_queue(args) -> int:
     return 0
 
 
+def cmd_kwsweep(args) -> int:
+    from lx import kwsweep
+    if args.status:
+        print(json.dumps(kwsweep.status(), indent=1))
+        return 0
+    gates = kwsweep.plan(args.cities, args.industries, args.keywords)
+    done = kwsweep.done_gates()
+    left = [g for g in gates if (g["city_slug"], g["industry"], g["keyword_id"]) not in done]
+    print(f"{len(gates)} gates × 49 pins; {len(gates) - len(left)} complete; {len(left)} to go "
+          f"(≈{len(left) * 934.5 / 3600:.0f} h at the 12-city sweep's median gate). Next: "
+          + (f"{left[0]['city']} · '{left[0]['phrase']}'" if left else "none"))
+    if not args.yes:
+        print("Not run. Pass --yes to start (real Chrome on Google Maps; resumable).")
+        return 2
+    sys.stdout.reconfigure(line_buffering=True)
+    kwsweep.run(args.cities, args.industries, args.keywords, headless=args.headless,
+                max_hours=args.max_hours, max_gates=args.max_gates)
+    return 0
+
+
 def cmd_sweep(args) -> int:
     from lx import sweep
     gates = sweep.plan(args.cities, args.industries)
@@ -186,6 +207,17 @@ def main(argv=None) -> int:
     p.add_argument("--yes", action="store_true")
     p.add_argument("--headless", action="store_true")
     p.set_defaults(fn=cmd_sweep)
+
+    p = sub.add_parser("kwsweep", help="multi-keyword sweep: city × keywords/keyword-sets.json keyword × 49 pins × top 20")
+    p.add_argument("--cities", nargs="*")
+    p.add_argument("--industries", nargs="*")
+    p.add_argument("--keywords", nargs="*", help="keyword ids, e.g. K02 K03 (default: all except K01)")
+    p.add_argument("--max-hours", type=float, help="stop at the first gate boundary after this many hours")
+    p.add_argument("--max-gates", type=int)
+    p.add_argument("--status", action="store_true", help="progress as JSON; no browser")
+    p.add_argument("--yes", action="store_true")
+    p.add_argument("--headless", action="store_true")
+    p.set_defaults(fn=cmd_kwsweep)
 
     p = sub.add_parser("dashboard", help="rebuild output/sweep/dashboard.html (--watch: on every finished gate)")
     p.add_argument("--watch", action="store_true")

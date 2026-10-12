@@ -82,3 +82,32 @@ the markup, not checked against a page saved on this machine. Before any queue:
   `node scripts/audit-oregon-location.mjs` to `reports/out-of-state-<date>.queue.jsonl`. It
   holds 43 searches asking whether each blocked business has an Oregon location. Pass it
   to `lx plan` / `lx run` directly.
+
+## Multi-keyword sweep (`lx kwsweep`) and its nightly schedule — added 2026-10-12
+
+The 12-city sweep ran one phrase per industry. `lx kwsweep` runs the keyword sets in
+[`keywords/keyword-sets.json`](keywords/keyword-sets.json): 12 industries × 17 keywords, every one templated on
+`{city}`. K01 of each set is the sweep's own phrase and is skipped (its rows are in `output/sweep/`), leaving
+2,304 gates (12 cities × 192) × 49 pins — about 598 h at the sweep's median gate of 934.5 s.
+
+- Harvest: rarlx `execute_bcrf49_pipeline`, unchanged, headless (the house mode). Code: `src/lx/kwsweep.py`.
+- Output: `output/kwsweep/` — `gates.jsonl` (one line per gate), `rows.jsonl` (one line per ranked card, with
+  `keyword_id`), `<city>/` saved pages. `output/sweep/` is never touched.
+- Order: Medford, Grants Pass, then the other cities alphabetically; industries alphabetically; keywords in set order.
+  A city's whole keyword set finishes before the next city starts.
+- Resume: stored pins are skipped; incomplete gates are retried on the next run; a lock refuses overlapping runs.
+
+```bash
+uv run lx kwsweep                       # plan + progress; no browser
+uv run lx kwsweep --status              # JSON progress
+uv run lx kwsweep --headless --yes --max-gates 1   # one gate now
+touch output/kwsweep/STOP               # pause at the next gate boundary; rm to resume
+```
+
+**Schedule:** Windows Task Scheduler task `RAR kwsweep nightly`, daily 21:30, runs
+`scripts/kwsweep-nightly.sh` through `wsl.exe` with a 9 h budget (`KWSWEEP_HOURS`), 11 h hard limit, no overlapping
+instances, catches up if the PC was off at 21:30. Registered by `scripts/register-kwsweep-task.ps1`. Windows is the
+clock because a WSL systemd timer only fires while the VM is up (`house-sync.timer` missed 04:30 on 2026-10-11 and ran
+at 12:16). Disable: `powershell.exe -Command "Disable-ScheduledTask -TaskName 'RAR kwsweep nightly'"`.
+Log per night: `output/kwsweep/nightly-YYYYMMDD.log`. At ~35 gates a night the full set takes about 66 nights;
+Medford alone (192 gates) about 6.

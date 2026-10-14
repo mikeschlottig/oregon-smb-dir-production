@@ -109,5 +109,9 @@ touch output/kwsweep/STOP               # pause at the next gate boundary; rm to
 instances, catches up if the PC was off at 21:30. Registered by `scripts/register-kwsweep-task.ps1`. Windows is the
 clock because a WSL systemd timer only fires while the VM is up (`house-sync.timer` missed 04:30 on 2026-10-11 and ran
 at 12:16). Disable: `powershell.exe -Command "Disable-ScheduledTask -TaskName 'RAR kwsweep nightly'"`.
+**Sleep (2026-10-13):** the task has WakeToRun (wake timers set to Enable on AC), so a sleeping PC wakes for the 21:30
+start; during the run `scripts/keep-awake.ps1` holds Windows awake (SetThreadExecutionState, no admin, no power-plan
+change) and exits when the wrapper removes `output/kwsweep/.awake` or after budget + 1 h. Before this, the PC slept
+mid-run twice and each window lost most of its hours.
 Log per night: `output/kwsweep/nightly-YYYYMMDD.log`. At ~35 gates a night the full set takes about 66 nights;
 Medford alone (192 gates) about 6.

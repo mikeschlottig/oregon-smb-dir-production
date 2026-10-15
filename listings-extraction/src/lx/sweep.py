@@ -23,7 +23,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from rarlx.bcrf49_linux import MarketConfig, execute_bcrf49_pipeline
-from rarlx.fields import extract_full_listings
+from rarlx.fields import extract_full_listings, serp_path_of
 
 from lx.targets import feature_id_to_place_id
 
@@ -84,7 +84,9 @@ def export_gate(g: dict) -> int:
             page = art / pin["point_id"] / "viewport.html"
             if not page.exists():
                 continue
-            for r in extract_full_listings(page.read_text(encoding="utf-8"), max_rank=20):
+            html = page.read_text(encoding="utf-8")
+            serp_path = serp_path_of(html)  # "typed" when Maps place-jumped and the phrase was typed (H29)
+            for r in extract_full_listings(html, max_rank=20):
                 r.pop("text_tokens", None)
                 if not r.get("place_id") and r.get("feature_id"):
                     r["place_id"] = feature_id_to_place_id(r["feature_id"])
@@ -92,7 +94,7 @@ def export_gate(g: dict) -> int:
                     "city_slug": g["city_slug"], "industry": g["industry"], "query": g["phrase"],
                     "point_id": pin["point_id"], "pin_lat": pin["latitude"], "pin_lng": pin["longitude"],
                     "radius_miles": pin["radius_miles"], "bearing": pin["bearing_label"],
-                    "exported_at": ts, **r,
+                    "exported_at": ts, "serp_path": serp_path, **r,
                 }) + "\n")
                 n += 1
     return n

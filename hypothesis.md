@@ -423,3 +423,122 @@ pages): `jsonld` changed on 9,819; **0 unexpected** — title, h1, canonical, ro
 breadcrumb, internal_links, maps_links and visible ★ identical on every page. The ★ metric is
 live: 8,872 pages show stars before and after. jsonld-audit: LB_RATING_THIRD_PARTY 0,
 RATING_ON_LIST 0, ERROR pages 9,853 → 596 (594 LB_REQUIRED_ADDRESS + 2 hubs), as predicted.
+
+## H29 — kwsweep gate "vegan restaurant Medford" never completes — CLOSED, root cause found; planned fix wrong
+
+Symptom (output/kwsweep/gates.jsonl, nightly-20261015.log): K14 incomplete on 3 runs
+(2026-10-14 12:11Z, 10-15 01:17Z, 08:30Z), ~75 min each, 7/49 pins pass, 42 return 0/20 on
+all 3 attempts. No `[BLOCK]` line, so `check_for_challenge` never fired. A 4th incomplete
+gate exists: "float spa Medford" (health-wellness, 10-15 12:45Z).
+Evidence so far: K14/med_bcrf49_r0.25_N/viewport.png is a Google Maps **place page**
+("Rooted: Eat More Plants", Vegetarian restaurant), not a results list.
+**Hypothesis:** Maps answers the query at those pins by jumping straight to one business's
+place page. The page has no `div[role=feed]` and no `div.Nv2PK` cards, so
+`extract_full_listings` returns 0 rows; there is no "end of the list" text, so
+`end_of_list` is False; the pin is never valid and the gate can never lock. Retries cannot
+help — the page Google serves is the same every time. This is not a block or a parser regression.
+**Prediction:**
+- all 42 failing K14 pins: `viewport.html` has 0 `Nv2PK` cards and no challenge sentinel;
+  each is one place page (URL/canonical `/maps/place/`), mostly or all "Rooted: Eat More Plants".
+- the 7 passing pins hold 20 card rankings (a list was served there).
+- "float spa Medford" failing pins: same pattern (place page, 0 cards).
+- fix = a place page is a 1-result SERP: record that one business as rank 1 with
+  end-of-market = True. Re-running K14 then locks the gate 49/49 with no further Google work
+  beyond the 42 pins; the 1-row pins carry the real place's name/place_id/cid.
+**Result (artifacts + evidence DB, no live traffic):**
+- Right: all 42 failing pins' `viewport.html` = place page titled "Rooted: Eat More Plants -
+  Google Maps", 0 `Nv2PK` cards, no `role="feed"`, no challenge. The page embeds no other
+  business (0 hits for the list pins' other names) — the list is not hidden in the HTML.
+- Right: the 7 passing pins (all from the 10-14 17:03 run) hold 20-card lists.
+- New: per-pin deterministic — a pin that failed did so on 3/3 attempts in 3/3 runs; passes
+  and fails interleave at the same radius (r0.25: N fail, NE/E/SE pass, S fail, SW pass).
+- **Wrong, and it kills the planned fix:** at the 7 list pins Rooted is rank **2 or 3**, never 1
+  (rank 1 = "Indian Family Kitchen" ×5, "Infinity Indian Eats", "Rogue Salad Co."). Storing
+  the place page as a 1-row SERP would write Rooted as #1 where Google ranks it #2–3, and
+  drop 19 real competitors. Rejected. The list exists; the place page hides it.
+**Rule:** before treating a degenerate SERP as the answer, compare it with a neighbouring pin
+that got the full list.
+
+## H29b — which request form gets the list at a place-jump pin — CLOSED, zoom wrong, typed right
+Probe (scratch, rarlx `launch_browser` + the harvest's own context options, headless, pin
+med_bcrf49_r0.25_N 42.330118,-122.8756, one visit per variant):
+A protocol URL `/maps/search/q/@lat,lng,14z` via google_home · B 15z · C 13z ·
+D maps_home at pin, type phrase into the search box, Enter · E protocol URL + `?hl=en`.
+**Prediction:** A = place page (reproduces). At least one of B–E returns ≥20 cards with
+Indian Family Kitchen / Rooted in the top 3. Most likely D fails too (typed search resolves the
+same way); zoom variants are the best bet if the jump depends on what the viewport holds.
+**Result H29b (2 probe runs, 2026-10-15 ~11:30):**
+- pin r0.25_N: A 14z = place page (reproduces); **B 15z = 20-card list**, top 5 Indian Family
+  Kitchen, Rooted, Infinity Indian Eats, Rogue Salad Co., Soo Rah — matches the neighbouring
+  list pins; C 13z = place page; D (typed) crashed: `#searchboxinput` never visible.
+- control, centroid (list at 14z on 10-14 17:03): **14z and 15z both = place page now.**
+- **Wrong:** zoom is not the lever. The jump is not a fixed function of the URL; the same URL
+  gave a list on 10-14 and a place page today. Per-pin "deterministic" was 3 tries within
+  minutes, not a property of the pin.
+- Side finding: `scripts/hooks/artifact-keeper.sh sweep` ran mid-session (another session's
+  SessionEnd) and **moved this live session's scratchpad** to ~/.claude/artifacts. Not fixed here.
+**Result H29c (centroid, now a jump pin at 14z and 15z):** F `…/data=!3m1!4b1` = place page;
+H maps_home entry = place page; I direct = place page; **G typed into Maps' box
+(`input[name="q"]` — `#searchboxinput` no longer exists) = 20-card list.** G repeated at
+r0.25_N and r1.00_E: 20 cards each (3/3). Every URL form jumps; the typed in-app search lists.
+Caveat measured, not assumed: after a typed search Maps re-fits the camera to "Medford"
+(@42.3295485,-122.8709386,14z at every pin), so only the context geolocation stays per-pin;
+the URL path keeps the camera on the pin. Orders still differ by pin (Decant appears at
+r1.00_E). Typed = what a person standing at the pin sees after typing the phrase; it is a
+different measurement from the URL camera, so every row must say which path produced it.
+**Root cause (closed):** Google Maps answers `/maps/search/<phrase>/@pin,14z` for this
+phrase with a single place page (Rooted: Eat More Plants) at most pins since 2026-10-14
+evening — a per-request decision, not a block, not a parser fault. The harvester only knows
+"list" or "challenge"; a place page parses to 0 cards, `end_of_list` stays False, all 3
+retries repeat the same request, the gate can never reach 49/49.
+
+## H29d — typed-search fallback on a place jump — CLOSED for K14 (49/49); K15 open, needs Mike
+Change (rarlx): `harvest_single_pin` detects a place jump (URL `/maps/place/`, no feed, no
+cards) and re-runs the search the probe-G way (Maps home at the pin, type the phrase,
+Enter); rankings gain `serp_path` (`url`|`typed`, NULL on older rows = url); a typed page is
+saved with a leading `<!-- rarlx serp_path=typed -->` so `lx` export tags rows.jsonl too.
+If the typed search also jumps, the pin still fails (no invented ranking).
+**Prediction:**
+- rar-linux tests + listings-extraction tests: all pass, plus new tests for the marker/column.
+- `lx kwsweep` re-run of K14 vegan: the 42 pins harvest via `typed`, gate locks 49/49 in
+  ≈ 42 × ~40 s ≈ 30 min, rows.jsonl gains 49×20 = 980 rows minus the 7 cached pins' rows
+  are re-exported too (export re-parses all 49 pages) → +980 rows, 840 tagged typed.
+- K15 float spa (health-wellness): unknown — either typed lists it, or the market is genuinely one-place and it
+  still fails (prediction: lists; Medford has several float/spa businesses).
+**Result H29d, live run 1 (K14, 2026-10-15 11:42–12:21, 2,317 s):** 42 uncached pins all
+place-jumped; typed fallback → 41 OK, **48/49, gate still locked out** by med_bcrf49_r2.00_N
+(attempt 1: 0 cards with **no** place-jump line — a 0-card page not at `/maps/place/`, page
+overwritten so unseen; attempts 2–3 typed: 0, then 12 cards with no end-of-list text).
+10 typed partials, 9 recovered on retry. 9 outer pins (8 mi ×7, r2.00_W, r4.00_SE) stored
+12–18 rows with Google's own "end of the list" text — a real short market at the
+city-fitted camera, accepted by the existing rule. DB: 41 pins `typed` (765 rows), 7 pins
+NULL/url (140). Predictions: fallback works = right; 49/49 in one pass = **wrong** (one flaky pin);
+"+980 rows, 840 typed" = **wrong** (short outer markets).
+Fix 2: `is_place_jump` = no feed and no cards, whatever the URL (the challenge check still
+runs on the final page). Tests 21 + 32 pass.
+**K15 float spa, before the fix:** all 49 saved pages = place page "SO Float Spa", 0 cards —
+same root cause. Prediction: typed search may also resolve to the one place (Medford may have
+a single float spa); if so the pin keeps failing by design and the keyword is a genuine
+1-business market that needs a decision (accept 1-row end-of-market, or drop the keyword) —
+not a harvester fault.
+**Result H29d, live run 2 (2026-10-15 12:21–12:42):**
+- K14 vegan: r2.00_N place-jumped, typed → 20/20; **gate locked 49/49 in 37 s, status
+  `complete`, 925 rows exported** (rows.jsonl carries `serp_path`). Closed.
+- K15 float spa: typed search **also** lands on "SO Float Spa" at every pin tried (pins 1–7,
+  3 attempts each) — prediction right: a genuine one-business market, not a harvester fault.
+- **Regression caught (mine):** at pin 07 Maps home loaded blank (title "Google Maps"),
+  `typed_maps_search` timed out on the search box, the TimeoutError escaped the 3rd attempt and
+  **crashed kwsweep** (it catches only SystemExit) — no gates.jsonl line written. Before H29 the
+  same pin just failed and the queue moved on; tonight's 21:30 run would have died at K15.
+  Fix 3: the fallback is wrapped — a failed retype keeps the page Maps served and the pin
+  falls through to the ordinary partial/incomplete path. Test
+  `test_failed_typed_fallback_fails_the_pin_not_the_sweep` drives `harvest_single_pin` with a
+  fake browser; proven able to fail (1 failed with the guard removed, 22 passed with it).
+**Rule:** a fallback added inside a retry loop must not raise anything the loop's caller
+did not already handle — check the caller's except clause, not just the happy path.
+**Open, needs Mike:** one-business keywords (K15 float spa, and the same will recur in small
+cities). URL and typed paths agree on one place, yet the gate needs a list, so the gate costs
+~49 pins × 3 attempts × 2 loads ≈ 2 h every night the queue reaches it and never locks.
+Options: (a) record the confirmed single place as rank 1 of 1, end-of-market, serp_path
+`place` (truthful when both paths agree — the K14 objection was that a list existed);
+(b) drop such keywords from keyword-sets.json; (c) leave as is.

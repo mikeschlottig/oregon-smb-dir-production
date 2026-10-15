@@ -215,3 +215,865 @@ session, the newest version of a file wins. A WSL timer is the right clock here:
 WSL is up.
 
 ## Appendix A — diffs
+
+Generated 2026-10-15T14:15:59-07:00 with `git show`; test fixtures excluded.
+
+### A.1 rar-linux `a5755db` — confirmed one-business pin
+```diff
+diff --git a/src/rarlx/bcrf49_linux.py b/src/rarlx/bcrf49_linux.py
+index 76f51ea..6fdace9 100644
+--- a/src/rarlx/bcrf49_linux.py
++++ b/src/rarlx/bcrf49_linux.py
+@@ -41,7 +41,10 @@ if sys.platform == "win32":
+ from patchright.async_api import async_playwright, Browser, BrowserContext, Page
+ from scrapling import Selector
+ 
+-from rarlx.fields import RANKINGS_EXTRA_COLUMNS, TYPED_MARKER, as_rankings_columns, extract_full_listings
++from rarlx.fields import (
++    RANKINGS_EXTRA_COLUMNS, as_rankings_columns, confirmed_single_place, extract_full_listings,
++    place_page_row, serp_marker,
++)
+ 
+ # Earth equatorial radius in statute miles for WGS84 geodesic forward calculation
+ EARTH_RADIUS_MILES = 3958.7613
+@@ -855,13 +858,24 @@ async def harvest_single_pin(
+         serp_path = "url"
+         if await is_place_jump(page):
+             serp_path = "typed"
+-            print(f"        [~] Place jump to '{await page.title()}' — re-running the search typed into Maps at the pin.")
++            jumped_url, jumped_title = page.url, await page.title()
++            print(f"        [~] Place jump to '{jumped_title}' — re-running the search typed into Maps at the pin.")
++            typed_ran = False
+             try:
+                 await typed_maps_search(page, lat, lng, keyword_phrase)
++                typed_ran = True
+             except Exception as e:
+                 # The fallback must never turn a failed pin into a crashed sweep (K15, 2026-10-15:
+                 # Maps home loaded blank, the search box never appeared, the timeout killed kwsweep).
+                 print(f"        [~] Typed search failed ({type(e).__name__}); keeping the page Maps served.")
++            # H31 (Mike, 2026-10-15): both request paths answering with the same one business is
++            # Google's whole answer for this pin — a confirmed 1-result list. One path disagreeing
++            # (K14 vegan: URL jumped, typed listed 20) is not confirmed, and the list wins. A retype
++            # that failed is no second observation: the page is still the first jump.
++            if typed_ran and await is_place_jump(page) and confirmed_single_place(
++                    jumped_url, jumped_title, page.url, await page.title()):
++                serp_path = "place"
++                print(f"        [~] Typed search landed on the same place — confirmed one-business answer.")
+ 
+         # Anti-bot Sentinel Check
+         page_text = await page.evaluate("() => document.body.innerText")
+@@ -878,8 +892,9 @@ async def harvest_single_pin(
+                 screenshot_path=str(challenge_png),
+             )
+ 
+-        # Step 3: Humanized Kinematics in feed until 20 cards loaded or end reached
+-        await humanized_feed_scroll(page, target_listings=20, max_cycles=10)
++        # Step 3: Humanized Kinematics in feed until 20 cards loaded or end reached (a place page has no feed)
++        if serp_path != "place":
++            await humanized_feed_scroll(page, target_listings=20, max_cycles=10)
+ 
+         # Step 4: Extract HTML DOM & Screenshot Artifacts
+         html_content = await page.content()
+@@ -887,7 +902,7 @@ async def harvest_single_pin(
+         point_dir.mkdir(parents=True, exist_ok=True)
+ 
+         html_file = point_dir / "viewport.html"
+-        html_file.write_text((TYPED_MARKER + "\n" if serp_path == "typed" else "") + html_content, encoding="utf-8")
++        html_file.write_text(serp_marker(serp_path, page.url) + html_content, encoding="utf-8")
+         html_path = str(html_file)
+ 
+         screenshot_file = point_dir / "viewport.png"
+@@ -897,11 +912,15 @@ async def harvest_single_pin(
+         # Step 5: Atomic Extraction & End-of-List Sentinel
+         # P1.14: the framework's extract_listings_from_html (kept above, unused) stored the
+         # star rating as category, dropped most addresses and stored the feature ID as place_id.
+-        listings = [
+-            {**as_rankings_columns(r), "serp_path": serp_path}
+-            for r in extract_full_listings(html_content, max_rank=20)
+-        ]
+-        end_of_list = is_end_of_list_reached(html_content, page_text)
++        if serp_path == "place":
++            listings = [{**place_page_row(page.url, await page.title()), "serp_path": serp_path}]
++            end_of_list = True  # the confirmed answer is this one business
++        else:
++            listings = [
++                {**as_rankings_columns(r), "serp_path": serp_path}
++                for r in extract_full_listings(html_content, max_rank=20)
++            ]
++            end_of_list = is_end_of_list_reached(html_content, page_text)
+ 
+     finally:
+         await context.close()
+diff --git a/src/rarlx/fields.py b/src/rarlx/fields.py
+index 9d54bfe..ccce3ed 100644
+--- a/src/rarlx/fields.py
++++ b/src/rarlx/fields.py
+@@ -143,6 +143,7 @@ def extract_full_listings(html: str, max_rank: int = 20) -> List[Dict[str, Any]]
+ # Written into rankings.extractor so a row says which parser produced it. Rows from before
+ # 2026-10-03 carry NULL there: they came from bcrf49_linux.extract_listings_from_html.
+ EXTRACTOR = "fields.extract_full_listings@2026-10-03"
++PLACE_EXTRACTOR = "fields.place_page_row@2026-10-15"
+ 
+ # Columns the evidence DB's rankings table gained on 2026-10-03 (P1.14). Old databases get
+ # them through bcrf49_linux.UniversalEvidenceStore, which adds whatever is missing.
+@@ -154,7 +155,7 @@ RANKINGS_EXTRA_COLUMNS = {
+     "website": "TEXT",
+     "sponsored": "INTEGER",
+     "extractor": "TEXT",
+-    "serp_path": "TEXT",  # 2026-10-15 (H29): "url" or "typed"; NULL on older rows = "url"
++    "serp_path": "TEXT",  # 2026-10-15 (H29/H31): "url", "typed" or "place"; NULL on older rows = "url"
+ }
+ 
+ # How the result list was reached (H29, 2026-10-15). "url": the /maps/search/<phrase>/@pin,14z
+@@ -164,10 +165,68 @@ RANKINGS_EXTRA_COLUMNS = {
+ # TYPED_MARKER as its first line so a re-parse of the file alone can tell the two apart.
+ TYPED_MARKER = "<!-- rarlx serp_path=typed -->"
+ 
++# "place" (H31, 2026-10-15): the URL search AND the typed search both landed on the same single
++# business's place page — Google's confirmed one-result answer at that pin, stored as rank 1 of 1.
++# The page is saved with PLACE_MARKER + the place URL (identity lives in the URL, not the markup).
++PLACE_MARKER = "<!-- rarlx serp_path=place url="
++_PLACE_MARKER_RE = re.compile(r"^<!-- rarlx serp_path=place url=(\S*) -->")
++GOOGLE_MAPS_TITLE_SUFFIX = " - Google Maps"
++
++
++def serp_marker(serp_path: str, url: str = "") -> str:
++    """First line written before a saved page's HTML ("" for the plain url path)."""
++    if serp_path == "typed":
++        return TYPED_MARKER + "\n"
++    if serp_path == "place":
++        return f"{PLACE_MARKER}{url.replace(' ', '%20')} -->\n"
++    return ""
++
+ 
+ def serp_path_of(html: str) -> str:
+-    """"typed" when a saved page carries TYPED_MARKER, else "url"."""
+-    return "typed" if html.startswith(TYPED_MARKER) else "url"
++    """"typed" / "place" from a saved page's marker line, else "url"."""
++    if html.startswith(TYPED_MARKER):
++        return "typed"
++    return "place" if html.startswith(PLACE_MARKER) else "url"
++
++
++def place_url_of(html: str) -> str:
++    """The place URL recorded in a "place" page's marker ("" when there is none)."""
++    m = _PLACE_MARKER_RE.match(html)
++    return m.group(1) if m else ""
++
++
++def confirmed_single_place(url_a: str, title_a: str, url_b: str, title_b: str) -> bool:
++    """Both request paths landed on one business's place page, and it is the same business.
++    A bare "Google Maps" title (blank or 0-card page) never confirms anything."""
++    if "/maps/place/" not in url_a or "/maps/place/" not in url_b:
++        return False
++    if not title_a.endswith(GOOGLE_MAPS_TITLE_SUFFIX) or title_a == GOOGLE_MAPS_TITLE_SUFFIX.strip(" -"):
++        return False
++    a, b = FEATURE_ID.findall(url_a), FEATURE_ID.findall(url_b)
++    if a and b and a[-1] != b[-1]:
++        return False
++    return title_a == title_b
++
++
++def place_page_row(url: str, title: str) -> Dict[str, Any]:
++    """Rank 1 of a confirmed one-business answer, in the evidence DB's rankings columns. Identity
++    (name, feature ID, CID, place lat/lng, place ID) comes from the landed URL and the page title;
++    the panel's other fields are re-parsed from the saved page by lx (lx.place_fields)."""
++    feature = FEATURE_ID.findall(url)
++    latlng = PLACE_LAT_LNG.findall(url)
++    place_id = PLACE_ID.search(url)
++    name = title[: -len(GOOGLE_MAPS_TITLE_SUFFIX)] if title.endswith(GOOGLE_MAPS_TITLE_SUFFIX) else title
++    fid = f"{feature[-1][0]}:{feature[-1][1]}".lower() if feature else None
++    return {
++        "rank": 1, "business_name": name, "category": None, "average_star_rating": None,
++        "number_of_reviews": None, "phone_number": None, "address_full": None,
++        "place_id": place_id.group(1) if place_id else None,
++        "cid": str(int(feature[-1][1], 16)) if feature else None,
++        "maps_url": url, "feature_id": fid,
++        "place_lat": float(latlng[-1][0]) if latlng else None,
++        "place_lng": float(latlng[-1][1]) if latlng else None,
++        "hours_status": None, "website": None, "sponsored": 0, "extractor": PLACE_EXTRACTOR,
++    }
+ 
+ 
+ def as_rankings_columns(row: Dict[str, Any]) -> Dict[str, Any]:
+diff --git a/tests/test_h31_confirmed_place.py b/tests/test_h31_confirmed_place.py
+new file mode 100644
+index 0000000..8121a4c
+--- /dev/null
++++ b/tests/test_h31_confirmed_place.py
+@@ -0,0 +1,111 @@
++"""H31 (2026-10-15): a one-business answer counts only when the URL search and the typed search agree."""
++import asyncio
++from pathlib import Path
++
++from rarlx.fields import confirmed_single_place, place_page_row, place_url_of, serp_marker, serp_path_of
++
++FIXTURES = Path(__file__).parent / "fixtures"
++PLACE_JUMP = (FIXTURES / "h29_place_jump_vegan_medford_r025N.html").read_text(encoding="utf-8")
++LIST_PAGE = (FIXTURES / "medford_lawfirms_kw09_centroid_viewport.html").read_text(encoding="utf-8")
++
++SO = ("https://www.google.com/maps/place/SO+Float+Spa/@42.3267,-122.8746,17z/data=!4m6!3m5"
++      "!1s0x54cf7b0000000001:0x9f00000000000abc!8m2!3d42.3267!4d-122.8746!16s%2Fg%2F11abc")
++SO_TITLE = "SO Float Spa - Google Maps"
++OTHER = SO.replace("0x9f00000000000abc", "0x1111111111111111").replace("SO+Float+Spa", "Other+Spa")
++SEARCH = "https://www.google.com/maps/search/float+spa+Medford/@42.3295485,-122.8709386,14z"
++
++
++def test_same_place_on_both_paths_is_confirmed():
++    assert confirmed_single_place(SO, SO_TITLE, SO, SO_TITLE)
++
++
++def test_typed_path_that_lists_is_not_confirmed():
++    # K14 vegan: the URL jumped to Rooted, the typed search showed 20 — the list wins.
++    assert not confirmed_single_place(SO, SO_TITLE, SEARCH, "float spa Medford - Google Maps")
++
++
++def test_a_different_place_is_not_confirmed():
++    assert not confirmed_single_place(SO, SO_TITLE, OTHER, "Other Spa - Google Maps")
++    assert not confirmed_single_place(SO, SO_TITLE, OTHER, SO_TITLE)  # same title, different feature ID
++
++
++def test_a_blank_maps_page_confirms_nothing():
++    assert not confirmed_single_place(SO, "Google Maps", SO, "Google Maps")
++
++
++def test_place_row_identity_comes_from_the_url():
++    row = place_page_row(SO, SO_TITLE)
++    assert row["rank"] == 1 and row["business_name"] == "SO Float Spa"
++    assert row["feature_id"] == "0x54cf7b0000000001:0x9f00000000000abc"
++    assert row["cid"] == str(int("0x9f00000000000abc", 16))
++    assert (row["place_lat"], row["place_lng"]) == (42.3267, -122.8746)
++
++
++def test_place_marker_round_trips():
++    saved = serp_marker("place", SO) + PLACE_JUMP
++    assert serp_path_of(saved) == "place" and place_url_of(saved) == SO
++    assert serp_path_of(serp_marker("typed") + LIST_PAGE) == "typed"
++    assert serp_path_of(serp_marker("url") + LIST_PAGE) == "url"
++
++
++class Page:
++    """A patchright Page stand-in whose content changes when the typed search runs."""
++    def __init__(self, url, title, html, has_feed):
++        self.url, self._title, self._html, self._feed = url, title, html, has_feed
++
++    def show(self, url, title, html, has_feed):
++        self.url, self._title, self._html, self._feed = url, title, html, has_feed
++
++    async def goto(self, *a, **k): pass
++    async def wait_for_selector(self, *a, **k):
++        if not self._feed:
++            raise TimeoutError("no feed")
++    async def wait_for_timeout(self, *a, **k): pass
++    async def query_selector(self, css): return object() if self._feed else None
++    async def query_selector_all(self, css): return []
++    async def title(self): return self._title
++    async def evaluate(self, js): return self._title
++    async def content(self): return self._html
++    async def screenshot(self, path, **k): Path(path).write_bytes(b"")
++    mouse = None
++
++
++def harvest(monkeypatch, tmp_path, typed_shows):
++    import rarlx.bcrf49_linux as m
++    page = Page(SO, SO_TITLE, PLACE_JUMP, has_feed=False)
++
++    async def typed(p, *a, **k):
++        p.show(*typed_shows)
++
++    async def no_scroll(*a, **k):
++        return 0
++
++    class Ctx:
++        async def new_page(self): return page
++        async def close(self): pass
++
++    class Browser:
++        async def new_context(self, **k): return Ctx()
++
++    monkeypatch.setattr(m, "typed_maps_search", typed)
++    monkeypatch.setattr(m, "humanized_feed_scroll", no_scroll)
++    pin = {"point_id": "p1", "latitude": 42.3, "longitude": -122.8}
++    return asyncio.run(m.harvest_single_pin(Browser(), pin, "K15", "float spa Medford", tmp_path))
++
++
++def test_harvest_stores_the_confirmed_place_as_rank_1_of_1(tmp_path, monkeypatch):
++    listings, html_path, _, end = harvest(monkeypatch, tmp_path, (SO, SO_TITLE, PLACE_JUMP, False))
++    assert end is True and len(listings) == 1
++    assert listings[0]["business_name"] == "SO Float Spa" and listings[0]["serp_path"] == "place"
++    assert place_url_of(Path(html_path).read_text(encoding="utf-8")) == SO
++
++
++def test_harvest_keeps_the_list_when_typed_search_lists(tmp_path, monkeypatch):
++    listings, html_path, _, _ = harvest(monkeypatch, tmp_path, (SEARCH, "x - Google Maps", LIST_PAGE, True))
++    assert len(listings) == 20 and {r["serp_path"] for r in listings} == {"typed"}
++    assert serp_path_of(Path(html_path).read_text(encoding="utf-8")) == "typed"
++
++
++def test_harvest_fails_the_pin_when_typed_search_lands_elsewhere(tmp_path, monkeypatch):
++    listings, _, _, end = harvest(monkeypatch, tmp_path, (OTHER, "Other Spa - Google Maps", PLACE_JUMP, False))
++    assert listings == [] and end is False
+```
+
+### A.2 oregon-smb-directory `9913041` — export, launcher, audit, repair
+```diff
+diff --git a/listings-extraction/scripts/audit_gate_passes.py b/listings-extraction/scripts/audit_gate_passes.py
+new file mode 100644
+index 0000000..d61d89d
+--- /dev/null
++++ b/listings-extraction/scripts/audit_gate_passes.py
+@@ -0,0 +1,54 @@
++"""Audit every accepted kwsweep pin for a false pass (2026-10-15, docs/CHANGES-2026-10-15-gate-detach-sweep.md §2).
++
++A pin is accepted when it holds 20 rows, or fewer with Google's end-of-list proof (or, since H31, a confirmed
++one-business place page). A false pass = a pin accepted while businesses Google showed were not stored. Two
++independent checks over the newest SUCCESS observation of every pin in every output/kwsweep evidence DB:
++  1. every short pin (< 20 rows, url/typed path) — does its saved page carry "You've reached the end of the list"?
++  2. every pin — does its saved page hold more result cards (div.Nv2PK) than rows stored, on a short list?
++Plus, per short gate, distinct businesses across the whole grid vs the most any one pin showed.
++Run:  uv run --project . python scripts/audit_gate_passes.py
++"""
++import glob
++import re
++import sqlite3
++
++import polars as pl
++from scrapling import Selector
++
++from rarlx.fields import serp_path_of
++from lx import kwsweep
++
++END = "you've reached the end of the list"
++LATEST = """SELECT o.observation_id, o.keyword_id, o.point_id, o.results_count, o.html_path FROM observations o
++            WHERE o.status='SUCCESS' AND o.timestamp = (SELECT max(timestamp) FROM observations o2
++            WHERE o2.keyword_id=o.keyword_id AND o2.point_id=o.point_id AND o2.status='SUCCESS')"""
++
++out = []
++for db in sorted(glob.glob(str(kwsweep.OUT / "*" / "*.db"))):
++    industry = re.search(r"_or_(.+)_evidence", db).group(1)
++    c = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
++    for oid, kw, pin, n, html_path in c.execute(LATEST):
++        try:
++            html = open(html_path, encoding="utf-8", errors="replace").read()
++        except OSError:
++            out.append(dict(industry=industry, kw=kw, pin=pin, n=n, cards=-1, end=False, path="missing", places=[]))
++            continue
++        places = [r[0] for r in c.execute(
++            "SELECT coalesce(place_id, cid, business_name) FROM rankings WHERE observation_id=?", (oid,))]
++        out.append(dict(industry=industry, kw=kw, pin=pin, n=n, cards=len(Selector(html).css("div.Nv2PK")),
++                        end=END in html.lower().replace("’", "'"), path=serp_path_of(html), places=places))
++
++df = pl.DataFrame(out)
++short = df.filter((pl.col("n") < 20) & (pl.col("path") != "place"))
++print(f"accepted pins: {df.height}  gates: {df.select('industry', 'kw').unique().height}  "
++      f"saved page missing: {df.filter(pl.col('path') == 'missing').height}")
++print(f"short pins (url/typed): {short.height}  with Google's end-of-list sentence: {short.filter(pl.col('end')).height}")
++print(f"confirmed one-business pins (place): {df.filter(pl.col('path') == 'place').height}")
++print(f"short pins whose page shows more cards than rows stored: "
++      f"{short.filter(pl.col('cards') > pl.col('n')).height}")
++grid = (df.join(short.select("industry", "kw").unique(), on=["industry", "kw"]).explode("places")
++        .group_by(["industry", "kw"]).agg(pl.col("places").n_unique().alias("distinct_in_grid"),
++                                          pl.col("n").max().alias("most_at_one_pin"))
++        .sort("distinct_in_grid", descending=True))
++with pl.Config(tbl_rows=40):
++    print(grid)
+diff --git a/listings-extraction/scripts/kwsweep-launch.sh b/listings-extraction/scripts/kwsweep-launch.sh
+new file mode 100755
+index 0000000..e0d83b6
+--- /dev/null
++++ b/listings-extraction/scripts/kwsweep-launch.sh
+@@ -0,0 +1,24 @@
++#!/usr/bin/env bash
++# kwsweep-launch.sh — start a kwsweep run that does not depend on the chat (or terminal) that started it.
++#
++# WHY (Mike, 2026-10-15): live runs started from a Claude Code shell are children of the claude process; closing
++# the chat kills them. This hands the run to Windows: Start-Process launches wsl.exe as a Windows process, outside
++# the caller's Linux process tree. That wsl.exe also keeps the WSL VM up for the whole run, and the run uses the same
++# script as the nightly task (kwsweep-nightly.sh: keep-awake, lock, resume, exit line in the log).
++#
++#   scripts/kwsweep-launch.sh [lx kwsweep args...]       e.g.  --industries health-wellness --keywords K15
++#   KWSWEEP_HOURS=2 scripts/kwsweep-launch.sh ...        time budget (default 9, as nightly)
++#
++# Prints the log path. Watch it with: tail -f <log>.  Stop at the next gate boundary: touch output/kwsweep/STOP.
++# The kwsweep lock (output/kwsweep/.lock) refuses a second concurrent run, nightly included.
++set -euo pipefail
++HERE=/home/mikes/oregon-smb-directory/listings-extraction
++LOG="output/kwsweep/adhoc-$(date +%Y%m%d-%H%M%S).log"
++HOURS="${KWSWEEP_HOURS:-9}"
++for a in "$@"; do
++  case "$a" in *[!A-Za-z0-9._-]*) echo "kwsweep-launch: refusing argument with shell/PowerShell metacharacters: $a" >&2; exit 2 ;; esac
++done
++ARGS="-d Ubuntu-24.04 -u mikes -- env KWSWEEP_LOG=$LOG KWSWEEP_HOURS=$HOURS $HERE/scripts/kwsweep-nightly.sh $*"
++/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -Command \
++  "Start-Process -WindowStyle Hidden -FilePath wsl.exe -ArgumentList '$ARGS'" </dev/null
++echo "$HERE/$LOG"
+diff --git a/listings-extraction/scripts/kwsweep-nightly.sh b/listings-extraction/scripts/kwsweep-nightly.sh
+index 5c0d023..a3e55e1 100755
+--- a/listings-extraction/scripts/kwsweep-nightly.sh
++++ b/listings-extraction/scripts/kwsweep-nightly.sh
+@@ -7,19 +7,22 @@
+ # it exits when output/kwsweep/.awake is removed below, or after KWSWEEP_HOURS + 1 h.
+ #   KWSWEEP_HOURS   time budget, checked between gates (default 9; a gate is ~16 min, so the window ends ≤ ~20 min late)
+ #   output/kwsweep/STOP   pauses the queue at the next gate boundary (delete it to resume)
+-# Log: output/kwsweep/nightly-YYYYMMDD.log. Resume, lock and block handling: src/lx/kwsweep.py.
++#   KWSWEEP_LOG     log path (default output/kwsweep/nightly-YYYYMMDD.log; scripts/kwsweep-launch.sh sets adhoc-*.log)
++#   extra args      passed to `lx kwsweep` (e.g. --industries health-wellness --keywords K15)
++# Live runs started from a chat go through scripts/kwsweep-launch.sh, never a chat-owned shell (Mike, 2026-10-15).
++# Resume, lock and block handling: src/lx/kwsweep.py.
+ set -uo pipefail
+ cd /home/mikes/oregon-smb-directory/listings-extraction
+ mkdir -p output/kwsweep
+-LOG="output/kwsweep/nightly-$(date +%Y%m%d).log"
++LOG="${KWSWEEP_LOG:-output/kwsweep/nightly-$(date +%Y%m%d).log}"
+ HOURS="${KWSWEEP_HOURS:-9}"
+ UV=/home/mikes/.local/bin/uv
+ SENTINEL=output/kwsweep/.awake
+-echo "=== $(date -Is) start · budget ${HOURS} h" >> "$LOG"
++echo "=== $(date -Is) start · budget ${HOURS} h · args: ${*:-none}" >> "$LOG"
+ touch "$SENTINEL"
+ /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden \
+   -File "$(wslpath -w scripts/keep-awake.ps1)" -Hours "$(awk "BEGIN{print $HOURS+1}")" -Sentinel "$(wslpath -w "$SENTINEL")" >/dev/null 2>&1 &
+-"$UV" run --project . lx kwsweep --headless --yes --max-hours "$HOURS" >> "$LOG" 2>&1
++"$UV" run --project . lx kwsweep --headless --yes --max-hours "$HOURS" "$@" >> "$LOG" 2>&1
+ rc=$?
+ rm -f "$SENTINEL"
+ echo "=== $(date -Is) exit ${rc}" >> "$LOG"
+diff --git a/listings-extraction/scripts/repair_rows_serp_path.py b/listings-extraction/scripts/repair_rows_serp_path.py
+new file mode 100644
+index 0000000..de41a8a
+--- /dev/null
++++ b/listings-extraction/scripts/repair_rows_serp_path.py
+@@ -0,0 +1,39 @@
++"""One-off repair (2026-10-15, docs/CHANGES-2026-10-15-gate-detach-sweep.md §3).
++
++rows.jsonl rows written before kwsweep.export_gate tagged serp_path get it from the marker line of the saved page
++they were parsed from; a page with no marker was reached by the URL path ("url"). Rows that already carry serp_path
++are left alone. The caller archives the pre-repair file first (output/kwsweep/_archive/rows.jsonl.<stamp>).
++Run:  uv run --project . python scripts/repair_rows_serp_path.py
++"""
++import json
++import os
++from collections import Counter
++
++from rarlx.fields import serp_path_of
++
++from lx import kwsweep, sweep
++
++out = kwsweep.OUT / "rows.jsonl"
++tmp = out.with_suffix(".jsonl.repairing")
++cache: dict = {}
++by_gate: Counter = Counter()
++with out.open(encoding="utf-8") as src, tmp.open("w", encoding="utf-8") as dst:
++    for line in src:
++        r = json.loads(line)
++        if "serp_path" not in r:
++            mk = sweep._market({"latitude": 0, "longitude": 0}, r["city_slug"].replace("-", " ").title())
++            page = (kwsweep.OUT / r["city_slug"] / f"artifacts_{mk.market_slug}_{r['industry'].lower()}"
++                    / r["keyword_id"] / r["point_id"] / "viewport.html")
++            if page not in cache:
++                cache[page] = serp_path_of(page.read_text(encoding="utf-8")) if page.exists() else "url"
++            r = {**r, "serp_path": cache[page]}
++        by_gate[(r["industry"], r["keyword_id"], r["serp_path"])] += 1
++        dst.write(json.dumps(r) + "\n")
++os.replace(tmp, out)
++
++totals = Counter()
++for (industry, kw, path), n in sorted(by_gate.items()):
++    totals[path] += n
++    if path != "url" or (industry, kw) == ("food-dining", "K14"):
++        print(industry, kw, path, n)
++print("rows:", sum(totals.values()), dict(totals), "| pages read:", len(cache))
+diff --git a/listings-extraction/src/lx/kwsweep.py b/listings-extraction/src/lx/kwsweep.py
+index fd6ccfd..6a5b883 100644
+--- a/listings-extraction/src/lx/kwsweep.py
++++ b/listings-extraction/src/lx/kwsweep.py
+@@ -31,10 +31,8 @@ from pathlib import Path
+ from typing import Iterable, List, Optional
+ 
+ from rarlx.bcrf49_linux import execute_bcrf49_pipeline
+-from rarlx.fields import extract_full_listings
+ 
+ from lx import sweep
+-from lx.targets import feature_id_to_place_id
+ 
+ KEYWORDS = sweep.ROOT / "keywords" / "keyword-sets.json"
+ OUT = sweep.ROOT / "output" / "kwsweep"
+@@ -88,10 +86,9 @@ def export_gate(g: dict) -> int:
+             page = art / pin["point_id"] / "viewport.html"
+             if not page.exists():
+                 continue
+-            for r in extract_full_listings(page.read_text(encoding="utf-8"), max_rank=20):
+-                r.pop("text_tokens", None)
+-                if not r.get("place_id") and r.get("feature_id"):
+-                    r["place_id"] = feature_id_to_place_id(r["feature_id"])
++            # serp_path on every row (url | typed | place). Missing here until 2026-10-15: the H29 commit
++            # tagged lx/sweep.py's export, which kwsweep does not call (CHANGES-2026-10-15 §3).
++            for r in sweep.page_rows(page.read_text(encoding="utf-8")):
+                 f.write(json.dumps({
+                     "city_slug": g["city_slug"], "industry": g["industry"], "keyword_id": g["keyword_id"],
+                     "query": g["phrase"], "point_id": pin["point_id"], "pin_lat": pin["latitude"],
+diff --git a/listings-extraction/src/lx/sweep.py b/listings-extraction/src/lx/sweep.py
+index d9c6387..98bbee3 100644
+--- a/listings-extraction/src/lx/sweep.py
++++ b/listings-extraction/src/lx/sweep.py
+@@ -23,8 +23,9 @@ from pathlib import Path
+ from typing import Dict, Iterable, List, Optional
+ 
+ from rarlx.bcrf49_linux import MarketConfig, execute_bcrf49_pipeline
+-from rarlx.fields import extract_full_listings, serp_path_of
++from rarlx.fields import extract_full_listings, place_url_of, serp_path_of
+ 
++from lx.place_fields import extract_place
+ from lx.targets import feature_id_to_place_id
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+@@ -84,22 +85,42 @@ def export_gate(g: dict) -> int:
+             page = art / pin["point_id"] / "viewport.html"
+             if not page.exists():
+                 continue
+-            html = page.read_text(encoding="utf-8")
+-            serp_path = serp_path_of(html)  # "typed" when Maps place-jumped and the phrase was typed (H29)
+-            for r in extract_full_listings(html, max_rank=20):
+-                r.pop("text_tokens", None)
+-                if not r.get("place_id") and r.get("feature_id"):
+-                    r["place_id"] = feature_id_to_place_id(r["feature_id"])
++            for r in page_rows(page.read_text(encoding="utf-8")):
+                 f.write(json.dumps({
+                     "city_slug": g["city_slug"], "industry": g["industry"], "query": g["phrase"],
+                     "point_id": pin["point_id"], "pin_lat": pin["latitude"], "pin_lng": pin["longitude"],
+                     "radius_miles": pin["radius_miles"], "bearing": pin["bearing_label"],
+-                    "exported_at": ts, "serp_path": serp_path, **r,
++                    "exported_at": ts, **r,
+                 }) + "\n")
+                 n += 1
+     return n
+ 
+ 
++PLACE_ROW_KEYS = ("business_name", "category", "average_star_rating", "number_of_reviews", "address", "phone",
++                  "website", "place_id", "cid", "feature_id", "place_lat", "place_lng")
++
++
++def page_rows(html: str) -> List[Dict]:
++    """Rows of one saved viewport.html, each tagged with serp_path (H29/H31):
++    "url" / "typed" = a result list, parsed card by card; "place" = Google's confirmed one-business
++    answer at that pin (URL and typed search agreed), parsed from the place panel as rank 1 of 1."""
++    serp_path = serp_path_of(html)
++    if serp_path == "place":
++        url = place_url_of(html)
++        p = extract_place(html, url)
++        rows = [{"rank": 1, **{k: p.get(k) for k in PLACE_ROW_KEYS}, "maps_url": url, "hours_status": None,
++                 "sponsored": False, "extractor": "lx.place_fields.extract_place"}]
++    else:
++        rows = extract_full_listings(html, max_rank=20)
++    out = []
++    for r in rows:
++        r.pop("text_tokens", None)
++        if not r.get("place_id") and r.get("feature_id"):
++            r["place_id"] = feature_id_to_place_id(r["feature_id"])
++        out.append({"serp_path": serp_path, **r})
++    return out
++
++
+ def done_gates() -> set:
+     p = OUT / "gates.jsonl"
+     if not p.exists():
+diff --git a/listings-extraction/tests/test_kwsweep_export.py b/listings-extraction/tests/test_kwsweep_export.py
+new file mode 100644
+index 0000000..288f12d
+--- /dev/null
++++ b/listings-extraction/tests/test_kwsweep_export.py
+@@ -0,0 +1,48 @@
++"""kwsweep/sweep export (2026-10-15): every row says how its page was reached; a confirmed place page
++is exported as its one business (H31). Fixture: the real K15 "float spa Medford" page saved at
++med_bcrf49_r0.00_centroid on 2026-10-15 (marker line removed)."""
++from pathlib import Path
++
++from rarlx.fields import serp_marker
++
++from lx import kwsweep, sweep
++
++FIX = Path(__file__).parent / "fixtures"
++SO_PAGE = (FIX / "h31_so_float_spa_place_page.html").read_text(encoding="utf-8")
++LIST_PAGE = (Path(__file__).parents[3] / "rar-linux" / "tests" / "fixtures"
++             / "medford_lawfirms_kw09_centroid_viewport.html").read_text(encoding="utf-8")
++SO_URL = ("https://www.google.com/maps/place/SO+Float+Spa/@42.3267,-122.8746,17z/data=!4m6!3m5"
++          "!1s0x54cf7b0000000001:0x9f00000000000abc!8m2!3d42.3267!4d-122.8746")
++
++
++def test_confirmed_place_page_exports_one_row():
++    rows = sweep.page_rows(serp_marker("place", SO_URL) + SO_PAGE)
++    assert len(rows) == 1
++    r = rows[0]
++    assert (r["rank"], r["business_name"], r["serp_path"]) == (1, "SO Float Spa", "place")
++    assert r["feature_id"] == "0x54cf7b0000000001:0x9f00000000000abc" and r["maps_url"] == SO_URL
++
++
++def test_unconfirmed_place_page_exports_nothing():
++    # Typed-marked place page = the retype also jumped but was not confirmed; it never became a row.
++    assert sweep.page_rows(serp_marker("typed") + SO_PAGE) == []
++
++
++def test_list_pages_carry_serp_path():
++    assert {r["serp_path"] for r in sweep.page_rows(LIST_PAGE)} == {"url"}
++    typed = sweep.page_rows(serp_marker("typed") + LIST_PAGE)
++    assert len(typed) == 20 and {r["serp_path"] for r in typed} == {"typed"}
++
++
++def test_kwsweep_export_uses_the_shared_parser(tmp_path, monkeypatch):
++    # The H29 commit tagged sweep.export_gate only; kwsweep.export_gate wrote no serp_path at all.
++    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
++    g = {"city_slug": "medford", "city": "Medford", "centroid": {"latitude": 42.3265, "longitude": -122.8756}, "industry": "health-wellness",
++         "keyword_id": "K15", "phrase": "float spa Medford",
++         "pins": [{"point_id": "p1", "latitude": 42.3, "longitude": -122.8, "radius_miles": 0, "bearing_label": "C"}]}
++    mk = sweep._market(g["centroid"], g["city"])
++    page = tmp_path / "medford" / f"artifacts_{mk.market_slug}_health-wellness" / "K15" / "p1" / "viewport.html"
++    page.parent.mkdir(parents=True)
++    page.write_text(serp_marker("place", SO_URL) + SO_PAGE, encoding="utf-8")
++    assert kwsweep.export_gate(g) == 1
++    assert '"serp_path": "place"' in (tmp_path / "rows.jsonl").read_text(encoding="utf-8")
+```
+
+### A.3 home `4e2fea5` — artifact-keeper sweep scope, scratchpad backup
+```diff
+diff --git a/.config/systemd/user/scratchpad-backup.service b/.config/systemd/user/scratchpad-backup.service
+new file mode 100644
+index 0000000..7d87e0e
+--- /dev/null
++++ b/.config/systemd/user/scratchpad-backup.service
+@@ -0,0 +1,6 @@
++[Unit]
++Description=Copy Claude Code session scratchpads from /tmp to ~/.claude/scratchpad-backup
++
++[Service]
++Type=oneshot
++ExecStart=/home/mikes/scripts/scratchpad-backup.sh
+diff --git a/.config/systemd/user/scratchpad-backup.timer b/.config/systemd/user/scratchpad-backup.timer
+new file mode 100644
+index 0000000..8b336bc
+--- /dev/null
++++ b/.config/systemd/user/scratchpad-backup.timer
+@@ -0,0 +1,10 @@
++[Unit]
++Description=Back up Claude Code scratchpads every minute (source: /home/mikes/scripts/scratchpad-backup.sh)
++
++[Timer]
++OnBootSec=1min
++OnUnitActiveSec=1min
++AccuracySec=5s
++
++[Install]
++WantedBy=timers.target
+diff --git a/scripts/hooks/artifact-keeper.sh b/scripts/hooks/artifact-keeper.sh
+new file mode 100755
+index 0000000..281fb92
+--- /dev/null
++++ b/scripts/hooks/artifact-keeper.sh
+@@ -0,0 +1,170 @@
++#!/usr/bin/env bash
++# artifact-keeper.sh — nothing an agent authors is allowed to live only in /tmp.
++#
++#   PostToolUse (Write|Edit)  ->  artifact-keeper.sh mirror
++#   SessionEnd                ->  artifact-keeper.sh sweep
++#   manual one-time rescue    ->  artifact-keeper.sh rescue
++#
++# WHY
++# 231 distinct files have been written to /tmp/claude-*/ scratchpads across this machine's
++# session history. 4 still exist. /tmp is not rotated here — it is simply lost on reboot,
++# and two of the casualties were the source files of published artifacts.
++#
++# DESIGN, and why it is this way
++#   * MIRROR COPIES, IT DOES NOT MOVE. The file stays at its /tmp path so a later Edit,
++#     Read or Artifact publish in the same session still resolves. Moving on PostToolUse
++#     would break the next tool call that touches the file.
++#   * MIRROR RUNS ON EVERY WRITE. The permanent copy is refreshed each save, so the
++#     archived version is the final version, not the first draft.
++#   * SWEEP MOVES, AND ONLY AT SessionEnd. Once the session is over nothing will reference
++#     the /tmp path again, so the remainder is moved and /tmp left clean. Sweep also
++#     catches files the mirror never saw — heredocs, ctx_execute output, anything Bash wrote.
++#   * SWEEP TOUCHES ONLY THE ENDING SESSION. It reads session_id from the SessionEnd payload
++#     and moves /tmp/claude-<uid>/*/<session_id>/ and nothing else. Until 2026-10-15 it swept
++#     the whole /tmp/claude-<uid> tree, so any session ending moved every *live* session's
++#     scratchpad (and Claude Code's own bash-edit-diff store) out from under it, then deleted
++#     the emptied directories. No session_id in the payload = nothing is moved.
++#   * RESCUE (manual) takes the whole tree but only files untouched for 24 h, so a live
++#     session is never robbed by a hand-run rescue either.
++#   * COPY-VERIFY-THEN-UNLINK. A move is a copy, a size comparison, and only then an
++#     unlink. A failed verify leaves the source alone.
++#   * NEVER OVERWRITES. A name collision gets a numeric suffix. Archive, never delete.
++#   * NEVER FAILS THE TOOL CALL. Every path exits 0. A broken archiver must not be able to
++#     block a write.
++set -uo pipefail
++
++DEST_ROOT="${CLAUDE_ARTIFACT_ROOT:-$HOME/.claude/artifacts}"
++MANIFEST="$DEST_ROOT/MANIFEST.tsv"
++SRC_GLOB_ROOT="${CLAUDE_SCRATCH_ROOT:-/tmp/claude-$(id -u)}"   # override exists for the test only
++MODE="${1:-mirror}"
++
++# Machinery, not authored work. Mirroring these turns an archive into a junk drawer.
++skip_file() {
++  case "$1" in
++    */node_modules/*|*/__pycache__/*|*/.venv/*|*/.git/*) return 0 ;;
++    *.lock|*.pid|*.sock|*.swp|*~|*.tmp) return 0 ;;
++    */tasks/*.output) return 0 ;;          # task plumbing, regenerated each run
++  esac
++  [ -f "$1" ] || return 0                  # gone, or not a regular file
++  [ -s "$1" ] || return 0                  # zero bytes
++  return 1
++}
++
++# /tmp/claude-1000/-home-mikes/<session>/scratchpad/a/b.html
++#   -> $DEST_ROOT/<YYYY-MM-DD>/<session-first8>/a/b.html
++dest_for() {
++  local src="$1" rel session stamp depth
++  rel="${src#"$SRC_GLOB_ROOT"/}"           # -home-mikes/<session>/scratchpad/a/b.html
++  stamp="$(date -r "$src" +%Y-%m-%d 2>/dev/null || date +%Y-%m-%d)"
++  depth="$(printf '%s' "$rel" | tr -cd '/' | wc -c)"
++
++  # Anything shallower than <project>/<session>/<file> has no session to key on — a stray
++  # written straight into the root. Bucket it rather than manufacturing a directory name
++  # out of a truncated filename.
++  if [ "$depth" -lt 2 ]; then
++    printf '%s/%s/_loose/%s' "$DEST_ROOT" "$stamp" "$(basename "$rel")"
++    return
++  fi
++
++  session="$(printf '%s' "$rel" | cut -d/ -f2)"
++  rel="$(printf '%s' "$rel" | cut -d/ -f3-)"   # scratchpad/a/b.html
++  rel="${rel#scratchpad/}"
++  printf '%s/%s/%s/%s' "$DEST_ROOT" "$stamp" "${session:0:8}" "$rel"
++}
++
++# Copy without ever clobbering: b.html, b-2.html, b-3.html …
++uncollide() {
++  local d="$1" base ext dir n=2
++  [ -e "$d" ] || { printf '%s' "$d"; return; }
++  dir="$(dirname "$d")"; base="$(basename "$d")"
++  case "$base" in *.*) ext=".${base##*.}"; base="${base%.*}" ;; *) ext="" ;; esac
++  while [ -e "$dir/$base-$n$ext" ]; do n=$((n+1)); done
++  printf '%s/%s-%s%s' "$dir" "$base" "$n" "$ext"
++}
++
++log_move() {
++  mkdir -p "$DEST_ROOT" 2>/dev/null || return 0
++  [ -f "$MANIFEST" ] || printf 'when\tmode\tbytes\tsource\tdestination\n' >> "$MANIFEST"
++  printf '%s\t%s\t%s\t%s\t%s\n' "$(date -Is)" "$1" "$2" "$3" "$4" >> "$MANIFEST"
++}
++
++# keep <src> <copy|move>
++keep() {
++  local src="$1" action="$2" dst sz dsz
++  skip_file "$src" && return 0
++  dst="$(dest_for "$src")"
++  mkdir -p "$(dirname "$dst")" 2>/dev/null || return 0
++
++  # An identical mirror already there: refresh in place rather than pile up suffixes.
++  if [ -e "$dst" ]; then
++    if cmp -s "$src" "$dst"; then
++      [ "$action" = "move" ] && rm -f "$src"
++      return 0
++    fi
++    # Same basename, different bytes, and this is a re-save of the same file: overwrite the
++    # mirror. Only a *different* file with a colliding name gets a suffix, and it cannot be
++    # distinguished here, so prefer freshness for mirror and suffix for sweep.
++    [ "$action" = "move" ] && dst="$(uncollide "$dst")"
++  fi
++
++  cp -p "$src" "$dst" 2>/dev/null || return 0
++  sz="$(stat -c %s "$src" 2>/dev/null || echo 0)"
++  dsz="$(stat -c %s "$dst" 2>/dev/null || echo -1)"
++  [ "$sz" = "$dsz" ] || { rm -f "$dst" 2>/dev/null; return 0; }   # verify failed, leave source
++
++  log_move "$action" "$sz" "$src" "$dst"
++  [ "$action" = "move" ] && rm -f "$src"
++  return 0
++}
++
++case "$MODE" in
++  mirror)
++    # PostToolUse hands us the tool call on stdin. Only /tmp scratchpad writes are our business.
++    payload="$(cat 2>/dev/null || true)"
++    [ -n "$payload" ] || exit 0
++    if command -v jq >/dev/null 2>&1; then
++      fp="$(printf '%s' "$payload" | jq -r '.tool_input.file_path // empty' 2>/dev/null)"
++    else
++      fp="$(printf '%s' "$payload" | grep -oE '"file_path"[[:space:]]*:[[:space:]]*"[^"]+"' \
++            | head -1 | sed -E 's/.*"file_path"[[:space:]]*:[[:space:]]*"([^"]+)"/\1/')"
++    fi
++    [ -n "${fp:-}" ] || exit 0
++    case "$fp" in "$SRC_GLOB_ROOT"/*) keep "$fp" copy ;; esac
++    ;;
++
++  sweep|rescue)
++    [ -d "$SRC_GLOB_ROOT" ] || exit 0
++    roots=()
++    if [ "$MODE" = "sweep" ]; then
++      # Only the session that is ending. Its id comes from the SessionEnd payload on stdin.
++      payload="$(cat 2>/dev/null || true)"
++      if command -v jq >/dev/null 2>&1; then
++        sid="$(printf '%s' "$payload" | jq -r '.session_id // empty' 2>/dev/null)"
++      else
++        sid="$(printf '%s' "$payload" | grep -oE '"session_id"[[:space:]]*:[[:space:]]*"[^"]+"' \
++              | head -1 | sed -E 's/.*"([^"]+)"$/\1/')"
++      fi
++      case "${sid:-}" in ''|*/*|.*) exit 0 ;; esac    # no id, or not a plain id: touch nothing
++      for d in "$SRC_GLOB_ROOT"/*/"$sid"; do [ -d "$d" ] && roots+=("$d"); done
++      age=()
++    else
++      roots=("$SRC_GLOB_ROOT")
++      age=(-mmin +1440)                                # rescue: files idle for 24 h only
++    fi
++    [ "${#roots[@]}" -gt 0 ] || exit 0
++    n=0
++    while IFS= read -r f; do
++      keep "$f" move && n=$((n+1))
++    done < <(find "${roots[@]}" -type f "${age[@]}" 2>/dev/null)
++    # Drop the directory skeletons left behind, inside the swept roots only.
++    find "${roots[@]}" -mindepth 1 -type d -empty -delete 2>/dev/null || true
++    [ "$MODE" = "sweep" ] && rmdir "${roots[@]}" 2>/dev/null
++    [ "$MODE" = "rescue" ] && echo "artifact-keeper: swept $n file(s) -> $DEST_ROOT"
++    ;;
++
++  *)
++    echo "usage: artifact-keeper.sh [mirror|sweep|rescue]" >&2
++    ;;
++esac
++
++exit 0
+diff --git a/scripts/scratchpad-backup.sh b/scripts/scratchpad-backup.sh
+new file mode 100755
+index 0000000..1852403
+--- /dev/null
++++ b/scripts/scratchpad-backup.sh
+@@ -0,0 +1,27 @@
++#!/usr/bin/env bash
++# scratchpad-backup.sh — copy every Claude Code session scratchpad to permanent storage, every minute.
++#
++# WHY (Mike, 2026-10-15): Claude Code puts each session's scratchpad under /tmp/claude-<uid>/<project>/<session>/scratchpad.
++# /tmp is lost on reboot and was also being emptied mid-session by the old artifact-keeper sweep, so the next session
++# could not find the previous session's working files. This runs from the systemd user timer scratchpad-backup.timer
++# (OnUnitActiveSec=1min) while WSL is up — the only time a scratchpad exists, so a WSL timer is the right clock here.
++#
++# Destination: ~/.claude/scratchpad-backup/<project>/<session>/   (same layout as /tmp, "scratchpad/" dropped)
++#   * COPY ONLY. rsync without --delete: a file removed from /tmp stays in the backup.
++#   * Latest version wins for a file that changed; history of finished sessions is the SessionEnd sweep's job
++#     (~/.claude/artifacts, scripts/hooks/artifact-keeper.sh).
++#   * Machinery (node_modules, .venv, __pycache__, .git) is skipped.
++set -uo pipefail
++
++SRC="${CLAUDE_SCRATCH_ROOT:-/tmp/claude-$(id -u)}"
++DEST="${SCRATCHPAD_BACKUP_ROOT:-$HOME/.claude/scratchpad-backup}"
++[ -d "$SRC" ] || exit 0
++
++for sp in "$SRC"/*/*/scratchpad; do
++  [ -d "$sp" ] || continue
++  rel="${sp#"$SRC"/}"          # <project>/<session>/scratchpad
++  out="$DEST/${rel%/scratchpad}"
++  mkdir -p "$out"
++  rsync -a --exclude node_modules --exclude .venv --exclude __pycache__ --exclude .git "$sp"/ "$out"/
++done
++exit 0
+```
+
+### A.4 previous session (for reference): rar-linux `37222a3`, oregon-smb-directory `d69301d` — H29 typed fallback
+
+See `git show 37222a3` / `git show d69301d`; their reasoning is hypothesis.md H29–H29d.

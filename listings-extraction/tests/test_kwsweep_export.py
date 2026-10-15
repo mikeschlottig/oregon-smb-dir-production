@@ -23,6 +23,13 @@ def test_confirmed_place_page_exports_one_row():
     assert r["feature_id"] == "0x54cf7b0000000001:0x9f00000000000abc" and r["maps_url"] == SO_URL
 
 
+def test_place_page_saved_before_the_panel_rendered_still_exports_its_business():
+    # K15 med_bcrf49_r8.00_NW, 2026-10-15: no h1/panel in the saved page; the DB had the name from the title.
+    bare = "<html><head><title>SO Float Spa - Google Maps</title></head><body><div role=main></div></body></html>"
+    [r] = sweep.page_rows(serp_marker("place", SO_URL) + bare)
+    assert r["business_name"] == "SO Float Spa" and r["feature_id"] == "0x54cf7b0000000001:0x9f00000000000abc"
+
+
 def test_unconfirmed_place_page_exports_nothing():
     # Typed-marked place page = the retype also jumped but was not confirmed; it never became a row.
     assert sweep.page_rows(serp_marker("typed") + SO_PAGE) == []

@@ -17,13 +17,14 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from rarlx.bcrf49_linux import MarketConfig, execute_bcrf49_pipeline
-from rarlx.fields import extract_full_listings, place_url_of, serp_path_of
+from rarlx.fields import extract_full_listings, place_page_row, place_url_of, serp_path_of
 
 from lx.place_fields import extract_place
 from lx.targets import feature_id_to_place_id
@@ -96,6 +97,7 @@ def export_gate(g: dict) -> int:
     return n
 
 
+TITLE = re.compile(r"<title>([^<]*)</title>")
 PLACE_ROW_KEYS = ("business_name", "category", "average_star_rating", "number_of_reviews", "address", "phone",
                   "website", "place_id", "cid", "feature_id", "place_lat", "place_lng")
 
@@ -106,10 +108,16 @@ def page_rows(html: str) -> List[Dict]:
     answer at that pin (URL and typed search agreed), parsed from the place panel as rank 1 of 1."""
     serp_path = serp_path_of(html)
     if serp_path == "place":
+        # Identity the same way the evidence DB stores it (landed URL + page title); panel fields on top
+        # when the panel had rendered. A page saved before Maps drew the panel (seen at K15
+        # med_bcrf49_r8.00_NW, 2026-10-15: no h1, 470 KB) still exports its business.
         url = place_url_of(html)
+        title = TITLE.search(html)
+        base = place_page_row(url, title.group(1).strip() if title else "")
         p = extract_place(html, url)
-        rows = [{"rank": 1, **{k: p.get(k) for k in PLACE_ROW_KEYS}, "maps_url": url, "hours_status": None,
-                 "sponsored": False, "extractor": "lx.place_fields.extract_place"}]
+        rows = [{"rank": 1, **{k: p.get(k) if p.get(k) is not None else base.get(k) for k in PLACE_ROW_KEYS},
+                 "maps_url": url, "hours_status": None, "sponsored": False,
+                 "extractor": "lx.place_fields.extract_place+fields.place_page_row"}]
     else:
         rows = extract_full_listings(html, max_rank=20)
     out = []

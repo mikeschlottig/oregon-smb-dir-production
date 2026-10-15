@@ -332,5 +332,18 @@ Diff record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md`.
 - [x] P15.3 lx export re-parses `serp_path=place` pages into their 1 row. Gate: test on a saved K15 page.
 - [x] P15.4 detached launcher: every live run starts outside the chat's process tree. Gate: parent of
   the running sweep is not a claude process; run survives.
-- [ ] P15.5 live K15 "float spa Medford" via the launcher. Gate: gates.jsonl `complete`, 49 rows place.
-- [ ] P15.6 diff record + hypothesis results + commits in rar-linux, oregon-smb-directory, home.
+- [x] P15.5 live K15 "float spa Medford" via the launcher. Gate: gates.jsonl `complete`, 49 rows place.
+- [x] P15.6 diff record + hypothesis results + commits in rar-linux, oregon-smb-directory, home.
+
+### P16 — workflow improvements (Mike, 2026-10-15 14:52: "go 1-4 straight through, then 5, then plan + do 6")
+Record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md` §8+. Predictions: `hypothesis.md` H33+.
+- [x] P16.1 Verify the final output: memory + PATTERNS entry. Gate: both files contain the rule, with the 10-15 evidence.
+- [ ] P16.2 `lx kwsweep --probe`: one centroid pin per never-run keyword → `output/kwsweep/probes.jsonl`
+  (list N / place / short+end / fail). Gate: unit test on classifier + live probe of K15 float spa = place.
+- [ ] P16.3 nightly gate audit ledger: `kwsweep-nightly.sh` appends `audit_gate_passes.py --json` to
+  `output/kwsweep/gate-audit.jsonl`. Gate: run once by hand, one JSON line with false_pass counts.
+- [ ] P16.4 hook blocks chat-launched sweeps (lx kwsweep live / rarlx / scrapers) → points to launcher.
+  Gate: hook test, 3 block + 3 allow cases (status, launcher, tests).
+- [ ] P16.5 resource visibility: resource-watch names top writer + top RSS (pid, comm, owner session);
+  thumbtack write volume diagnosed + recommendation for drive-clearing after R2 backup. Gate: --once output shows names.
+- [ ] P16.6 plan + do: hooks that move/delete need a fixture test + own-session scope (inventory, tests, AGENTS rule).

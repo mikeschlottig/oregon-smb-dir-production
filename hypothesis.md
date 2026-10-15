@@ -586,3 +586,14 @@ kwsweep` process contains no `claude`, and the log keeps growing after the launc
   export function. Fixed and back-filled: 785 typed + 140 url for K14, matching the DB.
 - **10-14 regression question (Mike):** 0 scraper commits on 10-14; Chrome dated 08-19; libs 10-03; both failing
   keywords were first-ever runs. Latent gap, not a regression. Docs: listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md.
+
+## H31 — result (K15 live, 2026-10-15 14:10–14:52, detached via kwsweep-launch.sh)
+- **Right:** 49/49 pins confirmed "SO Float Spa" (URL jump + typed jump, same place), gate `complete`, 49 rows,
+  0 typed-search failures, 0 incomplete. K14 vegan rows untouched (785 typed + 140 url).
+- **Wrong:** time. Predicted ≈30 min; actual 2,512 s ≈ 42 min (≈51 s/pin).
+- **Defect found by checking the final artifact (new pattern `verify-the-artifact-the-reader-uses`):** 1/49 exported
+  rows had `business_name = null` (med_bcrf49_r8.00_NW). The DB row was right (name from title); the saved page
+  was captured before Maps drew the panel (no h1, 470 KB vs 742 KB), so `extract_place` found nothing. Fix:
+  `sweep.page_rows` takes identity from `place_page_row(url, title)` (same as the DB) and overlays panel fields.
+  Re-exported with `scripts/reexport_gate.py` (archive `rows.jsonl.2026-10-15-145349`): 49/49 named.
+- Thumbtack scraper was SIGSTOPped 14:2x–14:53 for IO headroom, resumed (SIGCONT), auto-resume timer cancelled.

@@ -342,8 +342,12 @@ Record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md` §8+.
   (list N / place / short+end / fail). Gate: unit test on classifier + live probe of K15 float spa = place.
 - [x] P16.3 nightly gate audit ledger: `kwsweep-nightly.sh` appends `audit_gate_passes.py --json` to
   `output/kwsweep/gate-audit.jsonl`. Gate: run once by hand, one JSON line with false_pass counts.
-- [ ] P16.4 hook blocks chat-launched sweeps (lx kwsweep live / rarlx / scrapers) → points to launcher.
+- [x] P16.4 hook blocks chat-launched sweeps (lx kwsweep live / rarlx / scrapers) → points to launcher.
   Gate: hook test, 3 block + 3 allow cases (status, launcher, tests).
-- [ ] P16.5 resource visibility: resource-watch names top writer + top RSS (pid, comm, owner session);
+- [x] P16.5 resource visibility: resource-watch names top writer + top RSS (pid, comm, owner session);
   thumbtack write volume diagnosed + recommendation for drive-clearing after R2 backup. Gate: --once output shows names.
-- [ ] P16.6 plan + do: hooks that move/delete need a fixture test + own-session scope (inventory, tests, AGENTS rule).
+- [x] P16.6 plan + do: hooks that move/delete need a fixture test + own-session scope (inventory, tests, AGENTS rule).
+  - [x] P16.6a inventory every hook in ~/.claude/settings.json (all events) + the script each calls
+  - [x] P16.6b classify read-only vs mutating (mv/rm/delete/rewrite outside its own output)
+  - [x] P16.6c each mutator: scope (own session vs global) + fixture test? fix global scope, add tests
+  - [x] P16.6d scripts/hooks/tests/run-all.sh + rule in scripts/AGENTS.md + PATTERNS entry

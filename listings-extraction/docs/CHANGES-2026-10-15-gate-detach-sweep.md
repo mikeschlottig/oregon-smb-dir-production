@@ -1077,3 +1077,14 @@ index 0000000..1852403
 ### A.4 previous session (for reference): rar-linux `37222a3`, oregon-smb-directory `d69301d` — H29 typed fallback
 
 See `git show 37222a3` / `git show d69301d`; their reasoning is hypothesis.md H29–H29d.
+
+## 8. Workflow improvements, same day (P16 in tasks.md)
+
+| # | change | proof | commit |
+|---|---|---|---|
+| 1 | Pattern `verify-the-artifact-the-reader-uses` (hub + memory) | applied straight away: rows.jsonl check after K15 found 1/49 null name; fixed, re-exported 49/49 | hub `0d18eb9`, `9205100` |
+| 2 | `lx kwsweep --probe`: one centroid visit per new keyword → `probes.jsonl`; nightly probes 20 first; `--status` lists `place`/`short` keywords as pruning candidates | 8 live probes: float spa = place, employment lawyer = list, steakhouse = short (13); 10–38 s each, 0 blocks | `ed82fb3` |
+| 3 | Nightly gate-audit ledger `output/kwsweep/gate-audit.jsonl` | line 1: 125 gates, 0 false passes | `ed82fb3` |
+| 4 | `long-run-gate.sh` hook blocks sweeps/scrapers started in a chat shell | 16-case fixture; live block of `lx kwsweep --yes` | home `53fa47a` |
+| 5 | `resource-watch.sh` names top writers/memory, `--jobs` view, D-state debounce; thumbtack checkpoint churn fixed (114 GB → ~0.6 KB/s); thumbtack R2 backups repaired + backfilled | see `seo-webscrapers-and-scripts/thumbtack-scraper/docs/CHANGES-2026-10-15-checkpoint-and-r2.md` | home `4a86b7d`, `f3cae81`, `7b3a573` |
+| 6 | Mutating-hook rule (`scripts/AGENTS.md`), `hooks/tests/run-all.sh`, artifact-keeper fixture; watchdog INDEX.md writer opt-in | run-all: ALL HOOK TESTS PASS; mutation fails 3 checks | home `5ebfa22`, hub `0d18eb9` |

@@ -23,8 +23,9 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from rarlx.bcrf49_linux import MarketConfig, execute_bcrf49_pipeline
-from rarlx.fields import extract_full_listings, serp_path_of
+from rarlx.fields import extract_full_listings, place_url_of, serp_path_of
 
+from lx.place_fields import extract_place
 from lx.targets import feature_id_to_place_id
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -84,20 +85,40 @@ def export_gate(g: dict) -> int:
             page = art / pin["point_id"] / "viewport.html"
             if not page.exists():
                 continue
-            html = page.read_text(encoding="utf-8")
-            serp_path = serp_path_of(html)  # "typed" when Maps place-jumped and the phrase was typed (H29)
-            for r in extract_full_listings(html, max_rank=20):
-                r.pop("text_tokens", None)
-                if not r.get("place_id") and r.get("feature_id"):
-                    r["place_id"] = feature_id_to_place_id(r["feature_id"])
+            for r in page_rows(page.read_text(encoding="utf-8")):
                 f.write(json.dumps({
                     "city_slug": g["city_slug"], "industry": g["industry"], "query": g["phrase"],
                     "point_id": pin["point_id"], "pin_lat": pin["latitude"], "pin_lng": pin["longitude"],
                     "radius_miles": pin["radius_miles"], "bearing": pin["bearing_label"],
-                    "exported_at": ts, "serp_path": serp_path, **r,
+                    "exported_at": ts, **r,
                 }) + "\n")
                 n += 1
     return n
+
+
+PLACE_ROW_KEYS = ("business_name", "category", "average_star_rating", "number_of_reviews", "address", "phone",
+                  "website", "place_id", "cid", "feature_id", "place_lat", "place_lng")
+
+
+def page_rows(html: str) -> List[Dict]:
+    """Rows of one saved viewport.html, each tagged with serp_path (H29/H31):
+    "url" / "typed" = a result list, parsed card by card; "place" = Google's confirmed one-business
+    answer at that pin (URL and typed search agreed), parsed from the place panel as rank 1 of 1."""
+    serp_path = serp_path_of(html)
+    if serp_path == "place":
+        url = place_url_of(html)
+        p = extract_place(html, url)
+        rows = [{"rank": 1, **{k: p.get(k) for k in PLACE_ROW_KEYS}, "maps_url": url, "hours_status": None,
+                 "sponsored": False, "extractor": "lx.place_fields.extract_place"}]
+    else:
+        rows = extract_full_listings(html, max_rank=20)
+    out = []
+    for r in rows:
+        r.pop("text_tokens", None)
+        if not r.get("place_id") and r.get("feature_id"):
+            r["place_id"] = feature_id_to_place_id(r["feature_id"])
+        out.append({"serp_path": serp_path, **r})
+    return out
 
 
 def done_gates() -> set:

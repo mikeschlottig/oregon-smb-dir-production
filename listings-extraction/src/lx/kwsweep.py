@@ -31,10 +31,8 @@ from pathlib import Path
 from typing import Iterable, List, Optional
 
 from rarlx.bcrf49_linux import execute_bcrf49_pipeline
-from rarlx.fields import extract_full_listings
 
 from lx import sweep
-from lx.targets import feature_id_to_place_id
 
 KEYWORDS = sweep.ROOT / "keywords" / "keyword-sets.json"
 OUT = sweep.ROOT / "output" / "kwsweep"
@@ -88,10 +86,9 @@ def export_gate(g: dict) -> int:
             page = art / pin["point_id"] / "viewport.html"
             if not page.exists():
                 continue
-            for r in extract_full_listings(page.read_text(encoding="utf-8"), max_rank=20):
-                r.pop("text_tokens", None)
-                if not r.get("place_id") and r.get("feature_id"):
-                    r["place_id"] = feature_id_to_place_id(r["feature_id"])
+            # serp_path on every row (url | typed | place). Missing here until 2026-10-15: the H29 commit
+            # tagged lx/sweep.py's export, which kwsweep does not call (CHANGES-2026-10-15 §3).
+            for r in sweep.page_rows(page.read_text(encoding="utf-8")):
                 f.write(json.dumps({
                     "city_slug": g["city_slug"], "industry": g["industry"], "keyword_id": g["keyword_id"],
                     "query": g["phrase"], "point_id": pin["point_id"], "pin_lat": pin["latitude"],

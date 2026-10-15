@@ -322,3 +322,15 @@ tool or data. Nothing home-grown where a standard tool exists.
   (`listings-extraction/output/sweep/rows.jsonl`) + Search Console exports from Mike.
 - [ ] P14.8 Write the plan (SEO + AI search) and the content calendar from P14.6/P14.7
   evidence; each recommendation cites its source.
+
+### P15 — kwsweep: confirmed one-business gate, detached launch, scratchpad sweep (2026-10-15, Mike)
+Diff record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md`. Predictions: `hypothesis.md` H30–H32.
+- [x] P15.1 artifact-keeper sweep moves only the ending session's scratchpad (it moved every live
+  session's files and Claude Code's own `bash-edit-diff` store). Gate: fake-tree test, 2 sessions, 1 swept.
+- [x] P15.2 rarlx: a place page confirmed by both request paths (URL jump, then typed jump, same place)
+  is a 1-row end-of-list pin, `serp_path=place`. Gate: unit tests prove pass/fail both ways.
+- [x] P15.3 lx export re-parses `serp_path=place` pages into their 1 row. Gate: test on a saved K15 page.
+- [x] P15.4 detached launcher: every live run starts outside the chat's process tree. Gate: parent of
+  the running sweep is not a claude process; run survives.
+- [ ] P15.5 live K15 "float spa Medford" via the launcher. Gate: gates.jsonl `complete`, 49 rows place.
+- [ ] P15.6 diff record + hypothesis results + commits in rar-linux, oregon-smb-directory, home.

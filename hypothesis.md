@@ -542,3 +542,47 @@ cities). URL and typed paths agree on one place, yet the gate needs a list, so t
 Options: (a) record the confirmed single place as rank 1 of 1, end-of-market, serp_path
 `place` (truthful when both paths agree — the K14 objection was that a list existed);
 (b) drop such keywords from keyword-sets.json; (c) leave as is.
+
+## H30 — artifact-keeper sweep scope — OPEN
+Evidence (2026-10-15 14:03): `~/.claude/artifacts/MANIFEST.tsv` shows a SessionEnd sweep moving this live
+session's scratchpad files (`0d67f09c…/scratchpad/falsepass.py`, `cards.py`), deleting the emptied
+`scratchpad/` dir, and moving Claude Code's own `/tmp/claude-1000/bash-edit-diff/…/objects/*`.
+Cause (read in source): `sweep` runs `find "$SRC_GLOB_ROOT" -type f` over `/tmp/claude-1000` — every
+session, every project — then `find -empty -delete`. It never reads the SessionEnd payload's `session_id`.
+**Prediction:** scoping sweep to `/tmp/claude-1000/*/<session_id>/` (from stdin) moves the ending
+session's files only; a fake tree with 2 sessions + `bash-edit-diff` keeps the other session and
+`bash-edit-diff` byte-identical; a payload with no session_id moves nothing.
+
+## H31 — confirmed one-business answer is a valid pin — OPEN
+Mike, 2026-10-15: "when the end of list is confirmed and accurate the gate should pass."
+Audit first (all 8 kwsweep evidence DBs, 124 complete gates, 6,076 accepted pins): 536 pins were accepted
+short (<20) and **536/536** saved pages carry Google's exact "You've reached the end of the list"; on
+**0** short pins does the saved page hold more result cards than rows stored. False passes found: 0.
+The gate already passes a confirmed short list. What it cannot pass: a place page (no list, so no
+end-of-list sentence).
+**Rule for "confirmed":** the URL request place-jumps AND the typed search also lands on a place page AND
+both show the same business (page title). One path disagreeing = not confirmed = pin fails as before
+(K14 vegan: URL jumped to Rooted, typed listed 20 — the list wins, Rooted is not stored as #1).
+**Prediction:** K15 "float spa Medford": 49/49 pins confirmed, gate `complete`, 49 rows, every row
+rank 1 "SO Float Spa", `serp_path=place`; ≈ 49 × ~35 s ≈ 30 min (two loads per pin, no retries).
+K14 rows unchanged.
+
+## H32 — detached launch survives the chat — OPEN
+**Prediction:** `scripts/kwsweep-launch.sh` starts the run through Windows (`Start-Process wsl.exe`), so
+the sweep's process tree does not descend from the claude process: `ps -o ppid` chain of the `lx
+kwsweep` process contains no `claude`, and the log keeps growing after the launching shell exits.
+
+## H30 / H32 — results (2026-10-15 ~14:20)
+- **H30 right.** A fake tree held an ending session, a live session and a `bash-edit-diff` store. Sweep with
+  `session_id` moved only the ending session; the other two stayed sha1-identical. A payload with no id moved
+  nothing, and rescue moved only the 24 h-idle file. Home repo commit `4e2fea5`. A 1-minute backup timer
+  (`scratchpad-backup.timer`) was added at Mike's request; journal shows 4 runs in its first 5 min.
+- **H32 right (structure).** The K15 run launched by `scripts/kwsweep-launch.sh` at 14:10 has this ppid chain:
+  `lx ← uv ← bash kwsweep-nightly.sh ← Relay ← SessionLeader ← init`, with no claude in it. The launching shell
+  returned at once while the log kept growing.
+- **H31 timing wrong so far.** Predicted ≈35 s/pin; measured ≈130 s/pin (URL load, Maps home, typing, two page
+  loads, plus the 3–6 s pin delay). Pins 1–5: 5/5 confirmed "SO Float Spa".
+- **New, not predicted:** rows.jsonl had **no** serp_path at all (0/117,207). The H29 commit tagged the wrong
+  export function. Fixed and back-filled: 785 typed + 140 url for K14, matching the DB.
+- **10-14 regression question (Mike):** 0 scraper commits on 10-14; Chrome dated 08-19; libs 10-03; both failing
+  keywords were first-ever runs. Latent gap, not a regression. Docs: listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md.

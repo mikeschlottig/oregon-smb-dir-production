@@ -100,9 +100,16 @@ The 12-city sweep ran one phrase per industry. `lx kwsweep` runs the keyword set
 ```bash
 uv run lx kwsweep                       # plan + progress; no browser
 uv run lx kwsweep --status              # JSON progress
-uv run lx kwsweep --headless --yes --max-gates 1   # one gate now
+scripts/kwsweep-launch.sh --cities medford --keywords K15   # a live run, detached from the chat (prints the log path)
 touch output/kwsweep/STOP               # pause at the next gate boundary; rm to resume
+uv run python scripts/audit_gate_passes.py   # every accepted pin: end-of-list proof, cards vs rows stored
 ```
+
+Live runs never run in a chat's shell: `scripts/kwsweep-launch.sh` hands the run to Windows (`Start-Process wsl.exe`
+→ `kwsweep-nightly.sh`), so closing the chat cannot kill it (2026-10-15). Every exported row carries `serp_path`:
+`url` (camera on the pin), `typed` (Google place-jumped; phrase typed at the pin, Maps re-fits the camera to the city),
+`place` (both paths gave the same single business — rank 1 of 1). Why and diffs:
+`docs/CHANGES-2026-10-15-gate-detach-sweep.md`.
 
 **Schedule:** Windows Task Scheduler task `RAR kwsweep nightly`, daily 21:30, runs
 `scripts/kwsweep-nightly.sh` through `wsl.exe` with a 9 h budget (`KWSWEEP_HOURS`), 11 h hard limit, no overlapping

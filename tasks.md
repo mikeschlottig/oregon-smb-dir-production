@@ -338,9 +338,9 @@ Diff record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md`.
 ### P16 — workflow improvements (Mike, 2026-10-15 14:52: "go 1-4 straight through, then 5, then plan + do 6")
 Record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md` §8+. Predictions: `hypothesis.md` H33+.
 - [x] P16.1 Verify the final output: memory + PATTERNS entry. Gate: both files contain the rule, with the 10-15 evidence.
-- [ ] P16.2 `lx kwsweep --probe`: one centroid pin per never-run keyword → `output/kwsweep/probes.jsonl`
+- [x] P16.2 `lx kwsweep --probe`: one centroid pin per never-run keyword → `output/kwsweep/probes.jsonl`
   (list N / place / short+end / fail). Gate: unit test on classifier + live probe of K15 float spa = place.
-- [ ] P16.3 nightly gate audit ledger: `kwsweep-nightly.sh` appends `audit_gate_passes.py --json` to
+- [x] P16.3 nightly gate audit ledger: `kwsweep-nightly.sh` appends `audit_gate_passes.py --json` to
   `output/kwsweep/gate-audit.jsonl`. Gate: run once by hand, one JSON line with false_pass counts.
 - [ ] P16.4 hook blocks chat-launched sweeps (lx kwsweep live / rarlx / scrapers) → points to launcher.
   Gate: hook test, 3 block + 3 allow cases (status, launcher, tests).

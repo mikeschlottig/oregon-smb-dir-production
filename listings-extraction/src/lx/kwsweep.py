@@ -75,6 +75,107 @@ def gate_dir(g: dict) -> Path:
     return OUT / g["city_slug"]
 
 
+def gate_key(g: dict) -> tuple:
+    return (g["city_slug"], g["industry"], g["keyword_id"])
+
+
+# --- One-pin probe (H33, 2026-10-15) ---------------------------------------------------------------
+# A never-run keyword costs 49 pins before anyone sees how Google answers it (K14 vegan, K15 float spa).
+# The probe asks once, at the centroid pin, with the same harvester, and records what came back.
+PROBES = OUT / "probes.jsonl"
+
+
+def probe_kind(listings: List[dict], end_of_list: bool) -> str:
+    """list (20), short (fewer + Google's end-of-list), place (confirmed one business), fail."""
+    if listings and listings[0].get("serp_path") == "place":
+        return "place"
+    if len(listings) >= 20:
+        return "list"
+    if listings and end_of_list:
+        return "short"
+    return "fail"
+
+
+def probed() -> dict:
+    """Latest probe record per gate key."""
+    if not PROBES.exists():
+        return {}
+    return {gate_key(r): r for r in map(json.loads, PROBES.read_text(encoding="utf-8").splitlines())}
+
+
+def probe_todo(cities=None, industries=None, keyword_ids=None) -> List[dict]:
+    """Planned gates with no probe yet. Complete gates are skipped unless keyword ids were named."""
+    done, seen = done_gates(), probed()
+    return [g for g in plan(cities, industries, keyword_ids)
+            if gate_key(g) not in seen and (keyword_ids or gate_key(g) not in done)]
+
+
+async def _probe(gates: List[dict], headless: bool, log) -> int:
+    import random
+    from patchright.async_api import async_playwright
+    from rarlx.bcrf49_linux import (HarvesterCircuitBreakerError, derive_user_agent, harvest_single_pin,
+                                    launch_browser, resolve_chrome_executable)
+    n = 0
+    async with async_playwright() as p:
+        browser = await launch_browser(p, resolve_chrome_executable(), headless)
+        ua = derive_user_agent(browser.version, headless)
+        try:
+            for i, g in enumerate(gates):
+                if i and i % 7 == 0:  # same 7-visit browser recycle as the harvest
+                    await browser.close()
+                    browser = await launch_browser(p, resolve_chrome_executable(), headless)
+                pin, t0 = g["pins"][0], time.time()
+                rec = {"city_slug": g["city_slug"], "industry": g["industry"], "keyword_id": g["keyword_id"],
+                       "phrase": g["phrase"], "point_id": pin["point_id"]}
+                try:
+                    listings, html_path, _, end = await harvest_single_pin(
+                        browser, pin, g["keyword_id"], g["phrase"],
+                        OUT / "probes" / g["city_slug"] / g["industry"], headless=headless, user_agent=ua)
+                    rec.update(kind=probe_kind(listings, end), n=len(listings),
+                               serp_path=listings[0].get("serp_path") if listings else None,
+                               top=[r["business_name"] for r in listings[:3]], page=html_path)
+                except HarvesterCircuitBreakerError as e:
+                    rec.update(kind="blocked", n=0, error=str(e))
+                except Exception as e:  # one bad probe must not end the batch
+                    rec.update(kind="fail", n=0, error=f"{type(e).__name__}: {e}")
+                rec.update(seconds=round(time.time() - t0), probed_at=datetime.now(timezone.utc).isoformat())
+                with PROBES.open("a", encoding="utf-8") as f:
+                    f.write(json.dumps(rec) + "\n")
+                log(f"[probe] {g['city']} · {g['keyword_id']} · '{g['phrase']}': {rec['kind']} "
+                    f"({rec['n']}) {rec.get('top', '')}")
+                n += 1
+                if rec["kind"] == "blocked":
+                    log("[probe] blocked — stopping the probe batch; the sweep's own block handling decides the rest")
+                    break
+                await asyncio.sleep(random.uniform(3.0, 6.0))
+        finally:
+            await browser.close()
+    return n
+
+
+def probe(cities=None, industries=None, keyword_ids=None, headless: bool = True,
+          max_probes: Optional[int] = None, log=print) -> int:
+    """Probe gates that have no probe yet (see probe_todo). Holds the kwsweep lock. Returns probes written."""
+    lock = _lock(log)
+    if lock is None:
+        return 0
+    todo = probe_todo(cities, industries, keyword_ids)[:max_probes]
+    log(f"[probe] {len(todo)} gate(s) to probe at the centroid pin")
+    return asyncio.run(_probe(todo, headless, log)) if todo else 0
+
+
+def _lock(log):
+    """The kwsweep flock (one browser workload at a time), or None when another run holds it."""
+    OUT.mkdir(parents=True, exist_ok=True)
+    lock = (OUT / ".lock").open("w")
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        log("[kwsweep] another run holds output/kwsweep/.lock — not starting a second one")
+        return None
+    return lock
+
+
 def export_gate(g: dict) -> int:
     """Re-parse this gate's saved pages with the full extractor; append rows. Returns rows written."""
     mk = sweep._market(g["centroid"], g["city"])
@@ -105,21 +206,25 @@ def status() -> dict:
     secs = [g["seconds"] for g in map(json.loads, (OUT / "gates.jsonl").read_text().splitlines())
             if g.get("status") == "complete"] if (OUT / "gates.jsonl").exists() else []
     per = sorted(secs)[len(secs) // 2] if secs else 934.5      # median; 934.5 s = the 12-city sweep's median gate
+    probes = probed()
+    kinds: dict = {}
+    for r in probes.values():
+        kinds[r["kind"]] = kinds.get(r["kind"], 0) + 1
     return {"gates": len(gates), "complete": len(gates) - len(left), "remaining": len(left),
             "next": f"{left[0]['city']} · {left[0]['phrase']}" if left else None,
             "median_gate_seconds": per, "remaining_hours": round(len(left) * per / 3600, 1),
-            "paused": (OUT / "STOP").exists()}
+            "paused": (OUT / "STOP").exists(),
+            "probes": kinds,
+            # Probed one business, or a short market: candidates for pruning from keyword-sets.json (Mike decides).
+            "pruning_candidates": sorted(f"{r['city_slug']} · {r['keyword_id']} · {r['phrase']} → {r['kind']} ({r['n']})"
+                                         for r in probes.values() if r["kind"] in ("place", "short"))}
 
 
 def run(cities=None, industries=None, keyword_ids=None, headless: bool = True,
         max_hours: Optional[float] = None, max_gates: Optional[int] = None, log=print) -> int:
     """Run gates until the queue, the time budget or the gate budget is exhausted. Returns gates finished."""
-    OUT.mkdir(parents=True, exist_ok=True)
-    lock = (OUT / ".lock").open("w")
-    try:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
-        log("[kwsweep] another run holds output/kwsweep/.lock — not starting a second one")
+    lock = _lock(log)
+    if lock is None:
         return 0
     gates, finished = plan(cities, industries, keyword_ids), done_gates()
     todo = [g for g in gates if (g["city_slug"], g["industry"], g["keyword_id"]) not in finished]

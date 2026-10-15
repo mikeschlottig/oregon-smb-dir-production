@@ -7,6 +7,7 @@
 # it exits when output/kwsweep/.awake is removed below, or after KWSWEEP_HOURS + 1 h.
 #   KWSWEEP_HOURS   time budget, checked between gates (default 9; a gate is ~16 min, so the window ends ≤ ~20 min late)
 #   output/kwsweep/STOP   pauses the queue at the next gate boundary (delete it to resume)
+#   KWSWEEP_PROBES  nightly one-pin probes before the sweep (default 20; 0 = off; skipped when args are given)
 #   KWSWEEP_LOG     log path (default output/kwsweep/nightly-YYYYMMDD.log; scripts/kwsweep-launch.sh sets adhoc-*.log)
 #   extra args      passed to `lx kwsweep` (e.g. --industries health-wellness --keywords K15)
 # Live runs started from a chat go through scripts/kwsweep-launch.sh, never a chat-owned shell (Mike, 2026-10-15).
@@ -22,9 +23,16 @@ echo "=== $(date -Is) start · budget ${HOURS} h · args: ${*:-none}" >> "$LOG"
 touch "$SENTINEL"
 /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden \
   -File "$(wslpath -w scripts/keep-awake.ps1)" -Hours "$(awk "BEGIN{print $HOURS+1}")" -Sentinel "$(wslpath -w "$SENTINEL")" >/dev/null 2>&1 &
+# Nightly only (no args): probe the next never-run keywords at one pin first (H33), ≈50 s each.
+PROBES="${KWSWEEP_PROBES:-20}"
+if [ $# -eq 0 ] && [ "$PROBES" -gt 0 ]; then
+  "$UV" run --project . lx kwsweep --probe --headless --yes --max-probes "$PROBES" >> "$LOG" 2>&1
+fi
 "$UV" run --project . lx kwsweep --headless --yes --max-hours "$HOURS" "$@" >> "$LOG" 2>&1
 rc=$?
 rm -f "$SENTINEL"
 echo "=== $(date -Is) exit ${rc}" >> "$LOG"
 "$UV" run --project . lx kwsweep --status >> "$LOG" 2>&1
+# Gate audit ledger (2026-10-15): one line per run; false_pass_* above 0 means a gate let businesses through.
+"$UV" run --project . python scripts/audit_gate_passes.py --json >> output/kwsweep/gate-audit.jsonl 2>> "$LOG"
 exit "$rc"

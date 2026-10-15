@@ -126,7 +126,17 @@ def cmd_queue(args) -> int:
 def cmd_kwsweep(args) -> int:
     from lx import kwsweep
     if args.status:
-        print(json.dumps(kwsweep.status(), indent=1))
+        print(json.dumps(kwsweep.status(), indent=1, ensure_ascii=False))
+        return 0
+    if args.probe:
+        todo = kwsweep.probe_todo(args.cities, args.industries, args.keywords)[:args.max_probes]
+        print(f"{len(todo)} gate(s) to probe at the centroid pin (one Maps visit each). Next: "
+              + (", ".join(f"{g['keyword_id']} '{g['phrase']}'" for g in todo[:3]) if todo else "none"))
+        if not args.yes:
+            print("Not run. Pass --yes to start (real Chrome on Google Maps).")
+            return 2
+        sys.stdout.reconfigure(line_buffering=True)
+        kwsweep.probe(args.cities, args.industries, args.keywords, headless=args.headless, max_probes=args.max_probes)
         return 0
     gates = kwsweep.plan(args.cities, args.industries, args.keywords)
     done = kwsweep.done_gates()
@@ -215,6 +225,9 @@ def main(argv=None) -> int:
     p.add_argument("--max-hours", type=float, help="stop at the first gate boundary after this many hours")
     p.add_argument("--max-gates", type=int)
     p.add_argument("--status", action="store_true", help="progress as JSON; no browser")
+    p.add_argument("--probe", action="store_true",
+                   help="one centroid-pin visit per unprobed gate → output/kwsweep/probes.jsonl (list/short/place/fail)")
+    p.add_argument("--max-probes", type=int, help="cap on probes this run (with --probe)")
     p.add_argument("--yes", action="store_true")
     p.add_argument("--headless", action="store_true")
     p.set_defaults(fn=cmd_kwsweep)

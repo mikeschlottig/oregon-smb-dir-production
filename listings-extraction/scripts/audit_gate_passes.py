@@ -6,11 +6,15 @@ independent checks over the newest SUCCESS observation of every pin in every out
   1. every short pin (< 20 rows, url/typed path) — does its saved page carry "You've reached the end of the list"?
   2. every pin — does its saved page hold more result cards (div.Nv2PK) than rows stored, on a short list?
 Plus, per short gate, distinct businesses across the whole grid vs the most any one pin showed.
-Run:  uv run --project . python scripts/audit_gate_passes.py
+Run:  uv run --project . python scripts/audit_gate_passes.py [--json]
+      --json prints one summary line (the nightly ledger output/kwsweep/gate-audit.jsonl).
 """
 import glob
+import json
 import re
 import sqlite3
+import sys
+from datetime import datetime, timezone
 
 import polars as pl
 from scrapling import Selector
@@ -40,6 +44,19 @@ for db in sorted(glob.glob(str(kwsweep.OUT / "*" / "*.db"))):
 
 df = pl.DataFrame(out)
 short = df.filter((pl.col("n") < 20) & (pl.col("path") != "place"))
+if "--json" in sys.argv:  # one ledger line; kwsweep-nightly.sh appends it to output/kwsweep/gate-audit.jsonl
+    print(json.dumps({
+        "audited_at": datetime.now(timezone.utc).isoformat(),
+        "gates": df.select("industry", "kw").unique().height, "pins": df.height,
+        "pages_missing": df.filter(pl.col("path") == "missing").height,
+        "short_pins": short.height, "short_with_end_of_list": short.filter(pl.col("end")).height,
+        "place_pins": df.filter(pl.col("path") == "place").height,
+        "typed_pins": df.filter(pl.col("path") == "typed").height,
+        # The two false-pass signals. Anything above 0 is a gate that let missing businesses through.
+        "false_pass_no_end_proof": short.filter(~pl.col("end")).height,
+        "false_pass_unstored_cards": short.filter(pl.col("cards") > pl.col("n")).height,
+    }))
+    sys.exit(0)
 print(f"accepted pins: {df.height}  gates: {df.select('industry', 'kw').unique().height}  "
       f"saved page missing: {df.filter(pl.col('path') == 'missing').height}")
 print(f"short pins (url/typed): {short.height}  with Google's end-of-list sentence: {short.filter(pl.col('end')).height}")

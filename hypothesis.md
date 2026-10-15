@@ -597,3 +597,22 @@ kwsweep` process contains no `claude`, and the log keeps growing after the launc
   `sweep.page_rows` takes identity from `place_page_row(url, title)` (same as the DB) and overlays panel fields.
   Re-exported with `scripts/reexport_gate.py` (archive `rows.jsonl.2026-10-15-145349`): 49/49 named.
 - Thumbtack scraper was SIGSTOPped 14:2x–14:53 for IO headroom, resumed (SIGCONT), auto-resume timer cancelled.
+
+## H33 — one-pin keyword probe — OPEN
+Change: `lx kwsweep --probe` runs each not-yet-probed gate's phrase at the centroid pin only (same rarlx
+`harvest_single_pin`, incl. typed fallback and place confirmation), classifies it, appends `output/kwsweep/probes.jsonl`:
+`list` (≥20), `short` (1–19 + Google's end-of-list), `place` (confirmed one business), `fail` (anything else), `blocked`.
+Nightly runs `--probe --max-probes 20` before the sweep; `--status` shows probe counts and the `place`/`short`
+keywords as pruning candidates (no auto-skip — pruning is Mike's call).
+**Prediction:** K15 float spa Medford → `place` "SO Float Spa"; legal-services K15 (next in queue) → `list` 20;
+≈50 s per probe; 0 blocks.
+**Result H33 (live, 2026-10-15 14:56, detached systemd-run unit, 8 Medford K15 probes):** float spa → `place`
+"SO Float Spa" (right); employment lawyer → `list` 20 (right); steakhouse → `short` 13 (matches its gate's 450
+rows); the other 5 → `list`. 0 blocks (right). Time **wrong, in the good direction**: 10–20 s per list probe,
+38 s for the place probe (two loads), not ≈50 s. 20 nightly probes ≈ 5–7 min. `--status` lists float spa and
+steakhouse as pruning candidates.
+
+## H34 — nightly gate-audit ledger — CLOSED
+`audit_gate_passes.py --json` appended by `kwsweep-nightly.sh` after every window. First line by hand
+(22:00Z): 125 gates, 6,125 pins, 536 short / 536 with end-of-list, 49 place, 42 typed,
+false_pass_no_end_proof 0, false_pass_unstored_cards 0. Prediction (0 / 0) right.

@@ -12,3 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Crawlers that were never handed the sitemap find it here (Bing reported ~50 indexed pages of ~10.5k, 2026-10-21).
+Sitemap: https://oregonsmbdirectory.com/sitemap-index.xml

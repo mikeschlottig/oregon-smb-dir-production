@@ -93,3 +93,13 @@ Windows Task Scheduler settings, the R2 buckets, `src/lx/kwsweep.py`, and the ga
   Mike's direction. The nightly now ends with `scripts/kwsweep-reclaim.sh --backup --execute`. **Correction to item 1:**
   deleting inside WSL did not raise `C:` free (61.88 GiB before and after) because `ext4.vhdx` is not sparse — see the
   open items in `docs/CHANGES-2026-10-22-artifact-reclaim.md`. Completed gates are now 333, not 292.
+- **2026-10-22 — item 5 (prune short gates) done, and its premise corrected.** The "15 flagged gates ≈ 3.8 h" counted every
+  short/place probe in the status block, including gates that had **already run** (18 of 24 flagged candidates when
+  re-checked; only grants-pass retail-shopping gates were pending). Real ceiling ≈ 6 gates ≈ 1.5 h. Scored the pending ones
+  (hypothesis.md H6; rule fixed before scoring: prune when ≥ 70 % of the probe page's businesses are already in `rows.jsonl`
+  for the city or on a kept sibling's probe page) → pruned **K04** (same 7 businesses as K03), **K05** (13/17 already held),
+  **K17** (12/18 held + 6 on siblings); kept K03, K11, K13, K15. Saving ≈ 45 min. Mechanism: `keywords/pruned-gates.json`
+  (reason per entry; delete an entry to restore it) read by `kwsweep.plan()`; `--keywords K04` still runs it; status reports
+  `pruned`. Applied to the live sweep by pausing at a gate boundary (`STOP`) and resuming: "2301 gates in plan". Known gap:
+  `pruning_candidates` in the status block still lists completed gates; filter by pending before reading it. New probes land
+  nightly (20), so new candidates will appear.

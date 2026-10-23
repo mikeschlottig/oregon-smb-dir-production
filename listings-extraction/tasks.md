@@ -32,3 +32,14 @@ H1/H2 numbers stay in hypothesis.md as the measured alternative (z=6 WebP / gzip
 - [ ] 8. (Mike) C: free did not rise — ext4.vhdx not sparse. Convert/compact needs a WSL shutdown; decide timing. H5 test
       tomorrow: vhdx length after tonight's run.
 - [ ] 9. Commit (next step).
+
+# Prune short-probe gates (2026-10-22 evening, Mike: "Proceed with both. I trust you - get it done")
+Correction found on the way: 18 of the 24 flagged candidates had already run; only grants-pass retail-shopping gates were
+pending (the doc's "15 gates ≈ 3.8 h" counted completed ones). Real saving: 3 gates ≈ 45 min. See hypothesis.md H6.
+- [x] P1. Mechanism: `keywords/pruned-gates.json` (list of {city_slug, industry, keyword_id, reason, pruned_at}); `plan()`
+      skips them; `status()` reports the count. Test first (failing), then code. The running sweep is unaffected (plan is
+      read once at start).
+- [x] P2. Prune exactly: grants-pass retail-shopping K04, K05, K17. Keep K03, K11, K13, K15.
+- [x] P3. The running sweep holds the old plan in memory and reaches K04 ≈ 23:10, so apply by pausing at a gate
+      boundary (`output/kwsweep/STOP`), then resume via `scripts/kwsweep-launch.sh`; confirm the new log says 2301 gates.
+- [x] P4. Record result + restore instructions (delete the entry), commit.

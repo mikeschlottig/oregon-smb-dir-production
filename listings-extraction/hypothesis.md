@@ -39,3 +39,28 @@ Format: prediction written BEFORE the run → reality → diff → why.
 - Open test (decides urgency): note vhdx length now (212.1 GB at 21:10) and after tonight's run; the sweep writes
   ~2 GB/night of run data plus the ~3.5 GB of pages it deletes at the end. If the length stays ≈ 212 GB, ext4 reuses the
   freed blocks and C: holds; if it grows by about the pages written, the VHD must be converted/compacted (WSL shutdown).
+
+# Pruning the short-probe gates (2026-10-22 21:37, after Mike: "Proceed … I trust you")
+
+## H6 — most "short" probes are not redundant with completed gates
+- Decision rule, fixed BEFORE scoring: a candidate gate (city, industry, keyword) is pruned when its probe is `short` or
+  `place` AND at least 70 % of the businesses on its saved probe page already appear in `rows.jsonl` for the same city
+  (any industry, matched on place_id → cid → feature_id → name). Otherwise it stays in the plan: it adds enough new
+  businesses to be worth ~15 min. 70 % is a judgement, not a measurement; the full distribution is reported so it can be moved.
+- Prediction: median overlap ≈ 40 %; fewer than half of the 22 candidates reach 70 %. (Niche keywords such as crossfit,
+  pilates, brewery, campground are not covered by the gates run so far.)
+- Reality, first pass (INVALID): 20 of 23 scored 100 % overlap. Hand check showed why: 18 of the candidates had **already
+  run** and their own rows were counted as coverage. The status block's `pruning_candidates` lists every short/place probe
+  whether or not the gate is complete; the improvements doc's "15 gates ≈ 3.8 h" counted them that way. Only 6 candidates
+  were still pending (all grants-pass / retail-shopping), so the real ceiling is ~6 × 15 min ≈ 1.5 h. My first
+  `rg` cross-check was also wrong (pattern lacked the space `json.dumps` writes after the colon); the positive control
+  caught it. Diff: prediction (median 40 %) untested by a valid run; the method, not the hypothesis, failed.
+- Rule, restated for the valid scope: only PENDING gates are scored; coverage = share of the probe page's businesses already
+  in rows.jsonl for that city, or already on the probe page of a pending sibling that is kept (plan order). Prune at ≥ 70 %.
+- Reality, valid run (7 pending gates, all grants-pass retail-shopping): K03 14 % keep · K04 100 % (6 of 7 on kept K03) PRUNE ·
+  K05 82 % (13/17 in rows) PRUNE · K11 19 % keep · K13 0 % keep · K15 33 % keep · K17 100 % (12 in rows + 6 on siblings) PRUNE.
+  Three prunes ≈ 45 min. Prediction ("fewer than half reach 70 %"): 3 of 7 = 43 % — right, on a smaller set than I assumed.
+  Tradeoff stated: K05 loses up to 4 businesses that no completed gate holds; K17 up to 0–6. Reversible: delete the entry.
+- Applied 2026-10-22 21:53: STOP at a gate boundary (gate `grants-pass real-estate K15` finished first, 958 rows, 917 s), end-of-run
+  steps ran, relaunch via `kwsweep-launch.sh` → "2301 gates in plan, 334 complete, 1967 to go". Downtime ≈ 2.5 min.
+  To confirm tomorrow: K04, K05, K17 (grants-pass, retail-shopping) never appear in the adhoc log.

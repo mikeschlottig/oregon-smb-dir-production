@@ -35,6 +35,9 @@ from rarlx.bcrf49_linux import execute_bcrf49_pipeline
 from lx import sweep
 
 KEYWORDS = sweep.ROOT / "keywords" / "keyword-sets.json"
+# Single (city, industry, keyword) gates removed from the plan, each with its reason (2026-10-22). Keywords in
+# keyword-sets.json are shared by every city, so a per-city decision cannot be made there. Delete an entry to restore it.
+PRUNED = sweep.ROOT / "keywords" / "pruned-gates.json"
 OUT = sweep.ROOT / "output" / "kwsweep"
 CITY_FIRST = ["medford", "grants-pass"]
 
@@ -44,7 +47,21 @@ def load_sets(industries: Optional[Iterable[str]] = None) -> dict:
     return {k: v for k, v in sets.items() if not industries or k in set(industries)}
 
 
+def pruned_gates() -> set:
+    """(city_slug, industry, keyword_id) of every gate listed in PRUNED. An entry without a reason is refused."""
+    if not PRUNED.exists():
+        return set()
+    out = set()
+    for e in json.loads(PRUNED.read_text(encoding="utf-8")):
+        missing = [k for k in ("city_slug", "industry", "keyword_id", "reason") if not e.get(k)]
+        if missing:
+            raise ValueError(f"{PRUNED.name}: entry {e} is missing {', '.join(missing)}")
+        out.add((e["city_slug"], e["industry"], e["keyword_id"]))
+    return out
+
+
 def plan(cities=None, industries=None, keyword_ids=None) -> List[dict]:
+    pruned = pruned_gates()
     ms = sweep.load_markets(cities)
     ms.sort(key=lambda m: (CITY_FIRST.index(m["market"]["city_slug"]) if m["market"]["city_slug"] in CITY_FIRST
                            else len(CITY_FIRST), m["market"]["city_slug"]))
@@ -55,6 +72,8 @@ def plan(cities=None, industries=None, keyword_ids=None) -> List[dict]:
             for kw in s["keywords"]:
                 if kw.get("same_as_sweep") or (keyword_ids and kw["id"] not in set(keyword_ids)):
                     continue
+                if not keyword_ids and (m["market"]["city_slug"], ind, kw["id"]) in pruned:
+                    continue                    # named keyword ids still run: an explicit request wins
                 gates.append({
                     "city_slug": m["market"]["city_slug"], "city": city, "industry": ind,
                     "keyword_id": kw["id"], "phrase": kw["template"].format(city=city),
@@ -214,6 +233,7 @@ def status() -> dict:
             "next": f"{left[0]['city']} · {left[0]['phrase']}" if left else None,
             "median_gate_seconds": per, "remaining_hours": round(len(left) * per / 3600, 1),
             "paused": (OUT / "STOP").exists(),
+            "pruned": len(pruned_gates()),
             "probes": kinds,
             # Probed one business, or a short market: candidates for pruning from keyword-sets.json (Mike decides).
             "pruning_candidates": sorted(f"{r['city_slug']} · {r['keyword_id']} · {r['phrase']} → {r['kind']} ({r['n']})"

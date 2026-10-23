@@ -1,0 +1,29 @@
+[
+  {
+    "city_slug": "grants-pass",
+    "industry": "retail-shopping",
+    "keyword_id": "K04",
+    "phrase": "mattress store near me",
+    "reason": "Probe returned 7 businesses, 6 of them identical to K03 'mattress store Grants Pass oregon' (kept). Second pass over the same small result set.",
+    "evidence": "output/kwsweep/probes.jsonl; scored 2026-10-22 against rows.jsonl and kept sibling probe pages (hypothesis.md H6)",
+    "pruned_at": "2026-10-22"
+  },
+  {
+    "city_slug": "grants-pass",
+    "industry": "retail-shopping",
+    "keyword_id": "K05",
+    "phrase": "appliance store Grants Pass",
+    "reason": "Short probe (17). 13 of 17 businesses already in rows.jsonl for grants-pass (82 %, threshold 70 %); 4 would be new.",
+    "evidence": "output/kwsweep/probes.jsonl; hypothesis.md H6",
+    "pruned_at": "2026-10-22"
+  },
+  {
+    "city_slug": "grants-pass",
+    "industry": "retail-shopping",
+    "keyword_id": "K17",
+    "phrase": "flooring store Grants Pass oregon",
+    "reason": "Short probe (18). 12 of 18 businesses already in rows.jsonl for grants-pass and 6 more on the probe pages of kept sibling gates (100 %).",
+    "evidence": "output/kwsweep/probes.jsonl; hypothesis.md H6",
+    "pruned_at": "2026-10-22"
+  }
+]

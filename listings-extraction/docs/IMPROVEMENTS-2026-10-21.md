@@ -86,3 +86,10 @@ block count and per-gate seconds against the 912 s median over ≥ 5 gates.
 
 ## Not touched
 Windows Task Scheduler settings, the R2 buckets, `src/lx/kwsweep.py`, and the gate plan are unchanged.
+
+## Update log
+- **2026-10-22 — item 1 implemented (disk).** R2 top-up to `wsl2`, hash-verified, then `viewport.html`/`viewport.png`
+  of 333 finished gates removed (32,558 files, 18.94 GB); run data untouched. Compression was measured and dropped at
+  Mike's direction. The nightly now ends with `scripts/kwsweep-reclaim.sh --backup --execute`. **Correction to item 1:**
+  deleting inside WSL did not raise `C:` free (61.88 GiB before and after) because `ext4.vhdx` is not sparse — see the
+  open items in `docs/CHANGES-2026-10-22-artifact-reclaim.md`. Completed gates are now 333, not 292.

@@ -35,4 +35,7 @@ echo "=== $(date -Is) exit ${rc}" >> "$LOG"
 "$UV" run --project . lx kwsweep --status >> "$LOG" 2>&1
 # Gate audit ledger (2026-10-15): one line per run; false_pass_* above 0 means a gate let businesses through.
 "$UV" run --project . python scripts/audit_gate_passes.py --json >> output/kwsweep/gate-audit.jsonl 2>> "$LOG"
+# Disk (2026-10-22, Mike): top up R2, then remove viewport.html/png of finished gates that R2 now holds (~60 MB a gate).
+# Run data is never touched; a failure here never changes the run's exit code. Rules: scripts/kwsweep-reclaim.sh.
+bash scripts/kwsweep-reclaim.sh --backup --execute >> "$LOG" 2>&1 || true
 exit "$rc"

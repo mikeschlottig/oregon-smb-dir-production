@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# kwsweep-compress.sh — losslessly shrink the saved pages of FINISHED kwsweep gates (IMPROVEMENTS-2026-10-21 item 1).
+#   viewport.html -> viewport.html.gz   gzip -9 -n; the original is removed only after `gzip -dc | cmp` matches it
+#   viewport.png  -> viewport.webp      cwebp -lossless -z 6 -exact; the original is removed only after the decoded
+#                                       RGBA frames hash to the same MD5 (ffmpeg)
+# Eligible: a gate with status "complete" in gates.jsonl that finished more than GRACE_MIN minutes ago. export_gate
+# re-parses viewport.html right after a gate, so compressing sooner would race it; running or blocked gates are never
+# touched. This script does NOT take output/kwsweep/.lock — a held lock makes the nightly exit 0 and skip its window.
+# Idempotent: a folder already compressed has no viewport.html / viewport.png left to find. Default is report only.
+#   --execute        do the work
+#   --max-gates N    stop after N eligible gates (default: all)
+#   KWSWEEP_COMPRESS_JOBS       parallel workers (default 4)
+#   KWSWEEP_COMPRESS_GRACE_MIN  minutes a gate must have been finished (default 30)
+# Readers of the compressed names: nothing in src/lx or harvest-monitor reads an old gate's viewport.* (checked
+# 2026-10-22); scripts/repair_rows_serp_path.py is a one-off already applied.
+set -uo pipefail
+cd /home/mikes/oregon-smb-directory/listings-extraction/output/kwsweep || exit 1
+EXEC=0; MAX=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --execute) EXEC=1 ;;
+    --max-gates) MAX="${2:?--max-gates needs a number}"; shift ;;
+    *) echo "usage: kwsweep-compress.sh [--execute] [--max-gates N]" >&2; exit 2 ;;
+  esac
+  shift
+done
+JOBS="${KWSWEEP_COMPRESS_JOBS:-4}"
+GRACE_MIN="${KWSWEEP_COMPRESS_GRACE_MIN:-30}"
+
+shrink_html() {
+  local f=$1 gz=$1.gz part=$1.gz.part
+  [ -e "$gz" ] || { gzip -9 -n -c "$f" > "$part" && mv -f "$part" "$gz"; } || { rm -f "$part"; echo "FAIL gzip $f"; return 0; }
+  if gzip -dc "$gz" | cmp -s - "$f"; then rm -f "$f"; else rm -f "$gz"; echo "FAIL verify $f"; fi
+}
+shrink_png() {
+  local f=$1 w=${1%.png}.webp part=${1%.png}.part.webp a b
+  [ -e "$w" ] || { cwebp -quiet -lossless -z 6 -exact "$f" -o "$part" && mv -f "$part" "$w"; } || { rm -f "$part"; echo "FAIL cwebp $f"; return 0; }
+  a=$(ffmpeg -v error -nostdin -i "$f" -pix_fmt rgba -f md5 - 2>/dev/null)
+  b=$(ffmpeg -v error -nostdin -i "$w" -pix_fmt rgba -f md5 - 2>/dev/null)
+  if [ -n "$a" ] && [ "$a" = "$b" ]; then rm -f "$f"; else rm -f "$w"; echo "FAIL verify $f"; fi
+}
+shrink() { case "$1" in *.html) shrink_html "$1" ;; *.png) shrink_png "$1" ;; esac; }
+export -f shrink shrink_html shrink_png
+
+cut=$(( $(date +%s) - GRACE_MIN * 60 ))
+DIRS=()
+while IFS=$'\t' read -r city ind kw; do
+  for d in "$city"/artifacts_*_or_"$ind"/"$kw"; do
+    [ -d "$d" ] && DIRS+=("$d")
+  done
+  [ "$MAX" -gt 0 ] && [ "${#DIRS[@]}" -ge "$MAX" ] && break
+done < <(jq -r --argjson cut "$cut" 'select(.status=="complete" and ((.finished_at[:19] + "Z" | fromdateiso8601) < $cut))
+  | "\(.city_slug)\t\(.industry)\t\(.keyword_id)"' gates.jsonl | sort -u)
+
+echo "=== $(date -Is) kwsweep-compress · eligible gate folders: ${#DIRS[@]} · execute=$EXEC"
+[ "${#DIRS[@]}" -gt 0 ] || exit 0
+before=$(du -scb "${DIRS[@]}" | tail -n 1 | cut -f1)
+todo=$(find "${DIRS[@]}" \( -name viewport.html -o -name viewport.png \) | wc -l)
+echo "bytes now: $before · files left to compress: $todo"
+[ "$EXEC" -eq 1 ] || { echo "report only — add --execute"; exit 0; }
+find "${DIRS[@]}" \( -name viewport.html -o -name viewport.png \) -print0 \
+  | nice -n 19 ionice -c3 xargs -0 -P "$JOBS" -n 1 bash -c 'shrink "$0"'
+after=$(du -scb "${DIRS[@]}" | tail -n 1 | cut -f1)
+left=$(find "${DIRS[@]}" \( -name viewport.html -o -name viewport.png \) | wc -l)
+echo "bytes after: $after · saved: $(( before - after )) · files still uncompressed: $left"

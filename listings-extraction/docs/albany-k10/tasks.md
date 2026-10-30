@@ -12,5 +12,5 @@ Constraint (Mike): live run untouched. The 2026-10-29 21:35 process keeps its ol
 - [x] 8. Tests: rar-linux 38 passed, listings-extraction 50 passed
 - [x] 9. FINDINGS.md, hypothesis.md, SCOREBOARD entry
 - [x] 10. Commit both repos
-- [ ] 11. Daily monitor registered (Windows task + session cron), first real result after the 10-30 night run
+- [x] 11. Daily monitor registered: Windows task "RAR gate-health daily" 07:30 (runs scripts/gate-health-check.py, proven through wsl.exe) + session cron 07:17 (dies with the session, 7-day limit)
 - [ ] 12. 2026-10-31: read daily/2026-10-31.md; H2 must PASS. If not, fix and log it in hypothesis.md

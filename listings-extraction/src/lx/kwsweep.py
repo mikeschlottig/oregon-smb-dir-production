@@ -24,6 +24,7 @@ from __future__ import annotations
 import asyncio
 import fcntl
 import json
+import sqlite3
 import sys
 import time
 from datetime import datetime, timezone
@@ -96,6 +97,75 @@ def gate_dir(g: dict) -> Path:
 
 def gate_key(g: dict) -> tuple:
     return (g["city_slug"], g["industry"], g["keyword_id"])
+
+
+# --- Stuck gates (2026-10-30, Mike) ------------------------------------------------------------------
+# Albany K10 was retried first thing every night for 4 days: the same pin failed, the gate locked at 48/49 and
+# the 48 verified pins never reached rows.jsonl. A gate that ends "incomplete" STUCK_AFTER times in a row is
+# marked "skipped" in gates.jsonl and the queue moves on; naming it with --keywords retries it. Incomplete
+# attempts finished before STUCK_EPOCH ran on code that could not finish the gate (H32 fixed the place-jump
+# pin), so they do not count — bump STUCK_EPOCH with each harvest fix that unblocks a gate.
+STUCK_AFTER = 2
+STUCK_EPOCH = "2026-10-30T16:00:00+00:00"    # 09:00 PDT: after the 2026-10-29 run, which holds the old code, exits
+
+
+def _gate_records() -> List[dict]:
+    p = OUT / "gates.jsonl"
+    return list(map(json.loads, p.read_text().splitlines())) if p.exists() else []
+
+
+def stuck_gates() -> dict:
+    """{(city_slug, industry, keyword_id): consecutive stalled attempts} for gates at STUCK_AFTER or more.
+    An attempt is stalled when it ended incomplete and verified no pin more than the attempt before it; a gate
+    that gains pins each night (Albany K10 went 3 failed pins -> 2 -> 2 -> 1 -> 1 as flaky pins passed on retry)
+    is not stuck. An attempt without pins_verified (records before 2026-10-30) is a stall."""
+    streak: dict = {}
+    last: dict = {}
+    for r in _gate_records():
+        k, st = (r["city_slug"], r["industry"], r["keyword_id"]), r.get("status", "")
+        if st == "complete":
+            streak[k], last[k] = 0, None
+        elif st.startswith("incomplete") and r.get("finished_at", "") >= STUCK_EPOCH:
+            pv = r.get("pins_verified")
+            gained = pv is not None and last.get(k) is not None and pv > last[k]
+            streak[k] = 1 if gained or k not in streak or streak[k] == 0 else streak[k] + 1
+            last[k] = pv
+    return {k: n for k, n in streak.items() if n >= STUCK_AFTER}
+
+
+def _mark_skipped(stuck: dict, gates: List[dict]) -> None:
+    """One 'skipped' row per newly stuck gate (not one per night)."""
+    latest = {(r["city_slug"], r["industry"], r["keyword_id"]): r.get("status") for r in _gate_records()}
+    with (OUT / "gates.jsonl").open("a", encoding="utf-8") as f:
+        for g in gates:
+            k = gate_key(g)
+            if k in stuck and latest.get(k) != "skipped":
+                f.write(json.dumps({
+                    "city_slug": g["city_slug"], "industry": g["industry"], "keyword_id": g["keyword_id"],
+                    "phrase": g["phrase"], "status": "skipped", "rows": 0, "seconds": 0,
+                    "reason": f"{stuck[k]} consecutive incomplete attempts; name it with --keywords to retry",
+                    "finished_at": datetime.now(timezone.utc).isoformat()}) + "\n")
+
+
+def verified_pins(g: dict) -> set:
+    """point_ids the evidence store holds as verified for this gate (the rule rarlx resumes by)."""
+    mk = sweep._market(g["centroid"], g["city"])
+    db = gate_dir(g) / f"rar_{mk.market_slug}_{g['industry'].lower()}_evidence_V_0_01.db"
+    if not db.exists():
+        return set()
+    conn = sqlite3.connect(f"file:{db}?mode=ro", uri=True, timeout=30)
+    try:
+        latest = {}
+        for pid, status, n in conn.execute(
+                "SELECT point_id, status, results_count FROM observations WHERE keyword_id = ? ORDER BY timestamp",
+                (g["keyword_id"],)):
+            latest[pid] = status == "SUCCESS" and n > 0
+        for pid, n in conn.execute(
+                "SELECT point_id, count(*) FROM rankings WHERE keyword_id = ? GROUP BY point_id", (g["keyword_id"],)):
+            latest.setdefault(pid, n >= 20)
+        return {pid for pid, ok in latest.items() if ok}
+    finally:
+        conn.close()
 
 
 # --- One-pin probe (H33, 2026-10-15) ---------------------------------------------------------------
@@ -195,17 +265,25 @@ def _lock(log):
     return lock
 
 
-def export_gate(g: dict) -> int:
-    """Re-parse this gate's saved pages with the full extractor; append rows. Returns rows written."""
+def export_gate(g: dict, verified_only: bool = False) -> int:
+    """Re-parse this gate's saved pages with the full extractor; append rows. Returns rows written.
+    verified_only (an incomplete gate, 2026-10-30): export just the pins the store verified, so a gate that
+    locks at 48/49 keeps its 48. Every exported pin is recorded in exported-pins.jsonl; a pin in that ledger is
+    never exported again, so the retry that completes the gate adds only what is new."""
     mk = sweep._market(g["centroid"], g["city"])
     art = gate_dir(g) / f"artifacts_{mk.market_slug}_{g['industry'].lower()}" / g["keyword_id"]
     ts = datetime.now(timezone.utc).isoformat()
+    ledger = OUT / "exported-pins.jsonl"
+    done = {tuple(r) for r in map(json.loads, ledger.read_text().splitlines())} if ledger.exists() else set()
+    only = verified_pins(g) if verified_only else None
     n = 0
-    with (OUT / "rows.jsonl").open("a", encoding="utf-8") as f:
+    with (OUT / "rows.jsonl").open("a", encoding="utf-8") as f, ledger.open("a", encoding="utf-8") as led:
         for pin in g["pins"]:
             page = art / pin["point_id"] / "viewport.html"
-            if not page.exists():
+            key = [*gate_key(g), pin["point_id"]]
+            if not page.exists() or tuple(key) in done or (only is not None and pin["point_id"] not in only):
                 continue
+            led.write(json.dumps(key) + "\n")
             # serp_path on every row (url | typed | place). Missing here until 2026-10-15: the H29 commit
             # tagged lx/sweep.py's export, which kwsweep does not call (CHANGES-2026-10-15 §3).
             for r in sweep.page_rows(page.read_text(encoding="utf-8")):
@@ -221,7 +299,8 @@ def export_gate(g: dict) -> int:
 
 def status() -> dict:
     gates, done = plan(), done_gates()
-    left = [g for g in gates if (g["city_slug"], g["industry"], g["keyword_id"]) not in done]
+    stuck = stuck_gates()
+    left = [g for g in gates if gate_key(g) not in done and gate_key(g) not in stuck]
     secs = [g["seconds"] for g in map(json.loads, (OUT / "gates.jsonl").read_text().splitlines())
             if g.get("status") == "complete"] if (OUT / "gates.jsonl").exists() else []
     per = sorted(secs)[len(secs) // 2] if secs else 934.5      # median; 934.5 s = the 12-city sweep's median gate
@@ -234,6 +313,7 @@ def status() -> dict:
             "median_gate_seconds": per, "remaining_hours": round(len(left) * per / 3600, 1),
             "paused": (OUT / "STOP").exists(),
             "pruned": len(pruned_gates()),
+            "stuck": sorted(f"{c} · {i} · {k} ({n} incomplete)" for (c, i, k), n in stuck.items()),
             "probes": kinds,
             # Probed one business, or a short market: candidates for pruning from keyword-sets.json (Mike decides).
             "pruning_candidates": sorted(f"{r['city_slug']} · {r['keyword_id']} · {r['phrase']} → {r['kind']} ({r['n']})"
@@ -248,6 +328,12 @@ def run(cities=None, industries=None, keyword_ids=None, headless: bool = True,
         return 0
     gates, finished = plan(cities, industries, keyword_ids), done_gates()
     todo = [g for g in gates if (g["city_slug"], g["industry"], g["keyword_id"]) not in finished]
+    stuck = {} if keyword_ids else stuck_gates()    # naming keywords retries a stuck gate
+    if stuck:
+        _mark_skipped(stuck, todo)
+        log(f"[kwsweep] skipping {sum(gate_key(g) in stuck for g in todo)} stuck gate(s) "
+            f"({STUCK_AFTER}+ incomplete attempts in a row): retry with --keywords")
+        todo = [g for g in todo if gate_key(g) not in stuck]
     log(f"[kwsweep] {len(gates)} gates in plan, {len(gates) - len(todo)} complete, {len(todo)} to go"
         f"{f'; budget {max_hours} h' if max_hours else ''}{f', {max_gates} gates' if max_gates else ''}")
     t_start, n = time.time(), 0
@@ -270,9 +356,11 @@ def run(cities=None, industries=None, keyword_ids=None, headless: bool = True,
             ))
         except SystemExit as e:  # rarlx "GATE LOCKED": fewer than 49 pins verified; a re-run resumes the pins
             state = f"incomplete (exit {e.code})"
-        rows = export_gate(g) if state == "complete" else 0
+        # An incomplete gate keeps what it verified (Mike, 2026-10-30: "it discards the other results").
+        rows = export_gate(g, verified_only=state != "complete")
         rec = {"city_slug": g["city_slug"], "industry": g["industry"], "keyword_id": g["keyword_id"],
                "phrase": g["phrase"], "status": state, "rows": rows, "seconds": round(time.time() - t0),
+               "pins_verified": len(g["pins"]) if state == "complete" else len(verified_pins(g)),
                "finished_at": datetime.now(timezone.utc).isoformat()}
         with (OUT / "gates.jsonl").open("a", encoding="utf-8") as f:
             f.write(json.dumps(rec) + "\n")

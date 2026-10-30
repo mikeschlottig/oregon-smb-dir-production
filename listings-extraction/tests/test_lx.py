@@ -351,7 +351,7 @@ def test_kwsweep_plan_skips_the_sweep_phrase_and_runs_medford_then_grants_pass_f
     from lx import kwsweep
     gates = kwsweep.plan()
     sets = kwsweep.load_sets()
-    assert len(gates) == 12 * sum(len(s["keywords"]) - 1 for s in sets.values())
+    assert len(gates) == 12 * sum(len(s["keywords"]) - 1 for s in sets.values()) - len(kwsweep.pruned_gates())
     assert not any(g["keyword_id"] == "K01" for g in gates)
     order = list(dict.fromkeys(g["city_slug"] for g in gates))
     assert order[:2] == ["medford", "grants-pass"] and order[2:] == sorted(order[2:])
@@ -379,7 +379,7 @@ def test_kwsweep_stop_file_and_budgets_stop_before_touching_google(tmp_path, mon
     async def fake_pipeline(**kw):
         called.append(kw["keywords_override"][0]["keyword_id"])
     monkeypatch.setattr(kwsweep, "execute_bcrf49_pipeline", fake_pipeline)
-    monkeypatch.setattr(kwsweep, "export_gate", lambda g: 0)
+    monkeypatch.setattr(kwsweep, "export_gate", lambda g, verified_only=False: 0)
     (tmp_path / "STOP").write_text("")
     assert kwsweep.run(cities=["medford"], log=lambda *a: None) == 0 and called == []
     (tmp_path / "STOP").unlink()
@@ -396,3 +396,108 @@ def test_kwsweep_refuses_a_second_concurrent_run(tmp_path, monkeypatch):
     held = (tmp_path / ".lock").open("w")
     fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
     assert kwsweep.run(cities=["medford"], max_gates=1, log=lambda *a: None) == 0
+
+
+# ── incomplete gates keep their verified pins; stuck gates are skipped (2026-10-30, Albany K10) ──────
+def _rec(status, finished_at, pins_verified=None, kw="K10"):
+    r = {"city_slug": "albany", "industry": "sports-fitness", "keyword_id": kw, "phrase": "p", "status": status,
+         "rows": 0, "seconds": 1, "finished_at": finished_at}
+    if pins_verified is not None:
+        r["pins_verified"] = pins_verified
+    return r
+
+
+def _write_gates(tmp_path, recs):
+    (tmp_path / "gates.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
+
+
+AFTER = "2026-10-31T04:00:00+00:00"
+AFTER2 = "2026-11-01T04:00:00+00:00"
+AFTER3 = "2026-11-02T04:00:00+00:00"
+
+
+def test_gate_with_no_progress_is_stuck_after_two_incomplete_attempts(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", AFTER, 48)])
+    assert kwsweep.stuck_gates() == {}
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", AFTER, 48), _rec("incomplete (exit 1)", AFTER2, 48)])
+    assert kwsweep.stuck_gates() == {("albany", "sports-fitness", "K10"): 2}
+
+
+def test_gate_that_gains_pins_is_not_stuck_and_a_complete_resets(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", AFTER, 46), _rec("incomplete (exit 1)", AFTER2, 48)])
+    assert kwsweep.stuck_gates() == {}
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", AFTER, 48), _rec("incomplete (exit 1)", AFTER2, 48),
+                            _rec("complete", AFTER3, 49)])
+    assert kwsweep.stuck_gates() == {}
+
+
+def test_attempts_before_the_epoch_do_not_count_and_old_records_without_pins_are_stalls(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    old = "2026-10-27T03:00:00+00:00"
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", old), _rec("incomplete (exit 1)", old)] * 3)
+    assert kwsweep.stuck_gates() == {}                      # the five Albany K10 attempts of Oct 26-30
+    _write_gates(tmp_path, [_rec("incomplete (exit 1)", AFTER), _rec("incomplete (exit 1)", AFTER2)])
+    assert kwsweep.stuck_gates() == {("albany", "sports-fitness", "K10"): 2}
+
+
+def test_run_skips_a_stuck_gate_marks_it_once_and_moves_on(tmp_path, monkeypatch):
+    from lx import kwsweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    called = []
+    async def fake_pipeline(**kw):
+        called.append(kw["keywords_override"][0]["keyword_id"])
+    monkeypatch.setattr(kwsweep, "execute_bcrf49_pipeline", fake_pipeline)
+    monkeypatch.setattr(kwsweep, "export_gate", lambda g, verified_only=False: 0)
+    g0 = kwsweep.plan(cities=["medford"])[0]
+    stuck = [{**_rec("incomplete (exit 1)", t, 48), "city_slug": g0["city_slug"], "industry": g0["industry"],
+              "keyword_id": g0["keyword_id"]} for t in (AFTER, AFTER2)]
+    _write_gates(tmp_path, stuck)
+    logs = []
+    assert kwsweep.run(cities=["medford"], max_gates=1, log=logs.append) == 1
+    assert called[0] != g0["keyword_id"] and any("skipping 1 stuck gate" in l for l in logs)
+    kwsweep.run(cities=["medford"], max_gates=1, log=lambda *a: None)
+    skipped = [r for r in kwsweep._gate_records() if r["status"] == "skipped"]
+    assert len(skipped) == 1 and skipped[0]["keyword_id"] == g0["keyword_id"]
+    # naming the keyword retries it
+    assert kwsweep.run(cities=["medford"], keyword_ids=[g0["keyword_id"]], max_gates=1, log=lambda *a: None) == 1
+    assert called[-1] == g0["keyword_id"]
+
+
+def test_incomplete_gate_exports_only_verified_pins_and_never_twice(tmp_path, monkeypatch):
+    import sqlite3
+    from lx import kwsweep, sweep
+    monkeypatch.setattr(kwsweep, "OUT", tmp_path)
+    pins = [{"point_id": f"medford_or_bcrf49_r0.00_p{i}", "latitude": 42.3265, "longitude": -122.8756,
+             "radius_miles": 0.0, "bearing_label": "CENTER"} for i in range(3)]
+    g = {"city_slug": "medford", "city": "Medford", "industry": "legal-services", "keyword_id": "K02",
+         "phrase": "lawyer near me", "centroid": {"latitude": 42.3265, "longitude": -122.8756}, "pins": pins}
+    mk = sweep._market(g["centroid"], g["city"])
+    art = tmp_path / "medford" / f"artifacts_{mk.market_slug}_legal-services" / "K02"
+    for p in pins:                                           # every pin has a saved page, only p0 and p1 verified
+        (art / p["point_id"]).mkdir(parents=True)
+        (art / p["point_id"] / "viewport.html").write_text(MEDFORD.read_text(encoding="utf-8"), encoding="utf-8")
+    db = tmp_path / "medford" / f"rar_{mk.market_slug}_legal-services_evidence_V_0_01.db"
+    conn = sqlite3.connect(db)
+    conn.execute("CREATE TABLE observations (keyword_id TEXT, point_id TEXT, status TEXT, results_count INT, timestamp TEXT)")
+    conn.execute("CREATE TABLE rankings (keyword_id TEXT, point_id TEXT)")
+    conn.executemany("INSERT INTO observations VALUES ('K02', ?, ?, ?, ?)", [
+        (pins[0]["point_id"], "SUCCESS", 20, "t1"), (pins[1]["point_id"], "SUCCESS", 2, "t1"),
+        (pins[2]["point_id"], "FAILED", 0, "t1")])
+    conn.commit(); conn.close()
+    assert kwsweep.verified_pins(g) == {pins[0]["point_id"], pins[1]["point_id"]}
+    first = kwsweep.export_gate(g, verified_only=True)
+    assert first == 40                                       # 2 pins x 20 rows, the failed pin's page is not exported
+    rows = [json.loads(l) for l in (tmp_path / "rows.jsonl").read_text().splitlines()]
+    assert {r["point_id"] for r in rows} == {pins[0]["point_id"], pins[1]["point_id"]}
+    # the retry that completes the gate (p2 now verified) adds only the new pin
+    conn = sqlite3.connect(db)
+    conn.execute("INSERT INTO observations VALUES ('K02', ?, 'SUCCESS', 20, 't2')", (pins[2]["point_id"],))
+    conn.commit(); conn.close()
+    assert kwsweep.export_gate(g) == 20
+    rows = [json.loads(l) for l in (tmp_path / "rows.jsonl").read_text().splitlines()]
+    assert len(rows) == 60 and {r["point_id"] for r in rows} == {p["point_id"] for p in pins}

@@ -1,0 +1,7 @@
+.venv
+output
+_archive
+.pytest_cache
+queues
+markets
+__pycache__

@@ -19,3 +19,4 @@ Albany K10 captures real results, then a strict gate discards them.
 ## Daily log (append one dated line per check)
 
 - 2026-10-30 05:37 PDT baseline: all PENDING (no attempt since the fix), H5 PASS vacuously.
+- 2026-10-30 07:47 PDT scheduled check: H2/H3/H4/H6 PENDING, H5/H5b PASS (vacuous). Cause of PENDING: STUCK_EPOCH is 16:00Z (09:00 PDT) and no `lx kwsweep` process is alive (pgrep empty); the first run on the fixed code is tonight 21:29 PDT. Check exit 0, no code change. Next real verdict: the 2026-10-31 report.

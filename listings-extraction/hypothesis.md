@@ -64,3 +64,24 @@ Format: prediction written BEFORE the run → reality → diff → why.
 - Applied 2026-10-22 21:53: STOP at a gate boundary (gate `grants-pass real-estate K15` finished first, 958 rows, 917 s), end-of-run
   steps ran, relaunch via `kwsweep-launch.sh` → "2301 gates in plan, 334 complete, 1967 to go". Downtime ≈ 2.5 min.
   To confirm tomorrow: K04, K05, K17 (grants-pass, retail-shopping) never appear in the adhoc log.
+
+# 2026-10-25 early start (13:2x PDT, Mike: "resume the ksweep nightly extraction workflow - we are starting early today")
+
+## H7 — an early detached run with a 7.5 h budget hands over cleanly to the 21:30 nightly
+- State found: sweep idle since 06:47 (nightly-20261024 exit 0); 446/2301 complete, 1855 remaining; no STOP, no live lock holder;
+  resource-watch WARN only (C_free 57G). The 10-25 06:48 end-of-run reclaim FAILED: `atlas scan` refused by the resource guard
+  (psi_io_full 30.29 > STOP, exit 75) → 444 finished gate folders still hold viewport.html/png, and their new files are not yet in R2.
+- Prediction: launch via kwsweep-launch.sh (KWSWEEP_HOURS=7.5) → run ends ≈ 20:50–21:10, its end-of-run reclaim runs before 21:30,
+  the lock is free at 21:30 so the nightly starts normally. ppid chain of the lx process has no `claude`. First new gate ≈ 15–30 min
+  after probes (20 probes × ~50 s) begin. Reclaim stays PSI-sensitive: if the end-of-run `atlas scan` is refused again, rerun it by hand.
+
+# 2026-11-02 restart (05:34 PST, Mike: start where it left off, do not go back for Grants Pass or Ashland)
+
+## H8 — a plain resume moves forward; no code change is needed to keep it out of finished cities
+- State found: idle since 04:43 (adhoc-20261101-193703 exit 0, 9 h budget reached at Bend automotive K12). `plan()` minus `done_gates()`
+  minus `stuck_gates()` holds 0 Medford, Grants Pass, Albany or Ashland gates. The only gaps there stay out of the queue: Grants Pass
+  retail K04/K05/K17 (`keywords/pruned-gates.json`) and Ashland sports-fitness K03 (stuck, 2 incomplete).
+- Prediction: `kwsweep-launch.sh --yes` (an arg skips the probe phase) starts at Bend automotive K13; 776 complete, 1525 to go.
+- Reality: log line "2301 gates in plan, 776 complete, 1525 to go", first gate Bend K13, complete 49/49 pins, 980 rows, 921 s; K14 started.
+  ppid chain uv → bash → Relay → SessionLeader → init, no `claude`.
+- Diff: none. Naming the keyword ids with `--keywords` is the one path that would retry the stuck Ashland gate.

@@ -19,6 +19,12 @@ LOG="${KWSWEEP_LOG:-output/kwsweep/nightly-$(date +%Y%m%d).log}"
 HOURS="${KWSWEEP_HOURS:-9}"
 UV=/home/mikes/.local/bin/uv
 SENTINEL=output/kwsweep/.awake
+# A run already holds the kwsweep flock: leave at once. Going on would delete the live run's .awake sentinel below (its
+# keep-awake exits and the PC can sleep mid-run) and start a second reclaim (2026-11-01).
+if ! flock -n output/kwsweep/.lock true; then
+  echo "=== $(date -Is) another run holds output/kwsweep/.lock; leaving it alone" >> "$LOG"
+  exit 0
+fi
 echo "=== $(date -Is) start · budget ${HOURS} h · args: ${*:-none}" >> "$LOG"
 touch "$SENTINEL"
 /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden \

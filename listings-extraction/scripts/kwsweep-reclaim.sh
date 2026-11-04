@@ -53,7 +53,10 @@ cd "$HOME_ROOT/r2-backup-atlas" || exit 1
 if [ "$BACKUP" -eq 1 ]; then
   CATEGORIZED=skip:top-up-already-routed-oregon-smb-directory-wsl2-routes-reproduce-all-keys \
     "${ATLAS[@]}" backup wsl-home --under "$REL" --execute > "$TMP/backup.out" 2>&1 \
-    || { log "atlas backup failed — nothing removed"; tail -n 5 "$TMP/backup.out"; exit 1; }
+    || { log "atlas backup had failures — continuing: a file that did not upload stays 'missing', so rule 3 keeps it"
+         grep -E 'failed|^run ' "$TMP/backup.out" | tail -n 5 | cut -c1-200; }
+  # (until 2026-11-03 any failed upload aborted the whole reclaim: one transient R2 503 "Reduce your concurrent
+  #  request rate for the same object." on one file kept 875 gates' pages on disk; rule 3 already guards the delete)
   log "backup: $(grep -v '^\[guard\]' "$TMP/backup.out" | tail -n 1 | cut -c1-200)"
   "${ATLAS[@]}" scan wsl-home > "$TMP/scan.out" 2>&1 && "${ATLAS[@]}" compare wsl-home --under "$REL" > "$TMP/compare.out" 2>&1 \
     || { log "atlas rescan after backup failed — nothing removed"; exit 1; }

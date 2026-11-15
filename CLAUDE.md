@@ -16,14 +16,7 @@ uv run --project /home/mikes/doc-intel doc-intel query "<terms>" --db /home/mike
 ```
 
 Browse: http://127.0.0.1:8490/#/c/oregon-smb-directory
-Re-index: Curated index — check `stats` before re-indexing; do not change its scope.
-
-That index covers `src/` only. Two more cover the rest of this folder:
-
-| index | covers | query |
-|---|---|---|
-| `oregon-smb-directory-notes` | everything outside `src/`, `listings-extraction/`, `public/` — research, reports, handoffs, rar, requests, expert, docs | `doc-intel query "<terms>" --db /home/mikes/doc-intel/indexes/oregon-smb-directory-notes.db` |
-| `oregon-smb-listings-extraction` | the whole `listings-extraction/` project (its own CLAUDE.md has the block) | `doc-intel query "<terms>" --db /home/mikes/doc-intel/indexes/oregon-smb-listings-extraction.db` |
-
-Re-index notes: `uv run --project /home/mikes/doc-intel doc-intel index "/home/mikes/oregon-smb-directory" --db /home/mikes/doc-intel/indexes/oregon-smb-directory-notes.db --exclude src --exclude listings-extraction --exclude public`
+Covers this whole folder except `listings-extraction/`, which is its own project with its own
+index, `oregon-smb-listings-extraction` (see `listings-extraction/CLAUDE.md`).
+Refreshed nightly. Scope and exact rebuild command: `uv run --project /home/mikes/doc-intel doc-intel manifest --db /home/mikes/doc-intel/indexes/oregon-smb-directory.db`
 <!-- doc-intel:end -->

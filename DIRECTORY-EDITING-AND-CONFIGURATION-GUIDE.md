@@ -81,7 +81,7 @@ src/data/businesses/<city>__<industry>.json  ──►  src/data/businesses.ts  
    section 2.7, and those read the shard too.
 2. **The gates decide what shows.** If a field is missing its proof, the page silently
    hides it. Section 2.3 lists each proof.
-3. **Ratings and review counts come from Mike, never from an agent browsing Google.**
+3. **Ratings and review counts come from the maps-intel extraction, matched by CID** (§2.1, §2.4).
    Agents never open Google in a browser (see memory `google-services-stealth-only`).
 4. **Archive, never delete.** Removed material goes to
    `_archive/<name>-<YYYYMMDD-HHMMSS>/`, with a `README.md` explaining what was removed and
@@ -234,20 +234,34 @@ A rating shows only when **all three** hold (see `buildRatingObservation` in
    e.g. `"4.6|10"`. Write the number exactly as it is in the record: the record's `5` is
    `"5|16"`, not `"5.0|16"`.
 
+**Where the numbers come from: maps-intel, by CID.** D1 `maps-intel` (https://maps-intel.leverageai.network)
+holds the stealth re-scrape, one row per business: `feature_id`, `cid`, `rating`, `review_count`, `last_seen`.
+
+- Look the business up by the feature ID in its `googleUrl`. The row's `cid` must equal the feature ID's second
+  half in decimal; if it does not, publish no stars.
+- Take `rating` and `review_count` as they are. They will differ a little from an older reading — counts grow —
+  and that is fine; the site does not need to be perfectly current.
+- What must never happen is a **mangled total**: similarly named fields once put one number on a whole
+  category. If a new `rating|reviews` pair would be the third identical pair in its shard (and reviews > 5),
+  stop and check before publishing it.
+- Not in maps-intel → no stars until a stealth fetch adds it.
+- Audit of 2026-11-21: the CID agreed for all 5,505 directory feature IDs found in maps-intel; 98.7% of published
+  ratings were within 0.3 stars of it (script: `/mnt/c/Dev/ops-console/docs/evidence/rating-audit-2026-11-21.mjs`).
+
 **To update a rating:**
 
 1. **Change the record.** Patch `rating` and `reviews` in **every shard the business
    appears in**.
 2. **Change the evidence.** In `rating-evidence.json`, add or update the entry under
    `supplements`. Put it in the newest supplement block, or start a new block with its own
-   `observedAt`. Never edit the July 2026 base `observations` for a new reading; that
-   would backdate it.
+   `observedAt` (maps-intel's `last_seen` for that row). Never edit the July 2026 base
+   `observations` for a new reading; that would backdate it.
    ```json
    "supplements": [
-     { "source": "google_business_profile",
-       "observedAt": "2026-09-23T18:16:00.000-07:00",
-       "reportedBy": "Mike Schlottig, directory operator, from the Google Business Profile",
-       "observations": { "0x54c574367c852899:0x2759c1273f2ee03d": "4.6|10" } }
+     { "source": "maps-intel",
+       "observedAt": "2026-08-27T15:18:34.000Z",
+       "reportedBy": "maps-intel extraction (D1 maps-intel), matched by feature ID + CID",
+       "observations": { "0x54950a118a834403:0x7314fe365de77ef1": "5|30" } }
    ]
    ```
    The gate and `scripts/audit-publication.mjs` both read supplements newest-first, then
@@ -535,3 +549,11 @@ curl -s https://oregonsmbdirectory.com/city/<city>/<industry>/<slug>/ | grep -c 
 - **Audit scope:** `scripts/audit-publication.mjs` reads only the shards wired in `src/data/businesses.ts`.
 - **Before/after proof:** `scripts/compare-builds.mjs` (live vs `dist/`, or `--baseline-dist`) diffs title,
   H1, canonical, robots, breadcrumb, JSON-LD, links and visible stars on every page.
+
+### 2026-11-21 — Ratings come from maps-intel (Mike)
+- **Removed** the rule "ratings and review counts come from Mike, never look them up" (rule 3 and §2.1), at Mike's
+  request: the stealth re-scrape in maps-intel is the source, matched by feature ID + CID.
+- **§2.4** now says where the numbers come from, the CID check, the same-value-cluster guard against mangled totals,
+  and shows a maps-intel supplement instead of an operator report.
+- Rewritten in place, not appended, because Mike asked for the rule to be gone; the previous text is in git
+  (`15a6c1b`).

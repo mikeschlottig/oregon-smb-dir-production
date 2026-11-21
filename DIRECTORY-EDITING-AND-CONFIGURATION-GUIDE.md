@@ -18,32 +18,29 @@ shards, built with the wrong command, and hard-coded a place ID from a test fixt
 1. **Read first.** This guide's section for the change, the newest `handoffs/` file, and
    `docs/TAXONOMY.md` for any identifier you touch. You haven't read this file this session?
    Stop and read it.
-2. **Branch.** Never commit to `master` directly: `git switch -c dev/<topic>`.
-3. **Plan and predict.** Add the task to `tasks.md`, and write the prediction in
+2. **Plan and predict.** Add the task to `tasks.md`, and write the prediction in
    `hypothesis.md` (what changes, and which counts move by how much).
-4. **Change data through its path, never by hand-edit or re-serialization:**
+3. **Change data through its path, never by hand-edit or re-serialization:**
    - **listing fields:** a batch in `requests/listings/<date>-<topic>.json`. Check it with
      `node scripts/add-listings.mjs <batch> --dry`, then apply it without `--dry`.
    - **ratings:** the batch above, plus a `supplements` block in `rating-evidence.json` with
      `observedAt` and `reportedBy` (§2.4)
-   - **identifiers:** read from the record through `src/lib/google-place-id.ts`, never typed
-     by hand (`docs/TAXONOMY.md` Rule 0)
-5. **Check the diff:** `git diff --stat master`. A data change touches only the fields it
+   - **new business:** when adding a new business, add that business and all of that business's
+     available fields to the appropriate table in the existing database.
+4. **Check the diff:** `git diff --stat master`. A data change touches only the fields it
    names. A shard with dozens of changed lines was re-serialized, so revert it.
-6. **Build:** `bash scripts/build-bg.sh build`, as one background command; wait for it to
+5. **Build:** `bash scripts/build-bg.sh build`, as one background command; wait for it to
    exit. It runs the publication audit, the ID-literal check, `astro check`, the build, and
    the site and search gates. Success prints `BUILD_EXIT=0`. Never `npm run build` directly.
-7. **Verify the change itself, not just the build:**
+6. **Verify the change itself, not just the build:**
    - `bash scripts/check-listing-pages.sh <city>/<industry>/<slug>`
    - read the built page for the exact value you changed
    - for structured data, `npm run audit:jsonld` and compare against the last report
-8. **Review.** A separate model (not the one that made the change) reviews the diff against
-   the task before merge. For site-wide changes, it also gets the before/after audit reports.
-9. **Merge and ship:**
+7. **Merge and ship:**
    - `git switch master && git merge --no-ff dev/<topic>`
    - `bash scripts/deploy-bg.sh "<message>"`; success prints `DEPLOY_EXIT=0` and a Version ID
    - curl our live URL for the changed value (§9)
-10. **Record:** `tasks.md` ticked with the evidence, `hypothesis.md` result, a commit
+8. **Record:** `tasks.md` ticked with the evidence, `hypothesis.md` result, a commit
     message with the Worker Version ID, and a `handoffs/` note at session end.
 
 ---
@@ -130,7 +127,11 @@ src/data/businesses/<city>__<industry>.json  ──►  src/data/businesses.ts  
    - **Name, address and phone.** Use the business's own formatting, e.g. `(541) 441-0510`.
    - **Website.** The exact URL the owner gives, character for character.
    - **Google Maps place URL.** It must contain the `0x…:0x…` feature ID.
-   - **Rating and review count, from Mike.** Never go and look them up yourself.
+   - **Rating and review count, from maps-intel** (D1 `maps-intel`, https://maps-intel.leverageai.network;
+     Mike, 2026-11-21). Look the business up by its feature ID and confirm the `cid` matches the
+     feature ID's second half (decimal). Take `rating` and `review_count`, and record `last_seen` as the
+     observation date in `rating-evidence.json`. Exact numbers drift with the extraction date; what must
+     never happen is a mangled total. If the business is not in maps-intel, publish it without stars.
    - **Category.** Google's primary category, e.g. "Mulch supplier".
 3. **Write a batch file** at `requests/listings/<YYYY-MM-DD>-<topic>.json`. The format
    matches `requests/listings/2026-09-23-daley-organics.json`:
@@ -523,7 +524,7 @@ curl -s https://oregonsmbdirectory.com/city/<city>/<industry>/<slug>/ | grep -c 
 
 ### 2026-09-24 — Change protocol, identity, ratings out of structured data
 - **Added** "Change protocol" at the top of this guide (branch → batch → build script → verify →
-  second-model review → merge → deploy → record).
+  merge → deploy → record).
 - **Identifiers:** `docs/TAXONOMY.md`, `src/types/ids.ts`, `src/lib/google-place-id.ts`. The build runs
   `scripts/check-id-literals.mjs`, which fails on any untraced place/feature ID literal.
 - **Maps links (supersedes §2.9 text of 2026-09-23):** "Open in Google Maps" = `placeLink()`, the

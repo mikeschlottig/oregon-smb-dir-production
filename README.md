@@ -8,15 +8,11 @@ it broke the site or cost hours.
 1. **Read [`DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md`](DIRECTORY-EDITING-AND-CONFIGURATION-GUIDE.md)
    first**, all of it, before any edit, build or data change. Start with its **Change protocol**.
    This is not optional.
-2. **Never commit to `master`.** Work on `dev/<topic>` and follow the Change protocol: batch,
-   build script, verify, review by a second model, merge, deploy, record.
-3. **Identifiers:** read [`docs/TAXONOMY.md`](docs/TAXONOMY.md). Never type a place ID or a
-   feature ID by hand. The build fails on one.
-4. **Page rules:** [`CHECKLIST.md`](CHECKLIST.md) C01–C18 are the definition of a correct
+2. **Page rules:** [`CHECKLIST.md`](CHECKLIST.md) C01–C18 are the definition of a correct
    page. Structured data must be 100% correct; 99/100 is a failure.
-5. **The guide is append-only once shipped.** Don't rewrite its sections. Add a dated entry
+3. **The guide is append-only once shipped.** Don't rewrite its sections. Add a dated entry
    to its **Update log** (at the bottom) describing what changed and where.
-6. **Build and deploy only with** `bash scripts/build-bg.sh build` and `bash scripts/deploy-bg.sh`,
+4. **Build and deploy only with** `bash scripts/build-bg.sh build` and `bash scripts/deploy-bg.sh`,
    never `npm run build` or `wrangler deploy` directly.
 
 <!-- projectstd:begin id=facts v=1 -->
@@ -60,3 +56,5 @@ fields, such as ratings, a listing is allowed to show.
 The last recorded run is in the newest handoff:
 `handoffs/2026-09-23T0050_claude_owner-listings.md`. Worker version `67883cd5`, and every
 new listing returned 200 live. This README makes no claim that hasn't been re-run since then.
+
+Agents including Claude, are not allowed to make arbitrary rules. Rules may only be created if Mike explicitly asks for a rule to be created.

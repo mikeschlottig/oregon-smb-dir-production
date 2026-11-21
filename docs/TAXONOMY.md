@@ -4,10 +4,6 @@ What every entity and identifier is called, what it looks like, where its source
 lives, and which code reads or writes it. Types: `src/types/ids.ts`. Codec:
 `src/lib/google-place-id.ts`. Enforcement: `scripts/check-id-literals.mjs` (build).
 
-**Rule 0.** An identifier is never typed by hand. It is read from its source of truth (below)
-and passed through its parser or codec. A hard-coded ID needs an `id-source:` comment naming
-the file it came from, or the build fails.
-
 ## 1. Google place identity
 
 One Google place has three equivalent IDs. Each converts to the others exactly; verified on

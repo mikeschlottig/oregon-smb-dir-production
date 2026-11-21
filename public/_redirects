@@ -81,3 +81,6 @@
 /city/portland/travel-hospitality/comfort-inn-suites-vancouver-downtown-city-center/ /city/portland/travel-hospitality/ 301
 /city/portland/travel-hospitality/comfort-inn-suites-vancouver-downtown-city-center /city/portland/travel-hospitality/ 301
 # END out-of-state listings
+# Major Fluke moved Ashland -> Grants Pass at the owner's request (tasks.md P18, 2026-11-21).
+/city/ashland/business-professional-services/major-fluke/ /city/grants-pass/business-professional-services/major-fluke/ 301
+/city/ashland/business-professional-services/major-fluke /city/grants-pass/business-professional-services/major-fluke/ 301

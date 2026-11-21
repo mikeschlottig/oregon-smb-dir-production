@@ -378,3 +378,13 @@ Audit (Claude, Windows session, 2026-11-21): local master 21 ahead / 4 behind or
       (A 15th check, /search/, was my mistake: that page has never existed.)
 - [x] P17.5 push master; local == origin; handoff in handoffs/
       → pushed fab5d7d (local == origin); handoffs/2026-11-21T0220_claude_p17-reconcile.md
+
+## P18 — Listing requests backlog + JSON-LD fixes (2026-11-21, Mike: "confirm the requested listings updates and new listings are legit, then build the pages, then ship it" + "audit the current JSON-LD")
+Backlog (D1 contact_submissions): 9 new-listing requests, 7 already live from the 2026-09-23 batch; open: #28 PDX Roofing and
+Siding (add), #30 Menlo Insurance (declined: own site = San Francisco, no Oregon presence), #26 M & B Landscaping website,
+#27 Major Fluke move Ashland → Grants Pass, #34 Engrav Law new address. Each checked on the business's own website.
+- [ ] P18.1 add-listings.mjs gains mode "remove" (archived to _archive/removed-listings-<stamp>/; old URL redirected)
+- [ ] P18.2 batch requests/listings/2026-11-21-contact-submissions.json; dry-run; apply; rating evidence from maps-intel
+- [ ] P18.3 JSON-LD: LB_REQUIRED_ADDRESS (627 records with no address → maps-intel address by CID), CollectionPage on
+      /city/ and /services/, telephone in a dialable format in JSON-LD
+- [ ] P18.4 build (C01–C18, search), jsonld audit before/after, deploy, live checks, push

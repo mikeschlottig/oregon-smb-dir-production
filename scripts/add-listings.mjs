@@ -8,6 +8,9 @@
  *   mode "add"   (default) appends a new record; skipped if the slug already exists.
  *   mode "patch" merges the given fields into the existing record with that slug —
  *                used when the business is already in the directory from source data.
+ *   mode "remove" takes the record with that slug out of the shard (needs "reason"); the record is
+ *                archived to _archive/removed-listings-<stamp>/, and its old URL needs a redirect
+ *                in astro.config.mjs (2026-11-21, for moving a business to the right city/industry).
  *
  * Shards are edited as text, never re-serialized, so untouched records keep their exact
  * bytes (e.g. "rating": 5.0 stays 5.0) and a diff shows only what the request changed.
@@ -95,6 +98,13 @@ for (const [index, entry] of batch.listings.entries()) {
     const merged = { ...current, ...entry.record };
     validate(where, merged);
     actions.push({ where, shard: entry.shard, kind: "patch", record: merged });
+  } else if (mode === "remove") {
+    // 2026-11-21: a listing in the wrong city/industry (or one that should not be listed) leaves its shard.
+    // The removed record is archived (never deleted); the old URL needs a redirect in astro.config.mjs.
+    if (!found) { errors.push(`${where}: remove target not found`); continue; }
+    if (!entry.reason) { errors.push(`${where}: remove needs a "reason" (it is written to the archive)`); continue; }
+    const current = JSON.parse(data.text.slice(found.start, found.end));
+    actions.push({ where, shard: entry.shard, kind: "remove", record: current, reason: entry.reason, submissionId: entry.submissionId });
   } else if (found) {
     console.log(`skip  ${where} (already present)`);
   } else {
@@ -111,7 +121,20 @@ if (errors.length) {
 for (const action of actions) {
   const data = shards.get(action.shard);
   const block = serialize(action.record, data.eol);
-  if (action.kind === "patch") {
+  if (action.kind === "remove") {
+    // Cut the record's block plus the one comma that joins it to a neighbour; nothing else moves.
+    const { start, end } = findRecord(data.text, action.record.slug);
+    const before = data.text.slice(0, start);
+    const prevComma = before.search(/,\s*$/);
+    if (prevComma >= 0) data.text = data.text.slice(0, prevComma) + data.text.slice(end);
+    else {
+      const after = data.text.slice(end);
+      const nextComma = after.search(/^,/) === 0 ? 1 : 0;
+      const restStart = end + nextComma;
+      const lead = data.text.slice(restStart).match(/^\s*/)[0].length;
+      data.text = data.text.slice(0, start) + data.text.slice(restStart + (nextComma ? lead : 0));
+    }
+  } else if (action.kind === "patch") {
     const { start, end } = findRecord(data.text, action.record.slug);
     data.text = data.text.slice(0, start) + block + data.text.slice(end);
   } else {
@@ -125,5 +148,21 @@ for (const action of actions) {
 
 for (const data of shards.values()) {
   if (data?.changed && !dry) await writeFile(data.file, data.text, "utf8");
+}
+// Removed records are archived, never deleted: _archive/removed-listings-<YYYYMMDD-HHMMSS>/<shard>__<slug>.json
+const removed = actions.filter((a) => a.kind === "remove");
+if (removed.length && !dry) {
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").replace("T", "-").slice(0, 15);
+  const dir = path.join(root, "_archive", `removed-listings-${stamp}`);
+  const { mkdir } = await import("node:fs/promises");
+  await mkdir(dir, { recursive: true });
+  for (const a of removed) {
+    await writeFile(path.join(dir, `${a.shard}__${a.record.slug}.json`),
+      JSON.stringify({ removedAt: new Date().toISOString(), batch: batch.batch, shard: a.shard, submissionId: a.submissionId ?? null, reason: a.reason, record: a.record }, null, 2) + "\n", "utf8");
+  }
+  await writeFile(path.join(dir, "README.md"),
+    `# Listings removed by batch ${batch.batch}\n\nEach JSON file holds the full record as it was in its shard, the shard name and the reason.\n` +
+    `Restore: add the \`record\` back with a batch entry \`{ "mode": "add", "shard": "<shard>", "record": … }\`, and remove any redirect for its URL.\n`, "utf8");
+  console.log(`archived ${removed.length} removed record(s) to ${path.relative(root, dir)}`);
 }
 console.log(`${dry ? "[dry] " : ""}${actions.length} change(s) from ${batch.batch}`);

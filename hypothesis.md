@@ -635,3 +635,9 @@ has PostHog and /privacy/ answers 200 (no regression from deploying this machine
   "C:\Windows\package.json", BUILD_EXIT=38 in 1 s. Fixed in the toolchain: `corepack enable pnpm` (nvm v22.22.2).
 - Why: a tree can only be built where its build-time inputs live; the Mac held one the repo never named. Lesson: list
   every `import.meta.env.PUBLIC_*` and its source before building from another machine.
+
+## H36 — backlog batch + JSON-LD fixes (P18) — OPEN
+Prediction (before running): the batch dry-run passes except where the new remove mode needs a fix. After the build the
+JSON-LD audit shows LB_REQUIRED_ADDRESS falling from 594 pages to under 100 (maps-intel has a street address for most of
+the 627 address-less records, but service-area businesses hide theirs), PAGE_REQUIRED_TYPE 2 → 0, SITE_TELEPHONE_FORMAT
+10,069 → near 0. Pages built: 10,535 + 1 (PDX Roofing; Major Fluke moves, count unchanged) = 10,536.

@@ -458,14 +458,40 @@
   {
     "slug": "engrav-law-office-llp",
     "title": "Engrav Law Office LLP",
-    "address": "1500 SW 1st Ave #1170, Portland, OR 97201",
+    "address": "209 SW Oak St, Suite 200, Portland, OR 97204",
     "phone": "(971) 3392741",
-    "rating": 4.8,
+    "rating": 5.0,
     "reviews": 30,
     "category": "Law firm",
     "website": "https://engravlawoffice.com/",
     "googleUrl": "https://www.google.com/maps/place/Engrav+Law+Office+LLP/@45.5115513,-122.8311041,12z/data=!4m10!1m2!2m1!1sLaw+Firms+Portland+Oregon!3m6!1s0x54950a118a834403:0x7314fe365de77ef1!8m2!3d45.5120687!4d-122.6763062!15sChlMYXcgRmlybXMgUG9ydGxhbmQgT3JlZ29uWhsiGWxhdyBmaXJtcyBwb3J0bGFuZCBvcmVnb26SAQhsYXdfZmlybZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMUdUR1JIZUZwbGEyeHRXa1ZvU2sxRmFGZGhWRlpDVkcwMVdGTklZeEFC4AEA-gEECAAQLw!16s%2Fg%2F11c70hn2f0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
-    "claimed": true
+    "claimed": true,
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "address"
+      ],
+      "method": "The firm told the directory it had moved. Its own website shows the new address.",
+      "verifiedAt": "2026-11-21T03:40:00-08:00",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/34",
+        "web:engravlawoffice.com@2026-11-21"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://engravlawoffice.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+      "confirmationSources": [
+        "owner_submission",
+        "site_title_match",
+        "site_address_match"
+      ],
+      "riskFlags": []
+    }
   },
   {
     "slug": "miller-nash-llp",

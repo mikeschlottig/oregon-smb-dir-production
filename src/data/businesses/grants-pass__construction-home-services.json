@@ -869,11 +869,38 @@
     "address": "900 NW E St, Grants Pass, OR 97526",
     "phone": "(541) 7615872",
     "rating": 4.8,
-    "reviews": 28,
+    "reviews": 34,
     "category": "Landscape designer",
-    "website": "https://mandblandscapinggp.com/?utm_source=google?utm_medium=organic&utm_campaign=Google_Business_Profile",
+    "website": "https://mandblandscapinggp.com",
     "googleUrl": "https://www.google.com/maps/place/M+%26+B+Landscaping/@42.690839,-123.1623324,9z/data=!4m10!1m2!2m1!1sLandscaping+Grants+Pass+Oregon!3m6!1s0xae1c68c326171f0d:0x3f9f592c9dafe223!8m2!3d42.4439057!4d-123.3350801!15sCh5MYW5kc2NhcGluZyBHcmFudHMgUGFzcyBPcmVnb25aICIebGFuZHNjYXBpbmcgZ3JhbnRzIHBhc3Mgb3JlZ29ukgESbGFuZHNjYXBlX2Rlc2lnbmVymgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5UVU5KYWpnMmFEVjNSUkFC4AEA-gEFCNIBEEc!16s%2Fg%2F11rqz6hq3n?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
-    "claimed": true
+    "claimed": true,
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone"
+      ],
+      "method": "The business's marketing agency asked for its website to be linked. The website names the business, its Grants Pass service area and the same phone number.",
+      "verifiedAt": "2026-11-21T03:40:00-08:00",
+      "ownerParticipated": false,
+      "evidenceIds": [
+        "d1:contact_submissions/26",
+        "web:mandblandscapinggp.com@2026-11-21"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://mandblandscapinggp.com",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+      "confirmationSources": [
+        "agency_submission",
+        "site_title_match",
+        "site_phone_match"
+      ],
+      "riskFlags": []
+    }
   },
   {
     "slug": "bulletproof-construction-excavation-llc",

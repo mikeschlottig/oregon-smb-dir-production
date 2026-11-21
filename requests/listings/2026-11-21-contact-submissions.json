@@ -1,0 +1,143 @@
+{
+  "batch": "2026-11-21-contact-submissions",
+  "source": "D1 oregonsmbdirectory.contact_submissions, open requests as of 2026-11-21 (the rest were applied by 2026-09-23-contact-submissions.json)",
+  "checkedAt": "2026-11-21T03:40:00-08:00",
+  "decisions": [
+    { "submissionId": 30, "business": "Menlo Insurance Services", "decision": "declined",
+      "why": "The business's own website gives 406 Utah Street, San Francisco, CA 94110 and mentions only California; the request itself says the Portland address has no staffing or walk-in access. Not an Oregon small business with a local presence." },
+    { "submissionId": 27, "business": "Major Fluke", "decision": "moved Ashland → Grants Pass; address from the Google Business Profile, not the request",
+      "why": "Request (2026-10-02) gave 2634 Esther Ln; the business's Google profile in maps-intel (scraped 2026-10-16, later) gives 118 SW G St and phone (971) 330-1601, the same phone as majorfluke.com. The newer public profile wins; the old (541) number matches nothing current." },
+    { "submissionId": 34, "business": "Engrav Law Office LLP", "decision": "new address from the firm's request and its own website",
+      "why": "maps-intel (2026-08-27) still shows the old 1500 SW 1st Ave address; engravlawoffice.com now shows 209 SW Oak St, Suite 200. The sender's email was not confirmed (verified=0), but the firm's own site confirms the change." }
+  ],
+  "listings": [
+    {
+      "submissionId": 28,
+      "mode": "add",
+      "note": "New listing. Beaverton is in the Portland metro; Portland-metro businesses are listed under Portland (as Apex Business Marketing, Hillsboro, and PDX Fingerprinting). Not in maps-intel, so no stars yet.",
+      "shard": "portland__construction-home-services",
+      "record": {
+        "slug": "pdx-roofing-and-siding",
+        "title": "PDX Roofing and Siding",
+        "address": "9800 SW Beaverton-Hillsdale Hwy, Suite 207, Beaverton, OR 97005",
+        "phone": "(503) 344-2071",
+        "email": "hello@pdxroofingandsiding.com",
+        "category": "Roofing contractor",
+        "website": "https://pdxroofingandsiding.com/",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "The business asked to be listed through the directory's contact form. Its website names the business and shows the same phone number and Beaverton address.",
+          "verifiedAt": "2026-11-21T03:40:00-08:00",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/28", "web:pdxroofingandsiding.com@2026-11-21"]
+        },
+        "websiteValidation": {
+          "url": "https://pdxroofingandsiding.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+          "confirmationSources": ["owner_submission", "site_title_match", "site_phone_match", "site_address_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 26,
+      "mode": "patch",
+      "note": "Website link requested by the business's marketing agency (Major Fluke). The stored URL was a malformed tracking link with no validation, so no link showed. Reviews refreshed from maps-intel (2026-10-21).",
+      "shard": "grants-pass__construction-home-services",
+      "record": {
+        "slug": "m-b-landscaping",
+        "rating": 4.8,
+        "reviews": 34,
+        "website": "https://mandblandscapinggp.com",
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone"],
+          "method": "The business's marketing agency asked for its website to be linked. The website names the business, its Grants Pass service area and the same phone number.",
+          "verifiedAt": "2026-11-21T03:40:00-08:00",
+          "ownerParticipated": false,
+          "evidenceIds": ["d1:contact_submissions/26", "web:mandblandscapinggp.com@2026-11-21"]
+        },
+        "websiteValidation": {
+          "url": "https://mandblandscapinggp.com",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+          "confirmationSources": ["agency_submission", "site_title_match", "site_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 27,
+      "mode": "remove",
+      "reason": "Listed in the wrong city and industry: the business is a Grants Pass marketing agency (its own request, its website and its Google profile). Re-added under grants-pass__business-professional-services by this batch; the old URL redirects there.",
+      "shard": "ashland__business-professional-services",
+      "record": { "slug": "major-fluke" }
+    },
+    {
+      "submissionId": 27,
+      "mode": "add",
+      "note": "Moved from Ashland at the owner's request. Feature ID and Maps URL unchanged; rating from maps-intel (2026-10-16).",
+      "shard": "grants-pass__business-professional-services",
+      "record": {
+        "slug": "major-fluke",
+        "title": "Major Fluke",
+        "address": "118 SW G St, Grants Pass, OR 97527",
+        "phone": "(971) 330-1601",
+        "rating": 5,
+        "reviews": 13,
+        "category": "Marketing agency",
+        "website": "https://majorfluke.com/",
+        "googleUrl": "https://www.google.com/maps/place/Major+Fluke/@51.2072,-157.5885976,3z/data=!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Ashland+Oregon!3m6!1s0xae87e923e53b19df:0x2a03bbb772236d7b!8m2!3d42.4959444!4d-123.1623324!15sCi9XZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBBc2hsYW5kIE9yZWdvbloxIi93ZWIgZGVzaWduIGFuZCBkaWdpdGFsIG1hcmtldGluZyBhc2hsYW5kIG9yZWdvbpIBFG1hcmtldGluZ19jb25zdWx0YW50mgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0T1VVNHdTblpqYWxwQ1pWVXhhMlF3VmxCT01sVXpXa1JPWVU5SVl4QULgAQD6AQQIABAd!16s%2Fg%2F11yb1pycft?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+        "claimed": true,
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "website", "phone", "address"],
+          "method": "The business asked to be listed in Grants Pass as a marketing agency. Its website names the business in Grants Pass and shows the same phone number; the address is the one on its Google Business Profile.",
+          "verifiedAt": "2026-11-21T03:40:00-08:00",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/27", "web:majorfluke.com@2026-11-21", "maps-intel:0xae87e923e53b19df:0x2a03bbb772236d7b@2026-10-16"]
+        },
+        "websiteValidation": {
+          "url": "https://majorfluke.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+          "confirmationSources": ["owner_submission", "site_title_match", "site_phone_match"],
+          "riskFlags": []
+        }
+      }
+    },
+    {
+      "submissionId": 34,
+      "mode": "patch",
+      "note": "Office moved. Rating from maps-intel (2026-08-27).",
+      "shard": "portland__legal-services",
+      "record": {
+        "slug": "engrav-law-office-llp",
+        "address": "209 SW Oak St, Suite 200, Portland, OR 97204",
+        "rating": 5,
+        "reviews": 30,
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": ["business_name", "address"],
+          "method": "The firm told the directory it had moved. Its own website shows the new address.",
+          "verifiedAt": "2026-11-21T03:40:00-08:00",
+          "ownerParticipated": true,
+          "evidenceIds": ["d1:contact_submissions/34", "web:engravlawoffice.com@2026-11-21"]
+        },
+        "websiteValidation": {
+          "url": "https://engravlawoffice.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+          "confirmationSources": ["owner_submission", "site_title_match", "site_address_match"],
+          "riskFlags": []
+        }
+      }
+    }
+  ]
+}

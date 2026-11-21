@@ -31,6 +31,30 @@
         "0x585442bc72cbdc1:0x619096285d1cba63": "5|15",
         "0x5495a0e0ff6c49ff:0xfdaee010900df06b": "4.7|31"
       }
+    },
+    {
+      "source": "maps-intel",
+      "observedAt": "2026-08-27T15:18:34.000Z",
+      "reportedBy": "maps-intel extraction (D1 maps-intel), matched by feature ID + CID; listing requests of 2026-11-21 (requests/listings/2026-11-21-contact-submissions.json)",
+      "observations": {
+        "0x54950a118a834403:0x7314fe365de77ef1": "5|30"
+      }
+    },
+    {
+      "source": "maps-intel",
+      "observedAt": "2026-10-16T10:00:35.000Z",
+      "reportedBy": "maps-intel extraction (D1 maps-intel), matched by feature ID + CID; listing requests of 2026-11-21 (requests/listings/2026-11-21-contact-submissions.json)",
+      "observations": {
+        "0xae87e923e53b19df:0x2a03bbb772236d7b": "5|13"
+      }
+    },
+    {
+      "source": "maps-intel",
+      "observedAt": "2026-10-21T06:01:38.000Z",
+      "reportedBy": "maps-intel extraction (D1 maps-intel), matched by feature ID + CID; listing requests of 2026-11-21 (requests/listings/2026-11-21-contact-submissions.json)",
+      "observations": {
+        "0xae1c68c326171f0d:0x3f9f592c9dafe223": "4.8|34"
+      }
     }
   ],
   "observations": {

@@ -2739,5 +2739,43 @@
     "website": "http://www.capitolelectricco.com/",
     "googleUrl": "https://www.google.com/maps/place/Capitol+Electric+Co+Inc/@45.529671,-122.8115963,12z/data=!4m10!1m2!2m1!1sElectricians+Portland+Oregon!3m6!1s0x5495a3f21f47465b:0x9841bb59e83c94f7!8m2!3d45.5604391!4d-122.5445508!15sChxFbGVjdHJpY2lhbnMgUG9ydGxhbmQgT3JlZ29ukgELZWxlY3RyaWNpYW7gAQA!16s%2Fg%2F1tj5kw95?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "pdx-roofing-and-siding",
+    "title": "PDX Roofing and Siding",
+    "address": "9800 SW Beaverton-Hillsdale Hwy, Suite 207, Beaverton, OR 97005",
+    "phone": "(503) 344-2071",
+    "email": "hello@pdxroofingandsiding.com",
+    "category": "Roofing contractor",
+    "website": "https://pdxroofingandsiding.com/",
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "The business asked to be listed through the directory's contact form. Its website names the business and shows the same phone number and Beaverton address.",
+      "verifiedAt": "2026-11-21T03:40:00-08:00",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/28",
+        "web:pdxroofingandsiding.com@2026-11-21"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://pdxroofingandsiding.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+      "confirmationSources": [
+        "owner_submission",
+        "site_title_match",
+        "site_phone_match",
+        "site_address_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

@@ -424,5 +424,46 @@
     "website": "http://roguecreativestudio.com/",
     "googleUrl": "https://www.google.com/maps/place/Rogue+Creative+Studio/@51.2072,-121.9883,4z/data=!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Grants+Pass+Oregon!3m6!1s0x54c57bdbc02c4e89:0x6ec113982e3e5348!8m2!3d46.423669!4d-129.9427086!15sCjNXZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBHcmFudHMgUGFzcyBPcmVnb26SARB3ZWJzaXRlX2Rlc2lnbmVy4AEA!16s%2Fg%2F11clvmls75?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "major-fluke",
+    "title": "Major Fluke",
+    "address": "118 SW G St, Grants Pass, OR 97527",
+    "phone": "(971) 330-1601",
+    "rating": 5.0,
+    "reviews": 13,
+    "category": "Marketing agency",
+    "website": "https://majorfluke.com/",
+    "googleUrl": "https://www.google.com/maps/place/Major+Fluke/@51.2072,-157.5885976,3z/data=!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Ashland+Oregon!3m6!1s0xae87e923e53b19df:0x2a03bbb772236d7b!8m2!3d42.4959444!4d-123.1623324!15sCi9XZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBBc2hsYW5kIE9yZWdvbloxIi93ZWIgZGVzaWduIGFuZCBkaWdpdGFsIG1hcmtldGluZyBhc2hsYW5kIG9yZWdvbpIBFG1hcmtldGluZ19jb25zdWx0YW50mgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0T1VVNHdTblpqYWxwQ1pWVXhhMlF3VmxCT01sVXpXa1JPWVU5SVl4QULgAQD6AQQIABAd!16s%2Fg%2F11yb1pycft?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
+    "claimed": true,
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "website",
+        "phone",
+        "address"
+      ],
+      "method": "The business asked to be listed in Grants Pass as a marketing agency. Its website names the business in Grants Pass and shows the same phone number; the address is the one on its Google Business Profile.",
+      "verifiedAt": "2026-11-21T03:40:00-08:00",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/27",
+        "web:majorfluke.com@2026-11-21",
+        "maps-intel:0xae87e923e53b19df:0x2a03bbb772236d7b@2026-10-16"
+      ]
+    },
+    "websiteValidation": {
+      "url": "https://majorfluke.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-21T03:40:00-08:00",
+      "confirmationSources": [
+        "owner_submission",
+        "site_title_match",
+        "site_phone_match"
+      ],
+      "riskFlags": []
+    }
   }
 ]

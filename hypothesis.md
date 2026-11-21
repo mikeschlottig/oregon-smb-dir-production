@@ -617,8 +617,21 @@ steakhouse as pruning candidates.
 (22:00Z): 125 gates, 6,125 pins, 536 short / 536 with end-of-list, 49 place, 42 typed,
 false_pass_no_end_proof 0, false_pass_unstored_cards 0. Prediction (0 / 0) right.
 
-## H35 — reconcile local master with origin (P17) — OPEN
+## H35 — reconcile local master with origin (P17) — CLOSED
 Prediction (written before running): the merge of origin/master (4 commits) into master (21 + keepers) completes
 with no conflicts (merge-tree was clean); pnpm install + build-bg.sh gives BUILD_EXIT=0 with the C01–C18 verify and the
 search test passing; the built dist contains the PostHog snippet and /privacy/; after deploy the live homepage still
 has PostHog and /privacy/ answers 200 (no regression from deploying this machine's tree).
+
+**Reality:** RIGHT on every point, after two things the prediction did not foresee.
+- Merge 0d1d52b: no conflicts. Build: 10,535 pages (= the Mac's count), C01–C18 PASS, search PASS. Deploy 29194195
+  (472 changed files, 20,380 identical). Live: PostHog snippet + token, /lv-relay Worker 200, /privacy/ 200, robots
+  sitemap index, WebP cards, Daley Organics 4.6 ★, custom 404, contact preflight 204. local == origin (pushed).
+- Not predicted 1: the merge brought a build-time secret. PostHog renders only with PUBLIC_POSTHOG_TOKEN, which lived
+  only in the Mac's .env; a build here would have shipped a site without analytics and every gate would still pass
+  (no gate checks it). Fixed: the public phc_ token from the live page → gitignored .env + keyring
+  `oregon-smb-directory/PUBLIC_POSTHOG_TOKEN`.
+- Not predicted 2: in WSL, `pnpm` resolved to the Windows global shim (AppData/Roaming/npm/pnpm) → Windows npm →
+  "C:\Windows\package.json", BUILD_EXIT=38 in 1 s. Fixed in the toolchain: `corepack enable pnpm` (nvm v22.22.2).
+- Why: a tree can only be built where its build-time inputs live; the Mac held one the repo never named. Lesson: list
+  every `import.meta.env.PUBLIC_*` and its source before building from another machine.

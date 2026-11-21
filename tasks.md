@@ -372,5 +372,9 @@ Audit (Claude, Windows session, 2026-11-21): local master 21 ahead / 4 behind or
       install scripts; not needed (optional platform packages). Then BUILD_EXIT=0: 10,535 pages in 94 s (= the Mac's
       count), C01–C18 PASS, search PASS; dist checks 8/8 (PostHog snippet + token + /lv-relay, /privacy/ + footer link,
       robots sitemap index, WebP city cards, Daley Organics page).
-- [ ] P17.4 local dist has PostHog + /privacy/ + robots sitemap; deploy-bg.sh; live checks the same + a listing page
-- [ ] P17.5 push master; local == origin; handoff in handoffs/
+- [x] P17.4 local dist has PostHog + /privacy/ + robots sitemap; deploy-bg.sh; live checks the same + a listing page
+      → deploy 29194195 (rollback: a5356ae6, the Mac's 10-24 deploy). Live 14/14: PostHog + token, /lv-relay 200,
+      /privacy/ 200, robots sitemap, WebP, Daley Organics 4.6 ★, 5 section pages, 404, sitemap-index, contact 204.
+      (A 15th check, /search/, was my mistake: that page has never existed.)
+- [x] P17.5 push master; local == origin; handoff in handoffs/
+      → pushed fab5d7d (local == origin); handoffs/2026-11-21T0220_claude_p17-reconcile.md

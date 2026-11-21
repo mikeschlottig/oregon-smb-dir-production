@@ -430,3 +430,41 @@ Contradictions and the choice made for each: docs/STANDARDS-AUDIT-2026-11-21.md.
       qc-site pages with problems 10,533 → 3,172; descriptions out of range 4,247 → 0; titles > 60 4,724 → 111;
       Lighthouse accessibility 93–96 → 100 on all 12 page types; SEO 100; verify-site 0 failures.
       Open (each with its reason in the doc): D1b, D8 (Mike: edge scripts), D10, D11, D12, performance < 90.
+      → P19 "Decisions for you" archived by Mike: _archive/open-decisions-20261121-075728.md.
+        Still-open items with a method each: handoffs/2026-11-21T0800_claude_p19-still-open.md.
+
+## P20 — Directory pages people and search engines want; standards fixed at the source (2026-11-21, PROPOSED)
+Mike, 2026-11-21: "The SEO on this site, after all that, is still complete and utter shit" (Bend audit:
+C:\Users\mikes\Documents\11-20\bend.txt); the Data provenance card — "Do you know a single business directory in the
+world that does this?"; agent visibility "the same implementation with markdown as" C:\Dev\directory_websites\real_estate.
+Not started: waiting on Mike's read of this list.
+A. City hubs (all 12) — bend.txt
+- [ ] A1 title "Bend, Oregon — Find Local Businesses in Bend, OR" pattern (≤ 60), H1 with the computed business count
+      and county ("Bend, Oregon — over 1,000 local businesses in Deschutes County"; "verified" left out: records are
+      not verified one by one)
+- [ ] A2 H2 "Browse Bend Businesses by Industry"; every industry H3 "<Industry> in Bend" (today only some say it)
+B. Industry and service pages — "in <City>" in every title, H1 and listing heading (same rule as A2)
+C. Listing pages (9,428) — plain words, no pipeline vocabulary
+- [ ] C1 remove the "Data provenance" card, the "Source observed · 4.8+ source rating" badge and the
+      "Record status: Source observed" stat
+- [ ] C2 rating shown as "5.0 ★ Google rating · 45 reviews" with the date once ("as of Jul 26, 2026"), no asterisks
+- [ ] C3 phone shown as (541) 310-1523 (data stores "(541) 3101523"); "Website not confirmed" → nothing
+- [ ] C4 rewrite "About" + "How this listing sits in Bend" template prose in plain language; remove the empty heading
+      above "More … in Bend"; corrections link stays, as one plain line
+- [ ] C5 sweep every template for "source-observed", "owner-confirmed", "records the directory holds", "provenance";
+      editorial-policy keeps the method in plain words (Deedline: "Method", "About and data")
+D. Footer + trust, modelled on Deedline
+- [ ] D1 columns Directory / Trust / For machines; one line: "Ratings and review counts come from public Google Maps
+      listings captured on <date>. Not affiliated with Google; no business can pay for a rank."
+E. Agent visibility, Deedline implementation (src/lib/markdown.ts + *.md.ts routes in real_estate)
+- [ ] E1 a .md twin of every page type (home, city, industry, listing, service, blog, research, about) + the layout's
+      <link rel="alternate" type="text/markdown">; ~10.5k extra static files (dist has 20,865; paid-plan limit 100,000)
+- [ ] E2 /llms-full.txt, /index.json, site JSON-LD endpoint; robots.txt with AI-bot allows + Content-Signal
+F. House standards fixed at the source (not in a project memo)
+- [ ] F1 STD-SEO-001 + STANDARDS.md: a "directory sites" section — slug phrase compared with punctuation removed;
+      one-phone/one-email rows mean the publisher's own NAP; directory service pages are CollectionPage, not Service;
+      LocalBusiness.url may be the directory page with the business site in sameAs
+- [ ] F2 qc-site.py: read every JSON-LD object (arrays, @graph); copyright from footer text (as qc-seo-page.js does);
+      skip Google Maps links in the social-profile row; punctuation-normalized slug phrase
+- [ ] F3 docs/STANDARDS-AUDIT-2026-11-21.md D-list then points at the standard instead of standing alone
+G. Proof for every item: build gates, qc-site, browser snippets on the Bend pages, live curl, before/after table

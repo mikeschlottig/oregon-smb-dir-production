@@ -383,8 +383,29 @@ Audit (Claude, Windows session, 2026-11-21): local master 21 ahead / 4 behind or
 Backlog (D1 contact_submissions): 9 new-listing requests, 7 already live from the 2026-09-23 batch; open: #28 PDX Roofing and
 Siding (add), #30 Menlo Insurance (declined: own site = San Francisco, no Oregon presence), #26 M & B Landscaping website,
 #27 Major Fluke move Ashland → Grants Pass, #34 Engrav Law new address. Each checked on the business's own website.
-- [ ] P18.1 add-listings.mjs gains mode "remove" (archived to _archive/removed-listings-<stamp>/; old URL redirected)
-- [ ] P18.2 batch requests/listings/2026-11-21-contact-submissions.json; dry-run; apply; rating evidence from maps-intel
-- [ ] P18.3 JSON-LD: LB_REQUIRED_ADDRESS (627 records with no address → maps-intel address by CID), CollectionPage on
-      /city/ and /services/, telephone in a dialable format in JSON-LD
-- [ ] P18.4 build (C01–C18, search), jsonld audit before/after, deploy, live checks, push
+- [x] P18.1 add-listings.mjs gains mode "remove" (archived to _archive/removed-listings-<stamp>/; old URL redirected)
+      → also: a patch that does not touch the website is no longer rejected for a pre-existing unvalidated source
+        website (that website is already hidden by the gates; an address-only patch leaves it exactly as it was)
+- [x] P18.2 batch requests/listings/2026-11-21-contact-submissions.json; dry-run; apply; rating evidence from maps-intel
+      → 50aa50e. Evidence: each business's own site via Browser Run (no Google): PDX Roofing name+phone+address;
+        Engrav 209 SW Oak St Suite 200; M&B name+Grants Pass+phone (541) 761-5872; Major Fluke name+Grants Pass+
+        (971) 330-1601 = its Google profile phone. Menlo's site: 406 Utah Street, San Francisco only → declined.
+        Major Fluke address = Google profile (118 SW G St, maps-intel 2026-10-16), not the request's 2634 Esther Ln
+        (2026-10-02, older). 3 rating supplements appended to rating-evidence.json as text (24 lines, 0 removed).
+- [x] P18.3 JSON-LD (src/lib/schema.ts, hub pages)
+      → address: 626 records have none; maps-intel (CID-matched) has a street for only 6 → 5 applied
+        (requests/listings/2026-11-21-maps-intel-addresses.json; "2458w W Crestview Ave" left out as malformed).
+        The rest are service-area businesses. First try — PostalAddress {addressRegion OR, addressCountry US} +
+        areaServed — failed the site's own gate (build 1: C14 SCHEMA_REQUIRED ×2046, "nested PostalAddress is missing
+        addressLocality"). No true locality exists for them: maps-intel address/city/plus_code are empty, lat/lng can
+        sit in the ocean (36.26,-55.25), and the listing city is not their location (Ashland Websites is listed under
+        Albany). Decision: they emit no address (as before); LB_REQUIRED_ADDRESS on them is an ACCEPTED finding. C14
+        was not loosened and no locality was invented.
+      → telephone: JSON-LD emits "+1-541-570-1383" (Google's example form; passes the audit regex). Page text unchanged.
+      → /city/ and /services/ get CollectionPage + ItemList of exactly the pages they link to.
+- [x] P18.4 build (C01–C18, search), jsonld audit before/after, deploy, live checks, push
+      → BUILD_EXIT=0, C01–C18 PASS, 10,537 html. Audit: PAGE_REQUIRED_TYPE 2→0, SITE_TELEPHONE_FORMAT 10,069→4,
+        LB_REQUIRED_ADDRESS 594→588 (accepted, see P18.3). Deployed bf1b5ef1; live checks in hypothesis.md H36.
+      Open: SCHEMAORG_UNVERIFIED (validator.schema.org answered 405 — tooling, re-run later); LB_GEO / hours
+        enrichment from maps-intel is a separate piece of work; reply emails to requesters #26 #27 #28 #34 and the
+        Menlo decline are drafts for Mike (first 10 emails need his approval, D3).

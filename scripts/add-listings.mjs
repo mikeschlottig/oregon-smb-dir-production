@@ -96,7 +96,10 @@ for (const [index, entry] of batch.listings.entries()) {
     if (!found) { errors.push(`${where}: patch target not found`); continue; }
     const current = JSON.parse(data.text.slice(found.start, found.end));
     const merged = { ...current, ...entry.record };
-    validate(where, merged);
+    // Judge the website only when this patch changes it: a source-data website with no validation
+    // is already hidden by the gates, and an address-only patch leaves that exactly as it was.
+    const touchesWebsite = "website" in entry.record || "websiteValidation" in entry.record;
+    validate(where, touchesWebsite ? merged : { ...merged, website: undefined });
     actions.push({ where, shard: entry.shard, kind: "patch", record: merged });
   } else if (mode === "remove") {
     // 2026-11-21: a listing in the wrong city/industry (or one that should not be listed) leaves its shard.

@@ -158,6 +158,60 @@ export function postalAddress(address: string, fallbackLocality: string): Postal
   };
 }
 
+/**
+ * The listing data stores phones as "(541) 5701383" (10,069 pages, JSON-LD audit 2026-11-21:
+ * SITE_TELEPHONE_FORMAT). JSON-LD gets the same number in the dialable international form
+ * Google's examples use, "+1-541-570-1383". Anything that is not a 10-digit US number is
+ * passed through unchanged rather than guessed at. The visible page text is not touched.
+ */
+export function schemaTelephone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  const ten = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+  return ten.length === 10 ? `+1-${ten.slice(0, 3)}-${ten.slice(3, 6)}-${ten.slice(6)}` : phone.trim();
+}
+
+/**
+ * Where a business lives, for JSON-LD — only when the record has an address.
+ *
+ * Decision 2026-11-21 (tasks.md P18.3): the JSON-LD audit's LB_REQUIRED_ADDRESS flags the
+ * ~620 service-area businesses that hide their address on Google. No source holds a true
+ * locality for them (maps-intel address/city/plus_code are empty and the pins can sit in the
+ * ocean), the listing city is not where they are (Ashland Websites is listed under Albany),
+ * and verify-site C14 rightly refuses a PostalAddress without addressLocality. So they emit
+ * no address: an accepted audit finding, never an invented one.
+ */
+function businessLocation(address: string | null | undefined, cityName: string): Pick<ListBusinessItem, "address"> {
+  return address?.trim() ? { address: postalAddress(address, cityName) } : {};
+}
+
+/**
+ * CollectionPage + ItemList for a hub page that lists other pages (/city/, /services/).
+ * Both were missing one (PAGE_REQUIRED_TYPE, 2026-11-21).
+ */
+export function hubPageSchema(
+  name: string,
+  description: string,
+  pageUrl: string,
+  items: Array<{ name: string; url: string }>
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    url: pageUrl,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: items.length,
+      itemListElement: items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: { "@type": "WebPage", name: it.name, url: it.url },
+      })),
+    },
+  };
+}
+
 // --- Builder Functions ---
 
 /**
@@ -189,7 +243,7 @@ export function websiteSchema(siteUrl: string): Record<string, unknown>[] {
       url: base,
       logo: `${base}/og-default.jpg`,
       email: publisher.supportEmail,
-      telephone: publisher.supportPhone,
+      telephone: schemaTelephone(publisher.supportPhone),
     },
   ];
 }
@@ -268,10 +322,8 @@ export function industryPageSchema(
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
-          if (b.address) {
-            item.address = postalAddress(b.address, city.name);
-          }
-          if (b.phone) item.telephone = b.phone;
+          Object.assign(item, businessLocation(b.address, city.name));
+          if (b.phone) item.telephone = schemaTelephone(b.phone);
           if (b.category) item.description = b.category;
           return {
             "@type": "ListItem" as const,
@@ -305,11 +357,9 @@ export function businessSchema(
     name: business.title,
   };
 
-  if (business.address) {
-    schema.address = postalAddress(business.address, city.name);
-  }
+  Object.assign(schema, businessLocation(business.address, city.name));
 
-  if (business.phone) schema.telephone = business.phone;
+  if (business.phone) schema.telephone = schemaTelephone(business.phone);
 
   if (business.email) schema.email = business.email;
 
@@ -440,10 +490,8 @@ export function servicePageSchema(
             name: b.title,
             url: `${base}/city/${city.slug}/${industry.slug}/${b.slug || b.title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}/`,
           };
-          if (b.address) {
-            item.address = postalAddress(b.address, city.name);
-          }
-          if (b.phone) item.telephone = b.phone;
+          Object.assign(item, businessLocation(b.address, city.name));
+          if (b.phone) item.telephone = schemaTelephone(b.phone);
           if (b.category) item.description = b.category;
           return {
             "@type": "ListItem" as const,

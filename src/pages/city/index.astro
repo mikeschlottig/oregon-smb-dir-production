@@ -8,6 +8,7 @@ import { cities } from "@/data/cities";
 import { getBusinesses } from "@/data/businesses";
 import { industries } from "@/data/industries";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+import { hubPageSchema } from "@/lib/schema";
 
 const title = "Oregon Cities — Business Directory";
 const description = "Browse source-observed local business records across 12 Oregon cities and statewide regional collections.";
@@ -29,6 +30,8 @@ const crumbs = trail([
   { name: "Cities" },
 ]);
 const schemas = [
+  hubPageSchema(title, description, `${siteUrl}/city/`,
+    cityStats.map(({ city }) => ({ name: `${city.name}, Oregon`, url: `${siteUrl}/city/${city.slug}/` }))),
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 const cardImages = await cityCardImages();

@@ -5,6 +5,7 @@ import { cities } from "@/data/cities";
 import { serviceCategories, type ServiceCategory } from "@/data/serviceCategories";
 import { matchBusinesses } from "@/data/matchBusinesses";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
+import { hubPageSchema } from "@/lib/schema";
 
 // Build category-city grid: only show combinations with ≥3 businesses
 const categoryCityMap: {
@@ -24,7 +25,15 @@ const description = "Find service professionals across Oregon through explicit p
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([{ name: "Services" }]);
-const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
+// The ItemList names exactly the category-in-city pages this hub links to.
+const schemas = [
+  hubPageSchema(title, description, `${siteUrl}/services/`,
+    categoryCityMap.flatMap(({ category, cities: validCities }) => validCities.map((c) => ({
+      name: `${category.displayName} in ${c.name}`,
+      url: `${siteUrl}/services/${category.industrySlug}/${category.slug}/${c.slug}/`,
+    })))),
+  breadcrumbListSchema(crumbs, siteUrl),
+];
 ---
 
 <SiteLayout title={title} description={description} schemas={schemas}>

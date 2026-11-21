@@ -1,0 +1,21 @@
+{
+  "batch": "2026-11-21-maps-intel-addresses",
+  "source": "D1 maps-intel businesses, matched to the listing's Google feature ID with the CID cross-check (guide §2.4). Records that had no address in the source data but whose Google Business Profile now shows a street address in Oregon.",
+  "checkedAt": "2026-11-21T04:30:00-08:00",
+  "decisions": [
+    { "slug": "one-cervantes-construction-inc", "decision": "left without an address",
+      "why": "maps-intel gives \"2458w W Crestview Ave\"; the house number is malformed, and a wrong street address is worse than none. The page keeps the region-only JSON-LD address." }
+  ],
+  "listings": [
+    { "mode": "patch", "shard": "roseburg__construction-home-services", "note": "maps-intel 0x54c43dfc8436b6f9:0xfd825ab48cd5fc3a",
+      "record": { "slug": "l-m-custom-builders-llc", "address": "6218 Nonpareil Rd, Sutherlin, OR 97479" } },
+    { "mode": "patch", "shard": "eugene__construction-home-services", "note": "maps-intel 0x209addb71f7a7c5f:0xd2baec61e3d19753",
+      "record": { "slug": "action-drain-llcplumbing-eugene", "address": "4065 W 11th Ave #19, Eugene, OR 97402" } },
+    { "mode": "patch", "shard": "portland__construction-home-services", "note": "maps-intel 0x549573b86f0ff8a7:0x8ad3f662d0b76518",
+      "record": { "slug": "flow-roofing", "address": "555 SE Martin Luther King Jr Blvd, Portland, OR 97214" } },
+    { "mode": "patch", "shard": "klamath-falls__construction-home-services", "note": "maps-intel 0x54c8d5894c6e1661:0x550c6f8ed0a047d8",
+      "record": { "slug": "outlaw-roofing", "address": "2811 Broadmore St Ste 203, Klamath Falls, OR 97603" } },
+    { "mode": "patch", "shard": "albany__business-professional-services", "note": "maps-intel 0x54c0136eb0a77e6d:0x4670a916e987ca32",
+      "record": { "slug": "greatness-digital", "address": "5435 Nestucca Ave NE, Albany, OR 97321" } }
+  ]
+}

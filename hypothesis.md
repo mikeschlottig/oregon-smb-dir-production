@@ -636,8 +636,22 @@ has PostHog and /privacy/ answers 200 (no regression from deploying this machine
 - Why: a tree can only be built where its build-time inputs live; the Mac held one the repo never named. Lesson: list
   every `import.meta.env.PUBLIC_*` and its source before building from another machine.
 
-## H36 — backlog batch + JSON-LD fixes (P18) — OPEN
+## H36 — backlog batch + JSON-LD fixes (P18) — CLOSED
 Prediction (before running): the batch dry-run passes except where the new remove mode needs a fix. After the build the
 JSON-LD audit shows LB_REQUIRED_ADDRESS falling from 594 pages to under 100 (maps-intel has a street address for most of
 the 627 address-less records, but service-area businesses hide theirs), PAGE_REQUIRED_TYPE 2 → 0, SITE_TELEPHONE_FORMAT
 10,069 → near 0. Pages built: 10,535 + 1 (PDX Roofing; Major Fluke moves, count unchanged) = 10,536.
+Reality:
+- Contact batch dry-run: rejected once — Engrav's patch carried a website without websiteValidation (my batch, fixed).
+  Remove mode worked first time. The address batch exposed a script flaw: patches were judged on a pre-existing,
+  untouched source website → fixed (judge the website only when the patch changes it).
+- Pages: 10,537 html = 10,536 + 404 ✔. PAGE_REQUIRED_TYPE 2 → 0 ✔. SITE_TELEPHONE_FORMAT 10,069 → 4 ✔ (one record,
+  "(503) 7018766 ext. 2", passed through on purpose).
+- LB_REQUIRED_ADDRESS 594 → 588 ✘ (predicted < 100). maps-intel has a street for only 6 of 626 address-less records.
+  A region-only PostalAddress then failed verify-site C14 ×2046 (needs addressLocality); reverted.
+- Audit totals 2026-11-21: before PERFECT 17 · WARNING 8,614 · ERROR 1,905 → after 17 · 8,620 · 1,900.
+- Deployed bf1b5ef1; live: 4 listing pages 200 with links/phones, /city/ + /services/ CollectionPage, Ashland Major
+  Fluke URL 301 → Grants Pass, listed on marketing-agencies/grants-pass and roofing/portland.
+- Diff → why: I assumed service-area businesses' addresses were hidden only in the old extraction, not on Google
+  itself. maps-intel scraped the same profiles, so it has the same gap. Lesson: before predicting a fill rate from a
+  second source, check whether it scrapes the same upstream — two copies of one source fill nothing.

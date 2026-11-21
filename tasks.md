@@ -477,5 +477,10 @@ F. House standards fixed at the source (not in a project memo)
 - [x] F3 docs/STANDARDS-AUDIT-2026-11-21.md opens with a pointer to the standards
 G. Proof: astro check 0/0; build gates C01–C18 0 failures + search checks pass; twins check 0/0; live 21/21; Lighthouse
    on the Bend pages: accessibility 100, SEO 100 (best practices 81 = Cloudflare's injected script, archived).
-   Full `qc-site.py --directory` run: see the line added below when it finishes.
+   Full `qc-site.py --directory` on live (reports/std/p20c/): 63 pass · 3 fail · 228 pages with problems (was 3,172
+   after P19, 10,533 before). Left: 111 business names ≥ 60 chars (never shortened), 65 posts without TL;DR (handoff
+   item 1), blog/research headline slugs (item 2), 24 listings whose slug lost an accented letter (item 3), 27 slop
+   hits that are business names (justified, STD-SEO-001 §4), box.com + Yelp 403 to bots. 18,849 Google Maps links
+   not fetched. My first --directory run also showed 40 false slug misses: my qc-site normalizer dropped curly
+   apostrophes ("Willie’s" → "willies"); fixed (home repo 62edb58) and re-run.
    verify-site C10 now knows the four machine endpoints (its allowlist of non-HTML link targets).

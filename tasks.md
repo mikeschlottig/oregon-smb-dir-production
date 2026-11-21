@@ -355,9 +355,22 @@ Record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md` §8+.
 ## P17 — Reconcile local master with GitHub, ship from one tree (2026-11-21, Mike: "move forward with your plan")
 Audit (Claude, Windows session, 2026-11-21): local master 21 ahead / 4 behind origin; the live site is origin f22290f
 (PostHog + /privacy/ + WebP + pnpm, deployed 10-24 from another clone). No file changed on both sides; merge-tree clean.
-- [ ] P17.1 commit the keepers: 09-24 operator doc edits (AGENTS, README, TAXONOMY, guide) + 2026-11-21 ratings line;
+- [x] P17.1 commit the keepers: 09-24 operator doc edits (AGENTS, README, TAXONOMY, guide) + 2026-11-21 ratings line;
       listings-extraction/hypothesis.md; albany-k10 daily logs; rar/ source + spec; .gitignore __pycache__/*.pyc
-- [ ] P17.2 merge origin/master into master
-- [ ] P17.3 pnpm install, then `bash scripts/build-bg.sh build` (BUILD_EXIT=0)
+      → b5442b3 gitignore · 15a6c1b docs · 67994b8 albany-k10 logs · 980574a rar (36 files, 4,843 lines = the analysis
+      doc's count) · dea80e4 expert/ + projectstd backup → _archive/projectstd-backup-20260923-175600/ · 9571da9 README fix.
+      Working tree clean.
+- [x] P17.2 merge origin/master into master
+      → 0d1d52b, no conflicts; ahead 29 / behind 0. Brought in a Worker (worker/index.ts, posthog-relay.ts; run_worker_first
+      /lv-relay/*). Build needs PUBLIC_POSTHOG_TOKEN (built on the Mac from its .env): taken from the live page (public phc_
+      token) into gitignored .env + keyring oregon-smb-directory; contact endpoint = the code's fallback, which the live
+      site already uses (OPTIONS 204).
+- [x] P17.3 pnpm install, then `bash scripts/build-bg.sh build` (BUILD_EXIT=0)
+      → first build failed in 1 s (BUILD_EXIT=38, "C:\Windows\package.json"): in WSL, `pnpm` resolved to the Windows
+      global shim /mnt/c/Users/mikes/AppData/Roaming/npm/pnpm, which ran a Windows npm. Fix (toolchain, not repo):
+      `corepack enable pnpm` in nvm node v22.22.2 → pnpm 10.33.0 (the pinned version). pnpm skipped esbuild/sharp/workerd
+      install scripts; not needed (optional platform packages). Then BUILD_EXIT=0: 10,535 pages in 94 s (= the Mac's
+      count), C01–C18 PASS, search PASS; dist checks 8/8 (PostHog snippet + token + /lv-relay, /privacy/ + footer link,
+      robots sitemap index, WebP city cards, Daley Organics page).
 - [ ] P17.4 local dist has PostHog + /privacy/ + robots sitemap; deploy-bg.sh; live checks the same + a listing page
 - [ ] P17.5 push master; local == origin; handoff in handoffs/

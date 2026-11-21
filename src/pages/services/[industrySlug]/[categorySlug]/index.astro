@@ -1,4 +1,5 @@
 ---
+import { fitDescription } from "@/lib/seo-text";
 /**
  * Service category hub — /services/{industry}/{category}/
  *
@@ -45,7 +46,11 @@ const crumbs = trail([
 ]);
 
 const title = `${category.displayName} in Oregon`;
-const description = `${category.shortDescription} ${totalListings} source-observed providers across ${qualifyingCities.length} Oregon cities.`;
+const description = fitDescription([
+  category.shortDescription,
+  `${totalListings} source-observed providers across ${qualifyingCities.length} Oregon cities.`,
+  `Pick a city to compare them.`,
+]);
 
 /**
  * The category FAQ lives here, once, rather than on each of the city pages below —

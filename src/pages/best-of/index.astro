@@ -21,7 +21,7 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
-<SiteLayout title="Best Of — Oregon SMB Directory" schemas={schemas} noindex={bestOfLists.length === 0}>
+<SiteLayout title="Best Of — Oregon SMB Directory" description="Editorial ranking editions are paused while Oregon SMB Directory formalizes versioned methodology, evidence, and disclosure requirements." schemas={schemas} noindex={bestOfLists.length === 0}>
   <section class="bg-muted pt-32 pb-16 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />

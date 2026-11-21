@@ -1,4 +1,6 @@
 ---
+import { fitTitle, fitDescription } from "@/lib/seo-text";
+import { publisher } from "@/data/publisher";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import SeoTextBlock from "@/components/SeoTextBlock.astro";
@@ -21,8 +23,13 @@ export async function getStaticPaths() {
 }
 
 const { city } = Astro.props;
-const title = `${city.name}, Oregon — Local Business Directory`;
-const description = city.description;
+const title = fitTitle([`${city.name}, Oregon — Local Business Directory | ${publisher.name}`, `${city.name}, Oregon — Local Business Directory`]);
+const description = fitDescription([
+  city.description,
+  `Browse ${city.name} businesses by industry, with contact details and a map for each listing.`,
+  `Browse ${city.name} businesses by industry.`,
+  `Contact details and a map for each listing.`,
+]);
 
 // Calculate real stats for TldrCard
 const cityIndustriesWithListings = industries.filter(ind => 

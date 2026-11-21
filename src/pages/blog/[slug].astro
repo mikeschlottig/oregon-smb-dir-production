@@ -1,4 +1,6 @@
 ---
+import { fitTitle, fitDescription, cutAtWord } from "@/lib/seo-text";
+import { publisher } from "@/data/publisher";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { getCollection, render } from "astro:content";
@@ -25,7 +27,7 @@ const formatDate = (iso: string) => {
   return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 };
 
-const tocHeadings = headings.filter((h: any) => h.depth === 2 || h.depth === 3);
+const tocHeadings = headings.filter((h: any) => (h.depth === 2 || h.depth === 3) && h.text.trim() !== "");
 
 /**
  * Most blog posts cover small I-5 towns that have no directory page — only the twelve
@@ -45,8 +47,8 @@ const schemas = [
 ];
 ---
 <SiteLayout
-  title={`${post.data.title} — Oregon SMB Directory Blog`}
-  description={post.data.excerpt}
+  title={fitTitle([`${post.data.title} — Oregon SMB Directory Blog`, `${post.data.title} | ${publisher.name}`, post.data.title, cutAtWord(post.data.title)])}
+  description={fitDescription([post.data.excerpt.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[\[\]]/g, ""), `A ${post.data.category} story from the ${publisher.name} blog.`, `From the ${publisher.name} blog.`])}
   schemas={schemas}
 >
   <article class="pt-32 pb-20 px-4">
@@ -95,7 +97,7 @@ const schemas = [
         </nav>
       )}
 
-      <div class="mt-10 prose prose-lg max-w-none prose-headings:font-serif prose-headings:scroll-mt-24 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-3 prose-h3:text-2xl prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-li:text-foreground/90 prose-p:text-foreground/90 prose-p:leading-relaxed prose-table:text-sm prose-th:bg-muted prose-th:text-left prose-th:p-3 prose-td:p-3 prose-td:border prose-td:border-border prose-th:border prose-th:border-border [&_aside.callout]:my-6 [&_aside.callout]:rounded-xl [&_aside.callout]:border-2 [&_aside.callout]:p-6 [&_aside.callout-accent]:border-accent/30 [&_aside.callout-accent]:bg-accent/5 [&_aside.callout-primary]:border-primary/30 [&_aside.callout-primary]:bg-primary/5">
+      <div class="mt-10 prose prose-lg max-w-none break-words [&_table]:block [&_table]:overflow-x-auto prose-headings:font-serif prose-headings:scroll-mt-24 prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-3 prose-h3:text-2xl prose-a:text-primary prose-a:underline prose-a:underline-offset-2 prose-strong:text-foreground prose-li:text-foreground/90 prose-p:text-foreground/90 prose-p:leading-relaxed prose-table:text-sm prose-th:bg-muted prose-th:text-left prose-th:p-3 prose-td:p-3 prose-td:border prose-td:border-border prose-th:border prose-th:border-border [&_aside.callout]:my-6 [&_aside.callout]:rounded-xl [&_aside.callout]:border-2 [&_aside.callout]:p-6 [&_aside.callout-accent]:border-accent/30 [&_aside.callout-accent]:bg-accent/5 [&_aside.callout-primary]:border-primary/30 [&_aside.callout-primary]:bg-primary/5">
         <Content />
       </div>
 

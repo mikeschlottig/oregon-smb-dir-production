@@ -1,4 +1,6 @@
 ---
+import { fitTitle, fitDescription } from "@/lib/seo-text";
+import { publisher } from "@/data/publisher";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import SeoTextBlock from "@/components/SeoTextBlock.astro";
@@ -57,10 +59,12 @@ const tldrStats = [
   { value: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }), label: "Updated" }
 ];
 
-const title = `${industry.name} in ${city.name}, Oregon`;
-const description = `${industry.description}. Browse ${
-  businesses.length || "local"
-} business records serving ${city.name}.`;
+const title = fitTitle([`${industry.name} in ${city.name}, Oregon | ${publisher.name}`, `${industry.name} in ${city.name}, Oregon`]);
+const description = fitDescription([
+  `${industry.description}. Browse ${businesses.length || "local"} business records serving ${city.name}.`,
+  `Compare contact details and maps, then reach each business directly.`,
+  `Compare contact details and maps.`,
+]);
 
 // Generate SEO content and FAQs
 const seoContent = generateIndustrySeoContent(city, industry, businesses);
@@ -109,6 +113,7 @@ const relatedLinks = getCityIndustryRelatedLinks({
       </div>
     ) : (
       <>
+        <h2 class="sr-only">{industry.name} listings in {city.name}</h2>
         <BusinessFilterGrid
           client:load
           businesses={businesses}

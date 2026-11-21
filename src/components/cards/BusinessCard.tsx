@@ -30,7 +30,7 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
       {/* Top row: Icon + Name + Rating */}
       <div className="flex items-start gap-4 mb-4">
         {/* Icon/Logo slot */}
-        <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-sm" style={{ backgroundColor: 'var(--c-sky)' }}>
+        <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm" style={{ backgroundColor: 'var(--c-sky)', color: 'var(--c-pine)' }}>
           {initials}
         </div>
 

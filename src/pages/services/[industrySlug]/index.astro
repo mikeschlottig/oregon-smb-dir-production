@@ -1,4 +1,5 @@
 ---
+import { fitDescription } from "@/lib/seo-text";
 /**
  * Industry service hub — /services/{industry}/
  *
@@ -73,7 +74,11 @@ const crumbs = trail([
 ]);
 
 const title = `${industry.name} Services in Oregon`;
-const description = `Browse ${categories.length} ${industry.name.toLowerCase()} service categories across ${cities.length} Oregon cities, selected through explicit provider-category policies.`;
+const description = fitDescription([
+  `Browse ${categories.length} ${industry.name.toLowerCase()} service categories across ${cities.length} Oregon cities, selected through explicit provider-category policies.`,
+  `Pick a category to compare providers city by city.`,
+  `Pick a category.`,
+]);
 
 const schemas = [
   {

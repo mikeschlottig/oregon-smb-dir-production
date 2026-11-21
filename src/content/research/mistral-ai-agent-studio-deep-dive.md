@@ -177,7 +177,7 @@ Mistral has moved beyond simple text generation by integrating "Connectors"—fi
 
 ####  5.2.2 Model Context Protocol (MCP)
 
-Perhaps the most strategic addition in 2025 is the native support for the  Model Context Protocol (MCP) . MCP is an open standard that acts as a "USB port" for AI applications, allowing agents to connect to any MCP-compliant data source or tool (e.g., Google Drive, Slack, GitHub, Linear) without bespoke integration code. This allows Mistral agents to seamlessly plug into the existing enterprise software ecosystem. 12
+Perhaps the most strategic addition in 2025 is the native support for the  Model Context Protocol (MCP) . MCP is an open standard that acts as a "USB port" for AI applications, allowing agents to connect to any MCP-compliant data source or tool (e.g., Google Drive, Slack, GitHub, Linear) without bespoke integration code. This allows Mistral agents to plug into the existing enterprise software ecosystem. 12
 
 ###  5.3 Le Chat Enterprise
 

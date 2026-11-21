@@ -265,7 +265,7 @@ Rank |  Agent Name |  Brokerage |  Phone |  Email / Website
   * Years of Experience: 17+
 
   * Biography and Specialization: Jake Rockwell leads one of the most dominant real estate teams in Southern Oregon. With over 17 years of experience, he has vast knowledge of the Medford, Ashland, and Grants Pass markets. His background in investment properties, including rentals, commercial, and flips, provides a unique expertise. The Rockwell Group is a technology-driven team that has closed nearly 500 transactions in the last 12 months alone, making them one of the top teams in Oregon. Rockwell holds an E-Pro Realtor Certification. 50
-  * Client Review Synopsis: With hundreds of five-star reviews, clients consistently praise the Rockwell Group for their professionalism, market knowledge, and seamless process. The team approach is frequently highlighted as a major benefit, ensuring constant communication and support. Reviews mention specific team members like Simona Fino and Jordan Wilson for their exceptional service in Grants Pass. 51
+  * Client Review Synopsis: With hundreds of five-star reviews, clients consistently praise the Rockwell Group for their professionalism, market knowledge, and smooth process. The team approach is frequently highlighted as a major benefit, ensuring constant communication and support. Reviews mention specific team members like Simona Fino and Jordan Wilson for their exceptional service in Grants Pass. 51
   * Contact Information:
 
   * Phone: (541) 292-4444
@@ -389,7 +389,7 @@ Rank |  Agent Name |  Brokerage |  Phone |  Email / Website
   * Years of Experience: 23
 
   * Biography and Specialization: Jordan "JJ" Kramer has been a dominant force in Southern Oregon real estate since 2002, averaging the sale of a home every four days. As the #1 ranked agent in Southern Oregon for closed sales, he leads a full-time team of assistants dedicated to listings and escrows, ensuring "super communication." His team dominates the Rogue Valley luxury market and holds a significant market share in all other price ranges. His specialties include investment properties, new construction, and residential sales. 66
-  * Client Review Synopsis: With over 200 five-star reviews, clients describe Kramer and his team as the "best real estate professionals to work with." He is lauded for his deep market knowledge, passion for real estate, and exceptional negotiation skills. Clients consistently report fast sales, seamless transactions, and a feeling of being fully supported throughout the process. 66
+  * Client Review Synopsis: With over 200 five-star reviews, clients describe Kramer and his team as the "best real estate professionals to work with." He is lauded for his deep market knowledge, passion for real estate, and exceptional negotiation skills. Clients consistently report fast sales, smooth transactions, and a feeling of being fully supported throughout the process. 66
   * Contact Information:
 
   * Phone: (541) 840-2992
@@ -513,7 +513,7 @@ Rank |  Agent Name |  Brokerage |  Phone |  Email / Website
   * Years of Experience (Brokerage): Since 1972
 
   * Biography and Specialization: Founded in 1972, Fisher Nicholson Realty is the largest and highest-producing independent real estate company in Klamath County, branding themselves "The HOME Team." They have been voted #1 in the Best of the Basin for eight consecutive years. The brokerage serves Klamath and Lake counties in Oregon, as well as several counties in Northern California. Their longevity and market dominance are built on a foundation of truthfulness, fairness, and honesty. 80
-  * Client Review Synopsis: Client reviews for the brokerage and its agents, such as Lauren Horn and Valerie Morehouse, are overwhelmingly positive. Clients praise the team's professionalism, deep local knowledge, and ability to make complex transactions, including long-distance moves, feel seamless and stress-free. The firm's reputation for excellent customer service is a consistent theme. 83
+  * Client Review Synopsis: Client reviews for the brokerage and its agents, such as Lauren Horn and Valerie Morehouse, are overwhelmingly positive. Clients praise the team's professionalism, deep local knowledge, and ability to make complex transactions, including long-distance moves, feel simple and stress-free. The firm's reputation for excellent customer service is a consistent theme. 83
   * Contact Information:
 
   * Phone: (541) 884-1717
@@ -532,7 +532,7 @@ Rank |  Agent Name |  Brokerage |  Phone |  Email / Website
   * Total Reviews: 15+
   * Years of Experience: 6
 
-  * Biography and Specialization: A broker with the top-ranked Fisher Nicholson Realty, Lauren Horn has quickly built a strong business based on personalized, top-notch service. She holds PSE, MRP, and C2EX designations. She specializes in assisting clients who are relocating, first-time homebuyers, sellers, and investors. Her approach focuses on managing the entire process to make it as seamless as possible for her clients. 84
+  * Biography and Specialization: A broker with the top-ranked Fisher Nicholson Realty, Lauren Horn has quickly built a strong business based on personalized, top-notch service. She holds PSE, MRP, and C2EX designations. She specializes in assisting clients who are relocating, first-time homebuyers, sellers, and investors. Her approach focuses on managing the entire process to make it as smooth as possible for her clients. 84
   * Client Review Synopsis: Reviews for Horn are exceptional, with clients calling her "amazing," "knowledgeable," and a "great advocate." She is particularly praised for her communication skills and her ability to guide first-time homebuyers and manage long-distance purchases with patience and expertise. Her friendly and professional demeanor is consistently highlighted. 84
   * Contact Information:
 

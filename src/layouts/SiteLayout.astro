@@ -34,6 +34,8 @@ interface Props {
   industry?: string;
   /** Page classification for Pagefind search (e.g. business, service, category, city, guide) */
   pageType?: "business" | "service" | "category" | "city" | "guide" | "content";
+  /** The page's LCP image, preloaded from <head> (home hero; P19 2026-11-21). */
+  preloadImage?: { srcSet: string; sizes: string };
 }
 
 const {
@@ -48,6 +50,7 @@ const {
   city,
   industry,
   pageType,
+  preloadImage,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -70,6 +73,9 @@ const imageUrl = new URL(image, origin).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
+    {preloadImage && (
+      <link rel="preload" as="image" imagesrcset={preloadImage.srcSet} imagesizes={preloadImage.sizes} fetchpriority="high" />
+    )}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -106,9 +112,9 @@ const imageUrl = new URL(image, origin).toString();
   </head>
   <body data-page-kind={pageKind}>
     <div class="min-h-screen flex flex-col">
-      <div data-pagefind-ignore="all">
+      <header data-pagefind-ignore="all">
         <Navbar pathname={pathname} client:load />
-      </div>
+      </header>
       <main
         class="flex-1"
         {...(pagefindIgnore ? { "data-pagefind-ignore": "all" } : { "data-pagefind-body": true })}

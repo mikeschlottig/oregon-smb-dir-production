@@ -16,8 +16,8 @@ const industry = industries.find(i => i.slug === "business-professional-services
 const businesses = getBusinesses("portland", "business-professional-services");
 const related = businesses.filter(b => b.slug !== "pdx-fingerprinting").slice(0, 4);
 
-const title = "PDX Fingerprinting — Fingerprinting, Notary & Translation in Portland, OR";
-const description = "PDX Fingerprinting offers live scan and ink fingerprinting, FBI background checks, apostille, notary and certified translation from offices in Hillsboro and Lake Oswego, Oregon.";
+const title = "PDX Fingerprinting — Fingerprinting & Notary, Portland, OR";
+const description = "PDX Fingerprinting offers live scan and ink fingerprinting, FBI background checks, apostille, notary and certified translation in Hillsboro and Lake Oswego.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([

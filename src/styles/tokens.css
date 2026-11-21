@@ -7,8 +7,8 @@
   /* === Colors (Oregon-rooted palette) === */
   --c-pine: #1A3329;
   --c-river: #2A6049;
-  --c-sage: #5C7E6E;
-  --c-copper: #C45E2A;
+  --c-sage: #506E60; /* was #5C7E6E: 4.17:1 on stone; 4.64:1 now (WCAG AA, P19 2026-11-21) */
+  --c-copper: #B05526; /* was #C45E2A: 4.21:1 on white; 4.66:1 now (P19) — on dark backgrounds use --c-copper-lt */
   --c-copper-lt: #F0C4A0;
   --c-sky: #D4E8DF;
   --c-stone: #F4F1EB;

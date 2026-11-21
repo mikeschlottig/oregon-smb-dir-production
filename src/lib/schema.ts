@@ -372,6 +372,12 @@ export function businessSchema(
       .replace(/(^-|-$)/g, "");
   schema.url = `${base}/city/${city.slug}/${industry.slug}/${businessPath}/`;
 
+  // The business's own website, when the directory confirmed it (the same condition the page uses to show it).
+  // schema.org's LocalBusiness example puts the business site in `url`; here `url` must stay on-origin
+  // (verify-site C14, jsonld-audit PAGE_URL_CANONICAL), so the site goes in `sameAs` — as premium listings
+  // already do (docs/STANDARDS-AUDIT-2026-11-21.md D14).
+  if (business.website && business.websiteStatus === "confirmed") schema.sameAs = [business.website];
+
   if (business.category) schema.description = business.category;
 
   // DO NOT add telephone, geo, openingHours, sameAs, priceRange unless present in Business type

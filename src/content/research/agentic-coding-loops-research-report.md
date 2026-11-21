@@ -43,6 +43,7 @@ The purest implementation of a Ralph Loop is a bash script using a while loop. T
 
 The core logic, as of January 2026, follows this pattern :
 
+```bash
 #!/bin/bash   
 # The Ralph Wiggum Loop - Canonical Implementation 2026   
   
@@ -96,6 +97,7 @@ done
   
 echo " Failed to complete task within $MAX_ITERATIONS iterations."   
 exit 1   
+```
 
 ###  3.2 The Stop-Hook and Completion Promises
 
@@ -248,7 +250,7 @@ The battle against Context Rot will evolve from "fresh restarts" (Ralph) to "sma
 
 ##  10\. Conclusion
 
-The Ralph Wiggum Loop, formalized in January 2026, stands as a testament to the pragmatic adaptation of software engineering to the reality of AI models. By accepting the stochastic, limited nature of LLMs—their "Context Rot," their "Sycophancy," and their "Compaction"—engineers have built a robust architecture based on naive persistence. The while loop has replaced the complex state machine as the primary driver of autonomy.
+The Ralph Wiggum Loop, formalized in January 2026, shows the pragmatic adaptation of software engineering to the reality of AI models. By accepting the stochastic, limited nature of LLMs—their "Context Rot," their "Sycophancy," and their "Compaction"—engineers have built a robust architecture based on naive persistence. The while loop has replaced the complex state machine as the primary driver of autonomy.
 
 As we look forward, the chaos of "Gas Town" is slowly being paved by the governance of "Agent Bricks" and the intelligence of "Lisa." However, the core insight remains: in an age of cheap intelligence, persistence is a substitute for perfection. The developer of 2026 is a orchestrator of loops, a Mayor of a digital town, managing a workforce that may be dim-witted and prone to failure, but is infinitely eager to say, "I'm helping."
 

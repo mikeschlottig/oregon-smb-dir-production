@@ -100,7 +100,7 @@ The choice of inference engine—the software that actually runs the LLM on the 
 
 ####  vLLM: The General Purpose Workhorse
 
-vLLM remains the industry standard for general-purpose serving. Its introduction of  PagedAttention —inspired by virtual memory paging in operating systems—revolutionized memory management, allowing for significantly higher batch sizes. vLLM excels in "Time to First Token" (TTFT) and is the default choice for simple chat applications where the interaction pattern is linear and predictable.
+vLLM remains the industry standard for general-purpose serving. Its introduction of  PagedAttention —inspired by virtual memory paging in operating systems—changed memory management, allowing for significantly higher batch sizes. vLLM excels in "Time to First Token" (TTFT) and is the default choice for simple chat applications where the interaction pattern is linear and predictable.
 
 ####  SGLang: The Agentic Specialist
 

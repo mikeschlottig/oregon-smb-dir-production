@@ -11,5 +11,10 @@ const escapeJson = (value: unknown): string =>
     .replace(/</g, "\\u003c")
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026");
+
+// One <script> per schema object (P19, 2026-11-21). A single block holding an array is valid JSON-LD, but the house
+// crawler (qc-site.py via advertools) reads only the first object of a top-level array and reported "no
+// BreadcrumbList" on 10,529 pages whose breadcrumb was the second item. Separate blocks read the same everywhere.
+const blocks = Array.isArray(data) ? data : [data];
 ---
-<script type="application/ld+json" set:html={escapeJson(data)} />
+{blocks.map((block) => <script type="application/ld+json" set:html={escapeJson(block)} />)}

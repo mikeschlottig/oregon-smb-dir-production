@@ -52,12 +52,12 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
-<SiteLayout title={`Stories from the I-5 — Page ${currentPage}`} schemas={schemas}>
+<SiteLayout title={`Stories from the I-5 — Page ${currentPage}`} description={`Page ${currentPage} of the Oregon SMB Directory blog: long-form stories on the history, people and businesses of Oregon's cities along the I-5.`} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">The Blog · Page {currentPage}</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">Stories from the I-5</h1>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">Stories from the I-5 — Page {currentPage}</h1>
     </div>
   </section>
 

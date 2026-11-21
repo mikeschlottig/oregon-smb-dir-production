@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 
 const title = `Accessibility — ${publisher.name}`;
-const description = "Accessibility target, current improvements, and feedback path for Oregon SMB Directory.";
+const description = "Accessibility target, current improvements, and feedback path for Oregon SMB Directory. Report a barrier through the contact form or by phone.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([{ name: "Accessibility" }]);
@@ -22,7 +22,7 @@ const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
     </div>
   </header>
 
-  <main class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
+  <article class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
     <h2>Current approach</h2>
     <p>Search and filter controls use persistent labels, result counts are announced, keyboard users can skip to results, active pagination is identified, telephone numbers are linked, maps have textual alternatives, and form errors are associated with their fields and summarized.</p>
     <p>The site supports visible keyboard focus and reduced-motion preferences through its shared styles. Automated checks are supplemented with keyboard and zoom review during releases.</p>
@@ -30,5 +30,5 @@ const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
     <h2>Report a barrier</h2>
     <p>Email <a href={`mailto:${publisher.supportEmail}?subject=Accessibility%20feedback`}>{publisher.supportEmail}</a> with the page address, the task you were trying to complete, and the browser or assistive technology used if known. You can also call <a href={`tel:${publisher.supportPhone}`}>{publisher.supportPhoneDisplay}</a>.</p>
     <p>We will acknowledge accessibility reports and prioritize barriers that prevent access to business records, corrections, or contact paths.</p>
-  </main>
+  </article>
 </SiteLayout>

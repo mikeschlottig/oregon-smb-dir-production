@@ -4,7 +4,7 @@ import { getImage } from "astro:assets";
 import { cities } from "@/data/cities";
 import type { CardImage } from "@/types/images";
 
-const CARD_WIDTHS = [400, 640, 800];
+const CARD_WIDTHS = [400, 640, 800, 1200]; // 1200 added P19: a 3x phone needs ~1070 px; only sources that wide get it
 
 let cache: Promise<Readonly<Record<string, CardImage>>> | undefined;
 

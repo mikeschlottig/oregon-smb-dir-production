@@ -1,11 +1,28 @@
 import { ChevronDown } from "lucide-react";
-import heroImg from "@/images/hero-oregon.jpg";
 
-export const Hero = () => (
+/** Responsive WebP set built at build time by the page (astro:assets getImage). */
+export interface HeroImage {
+  src: string;
+  srcSet: string;
+  width: number;
+  height: number;
+}
+
+// The hero photo was a CSS background: a 251 KB 1920 px JPEG sent to every device, found late by the browser and
+// invisible to the image checks (P19 2026-11-21: home LCP 7.1 s on mobile). It is now a real <img> with a WebP
+// srcset, fetched first.
+export const Hero = ({ image }: { image: HeroImage }) => (
   <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-    <div
-      className="absolute inset-0 bg-cover bg-center scale-105"
-      style={{ backgroundImage: `url(${heroImg.src ?? heroImg})` }}
+    <img
+      src={image.src}
+      srcSet={image.srcSet}
+      sizes="100vw"
+      width={image.width}
+      height={image.height}
+      alt="Low sun over a snow-capped peak, with fog lying in valleys of conifer forest"
+      fetchPriority="high"
+      decoding="async"
+      className="absolute inset-0 w-full h-full object-cover"
     />
     <div className="absolute inset-0 bg-gradient-to-b from-foreground/50 via-foreground/30 to-foreground/75" />
     <div className="absolute inset-0 bg-gradient-to-r from-foreground/30 via-transparent to-foreground/30" />

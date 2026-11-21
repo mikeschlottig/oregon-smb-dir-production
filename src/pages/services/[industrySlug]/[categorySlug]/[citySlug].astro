@@ -1,4 +1,6 @@
 ---
+import { fitTitle } from "@/lib/seo-text";
+import { fitDescription } from "@/lib/seo-text";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import TldrCard from "@/components/TldrCard.astro";
 import BusinessCard from "@/components/cards/BusinessCard";
@@ -95,8 +97,13 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 
-const title = `${category.displayName} in ${city.name}, Oregon`;
-const description = `Find ${category.pluralName} serving ${city.name} and surrounding ${city.region} communities. Results use an explicit provider-category selection policy.`;
+const title = fitTitle([`${category.displayName} in ${city.name}, Oregon`, `${category.displayName} in ${city.name}, OR`]);
+const description = fitDescription([
+  `Find ${category.pluralName} serving ${city.name} and surrounding ${city.region} communities.`,
+  `Results use an explicit provider-category selection policy.`,
+  `Compare contact details and maps for each one.`,
+  `Compare contact details and maps.`,
+]);
 
 const tldrStats = [
   { value: businesses.length.toString(), label: "Listings" },

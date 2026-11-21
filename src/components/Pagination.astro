@@ -36,7 +36,7 @@ const nextHref = currentPage < totalPages ? pageHref(currentPage + 1) : null;
         rel="prev"
       >← Prev</a>
     ) : (
-      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground/50 cursor-not-allowed">← Prev</span>
+      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground cursor-not-allowed">← Prev</span>
     )}
 
     {pages.map((p) =>
@@ -62,7 +62,7 @@ const nextHref = currentPage < totalPages ? pageHref(currentPage + 1) : null;
         rel="next"
       >Next →</a>
     ) : (
-      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground/50 cursor-not-allowed">Next →</span>
+      <span class="px-3 py-2 rounded border border-border text-sm text-muted-foreground cursor-not-allowed">Next →</span>
     )}
   </nav>
 )}

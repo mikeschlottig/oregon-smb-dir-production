@@ -1,4 +1,5 @@
 ---
+import { fitTitle, fitDescription } from "@/lib/seo-text";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import BusinessFilterGrid from "@/components/BusinessFilterGrid";
@@ -33,8 +34,16 @@ const pageSlice = slicePage(businesses, currentPage);
 const range = pageRanges(businesses.length).find((r) => r.page === currentPage)!;
 const baseUrl = `/city/${city.slug}/${industry.slug}/`;
 
-const title = `${industry.name} in ${city.name}, Oregon — Page ${currentPage}`;
-const description = `${industry.description}. Browse ${businesses.length} source-observed business records serving ${city.name} (page ${currentPage} of ${totalPages}).`;
+const title = fitTitle([
+  `${industry.name} in ${city.name}, Oregon — Page ${currentPage}`,
+  `${industry.name} in ${city.name}, OR — Page ${currentPage}`,
+  `${industry.name}, ${city.name} — Page ${currentPage}`,
+]);
+const description = fitDescription([
+  `${industry.description}. Browse ${businesses.length} source-observed business records serving ${city.name} (page ${currentPage} of ${totalPages}).`,
+  `Compare contact details and maps for each business.`,
+  `Compare each listing.`,
+]);
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([
@@ -63,6 +72,7 @@ const schemas = [
   </section>
 
   <section class="container mx-auto px-4 py-16">
+    <h2 class="sr-only">{industry.name} listings in {city.name}, page {currentPage}</h2>
     <BusinessFilterGrid
       client:load
       businesses={businesses}

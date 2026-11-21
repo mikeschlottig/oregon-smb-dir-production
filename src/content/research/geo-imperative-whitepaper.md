@@ -1,6 +1,6 @@
 ---
 title: "Whitepaper: The GEO Imperative — Why Generative Engine Optimization Is the Most Important Marketing Discipline of the Next Decade"
-summary: "📄"
+summary: "An opinionated whitepaper arguing that GEO is the defining marketing discipline of the AI era, with tactical playbooks for prompt-level testing, content reformatting, and GEO for solo builders."
 category: "Generative Engine Optimization"
 published: "2026"
 author: "LEVERAGE AI Research"

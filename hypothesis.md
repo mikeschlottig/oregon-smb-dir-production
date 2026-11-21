@@ -655,3 +655,32 @@ Reality:
 - Diff → why: I assumed service-area businesses' addresses were hidden only in the old extraction, not on Google
   itself. maps-intel scraped the same profiles, so it has the same gap. Lesson: before predicting a fill rate from a
   second source, check whether it scrapes the same upstream — two copies of one source fill nothing.
+
+## H37 — the directory against the house standards (P19) — CLOSED
+Prediction (written before any checker output was read):
+- qc-site site rows pass (robots, sitemap, 404, compression, llms.txt). Page rules fail on most of ~10.5k pages,
+  dominated by: titles > 60 chars on listing pages ("<Business> in <City>, OR — <Industry> | Oregon SMB
+  Directory"), descriptions outside 120–160, and slug-phrase misses where the slug drops punctuation
+  ("m-b-landscaping" vs "M & B Landscaping"). "one phone number site-wide" FAILS by design (every listing links its
+  business's tel:), as does "phone + email on every page" if the footer has no tel:.
+- og:image is one 1200×630 default card → passes. Lighthouse mobile: SEO 100, Accessibility ≥ 95, Performance
+  < 90 on listing/industry pages that load the map or search island.
+- Anti-slop scan: a handful of hits, mostly "seamless" or "cutting-edge" inside business names/descriptions.
+Reality:
+- ✘ The checker did not run at all: Scrapy 2.20 broke advertools 0.18 (every request errored, KeyError on an empty
+  frame). Fixed by pinning, then it ran.
+- ✘ llms.txt was a 404 (predicted pass). ✔ robots/sitemap/404/compression passed.
+- ✔ Titles, descriptions and slug misses dominated (4,724 / 4,247 / 3,134); ✔ one-phone rows fail by design;
+  ✘ "phone + email on every page" passed — the footer already had both.
+- ✘ Two failures were checker artefacts I did not predict: advertools reads only the first object of a JSON-LD array
+  ("no BreadcrumbList" ×10,529) and qc-site reads only footer *links* for the copyright word.
+- ✘ Lighthouse accessibility was 93–96 (contrast tokens), not ≥ 95 everywhere; ✔ SEO 100; ✔ performance < 90 — but on
+  every page, not just map pages, and Best Practices 81 everywhere from Cloudflare's injected bot-detection script.
+- ✘ Anti-slop: 507 hits, not a handful — 468 business names; 32 real hits were our own research prose.
+- Not predicted at all: /about/ 404; a research report shipping a pasted HTML app with fictional 555 phone numbers;
+  23 reports with up to 21 h1s; an unfenced bash script rendering its comments as headings.
+- Diff → why: I predicted from the site's templates and never from its content or its edge. The templates were mostly
+  sound; the defects were in imported content (Notion/HTML exports) and in what Cloudflare injects. Lesson: an audit
+  plan needs one row per *source* of HTML — templates, imported content, edge injection — not one per template.
+  Second lesson: after changing the markdown pipeline, clear the content-layer cache (`astro sync --force`); an
+  unchanged file keeps its old rendering and the fix looks like it failed.

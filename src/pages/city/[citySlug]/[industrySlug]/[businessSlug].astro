@@ -17,6 +17,9 @@ import PremiumListing from "@/components/PremiumListing.astro";
 import { serviceCategories } from "@/data/serviceCategories";
 import { qualifyBusinessForService } from "@/data/serviceSelectionPolicies";
 import { businessSchema } from "@/lib/schema";
+import { fitTitle, fitDescription, article, listWords } from "@/lib/seo-text";
+import { isSharedName } from "@/lib/shared-names";
+import { publisher } from "@/data/publisher";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
 import { ratingAsOf, ratingLabel } from "@/lib/rating-display";
@@ -93,10 +96,29 @@ const related = getBusinesses(city.slug, industry.slug)
   .filter((b) => b.title !== business.title)
   .slice(0, 4);
 
-const title = premium?.seo.title ?? `${business.title} — ${industry.name} in ${city.name}, OR`;
-const description = premium?.seo.description ?? `${business.title} is a ${
-  business.category?.toLowerCase() ?? industry.name.toLowerCase()
-} serving ${city.name}, Oregon. ${industry.description}.`;
+// Title ≤ 60 and description 120–160 (house standard STD-SEO-001 row 2; P19, 2026-11-21). The business's own name
+// always leads and is never shortened; the brand is appended only when it fits (docs/STANDARDS-AUDIT-2026-11-21.md D2).
+const kindWord = (business.category ?? industry.name).toLowerCase();
+const showsWebsite = Boolean(business.website && business.websiteStatus === "confirmed");
+const findable = [business.phone && "phone number", showsWebsite && "website", business.address ? "address and directions" : "map"]
+  .filter((x): x is string => Boolean(x));
+const title = premium?.seo.title ?? fitTitle([
+  `${business.title} — ${industry.name} in ${city.name}, OR | ${publisher.name}`,
+  `${business.title} — ${industry.name} in ${city.name}, OR`,
+  business.category && `${business.title} — ${business.category} in ${city.name}, OR`,
+  `${business.title} in ${city.name}, OR`,
+  `${business.title}, ${city.name}`,
+  // The bare name only when no other listing shares it, so titles stay unique.
+  !isSharedName(business.title) && business.title,
+]);
+const description = premium?.seo.description ?? fitDescription([
+  `${business.title} is ${article(kindWord)} ${kindWord} serving ${city.name}, Oregon.`,
+  `See its ${listWords(findable)} on ${publisher.name}.`,
+  `${industry.description}.`,
+  `One of the ${industry.name.toLowerCase()} records listed for ${city.name}.`,
+  `See its contact details and map.`,
+  `Contact details and map inside.`,
+]);
 
 const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
 // One footnote at the bottom of the listing dates the rating; every rating shown on the

@@ -77,7 +77,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "plumbing",
     industrySlug: "construction-home-services",
-    displayName: "Plumbers",
+    displayName: "Plumbing Contractors",
     pluralName: "plumbers",
     shortDescription: "Licensed plumbing services for repairs, installations, and emergency services in residential and commercial properties.",
     tldr: "Plumbers handle everything from leaky faucets to full repiping and water heater installation. In Oregon, plumbers must be licensed through the Oregon Building Codes Division. Always verify licensing and get upfront pricing before work begins.",
@@ -128,7 +128,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "electrical",
     industrySlug: "construction-home-services",
-    displayName: "Electricians",
+    displayName: "Electrical Contractors",
     pluralName: "electricians",
     shortDescription: "Licensed electrical services including wiring, panel upgrades, lighting installation, and electrical repairs for homes and businesses.",
     tldr: "Electricians handle all electrical work from outlet repairs to full rewiring and panel upgrades. Oregon requires electricians to be licensed through the Oregon Building Codes Division. Never attempt DIY electrical work—improper wiring creates fire and shock hazards.",
@@ -945,7 +945,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "marketing-agencies",
     industrySlug: "business-professional-services",
-    displayName: "Marketing & Advertising Agencies",
+    displayName: "Marketing Agencies & Advertising Firms",
     pluralName: "marketing and advertising agencies",
     shortDescription: "Full-service and specialized marketing agencies offering digital marketing, branding, social media, SEO, and advertising services.",
     tldr: "Marketing agencies help businesses grow through strategy, branding, digital marketing, content creation, and advertising campaigns. Choose an agency based on their experience in your industry, the services you need, their portfolio, and whether their communication style matches your preferences.",
@@ -1301,7 +1301,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "massage-therapy",
     industrySlug: "health-wellness",
-    displayName: "Massage Therapists",
+    displayName: "Massage Therapy Practices",
     pluralName: "massage therapists",
     shortDescription: "Licensed massage therapists providing therapeutic and relaxation massage for pain relief, stress reduction, and wellness.",
     tldr: "Massage therapists provide therapeutic touch for relaxation, pain relief, and wellness. Oregon licenses massage therapists through the Oregon Board of Massage Therapists. Discuss your goals and any health conditions before the session. Regular massage can help manage stress and muscle tension.",
@@ -1404,7 +1404,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "general-practice-law",
     industrySlug: "legal-services",
-    displayName: "General Practice Attorneys",
+    displayName: "General Practice Law Firms",
     pluralName: "general practice attorneys",
     shortDescription: "Attorneys handling a broad range of legal matters for individuals and small businesses, from contracts to basic litigation.",
     tldr: "General practice attorneys handle various legal matters including contracts, estate planning, real estate transactions, and some litigation. They're a good starting point for common legal needs. For specialized matters, they may refer you to a specialist. Verify licensing through the Oregon State Bar.",
@@ -1506,7 +1506,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "business-law",
     industrySlug: "legal-services",
-    displayName: "Business & Corporate Attorneys",
+    displayName: "Business Law & Corporate Attorneys",
     pluralName: "business and corporate attorneys",
     shortDescription: "Legal services for businesses including formation, contracts, employment law, mergers and acquisitions, and regulatory compliance.",
     tldr: "Business attorneys help with business formation, contracts, employment law, regulatory compliance, and transactions. Some work with startups, others with established companies. Choose an attorney with experience in your industry and business size. Verify licensing through the Oregon State Bar.",
@@ -1660,7 +1660,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: "personal-training",
     industrySlug: "sports-fitness",
-    displayName: "Personal Trainers",
+    displayName: "Personal Training Services",
     pluralName: "personal trainers",
     shortDescription: "Certified personal trainers providing customized fitness programs, technique instruction, and motivation for individual fitness goals.",
     tldr: "Personal trainers create customized workout plans, teach proper exercise technique, and provide motivation and accountability. Look for nationally recognized certifications (NASM, ACE, ACSM). Ask about their experience with your goals (weight loss, strength, rehabilitation) and whether they offer packages or sessions à la carte.",

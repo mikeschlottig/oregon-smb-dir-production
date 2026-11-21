@@ -16,7 +16,7 @@ const businesses = getBusinesses("grants-pass", "business-professional-services"
 const related = businesses.filter(b => b.slug !== "leverageai").slice(0, 4);
 
 const title = "Leverage AI — AI Search & Digital Strategy in Grants Pass, OR";
-const description = "Leverage AI builds local demand systems for Oregon service businesses — AI search optimization, custom web design, and lead capture infrastructure. Based in Grants Pass, OR.";
+const description = "Leverage AI builds local demand systems for Oregon service businesses: AI search optimization, custom web design and lead capture. Based in Grants Pass, OR.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([

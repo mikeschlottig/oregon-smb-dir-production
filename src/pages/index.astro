@@ -12,6 +12,8 @@ import { getCollection } from "astro:content";
 import { researchReports, bestOfLists } from "@/data/content";
 import { websiteSchema } from "@/lib/schema";
 import { MapPin, ArrowRight, Calendar } from "lucide-react";
+import { getImage } from "astro:assets";
+import heroPhoto from "@/images/hero-oregon.jpg";
 
 // The newest posts from the MDX blog collection (src/content/blog/), never more than 3.
 const LATEST_POSTS = 3;
@@ -30,7 +32,7 @@ const featured = {
 };
 
 export const title = "Oregon Business Directory — Statewide Local Listings";
-export const description = "A statewide Oregon business directory organized by regional, city, industry, and service collections.";
+export const description = "Find local businesses in Oregon cities from Portland to Grants Pass. Browse by city, industry or service, with contact details and a map for each listing.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 
@@ -38,9 +40,13 @@ const schemas = [
   ...websiteSchema(siteUrl),
 ];
 const cardImages = await cityCardImages();
+
+// Hero photo as responsive WebP (P19, 2026-11-21) — see components/sections/Hero.tsx.
+const heroBuilt = await getImage({ src: heroPhoto, widths: [640, 960, 1280, 1920], format: "webp", quality: 72 });
+const hero = { src: heroBuilt.src, srcSet: heroBuilt.srcSet.attribute, width: heroPhoto.width, height: heroPhoto.height };
 ---
-<SiteLayout title={title} description={description} schemas={schemas}>
-  <Hero />
+<SiteLayout title={title} description={description} schemas={schemas} preloadImage={{ srcSet: hero.srcSet, sizes: "100vw" }}>
+  <Hero image={hero} />
   <MarqueeBanner />
   
   <!-- Search Section -->

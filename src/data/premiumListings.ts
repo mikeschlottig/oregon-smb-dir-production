@@ -48,7 +48,7 @@ export const premiumListings: PremiumListing[] = [
     key: "portland/construction-home-services/xcelent-concrete-services",
     schemaType: "HomeAndConstructionBusiness",
     seo: {
-      title: "Xcelent Concrete Services — Concrete Contractor in Portland, OR",
+      title: "Xcelent Concrete Services — Portland Concrete Contractor",
       description:
         "Xcelent Concrete Services installs and repairs concrete driveways, patios, sidewalks, steps, and retaining walls for homes and businesses in Portland, Oregon.",
     },
@@ -96,9 +96,9 @@ export const premiumListings: PremiumListing[] = [
   {
     key: "portland/business-professional-services/deepli-clean",
     seo: {
-      title: "Deepli Clean — Commercial Cleaning & Janitorial Services in Portland, OR",
+      title: "Deepli Clean — Commercial Cleaning in Portland, OR",
       description:
-        "Deepli Clean provides commercial cleaning, janitorial, office cleaning, deep cleaning, and facility maintenance for businesses in Portland, Oregon and surrounding areas.",
+        "Deepli Clean provides commercial, janitorial, office and deep cleaning plus facility maintenance for businesses in Portland, Oregon and surrounding areas.",
     },
     banner: {
       eyebrow: "Commercial cleaning · Portland metro",
@@ -145,7 +145,7 @@ export const premiumListings: PremiumListing[] = [
     seo: {
       title: "Apex Business Marketing — Web Design & SEO in Hillsboro, OR",
       description:
-        "Apex Business Marketing builds websites and provides SEO, AI search optimization, hosting, and maintenance for small businesses in Hillsboro, Portland, and Washington County.",
+        "Apex Business Marketing builds websites and provides SEO, AI search optimization, hosting and upkeep for small businesses in Hillsboro and Washington County.",
     },
     banner: {
       eyebrow: "Web design & SEO · Hillsboro",
@@ -210,7 +210,7 @@ export const premiumListings: PremiumListing[] = [
     key: "portland/health-medical/north-tabor-dental",
     schemaType: "Dentist",
     seo: {
-      title: "North Tabor Dental — Family & Cosmetic Dentist in Portland, OR",
+      title: "North Tabor Dental — Family & Cosmetic Dentist, Portland",
       description:
         "North Tabor Dental on NE Glisan St offers general, family, cosmetic, and pediatric dentistry, dental implants, veneers, and teeth whitening in Portland, Oregon.",
     },
@@ -263,7 +263,7 @@ export const premiumListings: PremiumListing[] = [
     seo: {
       title: "Capital Nomics — Business Valuation & Appraisal in Bend, OR",
       description:
-        "Capital Nomics provides business valuations, M&A advisory, exit planning, and goodwill assessments for businesses in Bend, Redmond, Eugene, Medford, and across Oregon.",
+        "Capital Nomics provides business valuations, M&A advisory, exit planning and goodwill assessments in Bend, Redmond, Eugene, Medford and across Oregon.",
     },
     banner: {
       eyebrow: "Business valuation · Central Oregon",

@@ -35,9 +35,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
+            <h2 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
               Cities
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm opacity-80">
               {cities.map((c) => (
                 <li key={c.slug}>
@@ -50,9 +50,9 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
+            <h2 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
               Industries
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm opacity-80">
               {industries.map((i) => (
                 <li key={i.slug}>
@@ -65,10 +65,11 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
+            <h2 className="font-sans font-semibold text-xs uppercase tracking-widest mb-4 opacity-60">
               Resources
-            </h4>
+            </h2>
             <ul className="space-y-2 text-sm opacity-80">
+              <li><a href="/about/" className="hover:text-accent transition-colors">About</a></li>
               <li><a href="/blog/" className="hover:text-accent transition-colors">Blog</a></li>
               <li><a href="/research/" className="hover:text-accent transition-colors">Research Reports</a></li>
               <li><a href="/best-of/" className="hover:text-accent transition-colors">Best Of</a></li>
@@ -81,7 +82,10 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs opacity-50">
-          <span>© 2026 Oregon SMB Directory. All rights reserved.</span>
+          {/* The notice links to /about/, which names the rights holder; qc-site.py reads only footer links. */}
+          <a href="/about/" className="hover:text-accent transition-colors">
+            Copyright © 2026 {publisher.legalOperator} · {publisher.name}. All rights reserved.
+          </a>
           <span>Statewide Oregon coverage</span>
         </div>
       </div>

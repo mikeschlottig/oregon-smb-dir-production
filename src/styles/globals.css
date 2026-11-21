@@ -21,9 +21,9 @@
     --secondary-foreground: 38 28% 96%;
 
     --muted: 35 18% 91%;
-    --muted-foreground: 24 18% 45%;
+    --muted-foreground: 24 18% 40%; /* was 45%: 3.88:1 on --muted; 4.72:1 now (P19 2026-11-21) */
 
-    --accent: 14 48% 44%;
+    --accent: 14 48% 42%; /* was 44%: 4.42:1 on --muted; 4.71:1 now (P19 2026-11-21) */
     --accent-foreground: 38 28% 96%;
 
     --gold: 45 85% 70%;

@@ -4,8 +4,8 @@ import { publisher } from "@/data/publisher";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 
-const title = `Editorial and Data Quality Policy — ${publisher.name}`;
-const description = "How Oregon SMB Directory sources, qualifies, labels, corrects, and publishes local business records.";
+const title = `Editorial Policy and Data Quality — ${publisher.name}`;
+const description = "How Oregon SMB Directory sources, qualifies, labels, corrects, and publishes local business records, and how to ask for a correction.";
 
 const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, "");
 const crumbs = trail([{ name: "Editorial & Data Quality" }]);
@@ -17,12 +17,12 @@ const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
     <div class="container mx-auto max-w-3xl">
       <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-4" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Project-specific policy · August 2026</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Editorial and data quality</h1>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Editorial policy and data quality</h1>
       <p class="text-muted-foreground text-lg">The labels on this site describe the evidence available for a field; they do not imply owner participation unless an owner event is recorded.</p>
     </div>
   </header>
 
-  <main class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
+  <article class="container mx-auto max-w-3xl px-4 py-14 prose prose-lg">
     <h2>Record labels</h2>
     <ul>
       <li><strong>Source observed</strong> means a field appeared in an identified public provider record.</li>
@@ -41,5 +41,5 @@ const schemas = [breadcrumbListSchema(crumbs, siteUrl)];
 
     <h2>Corrections</h2>
     <p>To challenge a name, category, address, status, rating observation, or website relationship, email <a href={`mailto:${publisher.supportEmail}`}>{publisher.supportEmail}</a> or use the <a href={publisher.correctionUrl}>listing-correction form</a>. Include the business name, city, disputed field, and supporting source. Disputed fields may be suppressed while evidence is reviewed.</p>
-  </main>
+  </article>
 </SiteLayout>

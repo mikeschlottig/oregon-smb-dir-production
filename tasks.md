@@ -409,3 +409,24 @@ Siding (add), #30 Menlo Insurance (declined: own site = San Francisco, no Oregon
       Open: SCHEMAORG_UNVERIFIED (validator.schema.org answered 405 — tooling, re-run later); LB_GEO / hours
         enrichment from maps-intel is a separate piece of work; reply emails to requesters #26 #27 #28 #34 and the
         Menlo decline are drafts for Mike (first 10 emails need his approval, D3).
+
+## P19 — Audit against the house standards (2026-11-21, Mike: "we have our own checkers … audit the
+## oregonsmbdirectory properly … surface the issues, make a choice, document your reasoning, and proceed")
+Standards: /home/mikes/leverageai-seo-site-standards (STANDARDS.md) → checkers in /home/mikes/house-standards:
+STD-WEB-QC-001 (standards/web-qc-seo.md, deploy gate rows 1–13) and STD-SEO-001 (standards/seo.md, rows 1–19).
+Indexes: codebase-intel …/indexes/{leverageai-seo-site-standards,house-standards}; doc-intel
+/home/mikes/doc-intel/indexes/{leverageai-seo-site-standards,house-standards}.db.
+Contradictions and the choice made for each: docs/STANDARDS-AUDIT-2026-11-21.md.
+- [x] P19.1 index both repos (codebase-intel + doc-intel); read the gate and checklist sections
+- [x] P19.2 qc-site.py over the live sitemap → reports/std/20261121-qc-oregonsmbdirectory.com.md
+      → the checker was broken first (Scrapy 2.20 vs advertools 0.18): pinned scrapy<2.20 in every documented
+        invocation + empty-crawl guard in qc-site.py. Then 18,904 pass / 7 fail / 10,533 pages with problems.
+- [x] P19.3 `astro check` 0 errors 0 warnings; anti-slop scan 507 hits → 468 business names + 6 citations
+      (justified) + 32 prose hits rewritten. (Row 6 links: verify-site C10 LINKS passes on every build.)
+- [x] P19.4 browser rows on 20 page types + Lighthouse on 12 → reports/std/browser-*-20261121/, scratchpad JSON
+- [x] P19.5 row 7 side by side → docs/jsonld-side-by-side-listing-2026-11-21.md (zero wrong; sameAs added)
+- [x] P19.6 triage → docs/STANDARDS-AUDIT-2026-11-21.md (D1–D14, fixes table, still-open list)
+- [x] P19.7 six deploys (4d0b98a3 … 04c2f5a8); after numbers in the audit doc "Results" table:
+      qc-site pages with problems 10,533 → 3,172; descriptions out of range 4,247 → 0; titles > 60 4,724 → 111;
+      Lighthouse accessibility 93–96 → 100 on all 12 page types; SEO 100; verify-site 0 failures.
+      Open (each with its reason in the doc): D1b, D8 (Mike: edge scripts), D10, D11, D12, performance < 90.

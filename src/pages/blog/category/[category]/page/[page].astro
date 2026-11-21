@@ -1,4 +1,5 @@
 ---
+import { fitDescription } from "@/lib/seo-text";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { blogCategories, getBlogCategory } from "@/data/blogCategories";
 import { pageCount, pageSlice as slicePage } from "@/lib/paginate";
@@ -67,12 +68,12 @@ const schemas = [
   breadcrumbListSchema(crumbs, siteUrl),
 ];
 ---
-<SiteLayout title={`${categoryName} — Page ${currentPage}`} schemas={schemas}>
+<SiteLayout title={`${categoryName} — Page ${currentPage}`} description={fitDescription([`Page ${currentPage} of the ${categoryName} stories on the Oregon SMB Directory blog.`, `Long-form posts on the history, people and businesses of Oregon's cities along the I-5.`, `Long-form stories about Oregon's cities.`, `Every post is free to read.`])} schemas={schemas}>
   <section class="bg-muted pt-32 pb-14 px-4 border-b border-border">
     <div class="container mx-auto max-w-4xl text-center">
       <Breadcrumbs crumbs={visibleTrail(crumbs)} class="mb-6" />
       <p class="text-accent text-sm uppercase tracking-widest mb-3">Category · Page {currentPage}</p>
-      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">{categoryName}</h1>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2">{categoryName} — Page {currentPage}</h1>
       {categoryInfo && (
         <p class="mt-5 text-muted-foreground text-left md:text-center max-w-3xl mx-auto leading-relaxed">
           {categoryInfo.description}

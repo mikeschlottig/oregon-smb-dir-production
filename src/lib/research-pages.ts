@@ -45,7 +45,7 @@ export function researchPageMeta(page: number, totalPages: number, start: number
       : `Research Library — Page ${page} of ${totalPages} — Oregon SMB Directory`;
   const description =
     page === 1
-      ? "Industry research reports and deep-dive analyses across Oregon's small-business economy."
-      : `Research reports ${start + 1}–${end} of ${total}: industry studies and deep-dive analyses of Oregon's small-business economy, page ${page} of ${totalPages}.`;
+      ? "Industry research reports and deep-dive analyses across Oregon's small-business economy, from hotels and real estate to contractors, salons and AI search."
+      : `Research reports ${start + 1}–${end} of ${total}: industry studies and deep-dive analyses of Oregon's small-business economy, page ${page} of ${totalPages}. Free to read online.`;
   return { title, description };
 }

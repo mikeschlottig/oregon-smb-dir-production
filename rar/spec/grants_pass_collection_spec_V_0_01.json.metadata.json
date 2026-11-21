@@ -1,0 +1,13 @@
+{
+  "Category": "Collection Specification",
+  "Properties": "Grants Pass Market Spec",
+  "Tags": [
+    "spec",
+    "grants_pass",
+    "bcrf49",
+    "mfcf49"
+  ],
+  "Link": "ranks-above-replacement\\rar\\spec\\grants_pass_collection_spec_V_0_01.json",
+  "Date": "2026-09-14T07:50:00.672358+00:00",
+  "Purpose": "Canonical market and coordinate configuration specification for Grants Pass, Oregon local search acquisitions."
+}

@@ -1,0 +1,14 @@
+{
+  "Category": "Spatial Geometry",
+  "Properties": "49-Point Grid Generators",
+  "Tags": [
+    "bcrf49",
+    "mfcf49",
+    "square49",
+    "polar",
+    "hexagonal"
+  ],
+  "Link": "ranks-above-replacement\\rar\\geometry\\grid_system_49_V_0_01.py",
+  "Date": "2026-09-14T07:50:00.672358+00:00",
+  "Purpose": "Generates 49-point sampling geometries including BCRF-49 logarithmic rings, Legacy 7x7 square, and MFCF-49 hexagonal grids."
+}

@@ -1,0 +1,68 @@
+{
+  "market_name": "Grants Pass",
+  "county": "Josephine County",
+  "state": "Oregon",
+  "country": "US",
+  "canonical_centroid": {
+    "latitude": 42.4389,
+    "longitude": -123.3284,
+    "crs": "EPSG:4326"
+  },
+  "market_study_polygon": {
+    "type": "BoundingBox",
+    "min_latitude": 42.3600,
+    "max_latitude": 42.5400,
+    "min_longitude": -123.4600,
+    "max_longitude": -123.2000
+  },
+  "supported_verticals": [
+    {
+      "niche_id": "lawyers",
+      "canonical_query": "lawyers in grants pass",
+      "censoring_horizon": 20
+    },
+    {
+      "niche_id": "roofers",
+      "canonical_query": "roofing contractors in grants pass",
+      "censoring_horizon": 20
+    }
+  ],
+  "sampling_frames": {
+    "BCRF_49": {
+      "frame_id": "frame_gp_bcrf49_v1",
+      "frame_type": "business_centered_polar",
+      "total_points": 49,
+      "radii_miles": [0.0, 0.25, 0.5, 1.0, 2.0, 4.0, 8.0],
+      "bearings_count": 8,
+      "purpose": "Distance-decay calibration and Prominence Alpha baseline estimation",
+      "sample_allocation": {
+        "near_field_0_to_1mi": 25,
+        "mid_field_1_to_4mi": 16,
+        "far_field_4_to_8mi": 8
+      }
+    },
+    "MFCF_49_HEX": {
+      "frame_id": "frame_gp_mfcf49_hex_v1",
+      "frame_type": "market_fixed_h3",
+      "total_points": 49,
+      "spacing_miles": 0.80,
+      "rings": 4,
+      "purpose": "Market-Fixed Competitive Frame and Matched-Proximity Comparison Set (MPCS) derivation"
+    },
+    "SQUARE_49": {
+      "frame_id": "frame_gp_sq49_legacy_v1",
+      "frame_type": "legacy_square_7x7",
+      "total_points": 49,
+      "step_miles": 1.0,
+      "purpose": "Legacy SaaS parity and comparative heatmapping"
+    }
+  },
+  "operational_guardrails": {
+    "search_surface": "google_maps_viewport",
+    "viewport_zoom": 14,
+    "browser_type": "chrome_stealth_patchright",
+    "humanized_jitter_ms": [2000, 4500],
+    "circuit_breaker_threshold": 3,
+    "proxy_tier": "RESIDENTIAL"
+  }
+}

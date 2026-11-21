@@ -1,0 +1,14 @@
+{
+  "Category": "Spatial Analysis Engine",
+  "Properties": "Mathematical MPCS & CWR Engine",
+  "Tags": [
+    "mpcs",
+    "cwr",
+    "distance_decay",
+    "p2a",
+    "spatial"
+  ],
+  "Link": "ranks-above-replacement\\rar\\analysis\\mpcs_engine_V_0_01.py",
+  "Date": "2026-09-14T07:50:00.672358+00:00",
+  "Purpose": "Engine that computes Matched-Proximity Comparison Sets and Crossover Win Rates across local rank observation pairs."
+}

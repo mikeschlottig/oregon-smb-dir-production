@@ -1,0 +1,14 @@
+{
+  "Category": "Validation Runner",
+  "Properties": "Medford Empirical Validation Script",
+  "Tags": [
+    "validation",
+    "medford",
+    "lawyers",
+    "roofers",
+    "mpcs"
+  ],
+  "Link": "ranks-above-replacement\\rar\\analysis\\run_medford_mpcs_validation_V_0_01.py",
+  "Date": "2026-09-14T07:50:00.672358+00:00",
+  "Purpose": "Executes MPCS empirical validation over 520 Medford observations producing CWR leaderboards and distance inversion logs."
+}

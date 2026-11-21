@@ -1,0 +1,12 @@
+{
+  "Category": "Harvester",
+  "Properties": {
+    "version": "0.02",
+    "stealth": "Patchright + Scrapling + Real Chrome",
+    "platform": "cross-platform (Windows, macOS, Linux)"
+  },
+  "Tags": ["harvester", "patchright", "scrapling", "stealth", "maps"],
+  "Link": "rar/harvester/maps_harvester_V_0_02.py",
+  "Date": "2026-09-13",
+  "Purpose": "Stealth Google Maps Viewport Harvester with dynamic Chrome detection, platform-matched User-Agent, and geolocation emulation."
+}

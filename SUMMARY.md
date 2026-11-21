@@ -92,7 +92,7 @@ astro-business-directory-template/
   .nvmrc
   astro.config.mjs
   package.json
-  package-lock.json
+  pnpm-lock.yaml
   postcss.config.js
   tailwind.config.ts
   tsconfig.json

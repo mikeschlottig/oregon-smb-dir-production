@@ -7,9 +7,14 @@
   // Assets-only Worker — no `main` script. Astro builds to ./dist; wrangler
   // uploads the directory and serves files directly from Cloudflare's edge.
   // not_found_handling: "404-page" matches Astro multi-page output (dist/404.html).
+  // Worker script runs ONLY for the first-party PostHog relay; everything else is served
+  // straight from static assets.
+  "main": "./worker/index.ts",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/lv-relay/*"]
   },
 
   // Custom domain routes in Cloudflare account (ceo@leverageai.network)

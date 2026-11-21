@@ -142,7 +142,7 @@ const metaContent = (head, name) => {
  * Paths permitted to declare themselves utility pages and so sit below the content
  * floor. The page must still make the declaration — this set only bounds who may.
  */
-const UTILITY_PATHS = new Set(["/contact/", "/accessibility/", "/editorial-policy/"]);
+const UTILITY_PATHS = new Set(["/contact/", "/accessibility/", "/editorial-policy/", "/privacy/"]);
 
 /* -------------------------------------------------------------- dist walk */
 

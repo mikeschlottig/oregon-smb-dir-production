@@ -1,14 +1,17 @@
 import { ArrowRight, MapPin } from "lucide-react";
 import type { City } from "@/data/cities";
+import type { CardImage } from "@/types/images";
 
-export const CityCard = ({ city }: { city: City }) => (
+export const CityCard = ({ city, image }: { city: City; image?: CardImage }) => (
   <a
     href={`/city/${city.slug}/`}
     className="group relative rounded-xl overflow-hidden cursor-pointer shadow-soft hover:shadow-elegant transition-all duration-500 hover:-translate-y-1 bg-card block"
   >
     <div className="relative h-56 overflow-hidden bg-muted">
       <img
-        src={city.image.src}
+        src={image?.src ?? city.image.src}
+        srcSet={image?.srcSet}
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         alt={city.name}
         loading="lazy"
         width={800}

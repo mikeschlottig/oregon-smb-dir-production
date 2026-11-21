@@ -1,11 +1,11 @@
 import type { ImageMetadata } from "astro";
 import albany from "@/images/cities/albany.jpg";
 import ashland from "@/images/cities/ashland.jpg";
-import bend from "@/images/cities/bend_oregon_website_image.png";
-import corvallis from "@/images/cities/corvallis_website_image.png";
+import bend from "@/images/cities/bend.jpg";
+import corvallis from "@/images/cities/corvallis.jpg";
 import eugene from "@/images/cities/eugene.jpg";
 import grantsPass from "@/images/cities/grants-pass.jpg";
-import klamathFalls from "@/images/cities/klamath_falls_oregon.png";
+import klamathFalls from "@/images/cities/klamath-falls.jpg";
 import medford from "@/images/cities/medford.jpg";
 import portland from "@/images/cities/portland-metro.jpg";
 import roseburg from "@/images/cities/roseburg.jpg";

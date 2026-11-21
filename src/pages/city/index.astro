@@ -11,7 +11,7 @@ import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { hubPageSchema } from "@/lib/schema";
 
 const title = "Oregon Businesses by City — Business Directory";
-const description = `Browse source-observed local business records across ${cities.length} Oregon cities and statewide regional collections. Pick a city to see its listings.`;
+const description = `Browse local businesses across ${cities.length} Oregon cities, from Portland to Grants Pass. Pick a city to see its industries, ratings and contact details.`;
 
 // Calculate stats for each city
 const cityStats = cities.map(city => {
@@ -42,7 +42,7 @@ const cardImages = await cityCardImages();
     breadcrumb={visibleTrail(crumbs)}
     eyebrow="Oregon"
     title="Oregon Businesses by City"
-    tagline="Browse source-observed local business records across 12 Oregon cities."
+    tagline={`Browse local businesses across ${cities.length} Oregon cities.`}
     stats={[
       { value: cities.length.toString(), label: "Cities" },
       { value: cityStats.reduce((sum, cs) => sum + cs.totalListings, 0).toString(), label: "Total Listings" },

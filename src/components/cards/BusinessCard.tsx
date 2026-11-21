@@ -1,7 +1,8 @@
-import { ExternalLink, MapPin, Star, BadgeCheck } from "lucide-react";
+import { ExternalLink, MapPin, Phone, Star, BadgeCheck } from "lucide-react";
 import { placeLink } from "@/lib/google-place-id";
 import { getBusinessPathSlug, type Business } from "@/data/businesses";
-import { ratingAsOf } from "@/lib/rating-display";
+import { ratingDate } from "@/lib/rating-display";
+import { formatPhone, telHref } from "@/lib/phone";
 
 type Props = {
   business: Business;
@@ -43,7 +44,7 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
             </h3>
             {isTopRated && (
               <span className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-full" style={{ backgroundColor: 'var(--c-copper-lt)', color: 'var(--c-pine)' }}>
-                <BadgeCheck className="w-3 h-3" aria-hidden="true" /> 4.8+ source rating
+                <BadgeCheck className="w-3 h-3" aria-hidden="true" /> Highly rated
               </span>
             )}
           </div>
@@ -66,12 +67,12 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
           </div>
           {typeof business.reviews === "number" && (
             <span className="font-mono text-sm" style={{ color: 'var(--c-sage)' }}>
-              ({business.reviews.toLocaleString()} reviews){business.ratingObservation ? "*" : ""}
+              ({business.reviews.toLocaleString("en-US")} Google review{business.reviews === 1 ? "" : "s"})
             </span>
           )}
           {business.ratingObservation && (
             <span className="text-xs" style={{ color: 'var(--c-sage)' }}>
-              {ratingAsOf(business.ratingObservation.observedAt)}
+              as of {ratingDate(business.ratingObservation.observedAt)}
             </span>
           )}
         </div>
@@ -83,11 +84,19 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
         </p>
       )}
 
-      {/* Address */}
+      {/* Address and phone stay out of the search index on list pages: a card's address names another town
+          (Medford roofers listed on the Klamath Falls page) and outranked the right city for "medford roofers".
+          The business's own page carries both. Same reason the Nearby Cities block is excluded. */}
       {business.address && (
-        <div className="flex items-start gap-2 text-sm mb-4" style={{ color: 'var(--c-pine)' }}>
+        <div className="flex items-start gap-2 text-sm mb-4" style={{ color: 'var(--c-pine)' }} data-pagefind-ignore="all">
           <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: 'var(--c-sage)' }} />
           <span>{business.address}</span>
+        </div>
+      )}
+      {business.phone && (
+        <div className="flex items-center gap-2 text-sm mb-4" style={{ color: 'var(--c-pine)' }} data-pagefind-ignore="all">
+          <Phone className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--c-sage)' }} />
+          <a href={telHref(business.phone)} className="hover:opacity-80">{formatPhone(business.phone)}</a>
         </div>
       )}
 
@@ -113,11 +122,6 @@ export const BusinessCard = ({ business, citySlug, industrySlug, qualificationLa
           >
             Website <ExternalLink className="w-3.5 h-3.5" />
           </a>
-        )}
-        {!business.website && business.websiteStatus === "unconfirmed" && (
-          <span className="inline-flex items-center min-h-[44px] px-4 py-2 text-sm border rounded" style={{ borderColor: 'var(--c-border)', color: 'var(--c-sage)' }}>
-            Website not confirmed
-          </span>
         )}
         {business.googleUrl && (
           <a

@@ -118,7 +118,7 @@ export const BusinessFilterGrid = ({
               Minimum rating
             </label>
             <Select value={minRating} onValueChange={setMinRating}>
-              <SelectTrigger id="minimum-rating" aria-label={`Filter ${industryName} by minimum source-observed rating`}>
+              <SelectTrigger id="minimum-rating" aria-label={`Filter ${industryName} by minimum Google rating`}>
                 <SelectValue placeholder="Min rating" />
               </SelectTrigger>
               <SelectContent>

@@ -79,7 +79,7 @@ const relatedCategoriesForCity = serviceCategories.filter((c) => {
 const localFaqs = [
   {
     question: `How many ${category.pluralName} serve ${city.name}?`,
-    answer: `${city.name} has ${businesses.length} ${category.pluralName} in this directory collection. Results qualify through a direct match to the source-observed provider category under selection policy service-intent:${category.slug} version 1.`,
+    answer: `${city.name} has ${businesses.length} ${category.pluralName} in this directory collection. Each one is listed on Google under a ${category.displayName.toLowerCase()} category.`,
   },
 ];
 
@@ -117,7 +117,7 @@ const tldrStats = [
     breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}
     title={title}
-    tagline={`${businesses.length} ${category.pluralName} selected through source-observed provider categories.`}
+    tagline={`${businesses.length} ${category.pluralName} in ${city.name}, Oregon.`}
     stats={tldrStats}
     county={city.county}
   />
@@ -162,8 +162,7 @@ const tldrStats = [
       {category.displayName} in {city.name}
     </h2>
     <p class="mb-6 text-sm" style="color: var(--c-sage);">
-      Selection policy <code>service-intent:{category.slug}@1</code> includes businesses only when
-      their source-observed provider category directly qualifies for this service collection ({category.pluralName}).
+      Listed here: {city.name} businesses whose Google category is one of the {category.pluralName} categories.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {qualifiedBusinesses.map(({ business, qualification }) => (

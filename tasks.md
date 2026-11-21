@@ -433,38 +433,49 @@ Contradictions and the choice made for each: docs/STANDARDS-AUDIT-2026-11-21.md.
       → P19 "Decisions for you" archived by Mike: _archive/open-decisions-20261121-075728.md.
         Still-open items with a method each: handoffs/2026-11-21T0800_claude_p19-still-open.md.
 
-## P20 — Directory pages people and search engines want; standards fixed at the source (2026-11-21, PROPOSED)
+## P20 — Directory pages people and search engines want; standards fixed at the source (2026-11-21, DONE)
 Mike, 2026-11-21: "The SEO on this site, after all that, is still complete and utter shit" (Bend audit:
 C:\Users\mikes\Documents\11-20\bend.txt); the Data provenance card — "Do you know a single business directory in the
 world that does this?"; agent visibility "the same implementation with markdown as" C:\Dev\directory_websites\real_estate.
-Not started: waiting on Mike's read of this list.
+Approved by Mike ("approved. proceed"). Deployed 2026-11-21 08:33; live proof: 21/21 checks
+(scratchpad live-check-p20.mjs, output below each item).
 A. City hubs (all 12) — bend.txt
-- [ ] A1 title "Bend, Oregon — Find Local Businesses in Bend, OR" pattern (≤ 60), H1 with the computed business count
-      and county ("Bend, Oregon — over 1,000 local businesses in Deschutes County"; "verified" left out: records are
-      not verified one by one)
-- [ ] A2 H2 "Browse Bend Businesses by Industry"; every industry H3 "<Industry> in Bend" (today only some say it)
-B. Industry and service pages — "in <City>" in every title, H1 and listing heading (same rule as A2)
+- [x] A1 title "Bend, Oregon — Find Local Businesses in Bend, OR"; H1 "Bend, Oregon: Search over 1,000 Local Businesses
+      in Deschutes County" (count computed at build; "verified" left out — records are not verified one by one)
+- [x] A2 H2 "Browse Bend Businesses by Industry"; every industry H3 "<Industry> in Bend" (12/12 live); the hub links only
+      industries that have listings there (an empty industry page is noindex)
+B. Industry and service pages — checked: titles, H1s, listing headings and FAQ questions already name the city; no change
 C. Listing pages (9,428) — plain words, no pipeline vocabulary
-- [ ] C1 remove the "Data provenance" card, the "Source observed · 4.8+ source rating" badge and the
-      "Record status: Source observed" stat
-- [ ] C2 rating shown as "5.0 ★ Google rating · 45 reviews" with the date once ("as of Jul 26, 2026"), no asterisks
-- [ ] C3 phone shown as (541) 310-1523 (data stores "(541) 3101523"); "Website not confirmed" → nothing
-- [ ] C4 rewrite "About" + "How this listing sits in Bend" template prose in plain language; remove the empty heading
-      above "More … in Bend"; corrections link stays, as one plain line
-- [ ] C5 sweep every template for "source-observed", "owner-confirmed", "records the directory holds", "provenance";
-      editorial-policy keeps the method in plain words (Deedline: "Method", "About and data")
+- [x] C1 "Data provenance" card, "Source observed · 4.8+ source rating" badge and "Record status" stat removed; badges are
+      "Verified listing" / "Highly rated" only
+- [x] C2 "5.0 ★ Google rating · 45 reviews"; one dated line; no asterisks (src/lib/rating-display.ts)
+- [x] C3 phones "(541) 310-1523" + tel:+1… (src/lib/phone.ts) on listings, cards and premium pages; "Website not
+      confirmed" / "withheld pending review" removed
+- [x] C4 About + "How Salon Twist compares in Bend" in plain words; "Suggest a correction · Claim it" line. The "empty
+      heading" in the proposal did not exist (my text extraction split a heading) — nothing to remove.
+      Also removed: the visible "Search keywords: roofer, roofers, …" line (keyword stuffing). The synonyms stay in
+      site search only, via data-pagefind-index-attrs — without them "medford roofers" ranked a Klamath Falls page #2
+      (search test failed); with them the top 3 are Medford roofers.
+- [x] C5 no "source-observed / owner-confirmed / provenance / record status / source rating" left on any public
+      template (grep over src, excluding /editorial-policy/ and llms.txt, which describe the method)
 D. Footer + trust, modelled on Deedline
-- [ ] D1 columns Directory / Trust / For machines; one line: "Ratings and review counts come from public Google Maps
-      listings captured on <date>. Not affiliated with Google; no business can pay for a rank."
-E. Agent visibility, Deedline implementation (src/lib/markdown.ts + *.md.ts routes in real_estate)
-- [ ] E1 a .md twin of every page type (home, city, industry, listing, service, blog, research, about) + the layout's
-      <link rel="alternate" type="text/markdown">; ~10.5k extra static files (dist has 20,865; paid-plan limit 100,000)
-- [ ] E2 /llms-full.txt, /index.json, site JSON-LD endpoint; robots.txt with AI-bot allows + Content-Signal
+- [x] D1 Directory / Trust / For machines columns, city + industry link rows, "Ratings and review counts come from public
+      Google Maps listings; each listing shows the date its rating was read. Not affiliated with Google. Payment does not
+      purchase a ranking." (the editorial policy's own words), content-signal line, copyright → /about/
+E. Agent visibility, Deedline implementation
+- [x] E1 src/lib/markdown.ts + 16 *.md.ts routes; <link rel="alternate" type="text/markdown"> from the layout;
+      scripts/check-markdown-twins.mjs: 10,538 html, 10,027 link a twin, 0 missing, 0 malformed (paginated slices, blog
+      category pages and the policy pages have none by design); served text/markdown (public/_headers)
+- [x] E2 /llms-full.txt (1.9 MB), /index.json (9,428 listings), /jsonld.json; robots.txt names the AI crawlers +
+      "Content-Signal: ai-input=yes, search=yes, ai-train=no"; /_astro/* immutable cache (perf skill ref 04)
 F. House standards fixed at the source (not in a project memo)
-- [ ] F1 STD-SEO-001 + STANDARDS.md: a "directory sites" section — slug phrase compared with punctuation removed;
-      one-phone/one-email rows mean the publisher's own NAP; directory service pages are CollectionPage, not Service;
-      LocalBusiness.url may be the directory page with the business site in sameAs
-- [ ] F2 qc-site.py: read every JSON-LD object (arrays, @graph); copyright from footer text (as qc-seo-page.js does);
-      skip Google Maps links in the social-profile row; punctuation-normalized slug phrase
-- [ ] F3 docs/STANDARDS-AUDIT-2026-11-21.md D-list then points at the standard instead of standing alone
-G. Proof for every item: build gates, qc-site, browser snippets on the Bend pages, live curl, before/after table
+- [x] F1 house-standards/standards/seo.md §1 punctuation rule + §6 directory sites; leverageai-seo-site-standards
+      STANDARDS.md §2, §8, §13 (commits 6744c06 home repo, e6010c2 standards repo)
+- [x] F2 qc-site.py --directory / --max-pages; every JSON-LD object read; copyright from footer text; Google Maps links
+      never bulk-fetched; normalized slug phrase; qc-seo-page.js normalized. Proof: smoke run on this site (directory
+      rows pass, 0 Maps fetches) + full run on leverageai.network (single-business rows unchanged)
+- [x] F3 docs/STANDARDS-AUDIT-2026-11-21.md opens with a pointer to the standards
+G. Proof: astro check 0/0; build gates C01–C18 0 failures + search checks pass; twins check 0/0; live 21/21; Lighthouse
+   on the Bend pages: accessibility 100, SEO 100 (best practices 81 = Cloudflare's injected script, archived).
+   Full `qc-site.py --directory` run: see the line added below when it finishes.
+   verify-site C10 now knows the four machine endpoints (its allowlist of non-HTML link targets).

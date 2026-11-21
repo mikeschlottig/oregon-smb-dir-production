@@ -23,13 +23,6 @@ export async function getStaticPaths() {
 }
 
 const { city } = Astro.props;
-const title = fitTitle([`${city.name}, Oregon — Local Business Directory | ${publisher.name}`, `${city.name}, Oregon — Local Business Directory`]);
-const description = fitDescription([
-  city.description,
-  `Browse ${city.name} businesses by industry, with contact details and a map for each listing.`,
-  `Browse ${city.name} businesses by industry.`,
-  `Contact details and a map for each listing.`,
-]);
 
 // Calculate real stats for TldrCard
 const cityIndustriesWithListings = industries.filter(ind => 
@@ -39,6 +32,24 @@ const totalListings = cityIndustriesWithListings.reduce(
   (sum, ind) => sum + getBusinesses(city.slug, ind.slug).length, 
   0
 );
+
+const fmt = new Intl.NumberFormat("en-US");
+/** "over 1,000" for 1,087; exact below 100. Counted at build time, never typed (STANDARDS.md §13). */
+const countWords = totalListings >= 100 ? `over ${fmt.format(Math.floor((totalListings - 1) / 100) * 100)}` : fmt.format(totalListings);
+const where = city.county ? `${city.county} County` : city.region;
+
+// Title, H1, H2 and industry headings: Mike's Bend audit, 2026-11-21 (Documents/11-20/bend.txt).
+const title = fitTitle([
+  `${city.name}, Oregon — Find Local Businesses in ${city.name}, OR`,
+  `${city.name}, Oregon — Local Businesses in ${city.name}, OR`,
+  `${city.name}, OR — Local Business Directory`,
+]);
+const h1 = `${city.name}, Oregon: Search ${countWords} Local Businesses in ${where}`;
+const description = fitDescription([
+  `Find local businesses in ${city.name}, OR: ${fmt.format(totalListings)} listings across ${cityIndustriesWithListings.length} industries in ${where}.`,
+  `Search by industry or service category, with phone numbers, websites and maps.`,
+  `Search by industry or service category.`,
+]);
 
 const tldrStats = [
   { value: cityIndustriesWithListings.length.toString(), label: "Industries" },
@@ -71,7 +82,7 @@ const relatedLinks = getCityHubRelatedLinks({
   <TldrCard
     breadcrumb={visibleTrail(crumbs)}
     eyebrow={city.region}
-    title={city.name}
+    title={h1}
     tagline={city.tagline}
     stats={tldrStats}
     county={city.county}
@@ -79,13 +90,14 @@ const relatedLinks = getCityHubRelatedLinks({
 
   <section class="container mx-auto px-4 pt-16 pb-20">
     <div class="text-center mb-12">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-3">Browse by Industry</h2>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-3">Browse {city.name} Businesses by Industry</h2>
       <p class="text-muted-foreground text-lg">
-        Find trusted local businesses in {city.name} across all major service categories.
+        {fmt.format(totalListings)} local businesses in {city.name}, grouped into {cityIndustriesWithListings.length} industries.
       </p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {industries.map((i) => <IndustryCard industry={i} citySlug={city.slug} />)}
+      {/* Only industries with listings here: an empty industry page is noindex, so its card was a dead end. */}
+      {cityIndustriesWithListings.map((i) => <IndustryCard industry={i} citySlug={city.slug} cityName={city.name} />)}
     </div>
   </section>
 

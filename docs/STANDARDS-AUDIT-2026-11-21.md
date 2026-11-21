@@ -1,5 +1,10 @@
 # Oregon SMB Directory against the house standards — 2026-11-21
 
+> **Superseded as a rulebook (P20 F, 2026-11-21).** The decisions below were moved into the standards themselves:
+> `house-standards/standards/seo.md` §1 (punctuation rule) and §6 (directory sites), `leverageai-seo-site-standards/
+> STANDARDS.md` §2, §8 and §13, and the checkers (`qc-site.py --directory`, `qc-seo-page.js`). Read those; this file
+> is the history of why.
+
 Mike, 2026-11-21: "we have our own checkers … audit the oregonsmbdirectory properly. When you run into perceived
 contradictory instructions … surface the issues, make a choice, document your reasoning, and proceed."
 Plan and proof: `tasks.md` P19 · predictions and results: `hypothesis.md` H37.

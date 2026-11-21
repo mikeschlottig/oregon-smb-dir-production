@@ -1,3 +1,6 @@
+# Search engines and AI answer engines may read and cite this directory. Model training is declined (Content-Signal).
+# Machine-readable entry points: /llms.txt, /llms-full.txt, /index.json, /jsonld.json, and a .md twin of every page.
+
 User-agent: Googlebot
 Allow: /
 
@@ -10,8 +13,37 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 User-agent: *
 Allow: /
+
+Content-Signal: ai-input=yes, search=yes, ai-train=no
 
 # Crawlers that were never handed the sitemap find it here (Bing reported ~50 indexed pages of ~10.5k, 2026-10-21).
 Sitemap: https://oregonsmbdirectory.com/sitemap-index.xml

@@ -107,7 +107,7 @@ const schemas = [
     breadcrumb={visibleTrail(crumbs)}
     eyebrow="Oregon"
     title={title}
-    tagline={`${categories.length} service categories drawn from ${totalListings} source-observed ${industry.name.toLowerCase()} records.`}
+    tagline={`${categories.length} service categories across ${totalListings} ${industry.name.toLowerCase()} businesses.`}
     stats={[
       { value: categories.length.toString(), label: "Service Categories" },
       { value: totalListings.toString(), label: "Qualified Listings" },
@@ -119,8 +119,8 @@ const schemas = [
       {industry.name} categories
     </h2>
     <p class="mb-10 max-w-3xl" style="color: var(--c-sage);">
-      {industry.description} A category appears below only where at least three
-      source-observed providers in a city qualify under that category's selection policy.
+      {industry.description} A category appears below in a city only where at least three
+      businesses there are listed under it.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

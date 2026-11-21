@@ -103,7 +103,7 @@ const relatedLinks = getBusinessRelatedLinks({
     stats={[
       { value: hasRating ? `${record.rating!.toFixed(1)} ★${ratingFootnote ? "*" : ""}` : "N/A", label: "Rating" },
       { value: hasRating ? `${record.reviews!.toLocaleString()}${ratingFootnote ? "*" : ""}` : "N/A", label: "Reviews" },
-      { value: isVerified ? "Verified" : "Listed", label: "Record status" },
+      { value: isVerified ? "Verified" : "Listed", label: "Listing" },
     ]}
     badge={isVerified ? (websiteConfirmed ? "Verified · confirmed website" : "Verified") : "Listed"}
   />
@@ -249,15 +249,9 @@ const relatedLinks = getBusinessRelatedLinks({
         </div>
       </div>
 
-      {isVerified && (
-        <div class="bg-card border border-border rounded-xl p-6 shadow-sm text-sm">
-          <h3 class="font-serif text-lg font-semibold mb-3">Data provenance</h3>
-          <p class="text-muted-foreground leading-relaxed">Verified listing. {record.verification!.method}</p>
-          <a href="/contact/?topic=listing-correction" class="inline-flex mt-3 text-accent hover:underline">
-            Request a correction
-          </a>
-        </div>
-      )}
+      <p class="text-sm text-muted-foreground px-1">
+        Something wrong? <a href="/contact/?topic=listing-correction" class="text-accent hover:underline">Suggest a correction</a>
+      </p>
 
       <div class="bg-card border border-border rounded-xl p-6 shadow-sm">
         <h3 class="font-serif text-lg font-semibold mb-3">Service area</h3>

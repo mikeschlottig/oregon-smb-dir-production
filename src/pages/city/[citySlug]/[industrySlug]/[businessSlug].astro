@@ -18,11 +18,12 @@ import { serviceCategories } from "@/data/serviceCategories";
 import { qualifyBusinessForService } from "@/data/serviceSelectionPolicies";
 import { businessSchema } from "@/lib/schema";
 import { fitTitle, fitDescription, article, listWords } from "@/lib/seo-text";
+import { formatPhone, telHref } from "@/lib/phone";
 import { isSharedName } from "@/lib/shared-names";
 import { publisher } from "@/data/publisher";
 import { trail, visibleTrail, breadcrumbListSchema } from "@/lib/breadcrumbs";
 import { getBusinessRelatedLinks } from "@/lib/link-graph";
-import { ratingAsOf, ratingLabel } from "@/lib/rating-display";
+import { ratingAsOf } from "@/lib/rating-display";
 import { placeLink } from "@/lib/google-place-id";
 import {
   ExternalLink,
@@ -121,8 +122,7 @@ const description = premium?.seo.description ?? fitDescription([
 ]);
 
 const isTopRated = typeof business.rating === "number" && business.rating >= 4.8;
-// One footnote at the bottom of the listing dates the rating; every rating shown on the
-// page carries the matching asterisk (src/lib/rating-display.ts).
+// One plain line at the bottom of the listing dates the Google rating (src/lib/rating-display.ts).
 const ratingFootnote =
   typeof business.rating === "number" && business.ratingObservation
     ? ratingAsOf(business.ratingObservation.observedAt)
@@ -137,32 +137,23 @@ const verifiedStatuses = new Set([
   "license_verified",
 ]);
 const isVerified = business.verification != null && verifiedStatuses.has(business.verification.status);
-const verificationLabel = isVerified
-  ? "Verified"
-  : business.verification
-    ? business.verification.status.replaceAll("_", " ")
-    : "Source observed";
-const badge = [
-  verificationLabel,
-  isVerified && business.websiteStatus === "confirmed" ? "confirmed website" : null,
-  isTopRated ? "4.8+ source rating" : null,
-]
+// Plain badges only (P20): what a visitor can use. How the pipeline labels a record stays on the method page.
+const badge = [isVerified ? "Verified listing" : null, isTopRated ? "Highly rated" : null]
   .filter(Boolean)
-  .join(" · ");
+  .join(" · ") || undefined;
 
 // Stats for TldrCard. Premium listings without a published rating lead with what the
 // profile does establish instead of two "N/A" cells.
 const hasRating = typeof business.rating === "number";
 const stats = premium && !hasRating
   ? [
-      { value: verificationLabel, label: "Record status" },
       { value: city.name, label: "Location" },
       { value: String(premium.services.length), label: "Services listed" },
     ]
   : [
-      { value: hasRating ? `${business.rating!.toFixed(1)} ★${ratingFootnote ? "*" : ""}` : "N/A", label: "Rating" },
-      { value: typeof business.reviews === "number" ? `${business.reviews.toLocaleString()}${ratingFootnote ? "*" : ""}` : "N/A", label: "Reviews" },
-      { value: verificationLabel, label: "Record status" },
+      ...(hasRating ? [{ value: `${business.rating!.toFixed(1)} ★`, label: "Google rating" }] : []),
+      ...(typeof business.reviews === "number" ? [{ value: business.reviews.toLocaleString("en-US"), label: "Google reviews" }] : []),
+      { value: `${city.name}, OR`, label: "Location" },
     ];
 
 /**
@@ -184,19 +175,41 @@ const betterRated =
     ? ratedPeers.filter((b) => b.rating > business.rating).length
     : null;
 
+const industryWords = industry.name.toLowerCase();
 const peerContext = [
-  `${business.title} is one of ${peers.length} ${industry.name.toLowerCase()} record${peers.length === 1 ? "" : "s"} the directory holds for ${city.name}, ${city.county} County.`,
+  `${business.title} is one of ${peers.length} ${industryWords} business${peers.length === 1 ? "" : "es"} listed in ${city.name}, ${city.county} County.`,
   business.category && sameCategory.length > 1
-    ? `${sameCategory.length} of those share the same source-observed provider category, ${business.category.toLowerCase()}.`
+    ? `${sameCategory.length} of them share its category, ${business.category.toLowerCase()}.`
     : business.category
-      ? `It is the only ${city.name} record in this industry filed under ${business.category.toLowerCase()}.`
+      ? `It is the only one listed as ${article(business.category)} ${business.category.toLowerCase()}.`
       : "",
   typeof business.rating === "number" && ratedPeers.length > 1
-    ? `${ratedPeers.length} of the ${peers.length} carry a rating that clears the publication gate; ${betterRated} of them rate higher than this one.`
-    : `Ratings are published only where the value, review count, observation date and record identity agree with the source evidence.`,
+    ? betterRated === 0
+      ? `None of the ${ratedPeers.length} with a Google rating rates higher.`
+      : `${betterRated} of the ${ratedPeers.length} with a Google rating rate${betterRated === 1 ? "s" : ""} higher.`
+    : typeof business.rating !== "number" && ratedPeers.length > 0
+      ? `${ratedPeers.length} of them show a Google rating here; ${business.title} does not have one yet.`
+      : "",
   isVerified
-    ? `${business.verification!.ownerParticipated ? "The business requested this listing, and the" : "The"} directory checked its ${business.websiteStatus === "confirmed" ? "website and " : ""}contact details on ${new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }).format(new Date(business.verification!.verifiedAt))}; confirm hours and pricing with the business directly.`
-    : `Details here are source-observed rather than owner-confirmed, so confirm hours, service area and pricing with the business before relying on them.`,
+    ? `${business.verification!.ownerParticipated ? "The business asked to be listed, and we" : "We"} checked its contact details on ${new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }).format(new Date(business.verification!.verifiedAt))}.`
+    : `Call ahead to confirm hours and prices.`,
+]
+  .filter(Boolean)
+  .join(" ");
+
+// The About paragraph says what a visitor needs: what it is, where, how it rates, how to reach it.
+const street = business.address ? business.address.split(",")[0].trim() : null;
+const aboutText = [
+  `${business.title} is ${article(kindWord)} ${kindWord} ${street ? `at ${street} in` : "serving"} ${city.name}, Oregon.`,
+  `${city.name} is in ${city.county} County, in the ${city.region.replace(/ · /g, " and ")} region.`,
+  hasRating
+    ? `It has a ${business.rating!.toFixed(1)}-star Google rating${typeof business.reviews === "number" ? ` from ${business.reviews.toLocaleString("en-US")} review${business.reviews === 1 ? "" : "s"}` : ""}.`
+    : null,
+  business.phone
+    ? `Call ${formatPhone(business.phone)}${showsWebsite ? " or visit its website" : ""} for hours and availability.`
+    : showsWebsite
+      ? "Visit its website for hours and availability."
+      : null,
 ]
   .filter(Boolean)
   .join(" ");
@@ -250,6 +263,11 @@ const schemas: object[] = [
     : []),
 ];
 
+const matchingServices = serviceCategories.filter((cat) =>
+  cat.industrySlug === industry.slug && qualifyBusinessForService(business, cat)
+);
+
+// Site-search synonyms (Pagefind only, never shown) — see the data-search-terms span below.
 // Colloquial search term map for consumer intent
 const colloquialMap: Record<string, string[]> = {
   roofing: ["roofer", "roofers", "roofing contractor", "roof repair", "roof replacement"],
@@ -264,9 +282,6 @@ const colloquialMap: Record<string, string[]> = {
   landscaping: ["landscaper", "landscapers", "lawn care"],
 };
 
-const matchingServices = serviceCategories.filter((cat) =>
-  cat.industrySlug === industry.slug && qualifyBusinessForService(business, cat)
-);
 const serviceSynonyms = Array.from(
   new Set([
     ...(business.category ? [business.category.toLowerCase()] : []),
@@ -350,16 +365,13 @@ const relatedLinks = getBusinessRelatedLinks({
 
       <div>
         <h2 class="font-serif text-2xl font-bold mb-3">About {business.title}</h2>
-        <p class="text-muted-foreground leading-relaxed">
-          {business.title} is listed as a {business.category?.toLowerCase() ?? industry.name.toLowerCase()} serving the {city.name} area. {industry.description}. {typeof business.rating === "number"
-            ? `Rated ${ratingLabel(business.rating, business.reviews)}.`
-            : "Contact them directly for service details, availability, and quotes."}
-        </p>
+        <p class="text-muted-foreground leading-relaxed">{aboutText}</p>
+        <span data-pagefind-index-attrs="data-search-terms" data-search-terms={serviceSynonyms.join(" ")}></span>
       </div>
 
       {matchingServices.length > 0 && (
         <div>
-          <h2 class="font-serif text-2xl font-bold mb-3">Specializations &amp; Services</h2>
+          <h2 class="font-serif text-2xl font-bold mb-3">Services</h2>
           <div class="flex flex-wrap gap-2 mb-2">
             {matchingServices.map((s) => (
               <span
@@ -370,14 +382,11 @@ const relatedLinks = getBusinessRelatedLinks({
               </span>
             ))}
           </div>
-          <p class="text-xs text-muted-foreground">
-            Search keywords: {serviceSynonyms.slice(0, 10).join(", ")}.
-          </p>
         </div>
       )}
 
       <div>
-        <h2 class="font-serif text-2xl font-bold mb-3">How this listing sits in {city.name}</h2>
+        <h2 class="font-serif text-2xl font-bold mb-3">How {business.title} compares in {city.name}</h2>
         <p class="text-muted-foreground leading-relaxed">
           {peerContext}
         </p>
@@ -397,8 +406,8 @@ const relatedLinks = getBusinessRelatedLinks({
           {business.phone && (
             <li class="flex items-center gap-3">
               <Phone className="w-4 h-4 text-accent flex-shrink-0" />
-              <a href={`tel:${business.phone}`} class="text-foreground hover:text-accent">
-                {business.phone}
+              <a href={telHref(business.phone)} class="text-foreground hover:text-accent">
+                {formatPhone(business.phone)}
               </a>
             </li>
           )}
@@ -413,18 +422,6 @@ const relatedLinks = getBusinessRelatedLinks({
               >
                 {business.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}
               </a>
-            </li>
-          )}
-          {!business.website && business.websiteStatus === "unconfirmed" && (
-            <li class="flex items-center gap-3">
-              <Globe className="w-4 h-4 text-accent flex-shrink-0" />
-              <span class="text-muted-foreground">Website not confirmed</span>
-            </li>
-          )}
-          {business.websiteStatus === "quarantined" && (
-            <li class="flex items-center gap-3">
-              <Globe className="w-4 h-4 text-accent flex-shrink-0" />
-              <span class="text-muted-foreground">Website withheld pending review</span>
             </li>
           )}
           {business.category && (
@@ -456,7 +453,7 @@ const relatedLinks = getBusinessRelatedLinks({
           )}
           {business.phone && (
             <a
-              href={`tel:${business.phone}`}
+              href={telHref(business.phone)}
               class="w-full inline-flex items-center justify-center gap-2 border border-border text-sm font-medium px-4 py-2.5 rounded hover:bg-muted transition-colors"
             >
               <Phone className="w-3.5 h-3.5" /> Call Now
@@ -465,17 +462,10 @@ const relatedLinks = getBusinessRelatedLinks({
         </div>
       </div>
 
-      <div class="bg-card border border-border rounded-xl p-6 shadow-sm text-sm">
-        <h3 class="font-serif text-lg font-semibold mb-3">Data provenance</h3>
-        <p class="text-muted-foreground leading-relaxed">
-          {isVerified
-            ? `Verified listing. ${business.verification!.method}`
-            : "This is a source-observed directory record, not an owner-confirmed profile unless a specific verification event appears above."}
-        </p>
-        <a href="/contact/?topic=listing-correction" class="inline-flex mt-3 text-accent hover:underline">
-          Request a correction
-        </a>
-      </div>
+      <p class="text-sm text-muted-foreground px-1">
+        Something wrong? <a href={publisher.correctionUrl} class="text-accent hover:underline">Suggest a correction</a>
+        · Own this business? <a href={publisher.claimUrl} class="text-accent hover:underline">Claim it</a>
+      </p>
 
       {related.length > 0 && (
         <div class="bg-card border border-border rounded-xl p-6 shadow-sm" data-pagefind-ignore="all">
@@ -523,13 +513,9 @@ const relatedLinks = getBusinessRelatedLinks({
   */}
   <section class="container mx-auto px-4 py-12 border-t" style="border-color: var(--c-border);">
     <p class="max-w-3xl text-sm leading-relaxed" style="color: var(--c-sage);">
-      Looking for how {business.title} compares with other {industry.name.toLowerCase()} in
-      {city.name}? The
+      See all {peers.length}
       <a href={`/city/${city.slug}/${industry.slug}/`} class="underline" style="color: var(--c-river);">
-        {industry.name} in {city.name}
-      </a>
-      page carries the full listing set, the rating distribution, and the questions that
-      apply across the whole category.
+        {industry.name} businesses in {city.name}</a>, with ratings and answers to common questions.
     </p>
   </section>
   </Fragment>

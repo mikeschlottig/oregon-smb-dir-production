@@ -8,7 +8,7 @@ export const AboutSection = () => (
         A Statewide Oregon Business Resource
       </h2>
       <p className="text-muted-foreground text-lg leading-relaxed">
-        Explore source-observed business records across the Rogue Valley, Southern Oregon,
+        Explore local businesses across the Rogue Valley, Southern Oregon,
         Willamette Valley, Central Oregon, Portland Metro, and city collections statewide.
       </p>
     </div>

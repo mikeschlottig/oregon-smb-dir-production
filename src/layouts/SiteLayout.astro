@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import JsonLd from "@/components/JsonLd.astro";
 import { publisher } from "@/data/publisher";
 import PostHogAnalytics from "@/components/PostHogAnalytics.astro";
+import { markdownTwinFor } from "@/lib/markdown";
 
 interface Props {
   title?: string;
@@ -57,6 +58,8 @@ const pathname = Astro.url.pathname;
 const origin = Astro.site ?? Astro.url.origin;
 const canonical = new URL(pathname, origin).toString();
 const imageUrl = new URL(image, origin).toString();
+// The page's markdown twin for agents (src/lib/markdown.ts; checked after every build by scripts/check-markdown-twins.mjs).
+const markdownTwin = markdownTwinFor(pathname);
 
 ---
 <!doctype html>
@@ -72,6 +75,7 @@ const imageUrl = new URL(image, origin).toString();
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {markdownTwin && <link rel="alternate" type="text/markdown" href={new URL(markdownTwin, origin).toString()} />}
     {noindex && <meta name="robots" content="noindex, follow" />}
     {preloadImage && (
       <link rel="preload" as="image" imagesrcset={preloadImage.srcSet} imagesizes={preloadImage.sizes} fetchpriority="high" />

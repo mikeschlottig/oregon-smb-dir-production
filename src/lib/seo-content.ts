@@ -15,11 +15,11 @@ export function generateCitySeoContent(city: City, industries: Industry[], busin
   const industryNames = industries.slice(0, 3).map(i => i.name.toLowerCase());
   const topBizNames = topRated.map(b => b.title);
 
-  return `Discover local business records serving ${city.name}, Oregon${city.county ? ` in ${city.county} County` : ''}. ${city.name} has ${businesses.length} directory listings across ${industries.length} industries in ${city.region}, including ${industryNames.slice(0, 2).join(" and ")} services.
+  return `Find local businesses in ${city.name}, Oregon${city.county ? `, ${city.county} County` : ''}. ${city.name} has ${businesses.length} listings across ${industries.length} industries in ${city.region}, including ${industryNames.slice(0, 2).join(" and ")}.
 
-${topBizNames.length > 0 ? `Source-observed ratings of 4.5 stars or higher are available for providers including ${topBizNames.slice(0, 2).join(" and ")}. ` : ""}Listing fields are drawn from public business data and may change; the directory does not imply owner confirmation unless a listing shows a specific verification event.
+${topBizNames.length > 0 ? `${topBizNames.slice(0, 2).join(" and ")} ${topBizNames.length > 1 ? "have" : "has"} a Google rating of 4.5 stars or higher. ` : ""}Listings come from public business information and can change, so call ahead to confirm hours and prices.
 
-Browse by industry or search by service type to compare all ${businesses.length} records in ${city.name}, Oregon. Use the correction path when a name, category, address, or contact detail needs review.`;
+Browse by industry or search by service to compare all ${businesses.length} businesses in ${city.name}, Oregon. If a name, category, address or phone number is wrong, suggest a correction from the listing.`;
 }
 
 /**
@@ -38,11 +38,11 @@ export function generateIndustrySeoContent(city: City, industry: Industry, busin
 
   const topBizNames = topRated.map(b => b.title);
 
-  return `Find ${industry.name.toLowerCase()} business records serving ${city.name}, Oregon. This broad industry collection contains ${businesses.length} local providers${avgRating === "N/A" ? "" : ` with a ${avgRating}-star average across ratings that passed the source-observation publication gate`}, serving ${city.name} and surrounding communities in ${city.region}.
+  return `Find ${industry.name.toLowerCase()} businesses in ${city.name}, Oregon. This page lists ${businesses.length} local businesses${avgRating === "N/A" ? "" : ` with an average Google rating of ${avgRating} stars`}, serving ${city.name} and nearby communities in ${city.region}.
 
-${topBizNames.length > 0 ? `Source-observed ratings of 4.5 stars or higher are available for ${topBizNames.slice(0, 2).join(" and ")}. ` : ""}Ratings are shown only when the value, review count, observation date, and provider record identity agree with the imported source evidence.
+${topBizNames.length > 0 ? `${topBizNames.slice(0, 2).join(" and ")} ${topBizNames.length > 1 ? "have" : "has"} a Google rating of 4.5 stars or higher. ` : ""}Each rating shows the date it was read from Google Maps.
 
-Search filters help you narrow by rating, location, and provider category. Contact and address fields are source-observed rather than owner-confirmed unless a listing states otherwise. Confirm availability, service areas, and pricing directly before hiring.`;
+Use the filters to narrow the list by rating, location and category. Call ahead to confirm availability, service area and prices before you hire.`;
 }
 
 /**
@@ -77,13 +77,13 @@ export function generateIndustryFaqs(city: City, industry: Industry, businesses:
   return [
     {
       question: `How many ${industryLabel} businesses serve ${city.name}, Oregon?`,
-      answer: `The directory holds ${businesses.length} ${industryLabel} record${businesses.length === 1 ? "" : "s"} for ${city.name} in ${city.county} County, spanning ${categories.length} distinct provider categor${categories.length === 1 ? "y" : "ies"}${categories.length > 0 ? ` such as ${categories.slice(0, 3).join(", ")}` : ""}. Records are source-observed; owner participation is stated only where an auditable verification event exists.`,
+      answer: `This directory lists ${businesses.length} ${industryLabel} business${businesses.length === 1 ? "" : "es"} in ${city.name}, ${city.county} County, across ${categories.length} categor${categories.length === 1 ? "y" : "ies"}${categories.length > 0 ? ` such as ${categories.slice(0, 3).join(", ")}` : ""}.`,
     },
     {
-      question: `Which ${industryLabel} businesses in ${city.name} have the strongest source-observed ratings?`,
+      question: `Which ${industryLabel} businesses in ${city.name} have the best Google ratings?`,
       answer: avgRating === null
-        ? `None of the ${businesses.length} ${industryLabel} records for ${city.name} currently carry a rating that clears the publication gate, so no ratings are shown on this page. A rating publishes only when its value, review count, observation date and record identity all agree with the imported source evidence.`
-        : `Across the ${rated.length} of ${businesses.length} ${city.name} ${industryLabel} records whose ratings clear the publication gate, the average is ${avgRating} stars and ${fourPlus} sit at 4.0 or higher${topNames.length > 0 ? `, led by ${topNames.join(" and ")}` : ""}. Ratings are source-observed rather than owner-confirmed, so confirm current standing before hiring.`,
+        ? `None of the ${businesses.length} ${industryLabel} businesses listed in ${city.name} has a Google rating shown here yet.`
+        : `${rated.length} of the ${businesses.length} ${industryLabel} businesses listed in ${city.name} show a Google rating. They average ${avgRating} stars, and ${fourPlus} rate 4.0 or higher${topNames.length > 0 ? `, led by ${topNames.join(" and ")}` : ""}.`,
     },
   ];
 }

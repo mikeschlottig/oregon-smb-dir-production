@@ -92,6 +92,6 @@ export const qualifyBusinessForService = (
     method: "direct-provider-category-match",
     matchedProviderCategory: business.category,
     categoryRole: "primary",
-    explanation: `Included because the source-observed provider category is “${business.category}”.`,
+    explanation: `Listed on Google as “${business.category}”.`,
   };
 };

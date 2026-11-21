@@ -1,0 +1,18 @@
+# Cloudflare Workers static assets headers (P20, 2026-11-21).
+# Markdown twins and the llms files are text for agents; give them the right types.
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+
+/jsonld.json
+  Content-Type: application/ld+json; charset=utf-8
+
+# Hashed build assets never change under the same name (astro-cloudflare-perf-audit skill, reference 04).
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

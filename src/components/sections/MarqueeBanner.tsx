@@ -4,7 +4,7 @@ const items = [
   "Rogue Valley · Willamette Valley · Central Oregon",
   "Portland Metro · Southern Oregon · Klamath Basin",
   "12 Cities · 12 Industries · Thousands of Records",
-  "Source-Observed Data with Publication Gates",
+  "Google Ratings with the Date They Were Read",
 ];
 
 export const MarqueeBanner = () => {

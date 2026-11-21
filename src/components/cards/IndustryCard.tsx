@@ -4,9 +4,11 @@ import { getBusinesses } from "@/data/businesses";
 
 const countBadgeBase =
   "absolute top-4 right-4 text-xs font-medium px-2 py-1 rounded-full";
-export type Props = { industry: Industry; citySlug: string };
+/** `cityName` makes the card heading "<Industry> in <City>" — every place-scoped heading names the place
+ *  (STANDARDS.md §13; Mike's Bend audit, 2026-11-21). */
+export type Props = { industry: Industry; citySlug: string; cityName?: string };
 
-export const IndustryCard = ({ industry, citySlug }: Props) => {
+export const IndustryCard = ({ industry, citySlug, cityName }: Props) => {
   const Icon =
     (Icons as unknown as Record<string, React.ComponentType<{ className?: string }>>)[industry.icon] ??
     Icons.Circle;
@@ -24,7 +26,7 @@ export const IndustryCard = ({ industry, citySlug }: Props) => {
         </div>
         <div className="flex-1">
           <h3 className="font-serif font-semibold text-lg mb-1 text-foreground group-hover:text-[var(--c-river)] transition-colors">
-            {industry.name}
+            {cityName ? `${industry.name} in ${cityName}` : industry.name}
           </h3>
           <p className="text-muted-foreground text-sm leading-relaxed">{industry.description}</p>
         </div>

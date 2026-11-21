@@ -58,7 +58,7 @@ const schemas = [
     <p>
       {fmt.format(listingCount)} local business records across {cities.length} Oregon cities and {industries.length} industries.
       You can browse <a href="/city/">by city</a>, by industry within a city, or <a href="/services/">by service</a>, and each
-      listing shows the contact details and map the directory holds for that business.
+      listing shows the business's contact details and a map.
     </p>
 
     <h2>Who publishes it</h2>
@@ -68,9 +68,10 @@ const schemas = [
 
     <h2>Where the listings come from</h2>
     <p>
-      Every record carries a label that says what kind of evidence stands behind each detail, and a record only appears
-      once it passes the directory's publication gates. The <a href={publisher.editorialPolicyUrl}>editorial and data quality
-      policy</a> explains the labels, the gates, how rankings and sponsorship are handled, and how corrections work.
+      Listings come from public business information, and ratings come from Google Maps with the date they were read.
+      Some listings were checked directly with the business; those say so. The
+      <a href={publisher.editorialPolicyUrl}>editorial policy</a> explains how listings are chosen and checked, how
+      rankings and sponsorship are handled, and how corrections work.
     </p>
 
     <h2>Listing, correcting or claiming a business</h2>

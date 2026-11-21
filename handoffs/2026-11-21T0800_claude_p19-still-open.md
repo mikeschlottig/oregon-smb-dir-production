@@ -22,9 +22,11 @@ From Windows: never put text with quotes or apostrophes inline in `wsl.exe bash 
   internal links (`grep -rn` the old slug).
 - Batches of 10; after each deploy, curl every old URL (expect 301 → 200).
 
-## 3. Listing slugs that lost accented letters (27) — D1b
-- e.g. "Dobrá Tea" → `dobr-tea`, "MÄS" → `m-s`, "Northwest Autohäus" → `northwest-autoh-us`. List them with the
-  normalized slug-vs-title check in `scripts/` (or recompute: NFKD, strip marks, kebab-case the title).
+## 3. Listing slugs that lost accented letters (24, measured by qc-site --directory after P20) — D1b
+- e.g. "Dobrá Tea" → `dobr-tea`, "Café des Chutes" → `caf-des-chutes`, "Telaré Law PLLC" → `telar-law-pllc`,
+  "Engel & Völkers" → `engel-v-lkers`. The list is the "keyword … not in title" rows for `/city/*/*/*/` pages in
+  `reports/std/p20c/20261121-qc-oregonsmbdirectory.com.md` (regenerate with
+  `qc-site.py https://oregonsmbdirectory.com --directory`). New slug = NFKD, strip marks, kebab-case the title.
 - Move each with `scripts/add-listings.mjs` (mode `remove` + `add`, which archives the old record) and add
   301 lines to `public/_redirects`, as done for Major Fluke in P18 (requests/listings/2026-11-21-contact-submissions.json).
 

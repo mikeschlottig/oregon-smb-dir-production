@@ -269,7 +269,8 @@ const fileSet = new Set(
   (await htmlFiles(DIST)).map((f) => relative(DIST, f).split(/[\\/]/).join("/"))
 );
 // assets that are not HTML still need to resolve for C10
-for (const extra of ["og-default.jpg", "favicon.ico", "sitemap-index.xml", "site.webmanifest"]) {
+// llms*.txt, index.json and jsonld.json: the machine endpoints the footer links (P20 E, 2026-11-21).
+for (const extra of ["og-default.jpg", "favicon.ico", "sitemap-index.xml", "site.webmanifest", "llms.txt", "llms-full.txt", "index.json", "jsonld.json"]) {
   if (existsSync(join(DIST, extra))) fileSet.add(extra);
 }
 

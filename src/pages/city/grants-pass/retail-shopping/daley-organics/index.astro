@@ -77,7 +77,7 @@ const embedSrc = "https://www.google.com/maps?q=42.5432168,-123.3884123&hl=en&z=
     stats={[
       { value: hasRating ? `${record.rating!.toFixed(1)} ★${ratingFootnote ? "*" : ""}` : "N/A", label: "Rating" },
       { value: hasRating ? `${record.reviews!.toLocaleString()}${ratingFootnote ? "*" : ""}` : "N/A", label: "Reviews" },
-      { value: isVerified ? "Verified" : "Editorial", label: "Record status" },
+      { value: isVerified ? "Verified" : "Listed", label: "Listing" },
     ]}
     badge={isVerified ? (record.websiteStatus === "confirmed" ? "Verified · confirmed website" : "Verified") : "Editorial profile"}
     image={banner}

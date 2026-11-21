@@ -351,3 +351,13 @@ Record: `listings-extraction/docs/CHANGES-2026-10-15-gate-detach-sweep.md` §8+.
   - [x] P16.6b classify read-only vs mutating (mv/rm/delete/rewrite outside its own output)
   - [x] P16.6c each mutator: scope (own session vs global) + fixture test? fix global scope, add tests
   - [x] P16.6d scripts/hooks/tests/run-all.sh + rule in scripts/AGENTS.md + PATTERNS entry
+
+## P17 — Reconcile local master with GitHub, ship from one tree (2026-11-21, Mike: "move forward with your plan")
+Audit (Claude, Windows session, 2026-11-21): local master 21 ahead / 4 behind origin; the live site is origin f22290f
+(PostHog + /privacy/ + WebP + pnpm, deployed 10-24 from another clone). No file changed on both sides; merge-tree clean.
+- [ ] P17.1 commit the keepers: 09-24 operator doc edits (AGENTS, README, TAXONOMY, guide) + 2026-11-21 ratings line;
+      listings-extraction/hypothesis.md; albany-k10 daily logs; rar/ source + spec; .gitignore __pycache__/*.pyc
+- [ ] P17.2 merge origin/master into master
+- [ ] P17.3 pnpm install, then `bash scripts/build-bg.sh build` (BUILD_EXIT=0)
+- [ ] P17.4 local dist has PostHog + /privacy/ + robots sitemap; deploy-bg.sh; live checks the same + a listing page
+- [ ] P17.5 push master; local == origin; handoff in handoffs/

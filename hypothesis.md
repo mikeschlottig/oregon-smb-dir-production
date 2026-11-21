@@ -616,3 +616,9 @@ steakhouse as pruning candidates.
 `audit_gate_passes.py --json` appended by `kwsweep-nightly.sh` after every window. First line by hand
 (22:00Z): 125 gates, 6,125 pins, 536 short / 536 with end-of-list, 49 place, 42 typed,
 false_pass_no_end_proof 0, false_pass_unstored_cards 0. Prediction (0 / 0) right.
+
+## H35 — reconcile local master with origin (P17) — OPEN
+Prediction (written before running): the merge of origin/master (4 commits) into master (21 + keepers) completes
+with no conflicts (merge-tree was clean); pnpm install + build-bg.sh gives BUILD_EXIT=0 with the C01–C18 verify and the
+search test passing; the built dist contains the PostHog snippet and /privacy/; after deploy the live homepage still
+has PostHog and /privacy/ answers 200 (no regression from deploying this machine's tree).

@@ -1,0 +1,49 @@
+{
+  "batch": "2026-11-22-directory-submission-35",
+  "source": "Directory contact submission #35 (2026-11-22 20:30:54), prepared in CloseCraft",
+  "checkedAt": "2026-11-27T05:28:38.524Z",
+  "listings": [
+    {
+      "submissionId": 35,
+      "tier": "basic",
+      "mode": "add",
+      "shard": "springfield__business-professional-services",
+      "record": {
+        "slug": "fotizo-media",
+        "title": "Fotizo Media",
+        "address": "Springfield, OR",
+        "phone": "(541) 972-0285",
+        "email": "info@fotizomedia.com",
+        "category": "Marketing agency (also web design, SEO, Google Ads management)",
+        "website": "https://fotizomedia.com/",
+        "websiteValidation": {
+          "url": "https://fotizomedia.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-27T05:28:38.484Z",
+          "confirmationSources": [
+            "site_title_match",
+            "site_phone_match"
+          ],
+          "riskFlags": []
+        },
+        "verification": {
+          "status": "contact_details_checked",
+          "scope": [
+            "business_name",
+            "phone",
+            "address",
+            "website"
+          ],
+          "method": "Owner listing request via the directory contact form (submission 35, 2026-11-22 20:30:54); website resolved and names the business. Prepared in CloseCraft for operator review.",
+          "verifiedAt": "2026-11-27T05:28:38.524Z",
+          "ownerParticipated": true,
+          "evidenceIds": [
+            "d1:contact_submissions/35",
+            "web:fotizomedia.com@2026-11-27"
+          ]
+        }
+      }
+    }
+  ]
+}

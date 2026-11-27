@@ -1,0 +1,1 @@
+- 2026-11-27T05:43:43Z claude: listings Fotizo Media (sub #35, PR #3) + A Street Dental patch (sub #37, PR #4, covers dup #36) applied (fadc32c), built, deployed; live 200. Rollback 9e4a7226. Prepared by CloseCraft v2 connector.

@@ -1,0 +1,44 @@
+{
+  "batch": "2026-11-23-directory-submission-37",
+  "source": "Directory contact submission #37 (2026-11-23 07:34:03), prepared in CloseCraft",
+  "checkedAt": "2026-11-27T05:28:42.988Z",
+  "listings": [
+    {
+      "submissionId": 37,
+      "tier": "basic",
+      "mode": "patch",
+      "shard": "grants-pass__health-medical",
+      "record": {
+        "slug": "a-street-dental-grants-pass",
+        "title": "A Street Dental Grants Pass",
+        "phone": "(541) 470-8424",
+        "website": "https://www.astreetdentalgp.com/",
+        "websiteValidation": {
+          "url": "https://www.astreetdentalgp.com/",
+          "relationship": "official_website",
+          "resolutionStatus": "confirmed",
+          "lastCheckedAt": "2026-11-27T05:28:42.489Z",
+          "confirmationSources": [
+            "site_title_match"
+          ],
+          "riskFlags": []
+        },
+        "verification": {
+          "status": "owner_claim_pending",
+          "scope": [
+            "business_name",
+            "phone",
+            "website"
+          ],
+          "method": "Owner listing request via the directory contact form (submission 37, 2026-11-23 07:34:03); website resolved and names the business. Prepared in CloseCraft for operator review.",
+          "verifiedAt": "2026-11-27T05:28:42.988Z",
+          "ownerParticipated": true,
+          "evidenceIds": [
+            "d1:contact_submissions/37",
+            "web:astreetdentalgp.com@2026-11-27"
+          ]
+        }
+      }
+    }
+  ]
+}

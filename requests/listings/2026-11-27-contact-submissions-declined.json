@@ -1,0 +1,13 @@
+{
+  "batch": "2026-11-27-contact-submissions-declined",
+  "source": "D1 oregonsmbdirectory.contact_submissions, reviewed 2026-11-27 via CloseCraft v2 `directory pending`",
+  "checkedAt": "2026-11-27T06:00:00Z",
+  "decisions": [
+    { "submissionId": 11, "business": "Smartblasts.co", "decision": "declined", "why": "Cold sales pitch for an email service (San Jose); not a listing request." },
+    { "submissionId": 22, "business": "mybusiness", "decision": "declined", "why": "Spam: no business details, abusive message." },
+    { "submissionId": 23, "business": "SNUG 360", "decision": "declined", "why": "Business is in Newark; message gives no Oregon location or details." },
+    { "submissionId": 29, "business": "Planpoint", "decision": "declined", "why": "The sender says it is a sales inquiry (NYC real-estate software), not a listing request." },
+    { "submissionId": 36, "business": "A Street Dental Grants Pass", "decision": "merged into #37", "why": "Same owner, same business, 42 minutes earlier; handled by 2026-11-23-directory-submission-37.json (PR #4)." }
+  ],
+  "listings": []
+}

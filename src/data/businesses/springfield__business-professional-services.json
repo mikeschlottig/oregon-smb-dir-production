@@ -82,5 +82,41 @@
     "website": "https://fpwmedia.com/",
     "googleUrl": "https://www.google.com/maps/place/FPW+Media/@44.0601337,-127.9906212,7z/data=!4m10!1m2!2m1!1sWeb+Design+and+Digital+Marketing+Springfield+Oregon!3m6!1s0x54c0e094408491df:0xfe0cb127e03f2b56!8m2!3d44.0464114!4d-122.9534757!15sCjNXZWIgRGVzaWduIGFuZCBEaWdpdGFsIE1hcmtldGluZyBTcHJpbmdmaWVsZCBPcmVnb25aNSIzd2ViIGRlc2lnbiBhbmQgZGlnaXRhbCBtYXJrZXRpbmcgc3ByaW5nZmllbGQgb3JlZ29ukgEQbWFya2V0aW5nX2FnZW5jeeABAA!16s%2Fg%2F11b8t7nbq0?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
     "claimed": true
+  },
+  {
+    "slug": "fotizo-media",
+    "title": "Fotizo Media",
+    "address": "Springfield, OR",
+    "phone": "(541) 972-0285",
+    "email": "info@fotizomedia.com",
+    "category": "Marketing agency (also web design, SEO, Google Ads management)",
+    "website": "https://fotizomedia.com/",
+    "websiteValidation": {
+      "url": "https://fotizomedia.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-27T05:28:38.484Z",
+      "confirmationSources": [
+        "site_title_match",
+        "site_phone_match"
+      ],
+      "riskFlags": []
+    },
+    "verification": {
+      "status": "contact_details_checked",
+      "scope": [
+        "business_name",
+        "phone",
+        "address",
+        "website"
+      ],
+      "method": "Owner listing request via the directory contact form (submission 35, 2026-11-22 20:30:54); website resolved and names the business. Prepared in CloseCraft for operator review.",
+      "verifiedAt": "2026-11-27T05:28:38.524Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/35",
+        "web:fotizomedia.com@2026-11-27"
+      ]
+    }
   }
 ]

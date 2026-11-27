@@ -663,13 +663,38 @@
     "slug": "a-street-dental-grants-pass",
     "title": "A Street Dental Grants Pass",
     "address": "828 NE A St, Grants Pass, OR 97526",
-    "phone": "(541) 4708424",
+    "phone": "(541) 470-8424",
     "rating": 4.9,
     "reviews": 578,
     "category": "Dentist",
     "website": "https://www.astreetdentalgp.com/",
     "googleUrl": "https://www.google.com/maps/place/A+Street+Dental+Grants+Pass/@42.4385758,-123.3270661,14z/data=!4m10!1m2!2m1!1sDentists+Grants+Pass+Oregon!3m6!1s0x54c57a277798f8b1:0xfe1fe3261d4affc7!8m2!3d42.4431134!4d-123.3148507!15sChtEZW50aXN0cyBHcmFudHMgUGFzcyBPcmVnb25aHSIbZGVudGlzdHMgZ3JhbnRzIHBhc3Mgb3JlZ29ukgEHZGVudGlzdJoBI0NoWkRTVWhOTUc5blMwVkpMVzB4UzJGNmN6UklUa1pCRUFF4AEA-gEFCPgCEEk!16s%2Fg%2F1tj2hmht?entry=ttu&g_ep=EgoyMDI2MDQyOS4wIKXMDSoASAFQAw%3D%3D",
-    "claimed": true
+    "claimed": true,
+    "websiteValidation": {
+      "url": "https://www.astreetdentalgp.com/",
+      "relationship": "official_website",
+      "resolutionStatus": "confirmed",
+      "lastCheckedAt": "2026-11-27T05:28:42.489Z",
+      "confirmationSources": [
+        "site_title_match"
+      ],
+      "riskFlags": []
+    },
+    "verification": {
+      "status": "owner_claim_pending",
+      "scope": [
+        "business_name",
+        "phone",
+        "website"
+      ],
+      "method": "Owner listing request via the directory contact form (submission 37, 2026-11-23 07:34:03); website resolved and names the business. Prepared in CloseCraft for operator review.",
+      "verifiedAt": "2026-11-27T05:28:42.988Z",
+      "ownerParticipated": true,
+      "evidenceIds": [
+        "d1:contact_submissions/37",
+        "web:astreetdentalgp.com@2026-11-27"
+      ]
+    }
   },
   {
     "slug": "grants-pass-podiatry",
